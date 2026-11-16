@@ -147,7 +147,11 @@ def setup_answers_cmd(source: str) -> int:
     root = m.data_dir()
     root.mkdir(parents=True, exist_ok=True)
     target = root / setup_answers.FILE_NAME
-    target.write_text(json.dumps(usable, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    target.unlink(missing_ok=True)
+    # personal answers: readable by Yuo's user only, like the database
+    fd = os.open(target, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
+    with os.fdopen(fd, "w", encoding="utf-8") as f:
+        f.write(json.dumps(usable, ensure_ascii=False, indent=2) + "\n")
     parts = " and ".join({"profile": "About you", "first_path": "Your first path"}[k] for k in usable)
     print(f"Saved {target}. The wizard starts {parts} from these answers; the learner checks them there.")
     return 0

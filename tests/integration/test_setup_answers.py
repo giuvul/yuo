@@ -1,6 +1,7 @@
 """Answers an AI assistant collected before Yuo started (SETUP.md): checked, pre-filled once, then deleted."""
 
 import json
+import os
 from collections.abc import Iterator
 from pathlib import Path
 from typing import Any, cast
@@ -120,5 +121,8 @@ def test_the_command_checks_and_saves_them(
     assert "profile.tz" in out.err and "About you and Your first path" in out.out
     saved = json.loads((data / setup_answers.FILE_NAME).read_text(encoding="utf-8"))
     assert "tz" not in saved["profile"] and saved["profile"]["display_name"] == "Sam"
+    if os.name == "posix":  # personal answers: owner only
+        assert (data / setup_answers.FILE_NAME).stat().st_mode & 0o777 == 0o600
+    assert cli.main(["setup-answers", str(given)]) == 0  # a second run replaces the file
     given.write_text("[]")
     assert cli.main(["setup-answers", str(given)]) == 1

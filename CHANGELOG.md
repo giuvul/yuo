@@ -4,6 +4,16 @@ All notable changes are listed here. The format follows Keep a Changelog; versio
 
 ## [Unreleased]
 
+## [1.0.1] - 2026-11-16
+
+- **A second copy on the same machine** no longer touches the first: `YUO_PROJECT` and `YUO_HOST_PORT` in
+  `.env` give it its own containers, data volume and port. Existing installs keep their names.
+- **Setup with an AI assistant**: the assistant hands over Yuo's address and setup code as soon as Yuo
+  answers, and opens it in the browser on the person's own computer; a new SSH tunnel route to try Yuo on a
+  server without opening anything; consistent memory, disk and volume figures; the Remotion licence note
+  for work computers.
+- The answers file an assistant saves for Yuo's setup is readable by Yuo only.
+
 ## [1.0.0] - 2026-11-16
 
 The first public release.

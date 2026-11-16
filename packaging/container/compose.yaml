@@ -2,7 +2,9 @@
 # The app, and a render container with no network for model-written video code. Optional Caddy
 # in front (profile `caddy`) for a public HTTPS name; or Tailscale Serve on the host (`yuo expose tailscale`).
 
-name: yuo
+# YUO_PROJECT and YUO_HOST_PORT (in .env) set apart a second copy on the same machine: its own containers,
+# data volume (<project>_data) and port. Never start a second copy without them.
+name: ${YUO_PROJECT:-yuo}
 
 x-yuo: &yuo
   image: ${YUO_IMAGE:-yuo:dev}
@@ -26,7 +28,7 @@ services:
       YUO_RENDER_SANDBOX: spool
       YUO_ALLOWED_HOSTS: ${YUO_ALLOWED_HOSTS:-}
     ports:
-      - "127.0.0.1:18765:18765"  # for Tailscale Serve or a proxy on the host; Caddy below uses the network
+      - "127.0.0.1:${YUO_HOST_PORT:-18765}:18765"  # for Tailscale Serve, an SSH tunnel or a proxy on the host
     mem_limit: 2g
 
   render:

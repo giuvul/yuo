@@ -34,6 +34,12 @@ make videos, so lessons are readings with practice questions and the tutor. Offe
   their own machine, nothing leaves. Video narration runs locally. Do not promise more than this.
 - **Stop on errors.** Show the error and the relevant log lines, say what you think happened, and propose a
   fix. Do not work around security (disabling the render sandbox, opening extra ports, running as root).
+- **Give the person Yuo's address as soon as it answers.** The moment the health check passes, save the
+  answers (section 6, a few seconds) and hand over the address and the one-time code, before any notes or
+  tidying up. On the person's own computer, also open the address in their browser yourself (`open URL` on
+  macOS, `start URL` on Windows, `xdg-open URL` on Linux). On a server, give the exact link they can click,
+  and the tunnel command first if they use one (5c). While a long download runs (the image is several GB),
+  say what is happening and roughly how long it takes.
 - **Versions.** Install the release named in `latest.json` (section 1). The desktop download has a SHA-256 to
   check; the server version is pinned by its version tag.
 
@@ -51,7 +57,7 @@ Sizes, for the plan:
 |---|---|
 | Desktop zip | about 4 MB (`desktop.bytes` in `latest.json`) |
 | Desktop first start: `uv`, Python 3.14 and Yuo's Python packages | up to about 600 MB of disk, once |
-| Server image | about 3.5 GB of disk |
+| Server image | about 3.4 GB of disk |
 | Docker, if missing (5.0) | Docker Desktop about 600 MB to download, about 3 GB of disk; Docker Engine on Linux about 300 MB |
 | Claude Code or Codex, if Yuo installs one for the person | Codex about 500 MB, Claude Code less |
 
@@ -62,7 +68,7 @@ Find out as much as you can without asking. Examples; use what fits the shell.
 | What | Examples | Why Yuo cares |
 |---|---|---|
 | Operating system, CPU type | `uname -sm`, `sw_vers`, PowerShell `Get-ComputerInfo -Property OsName,OsArchitecture` | Picks the download. macOS needs Apple silicon. |
-| Memory and free disk | `free -m`, `df -h ~`, PowerShell `Get-CimInstance Win32_OperatingSystem \| Select FreePhysicalMemory,TotalVisibleMemorySize` | The server version needs about 2 GB of free memory while it runs. |
+| Memory and free disk | `free -m`, `df -h ~`, PowerShell `Get-CimInstance Win32_OperatingSystem \| Select FreePhysicalMemory,TotalVisibleMemorySize` | The server version needs about 2 GB of free memory while it runs: a server with 4 GB is enough. On a personal computer, Docker Desktop and everything else running need room too: 8 GB is comfortable (section 4). |
 | Personal computer or server | an SSH session, no display, a cloud provider, a public IP address on the machine | Picks the route (section 4). |
 | Docker with Compose, and running | `docker compose version`, then `docker info` | Needed for the server version, the recommended one. Installed but `docker info` fails: Docker Desktop is not started (start it) or, on Linux, the user cannot reach the Docker daemon. Missing: section 5 explains how to install it. |
 | Can this computer run Docker Desktop | Windows: `wsl --status`, and "Virtualization: Enabled" in Task Manager > Performance > CPU; macOS: version 13 or later | Docker Desktop needs WSL 2 and hardware virtualization on Windows, and a recent macOS. |
@@ -72,7 +78,7 @@ Find out as much as you can without asking. Examples; use what fits the shell.
 | Time zone and language | `timedatectl`, `Get-TimeZone`, `$LANG`, `Get-Culture` | Profile suggestions, on the person's own computer only (see below). |
 | Tailscale | `tailscale status` | A private way for the person's phone to reach a server. |
 | Ports 80 and 443 | `ss -ltn`, `netstat -an`; `sudo ufw status` after asking | Needed for a public HTTPS address. |
-| Yuo already installed | desktop: the data folder (section 7) holds `yuo.db`; server: `docker ps -a --filter name=yuo` | Offer an update instead of a second install. |
+| Yuo already installed | desktop: the data folder (section 7) holds `yuo.db`; server: `docker ps -a --filter name=yuo`, `docker compose ls` | Offer an update instead of a second install. If they do want a second, separate copy (to try a new version, say), see "A second copy" in 5b. |
 
 On a server, the time zone and language are the server's (often UTC and `C.UTF-8`), not the person's: ask
 for theirs. If Yuo should run on another machine than the one you are on, do these checks there (over SSH, if
@@ -108,8 +114,9 @@ Ask only what section 2 did not answer, in one message where possible. Offer a d
 6. **Optional: about you.** Yuo asks these in its setup anyway; collected now, the setup starts from them:
    - the name Yuo should call them;
    - the language of Yuo's screens (English, Italian, Spanish, Portuguese or German), and the language
-     lessons are explained in: the one they understand best. To learn a language, that is still their own
-     language; the language they want to learn is the first path (for example "Spanish for my trip");
+     lessons are explained in: the one they understand best (if they speak several, ask which they prefer).
+     To learn a language, that is still their own language; the language they want to learn is the first
+     path (for example "Spanish for my trip");
    - their time zone (for daily reviews and streaks);
    - how long one study session should be (5 to 120 minutes; 20 by default);
    - interests Yuo can use for examples (hobbies, work, places; up to 500 characters).
@@ -144,6 +151,7 @@ itself from this draft, so do not write a syllabus.
 |---|---|
 | Yuo on their own computer (**recommended**) | **Server version on their computer** (5b), with Docker. Full Yuo, videos included. |
 | Yuo on a server, used from several devices | **Server version on a server** (5c), with Docker and HTTPS. |
+| Yuo on a server, tried first from one computer | **Server version on a server** (5c) through an **SSH tunnel**: nothing opened, HTTPS can come later. |
 | Yuo on their own computer, and Docker is not possible or not wanted | **Desktop app** (5a). Text only: no videos. |
 
 Propose the server version by default, and install Docker first if it is missing (5.0). Propose the desktop
@@ -151,7 +159,9 @@ app only when:
 
 - the person does not want Docker or videos, after you have told them what they give up;
 - the computer cannot run Docker (Docker Desktop needs WSL 2 and hardware virtualization on Windows, macOS 13
-  or later on a Mac), or has less than about 8 GB of memory or 10 GB of free disk;
+  or later on a Mac), or, being a personal computer, has less than about 8 GB of memory or 10 GB of free
+  disk (a server with 4 GB runs the server version well: this limit is for Docker Desktop on a computer
+  people also work on);
 - they are not allowed to install Docker on it (a work computer, or Docker Desktop's licence, see 5.0).
 
 Before the person picks the desktop app, say it plainly: **the desktop app does not make videos; lessons are
@@ -194,7 +204,9 @@ administrator rights, and on Windows often a restart. Use Docker's own installer
   them that the `docker` group is as powerful as root on that machine.
 
 Docker Desktop is free for personal use, education, non-commercial open source and small businesses; larger
-companies need a paid Docker subscription. Mention it when the computer looks like a work computer.
+companies need a paid Docker subscription. Yuo's videos are made with Remotion, which is free for individuals,
+non-profits and companies of up to three people; larger companies need a Remotion company licence
+(`https://www.remotion.dev/license`). Mention both when the computer looks like a work computer.
 
 Check before going on: `docker compose version` and `docker info` both work. If `docker info` fails right
 after installing, Docker Desktop is still starting, or on Linux the new group needs a fresh login.
@@ -223,12 +235,13 @@ checks for updates once a day and installs them on a restart, rolling back if th
 ### 5b. Server version on the person's computer
 
 The recommended route on a personal computer: full Yuo, videos included. Docker Desktop (Windows, macOS) or
-Docker Engine with Compose (Linux), installed and running (5.0); about 4 GB of disk for Yuo besides Docker
+Docker Engine with Compose (Linux), installed and running (5.0); about 3.5 GB of disk for Yuo besides Docker
 itself, and 2 GB of free memory while Yuo runs (a computer with 8 GB or more is comfortable). Docker Desktop
 must be running whenever the person uses Yuo; in its settings, "Start Docker Desktop when you sign in" keeps
 Yuo available after a restart.
 
-1. Get the release's files: `git clone --depth 1 --branch v<version> https://github.com/giuvul/yuo` (or
+1. Get the release's files: `git clone -c advice.detachedHead=false --depth 1 --branch v<version>
+   https://github.com/giuvul/yuo` (or
    download `https://github.com/giuvul/yuo/archive/refs/tags/v<version>.tar.gz`, which unpacks to
    `yuo-<version>`). Work in its `packaging/container` folder.
 2. Make the secrets key. It encrypts API keys at rest; tell the person to keep it with their backups. Do not
@@ -245,19 +258,43 @@ Yuo available after a restart.
        YUO_ORIGIN=http://localhost:18765
 
    Yuo is then reachable from this computer only. Passkeys work on `localhost` without HTTPS.
-4. `docker compose pull && docker compose up -d`.
+4. `docker compose pull && docker compose up -d`. The pull is about 3.4 GB: tell the person it can take
+   several minutes.
 5. Check: `docker compose ps` shows `yuo` running and `render` healthy, and
    `http://localhost:18765/api/health` answers. If the log says Yuo cannot read the secrets key file: on
    Linux the `chown` is missing; on Docker Desktop run `chmod 644 yuo_key` (the file stays inside the
    person's account), then `docker compose up -d`.
-6. If you collected answers, save them (section 6).
-7. Get the one-time setup code: `docker compose logs yuo | grep -A2 "one-time code"`. Give the person the code
-   and `http://localhost:18765/setup`.
+6. Right away: if you collected answers, save them (`docker compose exec -T yuo yuo setup-answers - <
+   setup-answers.json`, format in section 6), then get the one-time code with
+   `docker compose logs yuo | grep -A2 "one-time code"`, give the person the code and
+   `http://localhost:18765/setup`, and open that address in their browser (section 0). The rest of section 6
+   can follow while they sign in.
+
+Run every `docker compose` command in `packaging/container`: Compose reads `.env` there.
+
+**A second copy on the same machine.** Each copy is a Compose project with its own containers, data volume
+and port. A second copy needs two more lines in its `.env`, for example:
+
+    YUO_PROJECT=yuotrial
+    YUO_HOST_PORT=18766
+    YUO_ORIGIN=http://localhost:18766
+
+Never run `docker compose` for a new copy without `YUO_PROJECT`: it would take over the existing Yuo's
+containers, and `docker compose down -v` would delete its data. Use the new port wherever these steps say
+18765. Never run machine-wide clean-ups (`docker system prune`, `docker volume prune`) on a machine with Yuo.
 
 ### 5c. Server version on a server
 
-Install Docker Engine first if it is missing (5.0, Linux). Steps 1, 2 and 5 to 7 are those of 5b. Before
-step 3, choose how the person's devices reach Yuo: recommend from what section 2 found, and ask.
+Install Docker Engine first if it is missing (5.0, Linux). Steps 1, 2, 4 and 5 are those of 5b; then step 6,
+with the address the person will use. Before step 3, choose how the person's devices reach Yuo: recommend
+from what section 2 found, and ask.
+
+- **An SSH tunnel**, to try Yuo from one computer before opening anything: nothing is exposed and no HTTPS
+  is needed. `.env` as in 5b (`YUO_ORIGIN=http://localhost:18765`). The person runs, on their own computer,
+  `ssh -N -L 18765:127.0.0.1:18765 <user>@<server>` and opens `http://localhost:18765/setup` while it runs.
+  Give them that command and that link together. Phones cannot use it; for more devices, move to one of the
+  options below later: change `YUO_ORIGIN`, `docker compose up -d`, then sign in with the password or a
+  recovery code and add a new passkey, because a passkey belongs to the address it was made on.
 
 - **Tailscale**, when it is set up already, or when the server sits behind a router or carrier-grade NAT:
   private, nothing opened to the internet. Every device the person learns on joins their tailnet. `.env`:
@@ -265,7 +302,8 @@ step 3, choose how the person's devices reach Yuo: recommend from what section 2
       YUO_IMAGE=ghcr.io/giuvul/yuo:<version>
       YUO_ORIGIN=https://<the server's Tailscale name>
 
-  Then on the server `tailscale serve --bg --https=443 http://127.0.0.1:18765`, and start with
+  Then on the server `tailscale serve --bg --https=443 http://127.0.0.1:18765` (or the port in
+  `YUO_HOST_PORT`), and start with
   `docker compose pull && docker compose up -d`.
 - **A public name with Caddy**, when ports 80 and 443 can be opened: works from any device and browser.
   Without a domain of their own, use a free name from sslip.io (a public service that maps
@@ -281,8 +319,9 @@ step 3, choose how the person's devices reach Yuo: recommend from what section 2
   `sudo firewall-cmd --list-services` (after asking), and tell the person that a firewall in the hosting
   provider's panel can only be opened by them, there. Start with
   `docker compose --profile caddy pull && docker compose --profile caddy up -d`.
-- **Their own reverse proxy**, when they run one: proxy to `http://127.0.0.1:18765`, keep the Host header, do
-  not buffer `text/event-stream`, serve HTTPS only; `YUO_ORIGIN` is the URL it serves.
+- **Their own reverse proxy**, when they run one: proxy to `http://127.0.0.1:18765` (or `YUO_HOST_PORT`),
+  keep the Host header, do not buffer `text/event-stream`, serve HTTPS only; `YUO_ORIGIN` is the URL it
+  serves.
 
 The details, and the fix for every reachability problem, are in
 [packaging/container/README.md](packaging/container/README.md).
@@ -291,6 +330,9 @@ Until the person signs in, Yuo's setup page accepts only the one-time code, whic
 them to sign in soon after the start.
 
 ## 6. Hand over to the person
+
+Section 5 already gave the person the address and the code. This section is the answers file's format and
+what to tell them next.
 
 ### Save the answers for Yuo's setup
 
@@ -336,7 +378,8 @@ Every field is optional, and so is each part. A field that does not fit is left 
 
 Where it goes:
 
-- **Server version**, after the start. The command checks it and says what it left out, and why:
+- **Server version**, right after the start (5b step 6). The command checks it and says what it left out,
+  and why:
 
       docker compose exec -T yuo yuo setup-answers - < setup-answers.json
 
@@ -365,12 +408,12 @@ Tell the person where things are, and leave them a short note with this if they 
 
 | | Desktop app | Server version |
 |---|---|---|
-| Data folder | Windows `%LOCALAPPDATA%\Yuo\data`, macOS `~/Library/Application Support/Yuo/data`, Linux `~/.local/share/yuo-desktop/data` | the `yuo_data` Docker volume (`/data` inside) |
+| Data folder | Windows `%LOCALAPPDATA%\Yuo\data`, macOS `~/Library/Application Support/Yuo/data`, Linux `~/.local/share/yuo-desktop/data` | the Docker volume `yuo_data` (`<YUO_PROJECT>_data` for a second copy; `/data` inside) |
 | Start and stop | the start file or its shortcut; closing the window stops it | Docker Desktop (or the Docker service on Linux) must be running; `docker compose up -d`, `docker compose stop` |
 | Backups | one a day, in `backups` in the data folder | one a day in `/data/backups`; `docker compose exec yuo yuo backup` for one now; copy them off the machine together with `yuo_key` |
 | Locked out | the start file opens Yuo signed in | `docker compose exec yuo yuo setup-code` prints a new one-time code |
 | Update | automatic, on restart, with rollback | set the new version in `YUO_IMAGE`, then `docker compose pull && docker compose up -d` |
-| Remove | delete the folder Yuo was unzipped into and the folder above the data folder; saved keys are in the system keychain under `yuo` | `docker compose down -v` deletes everything, data included: ask first |
+| Remove | delete the folder Yuo was unzipped into and the folder above the data folder; saved keys are in the system keychain under `yuo` | in `packaging/container`, `docker compose down -v` deletes this copy, data included: ask first |
 
 ## 8. If something goes wrong
 
