@@ -1,0 +1,52 @@
+/* Flat botanical illustrations (illustrations.tsx). Fills only, from the illustration tokens; no gradients. */
+@layer components {
+  .illus {
+    display: block;
+    max-inline-size: 100%;
+    block-size: auto;
+  }
+
+  .deep {
+    fill: var(--yuo-color-illus-deep);
+  }
+
+  .mid {
+    fill: var(--yuo-color-illus-mid);
+  }
+
+  .soft {
+    fill: var(--yuo-color-illus-soft);
+  }
+
+  .ground {
+    fill: var(--yuo-color-illus-ground);
+  }
+
+  .paper {
+    fill: var(--yuo-color-illus-paper);
+  }
+
+  .sun {
+    fill: var(--yuo-color-illus-sun);
+  }
+
+  .clay {
+    fill: var(--yuo-color-illus-clay);
+  }
+
+  .bark {
+    fill: var(--yuo-color-illus-bark);
+  }
+
+  .barkLine {
+    fill: none;
+    stroke: var(--yuo-color-illus-bark);
+    stroke-linecap: round;
+  }
+
+  .deepLine {
+    fill: none;
+    stroke: var(--yuo-color-illus-deep);
+    stroke-linecap: round;
+  }
+}

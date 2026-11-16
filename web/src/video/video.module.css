@@ -1,0 +1,93 @@
+@layer components {
+  .player {
+    display: grid;
+    inline-size: 100%;
+    max-inline-size: 100%;
+    border-radius: var(--yuo-radius-3);
+    background: var(--yuo-color-media-bg);
+    box-shadow: var(--yuo-shadow-1);
+    overflow: hidden;
+
+    /* in fullscreen the picture takes what the bar leaves */
+    &:fullscreen {
+      grid-template-rows: minmax(0, 1fr) auto;
+      border-radius: 0;
+
+      & .controller {
+        aspect-ratio: auto;
+        block-size: 100%;
+      }
+    }
+  }
+
+  .controller {
+    display: block;
+    inline-size: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    /* before the poster arrives: a calm forest surface, not a black box */
+    background: var(--yuo-color-media-bg);
+    /* Media Chrome reads these; the focus ring stays visible on the dark bar */
+    --media-primary-color: var(--yuo-color-media-fg);
+    --media-secondary-color: transparent;
+    --media-focus-box-shadow: inset 0 0 0 2px var(--yuo-color-highlight);
+
+    & video {
+      inline-size: 100%;
+      block-size: 100%;
+      object-fit: contain;
+    }
+
+    /* long cues wrap inside the picture instead of running off its edge */
+    & video::cue {
+      white-space: normal;
+    }
+  }
+
+  /* the round play target in the middle of the picture */
+  .bigPlay {
+    --media-control-background: var(--yuo-color-highlight);
+    --media-control-hover-background: var(--yuo-color-highlight);
+    --media-primary-color: var(--yuo-color-highlight-fg);
+    --media-button-icon-width: 2rem;
+    --media-button-icon-height: 2rem;
+    inline-size: 4rem;
+    block-size: 4rem;
+    padding: var(--yuo-space-3);
+    border-radius: var(--yuo-radius-full);
+    box-shadow: var(--yuo-shadow-2);
+
+    @media (max-width: 30rem) {
+      inline-size: 3.25rem;
+      block-size: 3.25rem;
+      padding: var(--yuo-space-2-5);
+    }
+  }
+
+  .bar {
+    display: flex;
+    inline-size: 100%;
+    background: var(--yuo-color-media-bar);
+    --media-primary-color: var(--yuo-color-media-fg);
+    --media-text-color: var(--yuo-color-media-fg);
+    --media-control-background: var(--yuo-color-media-bar);
+    --media-control-hover-background: var(--yuo-color-media-bg);
+    --media-range-bar-color: var(--yuo-color-highlight);
+    --media-range-thumb-background: var(--yuo-color-highlight);
+    --media-focus-box-shadow: inset 0 0 0 2px var(--yuo-color-highlight);
+    --media-font-family: var(--yuo-font-sans);
+  }
+
+  .range {
+    flex: 1;
+    min-inline-size: 0;
+  }
+
+  /* a phone: mute stays, the volume slider and the duration go (the time range shows progress) */
+  @media (max-width: 30rem) {
+    .volume,
+    .duration {
+      display: none;
+    }
+  }
+}

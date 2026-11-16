@@ -1,0 +1,284 @@
+{
+ "$defs": {
+  "LessonVersionRecord": {
+   "additionalProperties": true,
+   "properties": {
+    "body": {
+     "items": {
+      "additionalProperties": true,
+      "type": "object"
+     },
+     "title": "Body",
+     "type": "array"
+    },
+    "data_class": {
+     "default": "C",
+     "enum": [
+      "C",
+      "F"
+     ],
+     "title": "Data Class",
+     "type": "string"
+    },
+    "est_minutes": {
+     "minimum": 0,
+     "title": "Est Minutes",
+     "type": "integer"
+    },
+    "extensions": {
+     "additionalProperties": true,
+     "title": "Extensions",
+     "type": "object"
+    },
+    "lang": {
+     "maxLength": 35,
+     "minLength": 2,
+     "title": "Lang",
+     "type": "string"
+    },
+    "objectives": {
+     "items": {
+      "$ref": "#/$defs/ObjectiveRole"
+     },
+     "title": "Objectives",
+     "type": "array"
+    },
+    "provenance": {
+     "$ref": "#/$defs/Provenance"
+    },
+    "sources": {
+     "items": {
+      "$ref": "#/$defs/SourceUse"
+     },
+     "title": "Sources",
+     "type": "array"
+    },
+    "title": {
+     "maxLength": 300,
+     "title": "Title",
+     "type": "string"
+    },
+    "translation_of_version_hash": {
+     "anyOf": [
+      {
+       "pattern": "^[0-9a-f]{64}$",
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Translation Of Version Hash"
+    },
+    "version_hash": {
+     "pattern": "^[0-9a-f]{64}$",
+     "title": "Version Hash",
+     "type": "string"
+    },
+    "version_no": {
+     "minimum": 1,
+     "title": "Version No",
+     "type": "integer"
+    }
+   },
+   "required": [
+    "version_hash",
+    "version_no",
+    "lang",
+    "title",
+    "body",
+    "est_minutes",
+    "provenance"
+   ],
+   "title": "LessonVersionRecord",
+   "type": "object"
+  },
+  "ObjectiveRole": {
+   "properties": {
+    "code": {
+     "pattern": "^[a-z0-9]+([._-][a-z0-9]+)*$",
+     "title": "Code",
+     "type": "string",
+     "x-ref": "objective"
+    },
+    "role": {
+     "enum": [
+      "primary",
+      "secondary"
+     ],
+     "title": "Role",
+     "type": "string"
+    }
+   },
+   "required": [
+    "code",
+    "role"
+   ],
+   "title": "ObjectiveRole",
+   "type": "object"
+  },
+  "Provenance": {
+   "additionalProperties": true,
+   "description": "Who made a version; never part of its hash (spec §5).",
+   "properties": {
+    "author_kind": {
+     "default": "system",
+     "enum": [
+      "system",
+      "learner"
+     ],
+     "title": "Author Kind",
+     "type": "string"
+    },
+    "authorship": {
+     "enum": [
+      "generated",
+      "human",
+      "human_edited",
+      "translated"
+     ],
+     "title": "Authorship",
+     "type": "string"
+    },
+    "licence": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Licence"
+    },
+    "upstream": {
+     "anyOf": [
+      {
+       "additionalProperties": true,
+       "type": "object"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Upstream"
+    }
+   },
+   "required": [
+    "authorship"
+   ],
+   "title": "Provenance",
+   "type": "object"
+  },
+  "SourceUse": {
+   "properties": {
+    "block_ids": {
+     "anyOf": [
+      {
+       "items": {
+        "type": "string"
+       },
+       "type": "array"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Block Ids"
+    },
+    "key": {
+     "maxLength": 200,
+     "title": "Key",
+     "type": "string",
+     "x-ref": "source"
+    },
+    "locator": {
+     "anyOf": [
+      {
+       "maxLength": 200,
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Locator"
+    }
+   },
+   "required": [
+    "key"
+   ],
+   "title": "SourceUse",
+   "type": "object"
+  }
+ },
+ "$id": "urn:yuo:package:1.0:record.lesson",
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "additionalProperties": true,
+ "properties": {
+  "code": {
+   "maxLength": 128,
+   "pattern": "^[a-z0-9]+([._-][a-z0-9]+)*$",
+   "title": "Code",
+   "type": "string"
+  },
+  "current": {
+   "anyOf": [
+    {
+     "pattern": "^[0-9a-f]{64}$",
+     "type": "string"
+    },
+    {
+     "type": "null"
+    }
+   ],
+   "default": null,
+   "title": "Current"
+  },
+  "extensions": {
+   "additionalProperties": true,
+   "title": "Extensions",
+   "type": "object"
+  },
+  "kind": {
+   "enum": [
+    "core",
+    "remedial",
+    "requested"
+   ],
+   "title": "Kind",
+   "type": "string"
+  },
+  "position": {
+   "minimum": 0,
+   "title": "Position",
+   "type": "integer"
+  },
+  "skill": {
+   "pattern": "^[a-z0-9]+([._-][a-z0-9]+)*$",
+   "title": "Skill",
+   "type": "string",
+   "x-ref": "skill"
+  },
+  "versions": {
+   "items": {
+    "$ref": "#/$defs/LessonVersionRecord"
+   },
+   "title": "Versions",
+   "type": "array"
+  }
+ },
+ "required": [
+  "code",
+  "skill",
+  "kind",
+  "position"
+ ],
+ "title": "LessonRecord",
+ "type": "object"
+}

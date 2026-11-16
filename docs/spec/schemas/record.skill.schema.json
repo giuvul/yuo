@@ -1,0 +1,88 @@
+{
+ "$id": "urn:yuo:package:1.0:record.skill",
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "additionalProperties": true,
+ "properties": {
+  "branch": {
+   "pattern": "^[a-z0-9]+([._-][a-z0-9]+)*$",
+   "title": "Branch",
+   "type": "string",
+   "x-ref": "branch"
+  },
+  "code": {
+   "maxLength": 128,
+   "pattern": "^[a-z0-9]+([._-][a-z0-9]+)*$",
+   "title": "Code",
+   "type": "string"
+  },
+  "extensions": {
+   "additionalProperties": true,
+   "title": "Extensions",
+   "type": "object"
+  },
+  "mastery_threshold": {
+   "anyOf": [
+    {
+     "maximum": 1,
+     "minimum": 0,
+     "type": "number"
+    },
+    {
+     "type": "null"
+    }
+   ],
+   "default": null,
+   "title": "Mastery Threshold"
+  },
+  "merged_into": {
+   "anyOf": [
+    {
+     "type": "string"
+    },
+    {
+     "type": "null"
+    }
+   ],
+   "default": null,
+   "title": "Merged Into",
+   "x-ref": "skill"
+  },
+  "optional": {
+   "default": false,
+   "title": "Optional",
+   "type": "boolean"
+  },
+  "position": {
+   "minimum": 0,
+   "title": "Position",
+   "type": "integer"
+  },
+  "prerequisites": {
+   "items": {
+    "type": "string"
+   },
+   "title": "Prerequisites",
+   "type": "array",
+   "x-ref": "skill"
+  },
+  "summary": {
+   "default": "",
+   "maxLength": 4000,
+   "title": "Summary",
+   "type": "string"
+  },
+  "title": {
+   "maxLength": 200,
+   "title": "Title",
+   "type": "string"
+  }
+ },
+ "required": [
+  "code",
+  "branch",
+  "title",
+  "position"
+ ],
+ "title": "SkillRecord",
+ "type": "object"
+}

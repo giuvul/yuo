@@ -1,0 +1,5604 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2026-11-15 13:30+0100\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: pt\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
+
+#: src/tutor/Dock.tsx
+msgid "tutor.fab.suggestion"
+msgstr ", há uma sugestão esperando"
+
+#: src/onboarding/SettingsSections.tsx
+msgid "settings.ai.model.resolved-via"
+msgstr "({model}, através de {via})"
+
+#: src/routes/setup.tsx
+msgid "wizard.steps.done"
+msgstr "(concluído)"
+
+#: src/routes/pathView.tsx
+msgid "path.growing.done"
+msgstr "(concluído)"
+
+#: src/onboarding/SettingsSections.tsx
+msgid "settings.ai.model.alias"
+msgstr "(a versão mais recente, através do Claude Code; a exata aparece aqui depois do primeiro uso)"
+
+#: src/onboarding/SettingsSections.tsx
+msgid "settings.ai.model.via"
+msgstr "(através de {via})"
+
+#. placeholder {0}: fresh.length
+#: src/video/NotesBubble.tsx
+msgid "notes-bubble.ask"
+msgstr "{0, plural, one {Perguntar ao tutor (#)} other {Perguntar ao tutor (#)}}"
+
+#. placeholder {0}: asked.length
+#: src/video/NotesBubble.tsx
+msgid "notes-bubble.asked.hide"
+msgstr "{0, plural, one {Ocultar # já perguntada} other {Ocultar # já perguntadas}}"
+
+#. placeholder {0}: asked.length
+#: src/video/NotesBubble.tsx
+msgid "notes-bubble.asked.show"
+msgstr "{0, plural, one {Mostrar # já perguntada} other {Mostrar # já perguntadas}}"
+
+#. placeholder {0}: Math.round(stage.fraction * 100)
+#: src/routes/importPage.tsx
+msgid "import.uploading.percent"
+msgstr "{0} % enviado"
+
+#. placeholder {0}: r.label
+#: src/onboarding/PlanUsage.tsx
+msgid "plan-usage.row"
+msgstr "{0}: <0/>; <1/>"
+
+#: src/routes/progress.tsx
+msgid "progress.branch.xp"
+msgstr "{bxp} XP"
+
+#: src/onboarding/ProbeSummary.tsx
+msgid "wizard.computer.server.models"
+msgstr "{count, plural, one {# modelo} other {# modelos}}"
+
+#: src/tutor/Thread.tsx
+msgid "tutor.chip.notes"
+msgstr "{count, plural, one {# nota} other {# notas}}"
+
+#: src/onboarding/ProbeSummary.tsx
+msgid "wizard.computer.disk.value"
+msgstr "{disk} GB"
+
+#: src/routes/nextSteps.tsx
+msgid "next.fact.lessons"
+msgstr "{done} lições estudadas, {left} ainda planejadas"
+
+#: src/routes/review.tsx
+msgid "review.chooser.due"
+msgstr "{due, plural, one {# para revisar} other {# para revisar}}"
+
+#: src/review/Hub.tsx
+msgid "review.cards.due"
+msgstr "{due, plural, one {# flashcard da sua prática está na hora de revisar.} other {# flashcards da sua prática estão na hora de revisar.}}"
+
+#: src/review/Hub.tsx
+msgid "review.hub.lead.due"
+msgstr "{due, plural, one {# ideia está na hora de revisar} other {# ideias estão na hora de revisar}}"
+
+#: src/review/Hub.tsx
+msgid "review.entry.counts"
+msgstr "{due} para revisar · {fading} se apagando"
+
+#: src/review/Hub.tsx
+msgid "review.hub.lead.fading"
+msgstr "{fading, plural, one {# ideia está começando a se apagar} other {# ideias estão começando a se apagar}}"
+
+#: src/review/Results.tsx
+msgid "review.results.ring"
+msgstr "{first} de {answered} certas na primeira tentativa"
+
+#: src/review/Hub.tsx
+msgid "review.hub.recent.row"
+msgstr "{first} de {answered} certas na primeira tentativa"
+
+#: src/onboarding/ProbeSummary.tsx
+msgid "wizard.computer.gpu.value"
+msgstr "{gpu} com {vram} GB de memória própria"
+
+#: src/onboarding/ProbeSummary.tsx
+msgid "wizard.computer.gpu.apple"
+msgstr "{gpu}, compartilhando a memória do computador"
+
+#: src/onboarding/vendorModels.tsx
+msgid "openrouter.models.detail"
+msgstr "{id} · {input} de entrada, {output} de saída por milhão de tokens"
+
+#: src/routes/lessonReader.tsx
+msgid "lesson.practice"
+msgstr "{items, plural, one {Prática (# pergunta)} other {Prática (# perguntas)}}"
+
+#: src/tutor/Thread.tsx
+msgid "tutor.chip.default"
+msgstr "{kind}: {label}"
+
+#: src/routes/devices.tsx
+msgid "devices.codes.left"
+msgstr "{left, plural, =0 {Não restam códigos de recuperação.} one {Resta # código de recuperação.} other {Restam # códigos de recuperação.}}"
+
+#: src/routes/pathNew.tsx
+msgid "path.new.estimate.title"
+msgstr "{lessons, plural, one {Custo estimado para # lição} other {Custo estimado para # lições}}"
+
+#: src/path/PathGraph.tsx
+#: src/path/PathGraph.tsx
+msgid "path.tree.branch.mastered"
+msgstr "{mastered} de {total} dominadas"
+
+#: src/routes/pathView.tsx
+msgid "path.overview.progress"
+msgstr "{mastered} de {total} habilidades dominadas"
+
+#: src/routes/index.tsx
+msgid "home.path.progress"
+msgstr "{mastered} de {total} habilidades dominadas"
+
+#: src/onboarding/ProbeSummary.tsx
+msgid "wizard.computer.memory.value"
+msgstr "{memory} GB"
+
+#: src/review/Hub.tsx
+msgid "review.hub.skill.memory"
+msgstr "{memory} de memória"
+
+#: src/components/JobProgress.tsx
+msgid "job.time.left"
+msgstr "{min, plural, one {falta cerca de # minuto} other {faltam cerca de # minutos}}"
+
+#: src/components/JobProgress.tsx
+msgid "job.time.typical"
+msgstr "{min, plural, one {costuma levar cerca de # minuto} other {costuma levar cerca de # minutos}}"
+
+#: src/routes/lessonReader.tsx
+msgid "lesson.minutes"
+msgstr "{minutes, plural, one {Cerca de # minuto} other {Cerca de # minutos}}"
+
+#: src/auth/AuthError.tsx
+msgid "auth.error.throttled"
+msgstr "{minutes, plural, one {Muitas tentativas erradas. Tente de novo em # minuto. Entrar com uma chave de acesso continua funcionando.} other {Muitas tentativas erradas. Tente de novo em # minutos. Entrar com uma chave de acesso continua funcionando.}}"
+
+#: src/sharing/labels.tsx
+msgid "share.count.branch"
+msgstr "{n, plural, one {# ramo} other {# ramos}}"
+
+#: src/components/HeaderStatus.tsx
+msgid "nav.reviews.due"
+msgstr "{n, plural, one {# para revisar} other {# para revisar}}"
+
+#: src/sharing/labels.tsx
+msgid "share.count.objective"
+msgstr "{n, plural, one {# objetivo de aprendizagem} other {# objetivos de aprendizagem}}"
+
+#: src/sharing/labels.tsx
+msgid "share.count.lesson"
+msgstr "{n, plural, one {# lição} other {# lições}}"
+
+#: src/sharing/labels.tsx
+msgid "share.count.asset"
+msgstr "{n, plural, one {# arquivo de mídia} other {# arquivos de mídia}}"
+
+#: src/sharing/labels.tsx
+msgid "share.count.item"
+msgstr "{n, plural, one {# pergunta} other {# perguntas}}"
+
+#: src/sharing/labels.tsx
+msgid "share.count.skill"
+msgstr "{n, plural, one {# habilidade} other {# habilidades}}"
+
+#: src/sharing/labels.tsx
+msgid "share.count.source"
+msgstr "{n, plural, one {# fonte} other {# fontes}}"
+
+#: src/sharing/labels.tsx
+msgid "share.count.rendition"
+msgstr "{n, plural, one {# vídeo ou leitura} other {# vídeos e leituras}}"
+
+#: src/sharing/labels.tsx
+msgid "share.count.theme"
+msgstr "{n, plural, one {# tema de vídeo} other {# temas de vídeo}}"
+
+#: src/sharing/ExportDialog.tsx
+msgid "share.personal.include"
+msgstr "{n, plural, one {Incluir meu próprio conteúdo (# item: lições pedidas, minhas edições, lições feitas a partir das minhas instruções pessoais)} other {Incluir meu próprio conteúdo (# itens: lições pedidas, minhas edições, lições feitas a partir das minhas instruções pessoais)}}"
+
+#: src/routes/jobs.tsx
+msgid "jobs.took.min"
+msgstr "{n, plural, one {levou # minuto} other {levou # minutos}}"
+
+#: src/routes/jobs.tsx
+msgid "jobs.took.s"
+msgstr "{n, plural, one {levou # segundo} other {levou # segundos}}"
+
+#: src/onboarding/CliAccess.tsx
+msgid "cli.state.installed"
+msgstr "{name} está instalado"
+
+#: src/onboarding/CliAccess.tsx
+msgid "cli.state.ready"
+msgstr "{name} está instalado e conectado"
+
+#: src/onboarding/CliAccess.tsx
+msgid "cli.state.signed-out"
+msgstr "{name} está instalado, mas não conectado"
+
+#: src/onboarding/CliAccess.tsx
+msgid "cli.state.not-installed"
+msgstr "{name} ainda não está instalado"
+
+#: src/tutor/Nudges.tsx
+msgid "tutor.nudge.unsent-notes"
+msgstr "{notes, plural, one {Você deixou # nota nesta lição sobre a qual ainda não perguntou. Perguntar ao tutor agora?} other {Você deixou # notas nesta lição sobre as quais ainda não perguntou. Perguntar ao tutor agora?}}"
+
+#: src/onboarding/PlanMeter.tsx
+msgid "plan-meter.week.reset"
+msgstr "{pct} da semana usado, renova {day} às {time}."
+
+#: src/onboarding/PlanMeter.tsx
+msgid "plan-meter.week"
+msgstr "{pct} da semana usado."
+
+#: src/onboarding/PlanMeter.tsx
+msgid "plan-meter.window.reset-day"
+msgstr "{pct} desta janela de 5 horas usado, renova {day} às {time}."
+
+#: src/onboarding/PlanMeter.tsx
+msgid "plan-meter.window.reset"
+msgstr "{pct} desta janela de 5 horas usado, renova às {time}."
+
+#: src/onboarding/PlanMeter.tsx
+msgid "plan-meter.window"
+msgstr "{pct} desta janela de 5 horas usado."
+
+#: src/components/SyncIndicator.tsx
+msgid "sync.pending"
+msgstr "{pending, plural, one {# pendente} other {# pendentes}}"
+
+#: src/components/SyncIndicator.tsx
+msgid "sync.rejected"
+msgstr "{rejected, plural, one {# não aceito} other {# não aceitos}}"
+
+#: src/tutor/Thread.tsx
+msgid "tutor.memory.noted"
+msgstr "{remembered, plural, one {Guardei # coisa sobre você.} other {Guardei # coisas sobre você.}}"
+
+#: src/routes/devices.tsx
+msgid "devices.list.revoked"
+msgstr "{revoked} foi desconectado."
+
+#: src/tutor/Thread.tsx
+msgid "tutor.pending.elapsed"
+msgstr "{seconds} s"
+
+#: src/routes/progress.tsx
+msgid "progress.streak"
+msgstr "{streak, plural, one {dia seguido} other {dias seguidos}}"
+
+#: src/routes/tutorMemory.tsx
+msgid "tutor.memory.intro"
+msgstr "{tutorName} guarda coisas duradouras sobre você, como suas metas, como você gosta de aprender e erros que percebeu, para que as próximas respostas combinem com você. Nada mais das suas conversas fica guardado aqui. Você pode alterar ou excluir cada entrada; entradas excluídas somem para sempre."
+
+#: src/tutor/Dock.tsx
+msgid "tutor.fab.unread"
+msgstr "{unread, plural, one {, # resposta nova} other {, # respostas novas}}"
+
+#: src/onboarding/profile.tsx
+msgid "profile.interests.description"
+msgstr "{used} de {max} caracteres. Por exemplo: ciclismo, cozinhar, trabalho em um hospital. Isso é enviado com cada pedido de lição como informação sobre você, para que os exemplos combinem com a sua vida. Deixe em branco para não enviar nada."
+
+#: src/routes/pathNew.tsx
+msgid "path.new.field.instructions.description"
+msgstr "{used} de {max} caracteres. Por exemplo: use exemplos em Python, mantenha as lições curtas."
+
+#: src/review/Hub.tsx
+msgid "review.hub.objective.memory"
+msgstr "{value} lembrado"
+
+#: src/review/Hub.tsx
+msgid "review.hub.objective.next"
+msgstr "{value} lembrado · próxima revisão {date}"
+
+#: src/onboarding/vendor.tsx
+msgid "vendor.key.saved"
+msgstr "{vendor} aceitou a chave. Ela está salva neste computador e não será mostrada de novo."
+
+#: src/onboarding/vendor.tsx
+msgid "vendor.key.refused"
+msgstr "{vendor} não aceitou esta chave. Confira se você copiou a chave inteira e se ela ainda está ativa."
+
+#: src/onboarding/vendor.tsx
+msgid "vendor.key.label"
+msgstr "Chave para {vendor}"
+
+#: src/onboarding/vendorModels.tsx
+msgid "vendor.models.none"
+msgstr "{vendor} não lista nenhum modelo para esta chave. Confira as permissões da chave no site do fornecedor ou use outra chave."
+
+#: src/routes/importPage.tsx
+msgid "import.preview.version-update"
+msgstr "{version} (você tem {installed})"
+
+#: src/assessment/AssessmentRunner.tsx
+msgid "assessment.summary.waiting"
+msgstr "{waiting, plural, one {# resposta ainda está sendo corrigida.} other {# respostas ainda estão sendo corrigidas.}}"
+
+#: src/onboarding/CliAccess.tsx
+msgid "cli.login.browser"
+msgstr "Uma janela do navegador foi aberta neste computador. Entre por lá; o Yuo espera e continua sozinho."
+
+#: src/routes/placement.tsx
+msgid "placement.intro"
+msgstr "Algumas perguntas por habilidade. As habilidades que você já conhece são marcadas como dominadas, para você poder pular adiante."
+
+#: src/routes/setup.tsx
+msgid "wizard.about.intro"
+msgstr "Algumas coisas sobre você, para que as lições combinem com você. Você pode alterar tudo isso em Configurações."
+
+#: src/onboarding/vendor.tsx
+msgid "vendor.key.set"
+msgstr "Uma chave para {vendor} está salva neste computador."
+
+#: src/onboarding/vendor.tsx
+msgid "vendor.choose.saved"
+msgstr "uma chave está salva"
+
+#: src/onboarding/vendor.tsx
+msgid "settings.ai.vendor.connected"
+msgstr "uma chave está salva"
+
+#: src/onboarding/SettingsSections.tsx
+msgid "settings.ai.key.set"
+msgstr "Uma chave está salva neste computador. Ela nunca é mostrada de novo."
+
+#: src/path/PathGraph.tsx
+msgid "path.tree.node.failed"
+msgstr "não foi possível escrever uma lição"
+
+#: src/path/PathGraph.tsx
+msgid "path.tree.node.writing"
+msgstr "uma lição está sendo escrita"
+
+#: src/onboarding/desktop.tsx
+msgid "desktop.signed-out.opened"
+msgstr "Uma nova aba está abrindo. Se o navegador pedir, permita."
+
+#: src/pwa/PwaControls.tsx
+msgid "pwa.update.text"
+msgstr "Uma nova versão do Yuo está pronta."
+
+#: src/auth/SetupFlow.tsx
+msgid "auth.setup.passkey.intro"
+msgstr "Uma chave de acesso permite entrar com a digital, o rosto ou o bloqueio de tela deste dispositivo. Nada para memorizar, e ela não pode ser roubada por phishing."
+
+#: src/routes/nextSteps.tsx
+msgid "next.quiz.title"
+msgstr "Uma olhada rápida no que vem"
+
+#: src/routes/skillTest.tsx
+msgid "skill-test.remedial"
+msgstr "Uma lição extra curta sobre o que você errou está sendo preparada. Ela aparece na trilha como uma lição extra."
+
+#: src/tutor/texts.ts
+msgid "tutor.trigger.failed-test"
+msgstr "Um teste de habilidade não aprovado"
+
+#: src/routes/jobs.tsx
+msgid "jobs.retrying"
+msgstr "Uma etapa não deu certo na primeira vez. O Yuo tenta de novo sozinho; por enquanto você não precisa fazer nada."
+
+#: src/tutor/texts.ts
+msgid "tutor.proposal.kind.other"
+msgstr "Uma sugestão"
+
+#: src/tutor/DockPanel.tsx
+msgid "tutor.policy.open-test"
+msgstr "Há um teste aberto, então as regras do teste valem em todas as telas. Termine o teste para ter ajuda completa de novo."
+
+#: src/review/Resolved.tsx
+msgid "review.report.body"
+msgstr "Uma pergunta errada ou confusa é retirada das suas revisões. Ela não conta nesta sessão."
+
+#: src/onboarding/PlanUsage.tsx
+msgid "plan-usage.window.lessons"
+msgstr "cerca de {lessons} lições por janela de 5 horas"
+
+#: src/routes/pathNew.tsx
+msgid "path.new.estimate.billed"
+msgstr "cerca de {low}–{high} cobrados"
+
+#: src/onboarding/ProbeSummary.tsx
+msgid "wizard.computer.speed.value"
+msgstr "Cerca de {speed} bilhões de cálculos por segundo"
+
+#: src/components/JobProgress.tsx
+msgid "job.time.almost"
+msgstr "falta cerca de um minuto"
+
+#: src/routes/setup.tsx
+msgid "wizard.step.about"
+msgstr "Sobre você"
+
+#: src/tutor/Proposals.tsx
+msgid "tutor.proposal.accept"
+msgstr "Aceitar"
+
+#: src/tutor/texts.ts
+msgid "tutor.proposal.status.accepted"
+msgstr "Aceita"
+
+#: src/routes/progress.tsx
+msgid "progress.achievements"
+msgstr "Conquistas"
+
+#: src/components/labels.tsx
+msgid "path.status.active"
+msgstr "Ativa"
+
+#: src/routes/SettingRow.tsx
+msgid "settings.proactivity.active"
+msgstr "Ativo (oferece ajuda com mais frequência)"
+
+#: src/routes/tutorMemory.tsx
+msgid "tutor.memory.add.submit"
+msgstr "Adicionar"
+
+#: src/onboarding/vendor.tsx
+msgid "settings.ai.vendor.add"
+msgstr "Adicionar uma chave"
+
+#: src/onboarding/vendor.tsx
+msgid "settings.ai.vendor.add.label"
+msgstr "Adicionar uma chave: {vendor}"
+
+#: src/tutor/texts.ts
+msgid "tutor.proposal.kind.add-lesson"
+msgstr "Adicionar uma lição"
+
+#: src/lesson/Notes.tsx
+msgid "notes.add.lesson"
+msgstr "Adicionar uma nota"
+
+#: src/lesson/Notes.tsx
+msgid "notes.add.block"
+msgstr "Adicionar uma nota aqui"
+
+#: src/routes/devices.tsx
+msgid "devices.credentials.add-passkey"
+msgstr "Adicionar uma chave de acesso"
+
+#: src/auth/SetupFlow.tsx
+msgid "auth.setup.passkey.title"
+msgstr "Adicionar uma chave de acesso"
+
+#: src/auth/SetupFlow.tsx
+msgid "auth.setup.passkey.add"
+msgstr "Adicionar uma chave de acesso"
+
+#: src/tutor/DockPanel.tsx
+msgid "tutor.chip.add-back"
+msgstr "Adicionar de volta: {kind}"
+
+#: src/routes/nextSteps.tsx
+msgid "next.confirm"
+msgstr "Adicionar isso à sua trilha? Os novos ramos entram depois dos que você já tem; seu progresso continua."
+
+#: src/routes/nextSteps.tsx
+msgid "next.confirm.yes"
+msgstr "Adicionar à minha trilha"
+
+#: src/routes/devices.tsx
+msgid "devices.credentials.added"
+msgstr "Adicionada em {added}"
+
+#: src/tutor/texts.ts
+msgid "tutor.memory.source.system"
+msgstr "Adicionado pelo Yuo"
+
+#: src/components/labels.tsx
+msgid "request.status.done"
+msgstr "Adicionada à trilha"
+
+#. placeholder {0}: data.added.join(", ")
+#: src/routes/nextSteps.tsx
+msgid "next.done"
+msgstr "Adicionado à sua trilha: {0}. As primeiras lições novas estão a caminho."
+
+#: src/routes/nextSteps.tsx
+msgid "next.writing.branches"
+msgstr "Adicionando os novos ramos à sua trilha…"
+
+#: src/components/JobProgress.tsx
+msgid "job.step.next-grow"
+msgstr "Adicionando as novas habilidades"
+
+#: src/review/Results.tsx
+msgid "review.results.loading"
+msgstr "Somando os resultados da sua sessão…"
+
+#: src/onboarding/SettingsSections.tsx
+msgid "settings.ai.local.url"
+msgstr "Endereço do app de modelo"
+
+#: src/tutor/texts.ts
+msgid "tutor.proposal.difficulty.advanced"
+msgstr "Avançado"
+
+#: src/components/labels.tsx
+msgid "difficulty.advanced"
+msgstr "Avançado"
+
+#: src/routes/SettingRow.tsx
+msgid "settings.impact.label"
+msgstr "Afeta"
+
+#: src/routes/SettingRow.tsx
+msgid "settings.solution.attempt"
+msgstr "Depois de uma tentativa"
+
+#: src/routes/levelCheck.tsx
+msgid "level-check.failed.then-retry"
+msgstr "Depois disso, volte e tente de novo, ou pule a verificação: a trilha então começa do básico."
+
+#: src/items/ItemInput.tsx
+msgid "item.flashcard.rating.again"
+msgstr "De novo"
+
+#: src/onboarding/SettingsSections.tsx
+#: src/routes/settings.tsx
+msgid "settings.ai.title"
+msgstr "Acesso à IA"
+
+#: src/routes/setup.tsx
+msgid "wizard.step.access"
+msgstr "Acesso à IA"
+
+#: src/onboarding/ProbeSummary.tsx
+msgid "wizard.computer.servers"
+msgstr "Apps de modelos de IA neste computador"
+
+#: src/tutor/DockPanel.tsx
+msgid "tutor.threads.all"
+msgstr "Todas"
+
+#: src/tutor/DockPanel.tsx
+msgid "tutor.thread.all.label"
+msgstr "Todas as conversas"
+
+#: src/assessment/AssessmentRunner.tsx
+msgid "assessment.summary.title"
+msgstr "Tudo pronto"
+
+#: src/routes/review.tsx
+msgid "review.chooser.fresh"
+msgstr "Tudo em dia"
+
+#: src/sharing/ExportDialog.tsx
+msgid "share.formats.label"
+msgstr "Incluir também arquivos padrão"
+
+#: src/routes/SettingRow.tsx
+msgid "settings.video-format.always"
+msgstr "Sempre um vídeo"
+
+#: src/tutor/texts.ts
+msgid "tutor.proposal.kind.extra-review"
+msgstr "Uma revisão extra"
+
+#: src/onboarding/texts.tsx
+msgid "wizard.preset.local.summary"
+msgstr "Um modelo aberto roda no seu próprio computador. Nada do que você aprende sai dele."
+
+#: src/sharing/labels.tsx
+msgid "share.format.anki"
+msgstr "Baralho do Anki"
+
+#: src/review/Player.tsx
+msgid "review.hint.next"
+msgstr "Outra dica"
+
+#: src/assessment/AssessmentRunner.tsx
+msgid "assessment.hint.next"
+msgstr "Outra dica"
+
+#: src/components/labels.tsx
+msgid "job.target.response"
+msgstr "resposta"
+
+#: src/items/ItemInput.tsx
+msgid "item.flashcard.back"
+msgstr "Resposta"
+
+#: src/routes/nextSteps.tsx
+msgid "next.submit.hint"
+msgstr "Responda todas as perguntas do quiz para continuar."
+
+#: src/routes/levelCheck.tsx
+msgid "level-check.intro"
+msgstr "Responda com sinceridade; “Ainda não sei” é uma boa resposta. Sua trilha começa pelo que você ainda não sabe."
+
+#: src/tutor/Dock.tsx
+msgid "tutor.announce.done"
+msgstr "Resposta pronta: {preview}"
+
+#: src/tutor/texts.ts
+msgid "tutor.trigger.fast-guessing"
+msgstr "Respondendo rápido demais"
+
+#: src/assessment/AssessmentRunner.tsx
+msgid "assessment.summary.bar"
+msgstr "Respostas certas"
+
+#: src/onboarding/texts.tsx
+msgid "wizard.option.vendor.summary"
+msgstr "Anthropic, OpenAI, Google Gemini, Mistral, DeepSeek, xAI ou Qwen; cobrado pelo fornecedor."
+
+#: src/routes/SettingRow.tsx
+msgid "settings.solution.any-time"
+msgstr "A qualquer momento"
+
+#: src/onboarding/SettingsSections.tsx
+#: src/routes/settings.tsx
+msgid "settings.appearance.title"
+msgstr "Aparência"
+
+#: src/review/Player.tsx
+msgid "review.kind.apply"
+msgstr "Aplicar"
+
+#: src/components/labels.tsx
+msgid "path.status.archived"
+msgstr "Arquivada"
+
+#: src/tutor/Thread.tsx
+msgid "tutor.composer.placeholder"
+msgstr "Faça uma pergunta…"
+
+#: src/tutor/texts.ts
+msgid "tutor.policy.lesson"
+msgstr "Pergunte sobre esta lição: explicações, exemplos, perguntas."
+
+#: src/tutor/Thread.tsx
+msgid "tutor.cancelled.again"
+msgstr "Perguntar de novo"
+
+#: src/tutor/texts.ts
+msgid "tutor.policy.free"
+msgstr "Pergunte qualquer coisa sobre a sua trilha. O tutor pode sugerir mudanças; você decide se quer fazê-las."
+
+#: src/routes/requests.tsx
+msgid "request.title"
+msgstr "Pedir uma lição"
+
+#: src/routes/requests.tsx
+msgid "request.submit"
+msgstr "Pedir esta lição"
+
+#: src/video/NotesBubble.tsx
+msgid "notes-bubble.ask.none"
+msgstr "Perguntar ao tutor"
+
+#: src/tutor/Nudges.tsx
+msgid "tutor.nudge.accept"
+msgstr "Perguntar ao tutor"
+
+#: src/review/Player.tsx
+msgid "review.menu.tutor"
+msgstr "Perguntar ao tutor"
+
+#: src/tutor/SelectionAsk.tsx
+msgid "tutor.selection.ask"
+msgstr "Perguntar ao tutor sobre isto"
+
+#: src/routes/lessonReader.tsx
+msgid "lesson.tutor.invite.body"
+msgstr "Peça ao tutor uma explicação, um exemplo ou uma verificação rápida do que você entendeu."
+
+#: src/review/Player.tsx
+msgid "review.badge.reask"
+msgstr "Perguntada de novo"
+
+#: src/tutor/Thread.tsx
+msgid "tutor.message.context"
+msgstr "Perguntado com: {context}"
+
+#: src/onboarding/vendorModels.tsx
+msgid "vendor.models.loading"
+msgstr "Perguntando a {vendor} quais modelos a sua chave pode usar…"
+
+#: src/auth/PasswordForm.tsx
+msgid "auth.password.hint"
+msgstr "Pelo menos 10 caracteres. Uma frase longa é mais fácil de lembrar."
+
+#: src/sharing/labels.tsx
+msgid "share.content.audio"
+msgstr "Áudio"
+
+#: src/components/labels.tsx
+msgid "skill.state.available"
+msgstr "Disponível"
+
+#: src/routes/setup.tsx
+msgid "wizard.back"
+msgstr "Voltar"
+
+#: src/routes/practice.tsx
+#: src/routes/practice.tsx
+msgid "practice.back-to-lesson"
+msgstr "Voltar à lição"
+
+#: src/routes/skillTest.tsx
+#: src/routes/skillTest.tsx
+msgid "skill-test.back"
+msgstr "Voltar à trilha"
+
+#: src/routes/placement.tsx
+#: src/routes/placement.tsx
+msgid "placement.back"
+msgstr "Voltar à trilha"
+
+#: src/routes/nextSteps.tsx
+msgid "next.back"
+msgstr "Voltar à trilha"
+
+#: src/routes/lessonReader.tsx
+#: src/routes/lessonReader.tsx
+msgid "lesson.back-to-path"
+msgstr "Voltar à trilha"
+
+#: src/review/Results.tsx
+msgid "review.results.back"
+msgstr "Voltar à trilha"
+
+#: src/routes/review.tsx
+msgid "review.session.back"
+msgstr "Voltar à revisão"
+
+#: src/onboarding/AiReady.tsx
+msgid "ai-ready.before-path"
+msgstr "Antes de o Yuo poder escrever a sua trilha, o programa da sua assinatura precisa estar instalado e conectado."
+
+#: src/onboarding/access.tsx
+msgid "access.consent.title"
+msgstr "Antes de o Yuo usar a sua assinatura"
+
+#: src/components/labels.tsx
+msgid "path.status.draft"
+msgstr "Em planejamento"
+
+#: src/components/labels.tsx
+msgid "request.status.running"
+msgstr "Em planejamento"
+
+#: src/components/labels.tsx
+msgid "lesson.state.generating"
+msgstr "Sendo escrita"
+
+#: src/routes/nextSteps.tsx
+msgid "next.directions.best"
+msgstr "Mais indicada"
+
+#: src/sharing/labels.tsx
+msgid "share.format.bibtex"
+msgstr "Bibliografia (BibTeX)"
+
+#: src/sharing/labels.tsx
+msgid "share.format.csl-json"
+msgstr "Bibliografia (CSL JSON)"
+
+#: src/routes/progress.tsx
+msgid "progress.branches"
+msgstr "Ramos"
+
+#: src/path/SkillPanel.tsx
+msgid "path.panel.builds-on"
+msgstr "Baseia-se em"
+
+#: src/tutor/Nudges.tsx
+msgid "tutor.nudge.prefill.fast-guessing"
+msgstr "Podemos ver a próxima pergunta com calma, juntos?"
+
+#: src/tutor/Thread.tsx
+msgid "tutor.queued.cancel"
+msgstr "Cancelar"
+
+#: src/routes/tutorMemory.tsx
+msgid "tutor.memory.cancel"
+msgstr "Cancelar"
+
+#: src/routes/nextSteps.tsx
+msgid "next.confirm.no"
+msgstr "Cancelar"
+
+#: src/routes/importPage.tsx
+#: src/routes/importPage.tsx
+msgid "import.cancel"
+msgstr "Cancelar"
+
+#: src/review/Resolved.tsx
+msgid "review.report.cancel"
+msgstr "Cancelar"
+
+#: src/onboarding/vendor.tsx
+msgid "vendor.key.cancel"
+msgstr "Cancelar"
+
+#: src/lesson/Notes.tsx
+msgid "notes.cancel"
+msgstr "Cancelar"
+
+#: src/components/ConfirmAction.tsx
+msgid "confirm.cancel"
+msgstr "Cancelar"
+
+#: src/onboarding/CliAccess.tsx
+msgid "cli.login.cancel"
+msgstr "Cancelar a conexão"
+
+#: src/components/labels.tsx
+msgid "job.status.cancelled"
+msgstr "cancelada"
+
+#: src/components/labels.tsx
+msgid "request.status.cancelled"
+msgstr "Cancelado"
+
+#: src/video/LessonVideo.tsx
+msgid "video.captions.label"
+msgstr "Legendas"
+
+#: src/review/Hub.tsx
+msgid "review.cards.title"
+msgstr "Cartões"
+
+#: src/routes/devices.tsx
+msgid "devices.credentials.change-password"
+msgstr "Alterar senha"
+
+#: src/tutor/texts.ts
+msgid "tutor.proposal.kind.difficulty"
+msgstr "Alterar a dificuldade"
+
+#: src/onboarding/SettingsSections.tsx
+msgid "settings.ai.change"
+msgstr "Alterar os modelos que escrevem as suas lições"
+
+#: src/tutor/texts.ts
+msgid "tutor.proposal.kind.prerequisites"
+msgstr "Alterar a ordem das habilidades"
+
+#: src/routes/tutorMemory.tsx
+msgid "tutor.memory.edit.label"
+msgstr "Alterar esta entrada"
+
+#: src/routes/setup.tsx
+msgid "wizard.computer.again"
+msgstr "Verificar de novo"
+
+#: src/onboarding/access.tsx
+msgid "access.local.check-again"
+msgstr "Verificar de novo"
+
+#: src/onboarding/CliAccess.tsx
+msgid "cli.check.again"
+msgstr "Verificar de novo"
+
+#: src/onboarding/access.tsx
+msgid "access.key.save"
+msgstr "Verificar e salvar a chave"
+
+#: src/review/Player.tsx
+msgid "review.check"
+msgstr "Verificar resposta"
+
+#: src/assessment/AssessmentRunner.tsx
+msgid "assessment.check"
+msgstr "Verificar resposta"
+
+#: src/routes/SettingRow.tsx
+msgid "settings.key.updates-check"
+msgstr "Procurar atualizações"
+
+#: src/onboarding/vendor.tsx
+msgid "vendor.key.check"
+msgstr "Verificar chave"
+
+#: src/onboarding/SettingsSections.tsx
+msgid "update.check"
+msgstr "Verificar agora"
+
+#: src/sharing/ExportDialog.tsx
+msgid "share.privacy.goal-check"
+msgstr "Confira isto antes de compartilhar: muitas vezes diz algo sobre você."
+
+#: src/review/Player.tsx
+msgid "review.keys.enter"
+msgstr "verificar, próxima"
+
+#: src/onboarding/PlanMeter.tsx
+msgid "plan-meter.checked-day"
+msgstr "Verificado em {date} às {time}."
+
+#: src/onboarding/PlanMeter.tsx
+msgid "plan-meter.checked"
+msgstr "Verificado às {time}."
+
+#: src/tutor/Thread.tsx
+msgid "tutor.guard.checked"
+msgstr "Verificado quanto a respostas reveladas antes de ser mostrado."
+
+#: src/components/JobProgress.tsx
+msgid "job.step.blind-solve"
+msgstr "Conferindo as respostas"
+
+#: src/onboarding/CliAccess.tsx
+msgid "cli.login.checking-code"
+msgstr "Verificando o código…"
+
+#: src/onboarding/vendor.tsx
+msgid "vendor.key.checking"
+msgstr "Verificando a chave…"
+
+#: src/onboarding/access.tsx
+msgid "access.key.checking"
+msgstr "Verificando a chave…"
+
+#: src/components/JobProgress.tsx
+msgid "job.step.review"
+msgstr "Procurando erros na lição"
+
+#: src/routes/importPage.tsx
+msgid "import.checking"
+msgstr "Verificando o pacote…"
+
+#: src/tutor/texts.ts
+msgid "tutor.stage.checking"
+msgstr "Verificando a resposta antes de mostrá-la…"
+
+#: src/routes/setup.tsx
+msgid "wizard.computer.checking"
+msgstr "Verificando o seu computador. Isso leva alguns segundos…"
+
+#: src/review/Player.tsx
+msgid "review.checking"
+msgstr "Verificando…"
+
+#: src/onboarding/access.tsx
+msgid "access.local.checking"
+msgstr "Verificando…"
+
+#: src/onboarding/SettingsSections.tsx
+msgid "update.checking"
+msgstr "Verificando…"
+
+#: src/onboarding/CliAccess.tsx
+msgid "cli.check.checking"
+msgstr "Verificando…"
+
+#: src/assessment/AssessmentRunner.tsx
+msgid "assessment.checking"
+msgstr "Verificando…"
+
+#: src/onboarding/SettingsSections.tsx
+msgid "settings.ai.role.reviewer"
+msgstr "Revisa as lições"
+
+#: src/routes/nextSteps.tsx
+msgid "next.directions.title"
+msgstr "Escolha uma direção"
+
+#: src/routes/importPage.tsx
+msgid "import.choose"
+msgstr "Escolher um arquivo"
+
+#: src/items/ItemInput.tsx
+msgid "item.matching.placeholder"
+msgstr "Escolha um par"
+
+#: src/onboarding/vendorModels.tsx
+msgid "vendor.models.placeholder"
+msgstr "Escolha um modelo"
+
+#: src/auth/SetupFlow.tsx
+msgid "auth.setup.password.title"
+msgstr "Escolha uma senha"
+
+#: src/onboarding/profile.tsx
+msgid "profile.tz.invalid"
+msgstr "Escolha um fuso horário da lista, por exemplo America/Sao_Paulo."
+
+#: src/sharing/ExportDialog.tsx
+msgid "share.components.none"
+msgstr "Escolha pelo menos uma parte."
+
+#: src/onboarding/vendorModels.tsx
+msgid "vendor.models.choose-both"
+msgstr "Escolha os dois modelos para ver quanto custa uma trilha típica."
+
+#: src/sharing/labels.tsx
+msgid "share.profile.custom"
+msgstr "Escolher partes"
+
+#: src/onboarding/SettingsSections.tsx
+msgid "settings.ai.openrouter.choose"
+msgstr "Escolher os modelos"
+
+#: src/onboarding/vendorModels.tsx
+msgid "vendor.models.explain"
+msgstr "Escolha os modelos de {vendor} que o Yuo usa. Um modelo diferente para revisar encontra mais erros do que o mesmo modelo revisando o próprio trabalho."
+
+#: src/routes/nextSteps.tsx
+msgid "next.choose"
+msgstr "Escolher esta direção"
+
+#: src/path/NextOffer.tsx
+msgid "next.offer.start"
+msgstr "Escolher o que vem agora"
+
+#: src/routes/review.tsx
+msgid "review.session.preparing"
+msgstr "Escolhendo as suas perguntas…"
+
+#: src/onboarding/texts.tsx
+msgid "wizard.preset.claude"
+msgstr "Claude (sua assinatura do Claude Code)"
+
+#: src/onboarding/ProbeSummary.tsx
+msgid "wizard.computer.claude"
+msgstr "App Claude Code"
+
+#: src/onboarding/PlanMeter.tsx
+msgid "plan-meter.lead.claude"
+msgstr "Plano do Claude agora (todos os seus dispositivos):"
+
+#: src/sharing/ExportDialog.tsx
+msgid "share.close"
+msgstr "Fechar"
+
+#: src/onboarding/SettingsSections.tsx
+#: src/onboarding/vendor.tsx
+msgid "settings.ai.vendor.close"
+msgstr "Fechar"
+
+#: src/video/NotesBubble.tsx
+msgid "notes-bubble.close"
+msgstr "Fechar as perguntas para o tutor"
+
+#: src/tutor/DockPanel.tsx
+msgid "tutor.dock.close.label"
+msgstr "Fechar o tutor"
+
+#: src/path/SkillPanel.tsx
+msgid "path.panel.close.label"
+msgstr "Fechar esta habilidade"
+
+#: src/routes/SettingRow.tsx
+msgid "settings.proactivity.coach"
+msgstr "Treinador (uma oferta curta de vez em quando)"
+
+#: src/onboarding/texts.tsx
+msgid "wizard.preset.codex"
+msgstr "Codex (sua assinatura do ChatGPT)"
+
+#: src/onboarding/ProbeSummary.tsx
+msgid "wizard.computer.codex"
+msgstr "App Codex"
+
+#: src/onboarding/PlanMeter.tsx
+msgid "plan-meter.lead.codex"
+msgstr "Plano do Codex agora (todos os seus dispositivos):"
+
+#: src/onboarding/profile.tsx
+msgid "profile.theme.label"
+msgstr "Cores"
+
+#: src/onboarding/CliAccess.tsx
+msgid "cli.login.device.wait"
+msgstr "Volte aqui. O Yuo percebe a conexão e continua sozinho."
+
+#: src/review/Player.tsx
+msgid "review.kind.compare"
+msgstr "Comparar"
+
+#: src/components/labels.tsx
+msgid "path.status.completed"
+msgstr "Concluída"
+
+#: src/onboarding/SettingsSections.tsx
+msgid "settings.ai.local.connect"
+msgstr "Conectar"
+
+#: src/onboarding/SettingsSections.tsx
+msgid "settings.ai.local.connected"
+msgstr "Conectado a {url}"
+
+#: src/onboarding/SettingsSections.tsx
+msgid "settings.ai.local.ok"
+msgstr "Conectado. Modelos disponíveis: {list}"
+
+#: src/onboarding/SettingsSections.tsx
+msgid "settings.ai.local.connecting"
+msgstr "Conectando…"
+
+#: src/review/Player.tsx
+msgid "review.badge.cross"
+msgstr "Liga lições"
+
+#: src/sharing/ExportDialog.tsx
+msgid "share.preview.contents"
+msgstr "Conteúdo"
+
+#: src/routes/pathView.tsx
+msgid "path.next.continue"
+msgstr "Continuar"
+
+#: src/path/NextOffer.tsx
+msgid "next.offer.continue"
+msgstr "Continuar"
+
+#: src/auth/SetupFlow.tsx
+msgid "auth.setup.code.submit"
+msgstr "Continuar"
+
+#: src/path/SkillPanel.tsx
+msgid "path.panel.continue"
+msgstr "Continuar a lição"
+
+#: src/auth/SetupFlow.tsx
+msgid "auth.setup.done"
+msgstr "Continuar para o Yuo"
+
+#: src/path/SkillPanel.tsx
+#: src/routes/pathView.tsx
+msgid "path.next.continue.label"
+msgstr "Continuar com “{lesson}”"
+
+#: src/review/Hub.tsx
+msgid "review.hub.continue"
+msgstr "Continuar a sua sessão ({answered} de {size})"
+
+#: src/tutor/DockPanel.tsx
+msgid "tutor.threads.label"
+msgstr "Conversas"
+
+#: src/onboarding/CliAccess.tsx
+msgid "cli.command.copied"
+msgstr "Copiado."
+
+#: src/auth/RecoveryCodes.tsx
+msgid "auth.codes.copied"
+msgstr "Copiados."
+
+#: src/sharing/ExportDialog.tsx
+msgid "share.formats.description"
+msgstr "Cópias para outros apps, dentro do pacote. O próprio Yuo lê apenas os seus próprios registros."
+
+#: src/onboarding/CliAccess.tsx
+msgid "cli.command.copy"
+msgstr "Copiar"
+
+#: src/onboarding/CliAccess.tsx
+msgid "cli.login.step.code"
+msgstr "Copie o código e cole aqui."
+
+#: src/auth/RecoveryCodes.tsx
+msgid "auth.codes.copy"
+msgstr "Copiar os códigos"
+
+#: src/auth/RecoveryCodes.tsx
+msgid "auth.codes.copy-failed"
+msgstr "Não foi possível copiar aqui; selecione os códigos e copie à mão."
+
+#: src/onboarding/CliAccess.tsx
+msgid "cli.command.copy-failed"
+msgstr "Não foi possível copiar aqui. O comando está selecionado: copie à mão."
+
+#: src/items/GradeFeedback.tsx
+msgid "item.grade.correct"
+msgstr "Correto."
+
+#: src/routes/SettingRow.tsx
+msgid "settings.impact.cost"
+msgstr "custo"
+
+#: src/onboarding/ProbeSummary.tsx
+msgid "wizard.computer.unknown"
+msgstr "Não foi possível ler"
+
+#: src/onboarding/access.tsx
+msgid "access.key.intro"
+msgstr "Crie uma chave no site da OpenRouter e cole aqui. O Yuo verifica a chave com a OpenRouter e a guarda neste computador."
+
+#: src/onboarding/vendor.tsx
+msgid "vendor.key.link"
+msgstr "Criar uma chave no site de {vendor} (abre em uma nova aba)"
+
+#: src/onboarding/vendor.tsx
+msgid "vendor.key.intro"
+msgstr "Crie uma chave no site do fornecedor e cole aqui. O Yuo verifica a chave pedindo a {vendor} a lista de modelos, o que não custa nada, e a guarda neste computador."
+
+#: src/routes/review.tsx
+msgid "review.chooser.new"
+msgstr "Criar uma trilha"
+
+#: src/routes/pathNew.tsx
+msgid "path.new.submit"
+msgstr "Criar trilha"
+
+#: src/routes/pathNew.tsx
+msgid "path.new.submitting"
+msgstr "Criando…"
+
+#: src/onboarding/access.tsx
+msgid "access.key.credit"
+msgstr "Crédito restante nesta chave: {credit}"
+
+#: src/routes/SettingRow.tsx
+msgid "settings.key.custom-instructions"
+msgstr "Instruções personalizadas"
+
+#: src/routes/pathNew.tsx
+msgid "path.new.field.instructions"
+msgstr "Instruções personalizadas (opcional)"
+
+#: src/routes/SettingRow.tsx
+msgid "settings.video-theme.dark"
+msgstr "Escuro"
+
+#: src/onboarding/profile.tsx
+msgid "profile.theme.dark"
+msgstr "Escuro"
+
+#: src/tutor/Proposals.tsx
+msgid "tutor.proposal.reject"
+msgstr "Recusar"
+
+#: src/tutor/texts.ts
+msgid "tutor.proposal.status.rejected"
+msgstr "Recusada"
+
+#: src/review/Hub.tsx
+msgid "review.size.deep"
+msgstr "Profunda"
+
+#: src/routes/SettingRow.tsx
+msgid "settings.default"
+msgstr "Padrão: {fallback}"
+
+#: src/lesson/BlockRenderer.tsx
+msgid "lesson.callout.definition"
+msgstr "Definição"
+
+#: src/routes/tutorMemory.tsx
+msgid "tutor.memory.delete"
+msgstr "Excluir"
+
+#: src/lesson/Notes.tsx
+msgid "notes.delete"
+msgstr "Excluir"
+
+#: src/tutor/DockPanel.tsx
+msgid "tutor.thread.erase.question"
+msgstr "Eliminar para sempre todas as mensagens desta conversa? As suas notas e a memória do tutor ficam."
+
+#: src/routes/tutorMemory.tsx
+msgid "tutor.memory.delete.confirm"
+msgstr "Excluir para sempre"
+
+#: src/routes/progress.tsx
+msgid "progress.erase.confirm"
+msgstr "Eliminar os meus dados"
+
+#: src/routes/progress.tsx
+msgid "progress.erase.button"
+msgstr "Eliminar os meus dados neste percurso"
+
+#: src/routes/settings.tsx
+msgid "settings.video-history.erase"
+msgstr "Eliminar o meu histórico de vídeos vistos"
+
+#: src/lesson/Notes.tsx
+msgid "notes.delete.label"
+msgstr "Excluir nota"
+
+#: src/tutor/DockPanel.tsx
+msgid "tutor.thread.erase.confirm"
+msgstr "Eliminar a conversa"
+
+#: src/routes/settings.tsx
+msgid "settings.video-history.confirm"
+msgstr "Eliminar o histórico"
+
+#: src/tutor/DockPanel.tsx
+msgid "tutor.thread.erase"
+msgstr "Eliminar esta conversa"
+
+#: src/video/NotesBubble.tsx
+msgid "notes-bubble.delete"
+msgstr "Excluir esta nota"
+
+#: src/routes/settings.tsx
+msgid "settings.video-history.question"
+msgstr "Eliminar para sempre que vídeos viu e quanto de cada um? As lições e o progresso ficam."
+
+#: src/routes/progress.tsx
+msgid "progress.erase.question"
+msgstr "Eliminar o seu progresso e tudo o que escreveu neste percurso? Não é possível anular."
+
+#. placeholder {0}: entry.text
+#: src/routes/tutorMemory.tsx
+msgid "tutor.memory.delete.label"
+msgstr "Excluir: {0}"
+
+#: src/routes/progress.tsx
+msgid "progress.erase.done"
+msgstr "Eliminados. O percurso recomeça do início."
+
+#: src/routes/requests.tsx
+msgid "request.open"
+msgstr "Descreva a lição de que você precisa"
+
+#: src/routes/jobs.tsx
+msgid "jobs.details"
+msgstr "Detalhes"
+
+#: src/path/LessonRow.tsx
+msgid "path.job.details"
+msgstr "Detalhes (tentativa {attempt})"
+
+#: src/routes/devices.tsx
+msgid "devices.list.title"
+msgstr "Dispositivos"
+
+#: src/onboarding/ProbeSummary.tsx
+msgid "wizard.computer.speed.none"
+msgstr "Não foi executado"
+
+#: src/routes/SettingRow.tsx
+msgid "settings.tone.direct"
+msgstr "Direto"
+
+#: src/tutor/Thread.tsx
+msgid "tutor.send.discard"
+msgstr "Descartar"
+
+#: src/onboarding/CliAccess.tsx
+#: src/onboarding/CliAccess.tsx
+msgid "cli.manual.title"
+msgstr "Fazer por conta própria"
+
+#: src/tutor/Nudges.tsx
+msgid "tutor.nudge.mute"
+msgstr "Não sugerir isto"
+
+#: src/components/labels.tsx
+msgid "job.status.succeeded"
+msgstr "concluída"
+
+#: src/routes/lessonReader.tsx
+msgid "lesson.done"
+msgstr "Concluir"
+
+#: src/routes/devices.tsx
+msgid "devices.codes.done"
+msgstr "Concluir"
+
+#: src/routes/jobs.tsx
+msgid "jobs.resolved"
+msgstr "feito depois por outra tentativa"
+
+#: src/routes/setup.tsx
+msgid "wizard.access.applied"
+msgstr "Pronto. O Yuo passa a usar {name}."
+
+#: src/onboarding/vendorModels.tsx
+msgid "vendor.models.applied"
+msgstr "Pronto. O Yuo passa a usar estes modelos de {vendor}."
+
+#: src/sharing/ExportDialog.tsx
+msgid "share.download"
+msgstr "Baixar"
+
+#: src/onboarding/SettingsSections.tsx
+msgid "update.download"
+msgstr "Baixar"
+
+#: src/onboarding/access.tsx
+msgid "access.local.step.install"
+msgstr "Baixe o app Ollama e instale como qualquer outro app:"
+
+#: src/video/LessonVideo.tsx
+msgid "video.download"
+msgstr "Baixar vídeo (MP4 com legendas)"
+
+#. placeholder {0}: formatBytes(download.progress.received, i18n.locale)
+#: src/sharing/ExportDialog.tsx
+msgid "share.download.progress-unknown"
+msgstr "Baixando: {0}"
+
+#. placeholder {0}: formatBytes(download.progress.received, i18n.locale)
+#. placeholder {1}: formatBytes(download.progress.total, i18n.locale)
+#: src/sharing/ExportDialog.tsx
+msgid "share.download.progress"
+msgstr "Baixando: {0} de {1}"
+
+#: src/sharing/ExportDialog.tsx
+msgid "share.download.running"
+msgstr "Baixando…"
+
+#: src/onboarding/SettingsSections.tsx
+msgid "update.downloading"
+msgstr "Baixando…"
+
+#: src/components/JobProgress.tsx
+msgid "job.step.round"
+msgstr "rascunho {n} de no máximo {of}"
+
+#: src/components/JobProgress.tsx
+msgid "job.step.stills"
+msgstr "Desenhando quadros de teste"
+
+#: src/routes/importPage.tsx
+msgid "import.drop"
+msgstr "Solte um arquivo .yuo.zip aqui, ou"
+
+#: src/routes/importPage.tsx
+msgid "import.drop.label"
+msgstr "Solte um arquivo de pacote aqui"
+
+#: src/review/Hub.tsx
+msgid "review.hub.chip.due"
+msgstr "para revisar"
+
+#: src/review/Hub.tsx
+msgid "review.hub.objective.due"
+msgstr "Para revisar"
+
+#: src/tutor/Proposals.tsx
+msgid "tutor.proposals.decided"
+msgstr "Sugestões anteriores ({count})"
+
+#: src/items/ItemInput.tsx
+msgid "item.flashcard.rating.easy"
+msgstr "Fácil"
+
+#: src/tutor/Thread.tsx
+msgid "tutor.queued.edit"
+msgstr "Editar"
+
+#: src/routes/tutorMemory.tsx
+msgid "tutor.memory.edit"
+msgstr "Editar"
+
+#: src/lesson/Notes.tsx
+msgid "notes.edit"
+msgstr "Editar"
+
+#: src/lesson/Notes.tsx
+msgid "notes.edit.label"
+msgstr "Editar nota"
+
+#: src/tutor/Thread.tsx
+msgid "tutor.queued.edit.label"
+msgstr "Editar a sua mensagem"
+
+#. placeholder {0}: entry.text
+#: src/routes/tutorMemory.tsx
+msgid "tutor.memory.edit.button.label"
+msgstr "Editar: {0}"
+
+#: src/tutor/Thread.tsx
+msgid "tutor.composer.help"
+msgstr "Enter envia, Shift+Enter começa uma nova linha."
+
+#: src/onboarding/PlanUsage.tsx
+msgid "plan-usage.codex-estimate"
+msgstr "Estimado a partir das faixas de mensagens que a OpenAI publica; a página de uso do seu plano mostra quanto resta."
+
+#: src/review/Results.tsx
+msgid "review.results.flawless"
+msgstr "Todas as respostas certas, na primeira tentativa"
+
+#: src/routes/devices.tsx
+msgid "devices.list.intro"
+msgstr "Todos os navegadores com que você entrou. Desconectar um dispositivo encerra as sessões dele; ele precisa entrar de novo."
+
+#: src/review/Hub.tsx
+msgid "review.hub.focus.all"
+msgstr "Tudo"
+
+#: src/review/Hub.tsx
+msgid "review.hub.lead.fresh"
+msgstr "Tudo o que você estudou ainda está fresco"
+
+#: src/review/Hub.tsx
+msgid "review.entry.fresh"
+msgstr "Tudo o que você estudou ainda está fresco."
+
+#: src/lesson/BlockRenderer.tsx
+msgid "lesson.callout.example"
+msgstr "Exemplo"
+
+#: src/routes/SettingRow.tsx
+msgid "settings.more"
+msgstr "Exemplo e sugestão"
+
+#: src/components/labels.tsx
+msgid "difficulty.expert"
+msgstr "Especialista"
+
+#: src/tutor/texts.ts
+msgid "tutor.proposal.status.expired"
+msgstr "Expirada"
+
+#: src/components/labels.tsx
+msgid "lesson.kind.remedial"
+msgstr "Lição extra"
+
+#: src/tutor/texts.ts
+msgid "tutor.memory.kind.fact"
+msgstr "Fato"
+
+#: src/review/Hub.tsx
+msgid "review.hub.chip.fading"
+msgstr "se apagando"
+
+#: src/components/labels.tsx
+msgid "job.status.failed"
+msgstr "falhou"
+
+#: src/components/labels.tsx
+msgid "lesson.state.failed"
+msgstr "Falhou"
+
+#: src/components/labels.tsx
+msgid "request.status.failed"
+msgstr "Falhou"
+
+#: src/assessment/AssessmentRunner.tsx
+msgid "assessment.cloze.prompt"
+msgstr "Preencha as lacunas"
+
+#: src/routes/SettingRow.tsx
+msgid "item-type.cloze"
+msgstr "Preencher a lacuna"
+
+#: src/routes/setup.tsx
+msgid "wizard.answers.note"
+msgstr "Preenchido com as respostas que seu assistente de IA coletou. Confira e altere o que quiser antes de continuar."
+
+#: src/routes/settings.tsx
+msgid "settings.search.label"
+msgstr "Procurar uma configuração"
+
+#: src/routes/settings.tsx
+msgid "settings.search.placeholder"
+msgstr "Procurar uma configuração, ex.: vídeo ou tutor"
+
+#: src/review/Player.tsx
+msgid "review.kind.debug"
+msgstr "Encontrar o erro"
+
+#: src/routes/nextSteps.tsx
+msgid "next.writing.directions"
+msgstr "Procurando direções que combinem com as suas respostas…"
+
+#: src/review/Hub.tsx
+msgid "review.hub.empty.body"
+msgstr "Termine uma lição e as ideias dela aparecem aqui. O Yuo então traz cada uma de volta pouco antes de você esquecer, com perguntas novas a cada vez."
+
+#: src/routes/index.tsx
+msgid "home.finish-setup.link"
+msgstr "Concluir a configuração"
+
+#: src/assessment/AssessmentRunner.tsx
+msgid "assessment.test.finish"
+msgstr "Terminar o teste"
+
+#: src/routes/setup.tsx
+msgid "wizard.path.skip"
+msgstr "Concluir sem uma nova trilha"
+
+#. placeholder {0}: d.finished_branches.join(", ")
+#: src/routes/nextSteps.tsx
+msgid "next.fact.finished"
+msgstr "Concluído: {0}"
+
+#: src/review/Results.tsx
+msgid "review.results.ring.caption"
+msgstr "primeira tentativa"
+
+#: src/review/Results.tsx
+msgid "review.results.first"
+msgstr "Primeira tentativa"
+
+#: src/path/PathGraph.tsx
+#: src/path/PathGraph.tsx
+msgid "path.tree.controls.fit"
+msgstr "Mostrar a árvore inteira"
+
+#: src/routes/nextSteps.tsx
+msgid "next.kind.fix"
+msgstr "Reforçar pontos fracos"
+
+#: src/routes/SettingRow.tsx
+msgid "item-type.flashcard"
+msgstr "Flashcard"
+
+#: src/sharing/labels.tsx
+msgid "share.content.flashcards"
+msgstr "Flashcards"
+
+#: src/review/Hub.tsx
+msgid "review.hub.focus"
+msgstr "Foco"
+
+#: src/routes/signIn.tsx
+msgid "auth.sign-in.passkey.waiting"
+msgstr "Siga as instruções do navegador…"
+
+#: src/auth/SetupFlow.tsx
+msgid "auth.setup.passkey.waiting"
+msgstr "Siga as instruções do navegador…"
+
+#: src/routes/jobs.tsx
+#: src/routes/jobs.tsx
+msgid "jobs.col.target"
+msgstr "Para"
+
+#: src/onboarding/vendorModels.tsx
+msgid "vendor.estimate.billed"
+msgstr "Para uma trilha típica de {lessons} lições: cerca de {low} a {high}, cobrados de você por {vendor}."
+
+#: src/onboarding/texts.tsx
+msgid "wizard.estimate.billed"
+msgstr "Para uma trilha típica de {lessons} lições: cerca de {low} a {high}, cobrados de você."
+
+#: src/onboarding/texts.tsx
+msgid "wizard.estimate.local"
+msgstr "Para uma trilha típica de {lessons} lições: sem custo por uso."
+
+#: src/onboarding/texts.tsx
+msgid "wizard.estimate.free"
+msgstr "Para uma trilha típica de {lessons} lições: sem custo por uso."
+
+#: src/onboarding/texts.tsx
+msgid "wizard.estimate.plan"
+msgstr "Para uma trilha típica de {lessons} lições: sem custo extra, usa parte dos limites do seu plano:"
+
+#: src/routes/tutorMemory.tsx
+msgid "tutor.memory.add.text.description"
+msgstr "Por exemplo: estou me preparando para uma entrevista de emprego. No máximo 300 caracteres."
+
+#: src/onboarding/ProbeSummary.tsx
+msgid "wizard.computer.cli.found"
+msgstr "Encontrado"
+
+#: src/onboarding/ProbeSummary.tsx
+msgid "wizard.computer.cli.found-version"
+msgstr "Encontrado (versão {version})"
+
+#: src/onboarding/SettingsSections.tsx
+msgid "settings.ai.apps.found"
+msgstr "Encontrados neste computador: {apps}"
+
+#: src/tutor/texts.ts
+msgid "tutor.proposal.difficulty.foundational"
+msgstr "Básico"
+
+#: src/components/labels.tsx
+msgid "difficulty.foundational"
+msgstr "Básico"
+
+#: src/onboarding/ProbeSummary.tsx
+msgid "wizard.computer.disk"
+msgstr "Espaço livre em disco"
+
+#: src/review/Results.tsx
+msgid "review.results.change"
+msgstr "de {before} para {after}"
+
+#. placeholder {0}: mmss(note.t_s)
+#: src/lesson/Notes.tsx
+msgid "notes.from-video"
+msgstr "Do vídeo em {0}"
+
+#: src/routes/SettingRow.tsx
+msgid "settings.gamification.full"
+msgstr "Completo (XP, sequências, níveis)"
+
+#: src/path/PathGraph.tsx
+#: src/path/PathGraph.tsx
+msgid "path.tree.controls.full"
+msgstr "Tela cheia"
+
+#: src/routes/SettingRow.tsx
+msgid "settings.key.gamification"
+msgstr "Elementos de jogo"
+
+#: src/items/ItemInput.tsx
+msgid "item.cloze.gap"
+msgstr "Lacuna {n}"
+
+#: src/tutor/texts.ts
+msgid "tutor.scope.general"
+msgstr "Geral"
+
+#: src/path/LessonRow.tsx
+msgid "path.lesson.generate"
+msgstr "Gerar"
+
+#: src/path/LessonRow.tsx
+msgid "path.lesson.generate.label"
+msgstr "Gerar “{title}”"
+
+#: src/components/HeaderStatus.tsx
+msgid "nav.jobs.active"
+msgstr "Gerando…"
+
+#: src/assessment/StartGate.tsx
+msgid "assessment.prepare.waiting"
+msgstr "A geração está pausada até o orçamento permitir mais."
+
+#: src/routes/jobs.tsx
+msgid "jobs.title"
+msgstr "Tarefas de geração"
+
+#: src/onboarding/access.tsx
+msgid "access.key.link"
+msgstr "Obtenha uma chave em openrouter.ai/keys (abre em uma nova aba)"
+
+#: src/onboarding/vendorModels.tsx
+msgid "openrouter.models.loading"
+msgstr "Obtendo a lista de modelos do OpenRouter…"
+
+#: src/routes/nextSteps.tsx
+msgid "next.kind.deeper"
+msgstr "Aprofundar"
+
+#: src/review/Hub.tsx
+msgid "review.hub.empty.back"
+msgstr "Ir para a trilha"
+
+#: src/routes/nextSteps.tsx
+msgid "next.kind.wider"
+msgstr "Ampliar"
+
+#: src/tutor/texts.ts
+msgid "tutor.memory.kind.goal"
+msgstr "Meta"
+
+#: src/items/ItemInput.tsx
+msgid "item.flashcard.rating.good"
+msgstr "Bom"
+
+#: src/tutor/DockPanel.tsx
+msgid "tutor.memory.first-use.ok"
+msgstr "Entendi"
+
+#: src/onboarding/SettingsSections.tsx
+msgid "settings.ai.role.grader"
+msgstr "Corrige as respostas"
+
+#: src/components/labels.tsx
+msgid "job.kind.grade"
+msgstr "Corrigindo uma resposta"
+
+#: src/onboarding/ProbeSummary.tsx
+msgid "wizard.computer.gpu"
+msgstr "Placa de vídeo"
+
+#: src/items/ItemInput.tsx
+msgid "item.flashcard.rating.hard"
+msgstr "Difícil"
+
+#: src/tutor/texts.ts
+msgid "tutor.policy.setup"
+msgstr "Ajuda com as configurações. O tutor explica as opções; você mesmo faz as mudanças."
+
+#: src/review/Resolved.tsx
+msgid "review.feedback.revealed"
+msgstr "Aqui está a resposta."
+
+#: src/tutor/DockPanel.tsx
+msgid "tutor.policy.dismiss"
+msgstr "Ocultar este aviso"
+
+#: src/review/Player.tsx
+msgid "review.keys.hint"
+msgstr "dica"
+
+#: src/review/Player.tsx
+msgid "review.hint"
+msgstr "Dica"
+
+#: src/review/Player.tsx
+msgid "review.hints.label"
+msgstr "Dicas"
+
+#: src/assessment/AssessmentRunner.tsx
+msgid "assessment.hints.label"
+msgstr "Dicas"
+
+#: src/routes/SettingRow.tsx
+msgid "settings.test-policy.hints"
+msgstr "Dicas com custo"
+
+#: src/routes/jobs.tsx
+msgid "jobs.history"
+msgstr "Histórico"
+
+#: src/routes/settings.tsx
+msgid "settings.group.reviews.description"
+msgstr "Quanto e com que frequência você retoma lições anteriores"
+
+#: src/items/ItemInput.tsx
+msgid "item.flashcard.rate"
+msgstr "Quão bem você sabia?"
+
+#: src/onboarding/profile.tsx
+msgid "profile.name.description"
+msgstr "Como o Yuo e o seu tutor chamam você."
+
+#: src/routes/setup.tsx
+msgid "wizard.options.label"
+msgstr "Como o Yuo escreve as suas lições"
+
+#: src/onboarding/access.tsx
+msgid "access.consent.agree"
+msgstr "Concordo"
+
+#: src/routes/pathView.tsx
+msgid "path.placement.offer"
+msgstr "Já conheço parte disto:"
+
+#: src/tutor/texts.ts
+msgid "tutor.guess.test"
+msgstr "Não posso dizer se isso está certo durante o teste. Posso reformular a pergunta ou explicar uma palavra dela."
+
+#: src/tutor/texts.ts
+msgid "tutor.guess"
+msgstr "Não posso dizer se isso está certo até você enviar a sua resposta. Quer uma dica, ou prefere que eu reformule a pergunta?"
+
+#: src/tutor/texts.ts
+msgid "tutor.review.coach"
+msgstr "Não posso dizer se isso está certo: descobrir por conta própria é o que faz a revisão funcionar. Tente, ou me peça uma dica ou uma pergunta que oriente."
+
+#: src/routes/nextSteps.tsx
+msgid "next.quiz.dont-know"
+msgstr "Ainda não sei"
+
+#: src/routes/levelCheck.tsx
+msgid "level-check.dont-know"
+msgstr "Ainda não sei"
+
+#: src/tutor/Nudges.tsx
+msgid "tutor.nudge.prefill.repeated-error"
+msgstr "Continuo errando “{objective}”. Pode explicar de outro jeito?"
+
+#: src/tutor/Nudges.tsx
+msgid "tutor.nudge.prefill.unsent-notes"
+msgstr "Deixei notas nesta lição. Pode passar por elas comigo?"
+
+#: src/auth/RecoveryCodes.tsx
+msgid "auth.codes.saved"
+msgstr "Guardei estes códigos"
+
+#: src/video/NotesBubble.tsx
+msgid "notes-bubble.ask.prefill"
+msgstr "Escrevi estas perguntas enquanto via o vídeo. Podemos vê-las juntos?"
+
+#: src/review/Player.tsx
+msgid "review.guessing"
+msgstr "Estou chutando"
+
+#: src/review/Resolved.tsx
+msgid "review.feedback.concept"
+msgstr "Ideia"
+
+#: src/onboarding/desktop.tsx
+msgid "desktop.signed-out.fallback"
+msgstr "Se nada abrir, inicie o Yuo de novo pelo inicializador (o arquivo Yuo-Windows / Yuo-macOS / Yuo-Linux, ou a entrada Yuo no menu)."
+
+#: src/onboarding/CliAccess.tsx
+msgid "cli.login.device.hint"
+msgstr "Se a página recusar o código, o login por dispositivo pode estar desativado na sua conta. Ative nas configurações de segurança da sua conta e comece a conexão de novo."
+
+#: src/auth/RecoveryCodes.tsx
+msgid "auth.codes.intro"
+msgstr "Se você perder a sua chave de acesso e a sua senha, cada um destes códigos permite entrar uma vez. Eles só aparecem agora: guarde em um lugar seguro, como um gerenciador de senhas ou no papel."
+
+#: src/routes/index.tsx
+#: src/routes/index.tsx
+msgid "home.import"
+msgstr "Importar uma trilha"
+
+#: src/routes/importPage.tsx
+msgid "import.title"
+msgstr "Importar uma trilha"
+
+#: src/routes/importPage.tsx
+msgid "import.new-copy"
+msgstr "Importar como uma nova cópia"
+
+#: src/routes/importPage.tsx
+msgid "import.new"
+msgstr "Importar como uma nova trilha"
+
+#: src/routes/importPage.tsx
+msgid "import.importing"
+msgstr "Importando…"
+
+#: src/sharing/ExportDialog.tsx
+msgid "share.preview.counts"
+msgstr "Em números"
+
+#: src/routes/importPage.tsx
+msgid "import.preview.counts"
+msgstr "Em números"
+
+#: src/components/labels.tsx
+msgid "job.status.running"
+msgstr "em andamento"
+
+#: src/components/labels.tsx
+msgid "skill.state.in-progress"
+msgstr "Em andamento"
+
+#: src/components/labels.tsx
+msgid "lesson.state.in-review"
+msgstr "Em revisão"
+
+#: src/onboarding/access.tsx
+msgid "access.local.step.model"
+msgstr "No app Ollama, procure o modelo {model} e baixe. Ele tem cerca de 18 GB, então isso pode demorar."
+
+#: src/onboarding/SettingsSections.tsx
+msgid "settings.ai.openrouter.in-use"
+msgstr "Em uso: {writer} escreve, {checker} revisa. Você pode escolher qualquer modelo do OpenRouter."
+
+#: src/routes/SettingRow.tsx
+msgid "settings.key.review-independent"
+msgstr "Revisor independente"
+
+#: src/onboarding/CliAccess.tsx
+msgid "cli.install.start"
+msgstr "Instalar {name}"
+
+#: src/onboarding/AiReady.tsx
+msgid "ai-ready.fix.install"
+msgstr "Instale {name} em Configurações para continuar"
+
+#: src/routes/setup.tsx
+msgid "wizard.access.wait.install"
+msgstr "Instale {programName} para continuar."
+
+#: src/onboarding/CliAccess.tsx
+msgid "cli.state.installing"
+msgstr "Instalando {name}"
+
+#: src/onboarding/CliAccess.tsx
+msgid "cli.install.running"
+msgstr "Instalando… isso pode levar um minuto."
+
+#: src/tutor/texts.ts
+msgid "tutor.proposal.difficulty.intermediate"
+msgstr "Intermediário"
+
+#: src/components/labels.tsx
+msgid "difficulty.intermediate"
+msgstr "Intermediário"
+
+#: src/components/labels.tsx
+msgid "difficulty.introductory"
+msgstr "Introdutório"
+
+#: src/onboarding/vendor.tsx
+msgid "vendor.key.hint"
+msgstr "Ela começa com {prefix}."
+
+#: src/onboarding/access.tsx
+msgid "access.key.hint"
+msgstr "Ela começa com sk-or-."
+
+#: src/onboarding/PlanUsage.tsx
+msgid "plan-usage.unknown"
+msgstr "Usa o seu plano. Quanto do plano uma trilha consome ainda não é medido; a página de uso do seu plano mostra quanto resta."
+
+#: src/tutor/Thread.tsx
+msgid "tutor.queued.edit.failed"
+msgstr "Ela foi respondida antes de a alteração chegar."
+
+#: src/routes/pathView.tsx
+msgid "path.next.none"
+msgstr "As lições dela ainda não foram escritas. Gere uma abaixo."
+
+#: src/routes/setup.tsx
+msgid "wizard.options.not-installed"
+msgstr "O programa ainda não está neste computador. O Yuo vai ajudar você a instalar."
+
+#: src/routes/jobs.tsx
+#: src/routes/jobs.tsx
+msgid "jobs.col.kind"
+msgstr "Tarefa"
+
+#: src/components/HeaderStatus.tsx
+msgid "nav.jobs"
+msgstr "Tarefas"
+
+#: src/routes/tutorMemory.tsx
+msgid "tutor.memory.delete.keep"
+msgstr "Manter"
+
+#: src/onboarding/SettingsSections.tsx
+#: src/onboarding/vendor.tsx
+msgid "settings.ai.key.remove.cancel"
+msgstr "Manter"
+
+#: src/onboarding/desktop.tsx
+msgid "desktop.stop.cancel"
+msgstr "Manter em execução"
+
+#: src/review/Player.tsx
+msgid "review.keys.label"
+msgstr "Atalhos de teclado"
+
+#: src/routes/tutorMemory.tsx
+msgid "tutor.memory.add.kind"
+msgstr "Tipo"
+
+#: src/routes/importPage.tsx
+msgid "import.preview.kind"
+msgstr "Tipo"
+
+#: src/routes/importPage.tsx
+msgid "import.preview.language"
+msgstr "Idioma"
+
+#: src/onboarding/profile.tsx
+msgid "profile.content-lang"
+msgstr "Idioma das suas lições"
+
+#: src/onboarding/profile.tsx
+msgid "profile.ui-lang"
+msgstr "Idioma das telas do Yuo"
+
+#: src/routes/devices.tsx
+msgid "devices.list.seen"
+msgstr "Ativo pela última vez {seen} · primeiro acesso {first}"
+
+#: src/routes/setup.tsx
+msgid "wizard.path.intro.short"
+msgstr "Último passo: diga ao Yuo o que você quer aprender. Ele planeja as habilidades e as lições e depois escreve as primeiras."
+
+#: src/routes/devices.tsx
+msgid "devices.credentials.used"
+msgstr "usada pela última vez {used}"
+
+#: src/auth/SetupFlow.tsx
+#: src/routes/signIn.tsx
+msgid "brand.tagline"
+msgstr "Aprenda qualquer coisa. Desenvolva as suas habilidades."
+
+#: src/routes/SettingRow.tsx
+msgid "settings.impact.learning"
+msgstr "aprendizagem"
+
+#: src/path/PathGraph.tsx
+msgid "path.tree.node.current"
+msgstr "aprendendo agora"
+
+#: src/path/SkillPanel.tsx
+#: src/routes/pathView.tsx
+msgid "path.skill.current"
+msgstr "Aprendendo agora"
+
+#: src/path/PathGraph.tsx
+msgid "path.tree.legend.current"
+msgstr "Aprendendo agora"
+
+#: src/routes/settings.tsx
+msgid "settings.learning.title"
+msgstr "Configurações de aprendizagem"
+
+#: src/routes/settings.tsx
+msgid "settings.group.lessons.description"
+msgstr "Duração, os seus pedidos, lições preparadas com antecedência"
+
+#: src/components/labels.tsx
+msgid "job.target.lesson"
+msgstr "lição"
+
+#: src/tutor/texts.ts
+msgid "tutor.chip.kind.lesson"
+msgstr "Lição"
+
+#: src/tutor/texts.ts
+msgid "tutor.scope.lesson"
+msgstr "Lição"
+
+#: src/sharing/labels.tsx
+msgid "share.personal.lesson"
+msgstr "Lição"
+
+#: src/components/labels.tsx
+msgid "lesson.kind.core"
+msgstr "Lição"
+
+#: src/tutor/Proposals.tsx
+msgid "tutor.proposal.detail.add-lesson"
+msgstr "Lição sobre: {prompt}"
+
+#: src/routes/SettingRow.tsx
+msgid "settings.key.reading-length"
+msgstr "Duração das lições"
+
+#: src/routes/lessonReader.tsx
+msgid "lesson.done.message"
+msgstr "Lição marcada como concluída."
+
+#: src/components/labels.tsx
+msgid "job.target.request"
+msgstr "pedido de lição"
+
+#: src/sharing/labels.tsx
+msgid "share.content.lessons"
+msgstr "Textos das lições"
+
+#: src/video/LessonVideo.tsx
+msgid "video.player.group"
+msgstr "Vídeo da lição"
+
+#: src/routes/SettingRow.tsx
+msgid "settings.key.video-format"
+msgstr "Vídeos das lições"
+
+#: src/review/Resolved.tsx
+#: src/review/Results.tsx
+msgid "review.feedback.lesson"
+msgstr "Lição: {lesson}"
+
+#: src/routes/settings.tsx
+msgid "settings.group.lessons"
+msgstr "Lições"
+
+#: src/path/SkillPanel.tsx
+msgid "path.panel.lessons"
+msgstr "Lições"
+
+#: src/routes/SettingRow.tsx
+msgid "settings.key.buffer"
+msgstr "Lições preparadas com antecedência"
+
+#: src/sharing/labels.tsx
+msgid "share.profile.full.description"
+msgstr "Lições, perguntas e os vídeos prontos."
+
+#: src/tutor/texts.ts
+msgid "tutor.blocked"
+msgstr "Vamos olhar juntos o enunciado da pergunta. Que parte não está clara?"
+
+#: src/path/PathGraph.tsx
+#: src/path/PathGraph.tsx
+#: src/routes/pathView.tsx
+#: src/routes/progress.tsx
+msgid "path.branch.level"
+msgstr "Nível {level}"
+
+#: src/review/Player.tsx
+msgid "review.badge.level"
+msgstr "Nível {level}"
+
+#: src/routes/importPage.tsx
+msgid "import.preview.licence"
+msgstr "Licença"
+
+#: src/routes/SettingRow.tsx
+msgid "settings.video-theme.light"
+msgstr "Claro"
+
+#: src/onboarding/profile.tsx
+msgid "profile.theme.light"
+msgstr "Claro"
+
+#: src/onboarding/SettingsSections.tsx
+msgid "settings.appearance.description"
+msgstr "Claro, escuro ou conforme o seu sistema"
+
+#: src/routes/requests.tsx
+msgid "request.field.links"
+msgstr "Links (opcional)"
+
+#: src/routes/pathView.tsx
+msgid "path.view.list"
+msgstr "Lista"
+
+#: src/onboarding/CliAccess.tsx
+#: src/onboarding/SettingsSections.tsx
+#: src/path/LazyPathGraph.tsx
+#: src/routes/index.tsx
+#: src/routes/jobs.tsx
+#: src/routes/jobs.tsx
+#: src/routes/lessonReader.tsx
+#: src/routes/nextSteps.tsx
+#: src/routes/pathView.tsx
+#: src/routes/progress.tsx
+#: src/routes/review.tsx
+#: src/routes/review.tsx
+#: src/routes/root.tsx
+#: src/routes/settings.tsx
+#: src/routes/setup.tsx
+#: src/routes/setup.tsx
+#: src/routes/setup.tsx
+#: src/routes/setup.tsx
+#: src/routes/setup.tsx
+#: src/routes/tutorMemory.tsx
+#: src/sharing/ExportDialog.tsx
+#: src/tutor/DockPanel.tsx
+#: src/tutor/DockPanel.tsx
+#: src/tutor/DockPanel.tsx
+#: src/video/LessonVideo.tsx
+#: src/video/LessonVideo.tsx
+msgid "common.loading"
+msgstr "Carregando…"
+
+#: src/path/PathGraph.tsx
+msgid "path.tree.legend.locked"
+msgstr "Bloqueada"
+
+#: src/components/labels.tsx
+msgid "skill.state.locked"
+msgstr "Bloqueada"
+
+#: src/routes/SettingRow.tsx
+msgid "settings.test-policy.locked"
+msgstr "Bloqueado (só o enunciado)"
+
+#: src/tutor/texts.ts
+msgid "tutor.policy.placement"
+msgstr "Bloqueado durante o teste de nivelamento: o tutor só explica o enunciado de uma pergunta."
+
+#: src/tutor/texts.ts
+msgid "tutor.policy.test-locked"
+msgstr "Bloqueado durante o teste: o tutor só explica o enunciado de uma pergunta e ajuda com o app."
+
+#: src/routes/SettingRow.tsx
+msgid "settings.length.long"
+msgstr "Longa"
+
+#: src/routes/SettingRow.tsx
+msgid "settings.video-length.long"
+msgstr "Longo"
+
+#: src/routes/SettingRow.tsx
+msgid "settings.key.review-max-interval"
+msgstr "Maior intervalo entre revisões (dias, 0 = sem limite)"
+
+#: src/review/Resolved.tsx
+#: src/review/Results.tsx
+msgid "review.feedback.revisit"
+msgstr "Veja de novo: {revisit}"
+
+#: src/components/JobProgress.tsx
+msgid "job.step.research"
+msgstr "Buscando fontes"
+
+#: src/auth/SetupFlow.tsx
+msgid "auth.setup.code.hint"
+msgstr "Perdeu? Execute `yuo setup-code` no servidor para obter um novo."
+
+#: src/routes/root.tsx
+msgid "nav.main.label"
+msgstr "Principal"
+
+#: src/routes/devices.tsx
+msgid "devices.codes.confirm"
+msgstr "Gerar novos códigos"
+
+#: src/routes/devices.tsx
+msgid "devices.codes.low"
+msgstr "Gere novos códigos para ainda conseguir entrar se perder a sua chave de acesso."
+
+#: src/routes/devices.tsx
+msgid "devices.codes.new"
+msgstr "Gerar novos códigos de recuperação"
+
+#: src/components/labels.tsx
+msgid "job.kind.rendition"
+msgstr "Criando uma videoaula"
+
+#: src/sharing/ExportDialog.tsx
+msgid "share.download.preparing"
+msgstr "Montando o pacote…"
+
+#: src/auth/SetupFlow.tsx
+msgid "auth.setup.codes.making"
+msgstr "Gerando os seus códigos de recuperação…"
+
+#: src/path/PathGraph.tsx
+msgid "path.tree.legend.done"
+msgstr "Dominada"
+
+#: src/components/labels.tsx
+msgid "skill.state.mastered"
+msgstr "Dominada"
+
+#: src/path/PathGraph.tsx
+msgid "path.tree.node.mastery"
+msgstr "domínio {percent}%"
+
+#: src/routes/SettingRow.tsx
+msgid "settings.key.decay"
+msgstr "O domínio diminui sem revisão"
+
+#: src/path/SkillPanel.tsx
+#: src/routes/pathView.tsx
+#: src/routes/progress.tsx
+msgid "path.skill.mastery"
+msgstr "Domínio de {title}"
+
+#: src/routes/SettingRow.tsx
+msgid "settings.video-theme.match-app"
+msgstr "Como a app"
+
+#: src/routes/SettingRow.tsx
+msgid "item-type.matching"
+msgstr "Associação"
+
+#: src/sharing/labels.tsx
+msgid "share.personal.asset"
+msgstr "Arquivo de mídia"
+
+#: src/sharing/labels.tsx
+msgid "share.content.assets"
+msgstr "Arquivos de mídia"
+
+#: src/routes/SettingRow.tsx
+msgid "settings.length.medium"
+msgstr "Média"
+
+#: src/routes/SettingRow.tsx
+msgid "settings.video-length.medium"
+msgstr "Médio"
+
+#: src/review/Hub.tsx
+msgid "review.hub.ring.caption"
+msgstr "memória"
+
+#: src/review/Results.tsx
+msgid "review.results.memory"
+msgstr "Memória"
+
+#: src/review/Hub.tsx
+msgid "review.skill.memory"
+msgstr "Memória"
+
+#: src/onboarding/ProbeSummary.tsx
+msgid "wizard.computer.memory"
+msgstr "Memória"
+
+#: src/review/Hub.tsx
+msgid "review.hub.skills"
+msgstr "Memória por habilidade"
+
+#: src/review/Hub.tsx
+msgid "review.skill.memory.label"
+msgstr "Memória de {title}"
+
+#. placeholder {0}: i18n.number(hub.memory, { style: "percent", maximumFractionDigits: 0 })
+#. placeholder {0}: i18n.number(memory, { style: "percent", maximumFractionDigits: 0 })
+#: src/review/Hub.tsx
+#: src/review/Hub.tsx
+msgid "review.hub.ring"
+msgstr "Memória: {0}"
+
+#: src/tutor/Thread.tsx
+msgid "tutor.composer.label"
+msgstr "Mensagem para {tutorName}"
+
+#: src/routes/SettingRow.tsx
+msgid "settings.gamification.minimal"
+msgstr "Mínimo (só o progresso na árvore)"
+
+#: src/onboarding/profile.tsx
+msgid "profile.minutes"
+msgstr "Minutos por sessão de estudo"
+
+#: src/tutor/texts.ts
+msgid "tutor.memory.kind.misconception"
+msgstr "Equívoco"
+
+#: src/routes/requests.tsx
+msgid "request.intro"
+msgstr "Está faltando algo? Descreva e o Yuo escreve uma lição sobre isso e a coloca na habilidade certa."
+
+#: src/onboarding/SettingsSections.tsx
+msgid "settings.ai.local.title"
+msgstr "App de modelo neste computador"
+
+#: src/routes/settings.tsx
+msgid "settings.ai.words"
+msgstr "modelo modelos Claude Codex OpenRouter chave assinatura entrar conectar instalar local IA"
+
+#: src/onboarding/vendorModels.tsx
+msgid "vendor.models.reviewer"
+msgstr "Modelo que revisa as lições"
+
+#: src/onboarding/vendorModels.tsx
+msgid "vendor.models.main"
+msgstr "Modelo que escreve as lições e as respostas"
+
+#: src/onboarding/vendor.tsx
+msgid "vendor.choose.label"
+msgstr "Fornecedor do modelo"
+
+#: src/onboarding/vendor.tsx
+msgid "settings.ai.vendors.heading"
+msgstr "Fornecedores de modelos"
+
+#: src/onboarding/SettingsSections.tsx
+msgid "settings.ai.models"
+msgstr "Modelos em uso"
+
+#: src/routes/SettingRow.tsx
+msgid "settings.key.budget"
+msgstr "Limite de orçamento mensal"
+
+#: src/sharing/labels.tsx
+msgid "share.format.moodle"
+msgstr "Perguntas para o Moodle"
+
+#: src/routes/root.tsx
+#: src/routes/root.tsx
+msgid "nav.more"
+msgstr "Mais"
+
+#: src/review/Player.tsx
+#: src/review/Player.tsx
+msgid "review.menu.label"
+msgstr "Mais opções para esta pergunta"
+
+#: src/routes/pathNew.tsx
+msgid "path.new.more-options"
+msgstr "Mais opções"
+
+#: src/routes/settings.tsx
+msgid "settings.group.motivation"
+msgstr "Motivação"
+
+#: src/items/ItemInput.tsx
+msgid "item.ordering.down"
+msgstr "Mover para baixo: {step}"
+
+#: src/items/ItemInput.tsx
+msgid "item.ordering.up"
+msgstr "Mover para cima: {step}"
+
+#: src/routes/SettingRow.tsx
+msgid "item-type.multi"
+msgstr "Múltipla escolha"
+
+#: src/sharing/ExportDialog.tsx
+msgid "share.personal.list"
+msgstr "Meu próprio conteúdo no pacote"
+
+#: src/routes/settings.tsx
+msgid "settings.profile.words"
+msgstr "nome idioma idiomas sessão minutos interesses fuso horário"
+
+#: src/routes/pathNew.tsx
+msgid "path.new.intro.check"
+msgstr "Diga o que você quer aprender e o que quer ser capaz de fazer. Algumas perguntas mostram o que você já sabe, e o Yuo planeja a trilha a partir daí."
+
+#: src/onboarding/SettingsSections.tsx
+msgid "settings.profile.description"
+msgstr "Nome, idiomas, duração da sessão e interesses"
+
+#: src/routes/settings.tsx
+msgid "settings.group.tutor.description"
+msgstr "Nome, tom, sugestões e o que ele lembra"
+
+#: src/path/PathGraph.tsx
+msgid "path.tree.legend.review"
+msgstr "Precisa de revisão"
+
+#: src/components/labels.tsx
+msgid "skill.state.needs-review"
+msgstr "Precisa de revisão"
+
+#: src/path/PathGraph.tsx
+msgid "path.tree.node.needs"
+msgstr "requer: {names}"
+
+#: src/routes/SettingRow.tsx
+msgid "settings.tone.neutral"
+msgstr "Neutro"
+
+#: src/onboarding/vendor.tsx
+msgid "vendor.key.label.replace"
+msgstr "Nova chave para {vendor}"
+
+#: src/tutor/Proposals.tsx
+msgid "tutor.proposal.detail.difficulty"
+msgstr "Nova dificuldade: {level}"
+
+#: src/routes/pathNew.tsx
+msgid "path.new.title"
+msgstr "Nova trilha de aprendizagem"
+
+#: src/onboarding/access.tsx
+msgid "access.key.label.replace"
+msgstr "Nova chave da OpenRouter"
+
+#: src/auth/PasswordForm.tsx
+msgid "auth.password.new"
+msgstr "Nova senha"
+
+#: src/routes/index.tsx
+#: src/routes/index.tsx
+msgid "home.new-path"
+msgstr "Nova trilha"
+
+#: src/routes/setup.tsx
+msgid "wizard.next"
+msgstr "Avançar"
+
+#: src/review/Player.tsx
+msgid "review.next"
+msgstr "Próxima"
+
+#: src/assessment/AssessmentRunner.tsx
+msgid "assessment.next"
+msgstr "Próxima pergunta"
+
+#: src/review/Results.tsx
+msgid "review.results.next"
+msgstr "Próxima revisão: {due}"
+
+#: src/onboarding/PlanUsage.tsx
+msgid "plan-usage.window.none"
+msgstr "sem limite de 5 horas"
+
+#: src/tutor/Thread.tsx
+msgid "tutor.failed.title"
+msgstr "Sem resposta desta vez."
+
+#: src/review/Hub.tsx
+msgid "review.cards.none"
+msgstr "Nenhum cartão para revisar agora. Muito bem."
+
+#: src/onboarding/SettingsSections.tsx
+msgid "settings.ai.apps.none"
+msgstr "Nenhum app Claude Code ou Codex foi encontrado neste computador."
+
+#: src/sharing/ExportDialog.tsx
+msgid "share.personal.none"
+msgstr "Esta trilha não tem conteúdo seu."
+
+#: src/routes/pathNew.tsx
+msgid "path.new.estimate.plan"
+msgstr "Sem custo extra na sua assinatura; usa parte dos limites do seu plano:"
+
+#: src/routes/jobs.tsx
+msgid "jobs.history.none"
+msgstr "Ainda não há trabalhos concluídos."
+
+#: src/routes/skillTest.tsx
+msgid "skill-test.intro"
+msgstr "Sem dicas e sem feedback até o final: isto verifica o que você consegue fazer sem ajuda."
+
+#: src/onboarding/vendor.tsx
+msgid "settings.ai.vendor.none"
+msgstr "sem chave"
+
+#: src/tutor/DockPanel.tsx
+msgid "tutor.thread.empty"
+msgstr "Ainda não há mensagens aqui. Pergunte sobre o que está na sua tela."
+
+#: src/onboarding/SettingsSections.tsx
+msgid "settings.ai.local.none"
+msgstr "Nenhum app de modelo deste computador está conectado."
+
+#: src/components/jobError.ts
+msgid "job.error.no-model"
+msgstr "Nenhum modelo está definido para esta etapa. Escolha uma predefinição na Configuração."
+
+#: src/onboarding/SettingsSections.tsx
+msgid "settings.ai.openrouter.not-in-use"
+msgstr "No momento nenhum modelo passa pelo OpenRouter. Escolha os modelos para usar esta chave."
+
+#: src/review/Player.tsx
+msgid "review.hint.none"
+msgstr "Sem mais dicas"
+
+#: src/assessment/AssessmentRunner.tsx
+msgid "assessment.hint.none"
+msgstr "Sem mais dicas"
+
+#: src/onboarding/SettingsSections.tsx
+msgid "settings.ai.key.none"
+msgstr "Nenhuma chave da OpenRouter está salva."
+
+#: src/routes/index.tsx
+msgid "home.empty"
+msgstr "Ainda não há trilhas. Diga ao Yuo o que você quer aprender e ele planeja as lições para você."
+
+#: src/routes/settings.tsx
+msgid "settings.search.none"
+msgstr "Nenhuma configuração corresponde a “{query}”."
+
+#: src/routes/placement.tsx
+msgid "placement.result.none"
+msgstr "Nenhuma habilidade foi marcada como dominada. A trilha começa do início."
+
+#: src/tutor/DockPanel.tsx
+msgid "tutor.policy.no-spoilers"
+msgstr "Sem spoilers"
+
+#: src/tutor/texts.ts
+msgid "tutor.policy.review-coach"
+msgstr "Sem spoilers: até esta pergunta ser resolvida, o tutor ajuda você a lembrar e explica as opções que você já tentou, nunca a resposta."
+
+#: src/routes/SettingRow.tsx
+msgid "settings.muted.none"
+msgstr "Nenhuma"
+
+#: src/onboarding/ProbeSummary.tsx
+msgid "wizard.computer.gpu.none"
+msgstr "Nenhuma encontrada que consiga rodar modelos de IA"
+
+#: src/routes/nextSteps.tsx
+msgid "next.others"
+msgstr "Nenhuma destas serve"
+
+#: src/onboarding/ProbeSummary.tsx
+msgid "wizard.computer.servers.none"
+msgstr "Nenhum em execução"
+
+#: src/routes/progress.tsx
+msgid "progress.achievements.none"
+msgstr "Nenhuma ainda. Continue assim."
+
+#: src/onboarding/ProbeSummary.tsx
+msgid "wizard.computer.cli.missing"
+msgstr "Não encontrado"
+
+#: src/tutor/Nudges.tsx
+msgid "tutor.nudge.dismiss"
+msgstr "Agora não"
+
+#: src/routes/nextSteps.tsx
+#: src/routes/nextSteps.tsx
+#: src/routes/nextSteps.tsx
+msgid "next.close"
+msgstr "Agora não"
+
+#: src/routes/skillTest.tsx
+msgid "skill-test.failed"
+msgstr "Ainda não aprovado."
+
+#: src/items/GradeFeedback.tsx
+msgid "item.grade.incorrect"
+msgstr "Não exatamente."
+
+#: src/review/Player.tsx
+msgid "review.feedback.retry"
+msgstr "Não exatamente. Mais uma tentativa."
+
+#: src/review/Results.tsx
+msgid "review.results.open"
+msgstr "Não acertada na única tentativa que teve."
+
+#: src/tutor/Thread.tsx
+msgid "tutor.send.failed"
+msgstr "Não enviada: {error}"
+
+#: src/tutor/Thread.tsx
+msgid "tutor.send.unsent"
+msgstr "Não enviada: não foi possível acessar o servidor. Ela será enviada quando você estiver on-line de novo."
+
+#: src/routes/devices.tsx
+msgid "devices.credentials.never-used"
+msgstr "ainda não usada"
+
+#: src/lesson/Notes.tsx
+msgid "notes.add.lesson.label"
+msgstr "Nota sobre esta lição"
+
+#: src/lesson/Notes.tsx
+msgid "notes.add.block.label"
+msgstr "Nota sobre esta parte"
+
+#: src/tutor/texts.ts
+msgid "tutor.memory.source.tutor"
+msgstr "Anotado pelo tutor"
+
+#: src/tutor/texts.ts
+msgid "tutor.chip.kind.notes"
+msgstr "Notas"
+
+#: src/tutor/texts.ts
+msgid "tutor.trigger.unsent-notes"
+msgstr "Notas sobre as quais você ainda não perguntou"
+
+#: src/routes/lessonReader.tsx
+msgid "notes.title"
+msgstr "Notas sobre esta lição"
+
+#: src/routes/setup.tsx
+msgid "wizard.access.nothing"
+msgstr "Nada mais é necessário para esta escolha."
+
+#: src/tutor/DockPanel.tsx
+msgid "tutor.chips.none"
+msgstr "Nada desta tela."
+
+#: src/routes/jobs.tsx
+msgid "jobs.none"
+msgstr "Nada está em execução e nada falhou recentemente."
+
+#: src/routes/tutorMemory.tsx
+msgid "tutor.memory.empty"
+msgstr "Nada guardado ainda."
+
+#: src/routes/review.tsx
+msgid "review.chooser.nothing"
+msgstr "Nada estudado ainda"
+
+#: src/review/Hub.tsx
+msgid "review.hub.empty.title"
+msgstr "Nada para revisar ainda"
+
+#: src/routes/importPage.tsx
+msgid "import.refused.nothing"
+msgstr "Nada foi importado."
+
+#: src/sharing/ExportDialog.tsx
+msgid "share.preview.empty"
+msgstr "Nada ainda"
+
+#: src/routes/jobs.tsx
+msgid "jobs.now"
+msgstr "Agora"
+
+#: src/routes/SettingRow.tsx
+msgid "settings.current.source"
+msgstr "Agora: {current} ({source})"
+
+#: src/routes/SettingRow.tsx
+msgid "settings.current.default"
+msgstr "Agora: {current} (padrão)"
+
+#: src/routes/SettingRow.tsx
+msgid "settings.gamification.off"
+msgstr "Desativado"
+
+#: src/routes/SettingRow.tsx
+msgid "settings.off"
+msgstr "Desativado"
+
+#: src/routes/SettingRow.tsx
+msgid "settings.proactivity.off"
+msgstr "Desativado (só responde a você)"
+
+#: src/components/SyncIndicator.tsx
+msgid "sync.offline"
+msgstr "off-line"
+
+#: src/onboarding/access.tsx
+msgid "access.local.step.install.link"
+msgstr "ollama.com/download (abre em uma nova aba)"
+
+#: src/routes/SettingRow.tsx
+msgid "settings.on"
+msgstr "Ativado"
+
+#: src/routes/signIn.tsx
+msgid "auth.sign-in.recovery.hint"
+msgstr "Um dos dez códigos que você guardou. Cada um funciona uma vez; gere novos em Login e dispositivos."
+
+#: src/routes/requests.tsx
+msgid "request.field.links.description"
+msgstr "Um por linha, no máximo {max}."
+
+#: src/onboarding/CliAccess.tsx
+msgid "cli.login.device.code"
+msgstr "Código de uso único"
+
+#: src/path/NextOffer.tsx
+msgid "next.offer.low"
+msgstr "Restam só algumas lições planejadas. Escolha para onde a sua trilha vai agora, para que ela continue crescendo."
+
+#: src/path/PathGraph.tsx
+msgid "path.tree.legend.open"
+msgstr "Aberta"
+
+#: src/routes/importPage.tsx
+msgid "import.intro"
+msgstr "Abra um pacote de trilha (.yuo.zip) que alguém compartilhou com você ou que você exportou. Você vê o que ele contém antes de qualquer coisa ser importada."
+
+#: src/review/Hub.tsx
+msgid "review.entry.open"
+msgstr "Abrir a revisão"
+
+#: src/onboarding/CliAccess.tsx
+msgid "cli.login.open.claude"
+msgstr "Abrir a página de login do Claude (abre em uma nova aba)"
+
+#: src/review/Resolved.tsx
+#: src/review/Results.tsx
+msgid "review.feedback.lesson.plain"
+msgstr "Abrir a lição"
+
+#: src/onboarding/access.tsx
+msgid "access.local.step.open"
+msgstr "Abra o app Ollama."
+
+#: src/routes/nextSteps.tsx
+msgid "next.done.open"
+msgstr "Abrir a trilha"
+
+#: src/onboarding/CliAccess.tsx
+#: src/onboarding/CliAccess.tsx
+msgid "cli.login.open"
+msgstr "Abrir a página de login (abre em uma nova aba)"
+
+#: src/tutor/Dock.tsx
+msgid "tutor.fab.shortcut"
+msgstr "Abrir o tutor (Ctrl+J)"
+
+#: src/tutor/DockPanel.tsx
+msgid "tutor.memory.first-use.link"
+msgstr "Abrir a memória do tutor"
+
+#: src/onboarding/desktop.tsx
+msgid "desktop.signed-out.open"
+msgstr "Abrir o Yuo com login feito"
+
+#: src/onboarding/access.tsx
+msgid "access.key.saved"
+msgstr "A OpenRouter aceitou a chave. Ela está salva neste computador e não será mostrada de novo."
+
+#: src/onboarding/texts.tsx
+msgid "wizard.reason.api-billed"
+msgstr "A OpenRouter cobra na sua conta da OpenRouter cada lição e cada resposta. Você precisa de uma conta com algum crédito."
+
+#: src/onboarding/access.tsx
+msgid "access.key.refused"
+msgstr "A OpenRouter não aceitou esta chave. Confira se você copiou a chave inteira e se ela ainda está ativa."
+
+#: src/onboarding/access.tsx
+msgid "access.key.label"
+msgstr "Chave da OpenRouter"
+
+#: src/onboarding/SettingsSections.tsx
+msgid "settings.ai.own-keys.description"
+msgstr "OpenRouter, um fornecedor de modelos ou um app de modelos neste computador, em vez de uma assinatura"
+
+#: src/review/Player.tsx
+msgid "review.keys.choose"
+msgstr "ou A–D: escolher"
+
+#: src/routes/nextSteps.tsx
+msgid "next.where.own"
+msgstr "Ou com as suas palavras (opcional)"
+
+#: src/routes/signIn.tsx
+msgid "auth.sign-in.other"
+msgstr "Outras formas de entrar"
+
+#: src/components/labels.tsx
+msgid "goal-type.curiosity"
+msgstr "Por curiosidade"
+
+#: src/path/PathGraph.tsx
+msgid "path.tree.minimap.label"
+msgstr "Visão geral da árvore"
+
+#: src/items/GradeFeedback.tsx
+msgid "item.grade.partial"
+msgstr "Parcialmente certo ({percent}%)."
+
+#: src/sharing/labels.tsx
+msgid "import.notice.unknown-kinds"
+msgstr "Partes que esta versão do Yuo não conhece foram deixadas de lado: {kinds}"
+
+#: src/sharing/ExportDialog.tsx
+msgid "share.components.label"
+msgstr "Partes a incluir"
+
+#: src/components/labels.tsx
+msgid "goal-type.exam"
+msgstr "Passar em uma prova"
+
+#: src/routes/skillTest.tsx
+msgid "skill-test.passed"
+msgstr "Aprovado. Esta habilidade está dominada."
+
+#: src/routes/devices.tsx
+msgid "devices.credentials.kind.passkey"
+msgstr "Chave de acesso"
+
+#: src/routes/devices.tsx
+msgid "devices.credentials.passkey-added"
+msgstr "Chave de acesso adicionada."
+
+#: src/routes/signIn.tsx
+msgid "auth.sign-in.password.label"
+msgstr "Senha"
+
+#: src/routes/devices.tsx
+msgid "devices.credentials.kind.password"
+msgstr "Senha"
+
+#: src/routes/devices.tsx
+msgid "devices.credentials.password-saved"
+msgstr "Senha salva."
+
+#: src/onboarding/CliAccess.tsx
+msgid "cli.login.code.label"
+msgstr "Cole o código daquela página"
+
+#: src/components/labels.tsx
+msgid "job.target.path"
+msgstr "trilha"
+
+#: src/tutor/texts.ts
+msgid "tutor.chip.kind.path"
+msgstr "Trilha"
+
+#: src/tutor/texts.ts
+msgid "tutor.scope.path"
+msgstr "Trilha"
+
+#: src/routes/review.tsx
+msgid "review.back.path"
+msgstr "Trilha"
+
+#: src/routes/pathView.tsx
+msgid "path.next.done.eyebrow"
+msgstr "Trilha concluída"
+
+#: src/routes/importPage.tsx
+#: src/routes/root.tsx
+msgid "nav.paths"
+msgstr "Trilhas"
+
+#: src/components/labels.tsx
+msgid "path.status.paused"
+msgstr "Pausada"
+
+#: src/components/labels.tsx
+msgid "job.status.waiting-resource"
+msgstr "pausada até o orçamento permitir"
+
+#: src/routes/importPage.tsx
+msgid "import.personal.badge"
+msgstr "Conteúdo pessoal"
+
+#: src/sharing/labels.tsx
+msgid "share.profile.custom.description"
+msgstr "Escolha as partes a incluir."
+
+#: src/routes/nextSteps.tsx
+msgid "next.where.intro"
+msgstr "Escolha o que se encaixa ou diga com as suas palavras. Você pode deixar qualquer pergunta de fora."
+
+#: src/routes/placement.tsx
+msgid "placement.title"
+msgstr "Teste de nivelamento"
+
+#: src/components/labels.tsx
+msgid "lesson.state.planned"
+msgstr "Planejada"
+
+#: src/components/labels.tsx
+msgid "job.kind.request"
+msgstr "Planejando uma lição pedida"
+
+#: src/components/labels.tsx
+msgid "job.kind.tree"
+msgstr "Planejando a trilha"
+
+#: src/components/JobProgress.tsx
+msgid "job.step.tree"
+msgstr "Planejando as habilidades"
+
+#: src/routes/pathView.tsx
+msgid "path.growing.plan"
+msgstr "Planejando as habilidades e as lições"
+
+#: src/routes/index.tsx
+msgid "home.empty.title"
+msgstr "Plante a sua primeira trilha"
+
+#. placeholder {0}: mmss(n.t_s)
+#: src/video/NotesBubble.tsx
+msgid "notes-bubble.seek"
+msgstr "Reproduzir o vídeo a partir de {0}"
+
+#: src/routes/requests.tsx
+msgid "request.links.too-many"
+msgstr "Informe no máximo {max} links."
+
+#: src/onboarding/vendorModels.tsx
+msgid "wizard.access.warnings"
+msgstr "Atenção"
+
+#: src/routes/settings.tsx
+msgid "settings.group.motivation.description"
+msgstr "Pontos, sequências e níveis"
+
+#: src/routes/practice.tsx
+msgid "practice.title"
+msgstr "Prática"
+
+#: src/routes/settings.tsx
+msgid "settings.group.practice"
+msgstr "Prática e testes de habilidade"
+
+#: src/sharing/labels.tsx
+msgid "share.content.items"
+msgstr "Perguntas de prática"
+
+#: src/tutor/texts.ts
+msgid "tutor.memory.kind.preference"
+msgstr "Preferência"
+
+#: src/components/labels.tsx
+msgid "job.kind.placement"
+msgstr "Preparando um teste de nivelamento"
+
+#: src/components/labels.tsx
+msgid "job.kind.test-bank"
+msgstr "Preparando um teste de habilidade"
+
+#: src/review/Hub.tsx
+msgid "review.cards.preparing"
+msgstr "Preparando os seus cartões…"
+
+#: src/routes/placement.tsx
+msgid "placement.preparing"
+msgstr "Preparando o seu teste de nivelamento. Isso pode levar alguns minutos…"
+
+#: src/assessment/StartGate.tsx
+msgid "assessment.loading"
+msgstr "Preparando as suas perguntas…"
+
+#: src/routes/skillTest.tsx
+msgid "skill-test.preparing"
+msgstr "Preparando o seu teste. Isso pode levar um minuto…"
+
+#: src/routes/SettingRow.tsx
+msgid "settings.impact.privacy"
+msgstr "privacidade"
+
+#: src/sharing/ExportDialog.tsx
+msgid "share.privacy.title"
+msgstr "Privacidade"
+
+#: src/routes/jobs.tsx
+msgid "jobs.col.problem"
+msgstr "Problema"
+
+#: src/routes/progress.tsx
+msgid "progress.title"
+msgstr "Progresso"
+
+#: src/onboarding/SettingsSections.tsx
+msgid "update.published"
+msgstr "Publicada em {published}."
+
+#: src/routes/SettingRow.tsx
+msgid "item-type.ordering"
+msgstr "Ordenar"
+
+#: src/routes/nextSteps.tsx
+msgid "next.kind.apply"
+msgstr "Colocar em prática"
+
+#: src/items/ItemInput.tsx
+msgid "item.ordering.label"
+msgstr "Coloque as etapas em ordem"
+
+#: src/tutor/texts.ts
+msgid "tutor.chip.kind.item"
+msgstr "Pergunta"
+
+#: src/sharing/labels.tsx
+msgid "share.personal.item"
+msgstr "Pergunta"
+
+#: src/tutor/Thread.tsx
+msgid "tutor.chip.item"
+msgstr "Pergunta {n} de {total}"
+
+#: src/review/Player.tsx
+msgid "review.vine.saved"
+msgstr "Pergunta {n}: resposta salva"
+
+#: src/review/Player.tsx
+msgid "review.vine.revealed"
+msgstr "Pergunta {n}: resposta mostrada"
+
+#: src/review/Player.tsx
+msgid "review.vine.skipped"
+msgstr "Pergunta {n}: relatada"
+
+#: src/review/Player.tsx
+msgid "review.vine.first"
+msgstr "Pergunta {n}: certa na primeira tentativa"
+
+#: src/review/Player.tsx
+msgid "review.vine.second"
+msgstr "Pergunta {n}: certa na segunda tentativa"
+
+#: src/review/Player.tsx
+msgid "review.vine.current"
+msgstr "Pergunta {n}: esta"
+
+#: src/review/Player.tsx
+msgid "review.vine.todo"
+msgstr "Pergunta {n}: ainda por vir"
+
+#: src/review/Player.tsx
+msgid "review.progress"
+msgstr "Pergunta {number} de {total}"
+
+#: src/assessment/AssessmentRunner.tsx
+msgid "assessment.progress"
+msgstr "Pergunta {number} de {total}"
+
+#: src/routes/levelCheck.tsx
+msgid "level-check.counter"
+msgstr "Pergunta {question} de {total}"
+
+#. placeholder {0}: mmss(atNow)
+#: src/video/NotesBubble.tsx
+msgid "notes-bubble.input"
+msgstr "Pergunta em {0}"
+
+#. placeholder {0}: mmss(atNow)
+#: src/video/NotesBubble.tsx
+msgid "notes-bubble.placeholder"
+msgstr "Pergunta em {0}… (Enter salva)"
+
+#: src/routes/SettingRow.tsx
+msgid "settings.key.practice-types"
+msgstr "Tipos de pergunta"
+
+#: src/routes/settings.tsx
+msgid "settings.group.practice.description"
+msgstr "Tipos de pergunta, quando as soluções aparecem, a nota para passar"
+
+#: src/routes/lessonReader.tsx
+msgid "lesson.tutor.invite.title"
+msgstr "Dúvidas sobre esta lição?"
+
+#: src/routes/levelCheck.tsx
+msgid "level-check.progress"
+msgstr "Perguntas respondidas"
+
+#: src/routes/SettingRow.tsx
+msgid "settings.key.video-notes-bubble"
+msgstr "Bolha de perguntas nos vídeos"
+
+#: src/video/LessonVideo.tsx
+msgid "notes-bubble.show"
+msgstr "Perguntas para o tutor"
+
+#: src/video/NotesBubble.tsx
+#: src/video/NotesBubble.tsx
+msgid "notes-bubble.title"
+msgstr "Perguntas para o tutor"
+
+#: src/video/NotesBubble.tsx
+msgid "notes-bubble.open"
+msgstr "Perguntas para o tutor: toque para abrir, arraste para mover ou até o × para ocultar"
+
+#: src/review/Player.tsx
+msgid "review.vine.label"
+msgstr "Perguntas desta sessão"
+
+#: src/tutor/Thread.tsx
+msgid "tutor.queued"
+msgstr "Na fila"
+
+#: src/components/labels.tsx
+msgid "lesson.state.queued"
+msgstr "Na fila"
+
+#: src/review/Hub.tsx
+msgid "review.size.quick"
+msgstr "Rápida"
+
+#: src/routes/SettingRow.tsx
+msgid "settings.proactivity.quiet"
+msgstr "Discreto (um ponto no botão do tutor)"
+
+#. placeholder {0}: r.right
+#. placeholder {1}: r.total
+#: src/routes/nextSteps.tsx
+msgid "next.quiz.result"
+msgstr "Quiz: {0} de {1} certas."
+
+#: src/onboarding/texts.tsx
+msgid "wizard.preset.local"
+msgstr "Qwen 3.8 27B neste computador"
+
+#: src/onboarding/texts.tsx
+msgid "wizard.preset.open"
+msgstr "Qwen 3.8 27B pela OpenRouter (pague pelo uso)"
+
+#: src/items/GradeFeedback.tsx
+msgid "item.grade.flashcard.saved"
+msgstr "Avaliação salva. O cartão volta quando for a hora de revisar."
+
+#: src/routes/SettingRow.tsx
+msgid "settings.video-format.reading"
+msgstr "Só leitura"
+
+#: src/sharing/labels.tsx
+msgid "share.content.readings"
+msgstr "Leituras"
+
+#: src/sharing/labels.tsx
+msgid "share.format.readings"
+msgstr "Leituras como páginas web e Markdown"
+
+#: src/components/labels.tsx
+msgid "lesson.state.ready"
+msgstr "Pronta"
+
+#. placeholder {0}: r.ready.join(", ")
+#: src/routes/nextSteps.tsx
+msgid "next.quiz.ready"
+msgstr "Pronto para: {0}."
+
+#: src/sharing/labels.tsx
+msgid "share.profile.full"
+msgstr "Pronto para estudar"
+
+#. placeholder {0}: stage.reason
+#: src/routes/importPage.tsx
+msgid "import.refused.reason"
+msgstr "Motivo: {0}"
+
+#: src/review/Player.tsx
+msgid "review.kind.recall"
+msgstr "Lembrar"
+
+#: src/tutor/texts.ts
+msgid "tutor.policy.review-before"
+msgstr "Primeiro tente lembrar sem ajuda. Antes de você responder, o tutor só recebe avisos de um cartão com defeito."
+
+#: src/items/ItemInput.tsx
+msgid "item.flashcard.recall"
+msgstr "Lembre a resposta mentalmente e depois vire o cartão."
+
+#: src/review/Hub.tsx
+msgid "review.hub.recent"
+msgstr "Sessões recentes"
+
+#: src/routes/setup.tsx
+msgid "wizard.step.recommendation"
+msgstr "Recomendação"
+
+#: src/routes/setup.tsx
+msgid "wizard.options.recommended"
+msgstr "Recomendado"
+
+#: src/components/JobProgress.tsx
+#: src/components/JobProgress.tsx
+msgid "job.step.narration"
+msgstr "Gravando a narração"
+
+#: src/routes/signIn.tsx
+msgid "auth.sign-in.recovery.label"
+msgstr "Código de recuperação"
+
+#: src/routes/devices.tsx
+msgid "devices.codes.title"
+msgstr "Códigos de recuperação"
+
+#: src/auth/RecoveryCodes.tsx
+msgid "auth.codes.list"
+msgstr "Códigos de recuperação"
+
+#: src/pwa/PwaControls.tsx
+msgid "pwa.update.reload"
+msgstr "Recarregar para atualizar"
+
+#: src/routes/tutorMemory.tsx
+msgid "tutor.memory.list.label"
+msgstr "Entradas guardadas"
+
+#: src/routes/devices.tsx
+msgid "devices.credentials.remove"
+msgstr "Remover {label}"
+
+#: src/routes/devices.tsx
+msgid "devices.credentials.remove.confirm"
+msgstr "Remover {label} para sempre"
+
+#: src/tutor/DockPanel.tsx
+msgid "tutor.chip.remove"
+msgstr "Remover do contexto: {kind}"
+
+#: src/onboarding/vendor.tsx
+msgid "settings.ai.vendor.remove.confirm-text"
+msgstr "Remover a chave para {vendor}? Os modelos de {vendor} param de funcionar até você adicionar uma chave de novo."
+
+#: src/onboarding/SettingsSections.tsx
+#: src/onboarding/vendor.tsx
+msgid "settings.ai.key.remove"
+msgstr "Remover a chave"
+
+#: src/onboarding/vendor.tsx
+msgid "settings.ai.vendor.remove.label"
+msgstr "Remover a chave: {vendor}"
+
+#: src/onboarding/SettingsSections.tsx
+msgid "settings.ai.key.remove.confirm-text"
+msgstr "Remover a chave? Os modelos pela OpenRouter param de funcionar até você adicionar uma chave de novo."
+
+#: src/tutor/DockPanel.tsx
+msgid "tutor.chips.removed"
+msgstr "Removido:"
+
+#: src/components/JobProgress.tsx
+msgid "job.step.render"
+msgstr "Renderizando o vídeo"
+
+#: src/tutor/texts.ts
+msgid "tutor.trigger.repeated-error"
+msgstr "Erros repetidos em uma mesma ideia"
+
+#: src/onboarding/SettingsSections.tsx
+#: src/onboarding/vendor.tsx
+msgid "settings.ai.key.replace"
+msgstr "Substituir a chave"
+
+#: src/onboarding/vendor.tsx
+msgid "settings.ai.vendor.replace.label"
+msgstr "Substituir a chave: {vendor}"
+
+#: src/tutor/DockPanel.tsx
+msgid "tutor.policy.checked"
+msgstr "As respostas são verificadas antes de você vê-las, por isso aparecem de uma vez."
+
+#: src/review/Resolved.tsx
+msgid "review.report.send"
+msgstr "Relatar e pular"
+
+#: src/review/Player.tsx
+msgid "review.menu.report"
+msgstr "Relatar pergunta"
+
+#: src/review/Resolved.tsx
+msgid "review.report.title"
+msgstr "Relatar esta pergunta"
+
+#: src/routes/requests.tsx
+msgid "request.sent"
+msgstr "Pedido enviado. A lição aparece na trilha quando estiver pronta."
+
+#: src/components/labels.tsx
+msgid "lesson.kind.requested"
+msgstr "Pedida"
+
+#: src/onboarding/SettingsSections.tsx
+msgid "update.restart"
+msgstr "Reiniciar para instalar"
+
+#: src/routes/jobs.tsx
+msgid "jobs.col.result"
+msgstr "Resultado"
+
+#: src/tutor/Thread.tsx
+msgid "tutor.failed.retry"
+msgstr "Tentar de novo"
+
+#: src/routes/review.tsx
+#: src/routes/review.tsx
+msgid "review.hub.title"
+msgstr "Revisão"
+
+#: src/review/Hub.tsx
+msgid "review.entry.title"
+msgstr "Revisão"
+
+#: src/review/Results.tsx
+msgid "review.results.again"
+msgstr "Revisar de novo"
+
+#: src/review/Hub.tsx
+msgid "review.cards.start"
+msgstr "Revisar cartões"
+
+#: src/routes/SettingRow.tsx
+msgid "settings.key.review-bank-size"
+msgstr "Perguntas de revisão por lição"
+
+#: src/routes/review.tsx
+msgid "review.session.title"
+msgstr "Sessão de revisão"
+
+#: src/tutor/Proposals.tsx
+msgid "tutor.proposal.detail.extra-review"
+msgstr "Revisar a habilidade: {skill}"
+
+#: src/review/Hub.tsx
+#: src/review/Hub.tsx
+msgid "review.skill.start"
+msgstr "Revisar esta habilidade"
+
+#: src/review/Hub.tsx
+#: src/review/Hub.tsx
+msgid "review.skill.start.label"
+msgstr "Revisar esta habilidade: {title}"
+
+#: src/components/JobProgress.tsx
+msgid "job.step.video-review"
+msgstr "Revisando os quadros e os fatos"
+
+#: src/routes/settings.tsx
+msgid "settings.group.reviews"
+msgstr "Revisões"
+
+#: src/routes/review.tsx
+msgid "review.chooser.title"
+msgstr "Revisões"
+
+#: src/components/HeaderStatus.tsx
+msgid "nav.reviews"
+msgstr "Revisões"
+
+#: src/routes/SettingRow.tsx
+msgid "settings.key.reviews-per-day"
+msgstr "Revisões por dia"
+
+#: src/review/Player.tsx
+msgid "review.option.right"
+msgstr "Resposta certa"
+
+#: src/items/ItemInput.tsx
+msgid "item.mark.right"
+msgstr "Resposta certa"
+
+#: src/onboarding/PlanMeter.tsx
+msgid "plan-meter.now.week"
+msgstr "Agora {weekPct} da semana está usado."
+
+#: src/onboarding/PlanMeter.tsx
+msgid "plan-meter.now"
+msgstr "Agora {windowPct} desta janela de 5 horas e {weekPct} da semana estão usados."
+
+#: src/onboarding/PlanMeter.tsx
+msgid "plan-meter.now.window"
+msgstr "Agora {windowPct} desta janela de 5 horas está usado."
+
+#: src/review/Resolved.tsx
+msgid "review.feedback.second"
+msgstr "Certo na segunda tentativa."
+
+#: src/review/Resolved.tsx
+msgid "review.feedback.first"
+msgstr "Certo, na primeira tentativa."
+
+#: src/onboarding/CliAccess.tsx
+msgid "cli.manual.where.terminal"
+msgstr "Execute isto em um terminal no computador que roda o Yuo:"
+
+#: src/onboarding/CliAccess.tsx
+msgid "cli.manual.where.container-login"
+msgstr "Execute isto em um terminal na máquina que roda o Yuo:"
+
+#: src/onboarding/CliAccess.tsx
+msgid "cli.manual.where.windows"
+msgstr "Execute isto no PowerShell no computador que roda o Yuo:"
+
+#: src/onboarding/CliAccess.tsx
+msgid "cli.manual.where.container"
+msgstr "Execute isto dentro do contêiner do Yuo. Por exemplo, abra um shell nele com <0>{shell}</0> e depois execute:"
+
+#: src/onboarding/texts.tsx
+msgid "wizard.reason.local-free"
+msgstr "Rodar o modelo no seu computador não custa nada por uso."
+
+#: src/onboarding/profile.tsx
+msgid "profile.theme.system"
+msgstr "Igual ao meu computador"
+
+#: src/tutor/Thread.tsx
+msgid "tutor.queued.save"
+msgstr "Salvar"
+
+#: src/routes/tutorMemory.tsx
+msgid "tutor.memory.save"
+msgstr "Salvar"
+
+#: src/routes/SettingRow.tsx
+msgid "settings.save"
+msgstr "Salvar"
+
+#: src/routes/SettingRow.tsx
+msgid "settings.save.label"
+msgstr "Salvar {label}"
+
+#: src/routes/setup.tsx
+msgid "wizard.about.save"
+msgstr "Salvar e continuar"
+
+#: src/assessment/AssessmentRunner.tsx
+msgid "assessment.test.next"
+msgstr "Salvar e continuar"
+
+#: src/pwa/PwaControls.tsx
+#: src/routes/root.tsx
+msgid "pwa.install"
+msgstr "Salvar atalho do app"
+
+#: src/lesson/Notes.tsx
+msgid "notes.save"
+msgstr "Salvar nota"
+
+#: src/video/NotesBubble.tsx
+msgid "notes-bubble.save"
+msgstr "Salvar a pergunta"
+
+#: src/routes/devices.tsx
+msgid "devices.credentials.password-submit"
+msgstr "Salvar a senha"
+
+#: src/auth/SetupFlow.tsx
+msgid "auth.setup.password.submit"
+msgstr "Salvar a senha"
+
+#: src/onboarding/SettingsSections.tsx
+msgid "settings.profile.save"
+msgstr "Salvar o seu perfil"
+
+#: src/onboarding/SettingsSections.tsx
+msgid "settings.ai.local.saved"
+msgstr "Endereço salvo: {url}. Ele não respondeu desde que o Yuo foi iniciado."
+
+#. placeholder {0}: download.name
+#: src/sharing/ExportDialog.tsx
+msgid "share.download.done"
+msgstr "Salvo como {0}. Confira os seus downloads."
+
+#: src/routes/SettingRow.tsx
+msgid "settings.saved"
+msgstr "Salvo."
+
+#: src/onboarding/profile.tsx
+msgid "profile.saved"
+msgstr "Salvo."
+
+#: src/review/Player.tsx
+msgid "review.saved"
+msgstr "Salvo. O feedback está nos resultados."
+
+#: src/review/Player.tsx
+msgid "review.saved-offline"
+msgstr "Salvo. Você verá o feedback quando estiver on-line de novo."
+
+#: src/routes/levelCheck.tsx
+msgid "level-check.sending"
+msgstr "Salvando as suas respostas…"
+
+#: src/routes/setup.tsx
+msgid "wizard.access.applying"
+msgstr "Salvando…"
+
+#: src/onboarding/vendorModels.tsx
+msgid "vendor.models.applying"
+msgstr "Salvando…"
+
+#: src/onboarding/profile.tsx
+msgid "profile.saving"
+msgstr "Salvando…"
+
+#: src/auth/PasswordForm.tsx
+msgid "auth.password.saving"
+msgstr "Salvando…"
+
+#: src/review/Player.tsx
+msgid "review.kind.scenario"
+msgstr "Cenário"
+
+#: src/review/Results.tsx
+msgid "review.results.second"
+msgstr "Segunda tentativa"
+
+#: src/routes/SettingRow.tsx
+msgid "settings.tutor-memory.link"
+msgstr "Ver e editar o que o tutor lembra"
+
+#: src/routes/nextSteps.tsx
+msgid "next.submit"
+msgstr "Ver as minhas direções"
+
+#: src/review/Player.tsx
+msgid "review.finish"
+msgstr "Ver resultados"
+
+#: src/assessment/AssessmentRunner.tsx
+msgid "assessment.finish"
+msgstr "Ver resultados"
+
+#: src/routes/pathView.tsx
+msgid "path.progress.see"
+msgstr "Ver seu progresso"
+
+#: src/items/ItemInput.tsx
+msgid "item.multi.label"
+msgstr "Selecione todas as que se aplicam"
+
+#: src/tutor/texts.ts
+msgid "tutor.chip.kind.selection"
+msgstr "Texto selecionado"
+
+#: src/tutor/SelectionAsk.tsx
+msgid "tutor.selection.label"
+msgstr "Texto selecionado"
+
+#: src/tutor/Thread.tsx
+msgid "tutor.chip.selection"
+msgstr "Selecionado: “{text}”"
+
+#: src/tutor/Thread.tsx
+msgid "tutor.composer.send"
+msgstr "Enviar"
+
+#: src/tutor/Thread.tsx
+msgid "tutor.send.again"
+msgstr "Enviar de novo"
+
+#: src/onboarding/CliAccess.tsx
+msgid "cli.login.code.send"
+msgstr "Enviar o código"
+
+#: src/tutor/Thread.tsx
+msgid "tutor.send.sending"
+msgstr "Enviando…"
+
+#: src/review/Results.tsx
+msgid "review.results.title"
+msgstr "Sessão concluída"
+
+#: src/onboarding/profile.tsx
+msgid "profile.more"
+msgstr "Duração da sessão e interesses (opcional)"
+
+#: src/routes/devices.tsx
+msgid "devices.credentials.set-password"
+msgstr "Definir uma senha"
+
+#: src/routes/SettingRow.tsx
+msgid "settings.source.lesson"
+msgstr "definido para uma lição"
+
+#: src/routes/SettingRow.tsx
+msgid "settings.source.path"
+msgstr "definido para uma trilha"
+
+#: src/routes/settings.tsx
+msgid "settings.group.installation.description"
+msgstr "Definido para todos neste Yuo por quem o administra"
+
+#: src/routes/SettingRow.tsx
+msgid "settings.source.installation"
+msgstr "definido para esta instalação"
+
+#: src/routes/setup.tsx
+msgid "wizard.title"
+msgstr "Configurar o Yuo"
+
+#: src/routes/settings.tsx
+msgid "settings.title"
+msgstr "Configurações"
+
+#: src/routes/devices.tsx
+#: src/routes/root.tsx
+msgid "nav.settings"
+msgstr "Configurações"
+
+#: src/routes/root.tsx
+msgid "nav.setup"
+msgstr "Configuração"
+
+#: src/auth/SetupFlow.tsx
+msgid "auth.setup.code.label"
+msgstr "Código de configuração"
+
+#: src/routes/setup.tsx
+msgid "wizard.steps.label"
+msgstr "Etapas da configuração"
+
+#: src/sharing/ExportDialog.tsx
+msgid "share.open"
+msgstr "Compartilhar ou exportar"
+
+#: src/sharing/ExportDialog.tsx
+msgid "share.title"
+msgstr "Compartilhar ou exportar esta trilha"
+
+#: src/routes/SettingRow.tsx
+msgid "settings.length.short"
+msgstr "Curta"
+
+#: src/routes/SettingRow.tsx
+msgid "settings.video-length.short"
+msgstr "Curto"
+
+#: src/routes/SettingRow.tsx
+msgid "item-type.short-answer"
+msgstr "Resposta curta"
+
+#: src/assessment/AssessmentRunner.tsx
+msgid "assessment.hint"
+msgstr "Mostrar uma dica"
+
+#: src/review/Player.tsx
+msgid "review.show-answer"
+msgstr "Mostrar resposta"
+
+#: src/items/ItemInput.tsx
+msgid "item.flashcard.show"
+msgstr "Mostrar resposta"
+
+#: src/routes/jobs.tsx
+msgid "jobs.history.more"
+msgstr "Mostrar anteriores"
+
+#: src/path/SkillPanel.tsx
+msgid "path.panel.show.label"
+msgstr "Mostrar na árvore: {title}"
+
+#: src/path/PathGraph.tsx
+msgid "path.tree.branches.label"
+msgstr "Mostrar um ramo"
+
+#: src/routes/SettingRow.tsx
+msgid "settings.key.solution-after"
+msgstr "Mostrar soluções"
+
+#: src/routes/pathView.tsx
+msgid "path.view.label"
+msgstr "Mostrar as habilidades como"
+
+#: src/path/PathGraph.tsx
+msgid "path.tree.branches.all"
+msgstr "Mostrar a árvore inteira"
+
+#: src/routes/tutorMemory.tsx
+msgid "tutor.memory.evidence"
+msgstr "Mostrar onde foi anotado"
+
+#: src/path/PathGraph.tsx
+msgid "path.tree.partial"
+msgstr "Mostrando o seu ramo atual. O botão de ajuste mostra a árvore inteira."
+
+#: src/review/Results.tsx
+msgid "review.results.shown"
+msgstr "Mostradas"
+
+#: src/routes/signIn.tsx
+msgid "auth.sign-in.password.submit"
+msgstr "Entrar"
+
+#: src/onboarding/CliAccess.tsx
+msgid "cli.login.step.sign-in"
+msgstr "Entre por lá e permita o acesso. A página então mostra um código."
+
+#: src/onboarding/CliAccess.tsx
+msgid "cli.login.device.enter"
+msgstr "Entre por lá e digite este código de uso único quando a página pedir:"
+
+#: src/onboarding/CliAccess.tsx
+msgid "cli.login.start"
+msgstr "Entrar no {name}"
+
+#: src/onboarding/AiReady.tsx
+msgid "ai-ready.fix.sign-in"
+msgstr "Entre no {name} em Configurações para continuar"
+
+#: src/onboarding/CliAccess.tsx
+msgid "cli.login.why"
+msgstr "Entre no {name} com a conta que tem a sua assinatura. O Yuo nunca vê a sua senha."
+
+#: src/routes/setup.tsx
+msgid "wizard.access.wait.sign-in"
+msgstr "Entre no {programName} para continuar."
+
+#: src/routes/signIn.tsx
+msgid "auth.sign-in.title"
+msgstr "Entrar no Yuo"
+
+#: src/routes/signIn.tsx
+msgid "auth.sign-in.passkey.submit"
+msgstr "Entrar com uma chave de acesso"
+
+#: src/routes/signIn.tsx
+msgid "auth.sign-in.recovery.submit"
+msgstr "Entrar com o código"
+
+#: src/routes/root.tsx
+#: src/routes/root.tsx
+msgid "nav.sign-out"
+msgstr "Sair"
+
+#: src/routes/devices.tsx
+msgid "devices.list.revoke"
+msgstr "Desconectar {label}"
+
+#: src/routes/devices.tsx
+msgid "devices.list.sign-out"
+msgstr "Sair deste dispositivo"
+
+#: src/routes/devices.tsx
+msgid "devices.title"
+msgstr "Login e dispositivos"
+
+#: src/routes/settings.tsx
+msgid "settings.devices-link"
+msgstr "Login e dispositivos: chaves de acesso, senha, códigos de recuperação, dispositivos conectados"
+
+#: src/components/SyncIndicator.tsx
+msgid "sync.signed-out"
+msgstr "desconectado, guardado até você entrar"
+
+#: src/onboarding/CliAccess.tsx
+msgid "cli.state.signing-in"
+msgstr "Entrando no {name}"
+
+#: src/onboarding/desktop.tsx
+msgid "desktop.signed-out.signing-in"
+msgstr "Fazendo o seu login"
+
+#: src/routes/SettingRow.tsx
+msgid "item-type.mcq"
+msgstr "Escolha única"
+
+#: src/components/labels.tsx
+msgid "job.target.skill"
+msgstr "habilidade"
+
+#: src/tutor/texts.ts
+msgid "tutor.chip.kind.skill"
+msgstr "Habilidade"
+
+#: src/tutor/texts.ts
+msgid "tutor.scope.skill"
+msgstr "Habilidade"
+
+#: src/routes/skillTest.tsx
+msgid "skill-test.title.plain"
+msgstr "Teste de habilidade"
+
+#: src/routes/SettingRow.tsx
+msgid "settings.key.pass-mark"
+msgstr "Nota para passar no teste de habilidade"
+
+#: src/routes/skillTest.tsx
+msgid "skill-test.title"
+msgstr "Teste de habilidade: {title}"
+
+#: src/path/PathGraph.tsx
+msgid "path.tree.label"
+msgstr "Árvore de habilidades"
+
+#: src/routes/pathView.tsx
+msgid "path.view.title"
+msgstr "Habilidades"
+
+#: src/path/PathGraph.tsx
+msgid "path.tree.skills.label"
+msgstr "Habilidades"
+
+#: src/sharing/labels.tsx
+msgid "share.content.curriculum"
+msgstr "Habilidades e estrutura"
+
+#: src/routes/pathView.tsx
+msgid "path.overview.progress.label"
+msgstr "Habilidades dominadas"
+
+#: src/routes/progress.tsx
+msgid "progress.skills"
+msgstr "Habilidades dominadas: {mastered} de {total}"
+
+#: src/routes/index.tsx
+msgid "home.path.progress.label"
+msgstr "Habilidades dominadas: {title}"
+
+#: src/sharing/labels.tsx
+msgid "share.profile.structure.description"
+msgstr "Habilidades, textos das lições e perguntas, sem vídeos: os modelos de quem recebe criam os vídeos."
+
+#: src/routes/levelCheck.tsx
+msgid "level-check.skip"
+msgstr "Pular e começar do básico"
+
+#: src/sharing/labels.tsx
+msgid "share.content.slides"
+msgstr "Slides"
+
+#: src/onboarding/SettingsSections.tsx
+msgid "settings.ai.role.utility"
+msgstr "Tarefas pequenas"
+
+#: src/routes/nextSteps.tsx
+msgid "next.so-far"
+msgstr "Até agora"
+
+#: src/items/GradeFeedback.tsx
+msgid "item.grade.solution"
+msgstr "Solução"
+
+#: src/routes/importPage.tsx
+msgid "import.profile.custom"
+msgstr "Algumas partes de uma trilha"
+
+#: src/onboarding/texts.tsx
+msgid "wizard.estimate.missing"
+msgstr "Algumas etapas ainda não têm preço conhecido, então pode custar mais."
+
+#: src/onboarding/vendorModels.tsx
+msgid "vendor.estimate.missing"
+msgstr "Algumas etapas ainda não têm preço conhecido, então pode custar mais."
+
+#: src/routes/pathNew.tsx
+msgid "path.new.estimate.missing"
+msgstr "Algumas etapas ainda não têm preço conhecido, então o custo real pode ser maior."
+
+#: src/tutor/texts.ts
+msgid "tutor.error.other"
+msgstr "Algo deu errado ao responder."
+
+#: src/components/jobError.ts
+msgid "job.error.generic"
+msgstr "Algo deu errado ao gerar."
+
+#: src/sharing/labels.tsx
+msgid "share.personal.source"
+msgstr "Fonte"
+
+#: src/sharing/labels.tsx
+msgid "share.content.sources"
+msgstr "Fontes"
+
+#: src/onboarding/ProbeSummary.tsx
+msgid "wizard.computer.speed"
+msgstr "Teste de velocidade"
+
+#: src/sharing/labels.tsx
+msgid "share.format.csv"
+msgstr "Planilha (CSV)"
+
+#: src/review/Hub.tsx
+msgid "review.size.standard"
+msgstr "Padrão"
+
+#: src/sharing/labels.tsx
+msgid "share.content.standard"
+msgstr "Arquivos padrão ({list})"
+
+#: src/routes/nextSteps.tsx
+msgid "next.start"
+msgstr "Começar"
+
+#: src/path/PathGraph.tsx
+msgid "path.tree.start"
+msgstr "Início"
+
+#: src/routes/setup.tsx
+msgid "wizard.answers.clear"
+msgstr "Começar em branco"
+
+#: src/tutor/Proposals.tsx
+msgid "tutor.proposal.review.start.plain"
+msgstr "Começar a revisão"
+
+#: src/tutor/Proposals.tsx
+msgid "tutor.proposal.review.start"
+msgstr "Começar a revisão de {skill}"
+
+#: src/routes/progress.tsx
+msgid "progress.erase.description"
+msgstr "Recomece este percurso: o seu progresso, respostas, revisões, notas, conversas com o tutor e pedidos de lições aqui são eliminados para sempre. O percurso e as suas lições ficam; as lições escritas a partir do seu próprio material são escritas de novo quando precisar delas."
+
+#: src/routes/index.tsx
+msgid "home.path.created"
+msgstr "iniciada em {created}"
+
+#: src/routes/pathView.tsx
+msgid "path.growing.start"
+msgstr "Começando do básico"
+
+#: src/onboarding/CliAccess.tsx
+msgid "cli.login.starting"
+msgstr "Iniciando a conexão…"
+
+#: src/routes/jobs.tsx
+msgid "jobs.col.status"
+msgstr "Status"
+
+#: src/routes/setup.tsx
+msgid "wizard.step.of"
+msgstr "Passo {number} de {total}"
+
+#: src/auth/SetupFlow.tsx
+msgid "auth.setup.step"
+msgstr "Passo {number} de 3"
+
+#: src/routes/pathView.tsx
+msgid "path.growing.steps"
+msgstr "Etapas"
+
+#: src/tutor/Thread.tsx
+msgid "tutor.pending.cancel"
+msgstr "Parar"
+
+#: src/tutor/Thread.tsx
+msgid "tutor.pending.cancel.label"
+msgstr "Parar a resposta de {tutorName}"
+
+#: src/onboarding/desktop.tsx
+msgid "desktop.stop"
+msgstr "Encerrar o Yuo"
+
+#: src/onboarding/desktop.tsx
+msgid "desktop.stop.confirm-text"
+msgstr "Encerrar o Yuo agora? As lições que estão sendo escritas esperam até você iniciá-lo de novo."
+
+#: src/onboarding/SettingsSections.tsx
+msgid "settings.desktop.description"
+msgstr "Encerre o Yuo quando terminar"
+
+#: src/routes/jobs.tsx
+msgid "jobs.cancelled"
+msgstr "Interrompido antes de terminar."
+
+#: src/routes/SettingRow.tsx
+msgid "settings.key.grace-days"
+msgstr "Dias de tolerância da sequência"
+
+#: src/review/Hub.tsx
+msgid "review.hub.chip.strong"
+msgstr "firme"
+
+#. placeholder {0}: d.strong.join(", ")
+#: src/routes/nextSteps.tsx
+msgid "next.fact.strong"
+msgstr "Pontos fortes: {0}"
+
+#: src/sharing/labels.tsx
+msgid "share.profile.structure"
+msgstr "Estrutura e textos"
+
+#: src/onboarding/SettingsSections.tsx
+msgid "settings.ai.apps"
+msgstr "Apps de assinatura"
+
+#: src/tutor/Nudges.tsx
+msgid "tutor.nudge.peek.label"
+msgstr "Sugestão do tutor"
+
+#: src/tutor/Proposals.tsx
+msgid "tutor.proposal.label"
+msgstr "Sugestão: {kind}"
+
+#: src/tutor/Nudges.tsx
+msgid "tutor.nudge.list.label"
+msgstr "Sugestões"
+
+#: src/tutor/Proposals.tsx
+msgid "tutor.proposals.title"
+msgstr "Sugestões do tutor"
+
+#: src/routes/SettingRow.tsx
+msgid "settings.key.tutor-muted"
+msgstr "Sugestões que você desativou"
+
+#: src/components/SyncIndicator.tsx
+msgid "sync.synced"
+msgstr "Sincronizado"
+
+#: src/components/SyncIndicator.tsx
+msgid "sync.syncing"
+msgstr "sincronizando"
+
+#: src/onboarding/ProbeSummary.tsx
+msgid "wizard.computer.os"
+msgstr "Sistema"
+
+#: src/routes/pathView.tsx
+msgid "path.placement.start"
+msgstr "Fazer um teste de nivelamento"
+
+#: src/tutor/Thread.tsx
+msgid "tutor.queued.withdraw"
+msgstr "Retirar"
+
+#: src/tutor/Thread.tsx
+msgid "tutor.queued.withdraw.label"
+msgstr "Retirar esta mensagem"
+
+#: src/path/SkillPanel.tsx
+#: src/routes/pathView.tsx
+msgid "path.skill.test"
+msgstr "Fazer o teste de habilidade"
+
+#: src/path/SkillPanel.tsx
+#: src/routes/pathView.tsx
+msgid "path.skill.test.label"
+msgstr "Fazer o teste de habilidade: {title}"
+
+#: src/components/JobProgress.tsx
+msgid "job.time.longer"
+msgstr "está levando mais que o normal, ainda trabalhando"
+
+#: src/routes/SettingRow.tsx
+msgid "settings.key.review-retention"
+msgstr "Lembrança desejada no momento da revisão"
+
+#: src/routes/tutorMemory.tsx
+msgid "tutor.memory.add.title"
+msgstr "Diga ao tutor algo para lembrar"
+
+#: src/routes/setup.tsx
+msgid "wizard.path.waitlist.link"
+msgstr "Diga que tem interesse (abre um formulário em uma nova aba)"
+
+#: src/tutor/texts.ts
+msgid "tutor.scope.attempt"
+msgstr "Teste"
+
+#: src/assessment/AssessmentRunner.tsx
+msgid "assessment.test.done"
+msgstr "Teste concluído"
+
+#: src/tutor/texts.ts
+msgid "tutor.policy.test-hints"
+msgstr "Teste com dicas: o tutor pode dar um pequeno empurrão por pergunta, e essa resposta passa a contar como ajudada."
+
+#: src/onboarding/SettingsSections.tsx
+msgid "settings.ai.local.invalid-notice"
+msgstr "Esse endereço não está neste computador."
+
+#: src/onboarding/CliAccess.tsx
+msgid "cli.login.code.refused"
+msgstr "Esse código não funcionou. Copie de novo da página de login."
+
+#: src/auth/AuthError.tsx
+msgid "auth.error.refused"
+msgstr "Não funcionou: {detail}"
+
+#: src/onboarding/vendor.tsx
+msgid "vendor.key.format.any"
+msgstr "Isso não parece uma chave de {vendor}."
+
+#: src/onboarding/vendor.tsx
+msgid "vendor.key.format"
+msgstr "Isso não parece uma chave de {vendor}. Ela começa com {prefix}."
+
+#: src/onboarding/access.tsx
+msgid "access.key.format"
+msgstr "Isso não parece uma chave da OpenRouter. Ela começa com sk-or-."
+
+#: src/auth/AuthError.tsx
+msgid "auth.error.recovery"
+msgstr "Esse código de recuperação não é válido ou já foi usado."
+
+#: src/auth/AuthError.tsx
+msgid "auth.error.setup-code"
+msgstr "Esse código de configuração não funciona. Os códigos funcionam uma vez e expiram depois de um dia; o servidor mostra um novo quando inicia."
+
+#: src/onboarding/texts.tsx
+msgid "wizard.reason.cli-found"
+msgstr "O app {app} está neste computador, então o Yuo pode usar a sua assinatura em vez de pagar por uso."
+
+#: src/onboarding/CliAccess.tsx
+msgid "cli.manual.docs"
+msgstr "O guia do {name} (abre em uma nova aba)"
+
+#: src/onboarding/texts.tsx
+msgid "wizard.reason.no-subscription"
+msgstr "Os apps Claude Code e Codex não estão neste computador, então o Yuo não pode usar uma assinatura que você já paga."
+
+#: src/routes/pathNew.tsx
+msgid "path.new.estimate.unavailable"
+msgstr "A estimativa de custo não está disponível agora."
+
+#: src/onboarding/vendorModels.tsx
+msgid "vendor.estimate.unavailable"
+msgstr "A estimativa de custo não está disponível agora."
+
+#: src/video/unavailable.tsx
+msgid "video.unavailable.desktop"
+msgstr "O app para computador ainda não cria vídeos, então as suas lições são leituras com prática e o tutor. Por enquanto, os vídeos precisam da versão para servidor do Yuo."
+
+#: src/onboarding/CliAccess.tsx
+msgid "cli.install.failed"
+msgstr "O instalador não terminou. Você pode instalar {name} por conta própria, veja abaixo."
+
+#: src/components/jobError.ts
+msgid "job.error.review"
+msgstr "A lição não passou na revisão de qualidade."
+
+#: src/tutor/Proposals.tsx
+msgid "tutor.proposal.add-lesson.done"
+msgstr "A lição foi pedida. Ela aparece em “Seus pedidos” na trilha."
+
+#: src/tutor/texts.ts
+msgid "tutor.error.transport"
+msgstr "Não foi possível acessar o modelo."
+
+#: src/components/jobError.ts
+msgid "job.error.rate-limit"
+msgstr "O provedor do modelo pediu ao Yuo para ir mais devagar. Tente de novo mais tarde."
+
+#: src/tutor/texts.ts
+msgid "tutor.error.auth"
+msgstr "O provedor do modelo não aceitou as credenciais. Confira-as na Configuração."
+
+#: src/tutor/texts.ts
+msgid "tutor.error.quota"
+msgstr "A cota ou o limite de uso do provedor do modelo acabou. Tente de novo mais tarde ou escolha outros modelos na Configuração."
+
+#: src/tutor/texts.ts
+msgid "tutor.error.empty"
+msgstr "O modelo devolveu uma resposta vazia."
+
+#: src/tutor/texts.ts
+msgid "tutor.error.timeout"
+msgstr "O modelo demorou demais para responder."
+
+#: src/components/jobError.ts
+msgid "job.error.timeout"
+msgstr "O modelo demorou demais para responder."
+
+#: src/components/jobError.ts
+msgid "job.error.invalid-output"
+msgstr "A resposta do modelo não pôde ser usada, mesmo depois de o Yuo pedir que ele a corrigisse."
+
+#: src/onboarding/SettingsSections.tsx
+msgid "settings.ai.description"
+msgstr "Os modelos que escrevem as suas lições e como o Yuo os acessa"
+
+#: src/tutor/texts.ts
+msgid "tutor.error.budget"
+msgstr "O limite de orçamento mensal foi atingido. Aumente-o em Configurações ou espere o próximo mês."
+
+#: src/components/jobError.ts
+msgid "job.error.budget"
+msgstr "O limite de gastos mensal foi atingido, então a geração está pausada até ele permitir mais."
+
+#: src/onboarding/SettingsSections.tsx
+msgid "update.staged"
+msgstr "A nova versão foi baixada e verificada. O Yuo a instala ao reiniciar, o que leva um minuto."
+
+#: src/routes/pathView.tsx
+msgid "path.next.writing"
+msgstr "A próxima lição está sendo escrita."
+
+#: src/onboarding/access.tsx
+msgid "access.local.ready"
+msgstr "O app Ollama está em execução e tem o modelo {model}."
+
+#: src/onboarding/access.tsx
+msgid "access.local.no-model"
+msgstr "O app Ollama está em execução, mas o modelo ainda não está nele."
+
+#: src/onboarding/SettingsSections.tsx
+msgid "settings.ai.local.url.description"
+msgstr "O app Ollama neste computador responde em http://127.0.0.1:11434/v1."
+
+#: src/sharing/ExportDialog.tsx
+msgid "share.privacy.goal"
+msgstr "O pacote inclui o objetivo da trilha:"
+
+#: src/components/jobError.ts
+msgid "job.error.renderer-away"
+msgstr "A parte do Yuo que cria os vídeos não estava respondendo."
+
+#: src/auth/AuthError.tsx
+msgid "auth.error.passkey-cancelled"
+msgstr "A janela da chave de acesso foi fechada ou expirou. Nada foi alterado; você pode tentar de novo."
+
+#: src/path/PathGraph.tsx
+msgid "path.tree.hint"
+msgstr "A trilha desenhada como um grafo: o início no centro, um ponto central para cada ramo ao redor, as habilidades crescendo para fora. As setas Esquerda e Direita andam por um ramo, Cima e Baixo passam de um ramo para outro, Enter abre uma habilidade. Há também uma visualização em lista: escolha Lista acima."
+
+#: src/routes/importPage.tsx
+msgid "import.personal.intro"
+msgstr "Quem compartilhou isto incluiu conteúdo próprio:"
+
+#: src/onboarding/PlanMeter.tsx
+msgid "plan-meter.limited"
+msgstr "O limite do plano foi atingido. As lições esperam até ele renovar, e então o Yuo continua sozinho."
+
+#: src/routes/practice.tsx
+msgid "practice.preparing"
+msgstr "As perguntas de prática estão sendo escritas…"
+
+#: src/assessment/StartGate.tsx
+msgid "assessment.prepare.failed"
+msgstr "Não foi possível preparar as perguntas."
+
+#: src/routes/levelCheck.tsx
+msgid "level-check.failed.not-ready"
+msgstr "Não foi possível escrever as perguntas."
+
+#: src/routes/levelCheck.tsx
+msgid "level-check.failed.retry"
+msgstr "Não foi possível escrever as perguntas. Tente de novo, ou pule a verificação: a trilha então começa do básico."
+
+#: src/items/GradeFeedback.tsx
+msgid "item.grade.right-answer"
+msgstr "A resposta certa"
+
+#: src/onboarding/texts.tsx
+msgid "wizard.preset.open.summary"
+msgstr "O mesmo modelo aberto, executado pela OpenRouter. Você paga à OpenRouter pelo que usar."
+
+#: src/auth/PasswordForm.tsx
+msgid "auth.password.again"
+msgstr "A mesma senha de novo"
+
+#: src/components/jobError.ts
+msgid "job.error.busy"
+msgstr "A mesma etapa já estava em execução. O Yuo vai tentar de novo."
+
+#: src/components/ErrorNotice.tsx
+msgid "error.server"
+msgstr "O servidor não conseguiu fazer isto: {detail}"
+
+#: src/onboarding/CliAccess.tsx
+msgid "cli.login.failed"
+msgstr "A conexão não terminou. Você pode começar de novo."
+
+#: src/onboarding/CliAccess.tsx
+#: src/onboarding/CliAccess.tsx
+msgid "cli.login.no-link"
+msgstr "A página de login não chegou. Cancele e comece de novo."
+
+#: src/tutor/texts.ts
+msgid "tutor.policy.test-debrief"
+msgstr "O teste terminou: converse sobre os temas dele e o que estudar agora. As respostas continuam ocultas para uma nova tentativa."
+
+#: src/tutor/Nudges.tsx
+msgid "tutor.nudge.failed-test"
+msgstr "Você ainda não passou no teste de {skill}. Planejar o que estudar antes da nova tentativa?"
+
+#: src/tutor/Dock.tsx
+msgid "tutor.announce.failed"
+msgstr "O tutor não conseguiu responder. {reason}"
+
+#: src/tutor/Dock.tsx
+msgid "tutor.announce.answering"
+msgstr "O tutor está respondendo."
+
+#: src/tutor/Proposals.tsx
+msgid "tutor.proposals.intro"
+msgstr "O tutor nunca muda a sua trilha sozinho. Aceite o que ajuda e recuse o resto."
+
+#: src/tutor/DockPanel.tsx
+msgid "tutor.memory.first-use"
+msgstr "O tutor guarda coisas duradouras sobre você, como metas, preferências e erros que percebeu, para ajudar entre conversas. Você pode ver, alterar e excluir cada entrada."
+
+#: src/tutor/DockPanel.tsx
+msgid "tutor.context.error"
+msgstr "Não foi possível carregar o contexto do tutor. Você ainda pode enviar uma mensagem."
+
+#: src/auth/PasswordForm.tsx
+msgid "auth.password.mismatch"
+msgstr "As duas senhas são diferentes."
+
+#: src/routes/importPage.tsx
+msgid "import.upload.network"
+msgstr "O envio não chegou ao servidor do Yuo. Verifique a conexão e tente de novo. Nada foi importado."
+
+#: src/video/LessonVideo.tsx
+msgid "video.making"
+msgstr "O vídeo está sendo criado; enquanto isso, a lição em texto está aqui."
+
+#: src/video/unavailable.tsx
+msgid "video.unavailable.no-container"
+msgstr "O serviço de vídeo não está em execução, então por enquanto as lições vêm como leituras. Quem administra este servidor pode iniciar o serviço de renderização pelo arquivo compose do servidor."
+
+#: src/components/jobError.ts
+msgid "job.error.video-code"
+msgstr "Não foi possível montar as cenas do vídeo; a lição para ler tem tudo."
+
+#: src/onboarding/PlanUsage.tsx
+msgid "plan-usage.week.unpublished"
+msgstr "o limite semanal não é publicado"
+
+#: src/onboarding/PlanUsage.tsx
+msgid "plan-usage.week.share"
+msgstr "a trilha inteira usa <0/> da semana"
+
+#: src/routes/settings.tsx
+msgid "settings.appearance.words"
+msgstr "tema escuro claro cores modo escuro aparência"
+
+#: src/assessment/StartGate.tsx
+msgid "assessment.empty"
+msgstr "Ainda não há perguntas aqui."
+
+#: src/review/Hub.tsx
+msgid "review.hub.no-questions"
+msgstr "Ainda não há perguntas de revisão para o que você estudou."
+
+#: src/video/LessonVideo.tsx
+msgid "video.failed"
+msgstr "Desta vez não há vídeo para esta lição; a lição em texto abaixo tem tudo."
+
+#: src/routes/review.tsx
+msgid "review.session.none"
+msgstr "Não há nada para revisar aqui agora."
+
+#: src/components/jobError.ts
+msgid "job.error.disk-full"
+msgstr "Não havia espaço suficiente para montar o vídeo."
+
+#: src/routes/nextSteps.tsx
+msgid "next.quiz.intro"
+msgstr "Estas vão um pouco além do que você estudou. “Ainda não sei” é uma boa resposta: mostra para onde ir."
+
+#: src/tutor/texts.ts
+msgid "tutor.stage.thinking"
+msgstr "Pensando…"
+
+#: src/review/Player.tsx
+msgid "review.rejected"
+msgstr "Não foi possível registrar esta resposta: {reason}"
+
+#: src/assessment/AssessmentRunner.tsx
+msgid "assessment.rejected"
+msgstr "Não foi possível registrar esta resposta: {reason}"
+
+#: src/auth/SetupFlow.tsx
+msgid "auth.setup.password.no-passkeys"
+msgstr "Este navegador não consegue criar chaves de acesso aqui, então escolha uma senha. Você pode adicionar uma chave de acesso depois, por outro dispositivo."
+
+#: src/routes/signIn.tsx
+msgid "auth.sign-in.no-passkeys"
+msgstr "Este navegador não consegue usar chaves de acesso aqui e não há senha definida. Use um código de recuperação, ou entre em um dispositivo com a sua chave de acesso e defina uma senha por lá."
+
+#: src/auth/AuthError.tsx
+msgid "auth.error.passkey-browser"
+msgstr "Este navegador não conseguiu usar uma chave de acesso aqui ({name})."
+
+#: src/onboarding/SettingsSections.tsx
+msgid "update.no-feed"
+msgstr "Esta versão não procura atualizações."
+
+#: src/onboarding/texts.tsx
+msgid "wizard.reason.no-gpu"
+msgstr "Este computador não tem uma placa de vídeo capaz de rodar o modelo, então ele roda em outro lugar."
+
+#: src/tutor/DockPanel.tsx
+msgid "tutor.thread.label"
+msgstr "Esta conversa"
+
+#: src/components/ErrorNotice.tsx
+msgid "error.not-found"
+msgstr "Não foi possível encontrar isto. Talvez tenha sido removido."
+
+#: src/tutor/Proposals.tsx
+msgid "tutor.proposal.error"
+msgstr "Esta decisão não foi aceita: {error}"
+
+#: src/routes/devices.tsx
+msgid "devices.list.this"
+msgstr "Este dispositivo"
+
+#: src/routes/importPage.tsx
+msgid "import.upload.too-large"
+msgstr "Este arquivo tem mais de 10 GB. Nada foi importado."
+
+#: src/routes/settings.tsx
+msgid "settings.group.installation"
+msgstr "Esta instalação"
+
+#: src/video/unavailable.tsx
+msgid "video.unavailable.not-installed"
+msgstr "Esta instalação não tem criador de vídeos, então as lições são leituras com prática e o tutor."
+
+#: src/routes/SettingRow.tsx
+msgid "settings.read-only"
+msgstr "Isto está definido para a instalação inteira."
+
+#: src/onboarding/SettingsSections.tsx
+msgid "update.newest"
+msgstr "Esta é a versão mais recente."
+
+#: src/routes/devices.tsx
+msgid "devices.credentials.only"
+msgstr "Esta é a sua única forma de entrar; adicione outra antes de remover esta."
+
+#: src/onboarding/access.tsx
+msgid "access.key.no-limit"
+msgstr "Esta chave não tem limite de gastos."
+
+#: src/routes/practice.tsx
+msgid "practice.empty"
+msgstr "Esta lição ainda não tem perguntas de prática."
+
+#: src/routes/lessonReader.tsx
+msgid "lesson.not-ready"
+msgstr "Esta lição ainda não está pronta."
+
+#: src/onboarding/desktop.tsx
+msgid "desktop.signed-out.failed"
+msgstr "Este link já foi usado ou é antigo demais."
+
+#: src/routes/importPage.tsx
+msgid "import.preview.structure"
+msgstr "Este pacote não tem vídeos: os seus modelos criam os vídeos depois da importação."
+
+#: src/routes/importPage.tsx
+msgid "import.cannot"
+msgstr "Este pacote contém só algumas partes de uma trilha, e nenhuma importação anterior dela foi encontrada aqui, então ele não pode ser importado."
+
+#: src/sharing/labels.tsx
+msgid "import.notice.unsigned"
+msgstr "Este pacote não é assinado, então não é possível verificar quem o criou. Importe apenas se você confia na origem dele."
+
+#: src/sharing/labels.tsx
+msgid "import.notice.signed"
+msgstr "Este pacote é assinado, mas o Yuo ainda não consegue verificar assinaturas, então trate-o como não assinado."
+
+#: src/routes/pathView.tsx
+msgid "path.growing.wait"
+msgstr "Esta página se atualiza sozinha quando as primeiras lições estiverem prontas."
+
+#: src/routes/pathView.tsx
+msgid "path.no-branches"
+msgstr "Esta trilha ainda não tem lições."
+
+#: src/tutor/Thread.tsx
+msgid "tutor.chip.item.plain"
+msgstr "Esta pergunta"
+
+#: src/tutor/texts.ts
+msgid "tutor.policy.review-resolved"
+msgstr "Esta pergunta está resolvida: o tutor pode explicar a resposta e cada opção livremente."
+
+#: src/routes/nextSteps.tsx
+msgid "next.failed"
+msgstr "Não foi possível concluir esta etapa. Tente de novo, ou feche o ponto de controle por enquanto."
+
+#: src/video/unavailable.tsx
+msgid "video.unavailable.no-sandbox"
+msgstr "Este sistema não consegue manter o código dos vídeos isolado da rede, então o Yuo não cria vídeos aqui e as lições são leituras. Os vídeos são código escrito pela IA e só rodam isolados da rede."
+
+#: src/tutor/DockPanel.tsx
+msgid "tutor.threads.this.plain"
+msgstr "Esta conversa"
+
+#: src/tutor/DockPanel.tsx
+msgid "tutor.threads.this"
+msgstr "Esta conversa ({scopeLabel})"
+
+#: src/routes/SettingRow.tsx
+msgid "settings.impact.time"
+msgstr "tempo"
+
+#: src/onboarding/profile.tsx
+msgid "profile.tz"
+msgstr "Fuso horário"
+
+#: src/lesson/BlockRenderer.tsx
+msgid "lesson.callout.tip"
+msgstr "Dica"
+
+#: src/routes/pathNew.tsx
+msgid "path.new.field.title"
+msgstr "Título"
+
+#: src/auth/SetupFlow.tsx
+msgid "auth.setup.code.intro"
+msgstr "Para confirmar que esta instalação é sua, digite o código de configuração que o servidor do Yuo mostrou no console ao iniciar. Ele se parece com ABCD-EFGH-JKLM-NPQR."
+
+#: src/onboarding/access.tsx
+msgid "access.local.no-server"
+msgstr "Para rodar o modelo neste computador, o Yuo usa o app gratuito Ollama. Ele ainda não está em execução."
+
+#: src/components/JobProgress.tsx
+msgid "job.step.translate"
+msgstr "Traduzindo"
+
+#: src/routes/pathView.tsx
+msgid "path.view.tree"
+msgstr "Árvore"
+
+#: src/review/Player.tsx
+msgid "review.option.tried"
+msgstr "Tentada"
+
+#: src/routes/setup.tsx
+msgid "wizard.computer.retry"
+msgstr "Tentar de novo"
+
+#: src/routes/nextSteps.tsx
+msgid "next.retry"
+msgstr "Tentar de novo"
+
+#: src/routes/levelCheck.tsx
+msgid "level-check.retry"
+msgstr "Tentar de novo"
+
+#: src/routes/jobs.tsx
+msgid "jobs.retry"
+msgstr "Tentar de novo"
+
+#: src/review/Results.tsx
+msgid "review.results.retry"
+msgstr "Tentar de novo"
+
+#: src/review/Player.tsx
+msgid "review.try-again"
+msgstr "Tentar de novo"
+
+#: src/path/LessonRow.tsx
+msgid "path.lesson.retry"
+msgstr "Tentar de novo"
+
+#: src/auth/SetupFlow.tsx
+msgid "auth.setup.codes.retry"
+msgstr "Tentar de novo"
+
+#: src/video/LessonVideo.tsx
+msgid "video.again"
+msgstr "Tentar criar o vídeo de novo"
+
+#: src/onboarding/CliAccess.tsx
+msgid "cli.install.retry"
+msgstr "Tentar o instalador de novo"
+
+#: src/tutor/texts.ts
+msgid "tutor.review"
+msgstr "Tente lembrar primeiro: a revisão funciona melhor sem ajuda. Se o cartão estiver com defeito ou confuso, me diga o que há de errado."
+
+#: src/components/JobProgress.tsx
+msgid "job.time.retry"
+msgstr "nova tentativa às {at}"
+
+#: src/tutor/DockPanel.tsx
+msgid "tutor.memory.first-use.setting"
+msgstr "Desativar a memória"
+
+#: src/routes/tutorMemory.tsx
+msgid "tutor.memory.setting.link"
+msgstr "Ativar ou desativar a memória do tutor em Configurações"
+
+#: src/review/Player.tsx
+msgid "review.keys.tutor"
+msgstr "tutor"
+
+#: src/routes/tutorMemory.tsx
+#: src/tutor/Dock.tsx
+msgid "tutor.name.default"
+msgstr "Tutor"
+
+#: src/routes/settings.tsx
+msgid "settings.group.tutor"
+msgstr "Tutor"
+
+#: src/onboarding/SettingsSections.tsx
+msgid "settings.ai.role.tutor"
+msgstr "Tutor"
+
+#: src/routes/SettingRow.tsx
+msgid "settings.key.tutor-test-policy"
+msgstr "Tutor durante os testes de habilidade"
+
+#: src/tutor/texts.ts
+msgid "tutor.chip.kind.memory"
+msgstr "Memória do tutor"
+
+#: src/tutor/DockPanel.tsx
+#: src/tutor/Thread.tsx
+msgid "tutor.memory.link"
+msgstr "Memória do tutor"
+
+#: src/routes/tutorMemory.tsx
+msgid "tutor.memory.title"
+msgstr "Memória do tutor"
+
+#: src/routes/SettingRow.tsx
+msgid "settings.key.tutor-memory"
+msgstr "Memória do tutor"
+
+#: src/routes/SettingRow.tsx
+msgid "settings.key.tutor-proactivity"
+msgstr "Sugestões do tutor"
+
+#: src/routes/SettingRow.tsx
+msgid "settings.key.tutor-name"
+msgstr "Nome do tutor"
+
+#: src/routes/SettingRow.tsx
+msgid "settings.key.tutor-tone"
+msgstr "Tom do tutor"
+
+#: src/onboarding/vendorModels.tsx
+msgid "vendor.models.search"
+msgstr "Digite para pesquisar, por exemplo qwen ou claude"
+
+#: src/onboarding/PlanUsage.tsx
+msgid "plan-usage.under-one"
+msgstr "menos de 1%"
+
+#: src/onboarding/PlanUsage.tsx
+msgid "plan-usage.window.under-one"
+msgstr "menos de uma lição por janela de 5 horas"
+
+#: src/components/labels.tsx
+msgid "goal-type.understanding"
+msgstr "Entender bem"
+
+#: src/path/SkillPanel.tsx
+msgid "path.panel.unlocks"
+msgstr "Desbloqueia"
+
+#: src/path/SkillPanel.tsx
+#: src/routes/pathView.tsx
+msgid "path.skill.locked"
+msgstr "Desbloqueia depois de: {names}"
+
+#: src/path/LessonRow.tsx
+#: src/path/SkillPanel.tsx
+#: src/routes/pathView.tsx
+msgid "path.lesson.untitled"
+msgstr "Lição sem título"
+
+#: src/routes/pathView.tsx
+msgid "path.next.eyebrow"
+msgstr "A seguir"
+
+#: src/onboarding/SettingsSections.tsx
+msgid "update.container"
+msgstr "Atualize baixando a nova imagem do contêiner."
+
+#: src/routes/importPage.tsx
+msgid "import.update"
+msgstr "Atualizar essa trilha"
+
+#: src/onboarding/SettingsSections.tsx
+#: src/routes/settings.tsx
+msgid "update.title"
+msgstr "Atualizações"
+
+#: src/routes/importPage.tsx
+msgid "import.preview.upgraded"
+msgstr "Atualizado a partir do formato de pacote {upgraded}."
+
+#: src/routes/importPage.tsx
+msgid "import.uploading.label"
+msgstr "Progresso do envio"
+
+#. placeholder {0}: stage.name
+#: src/routes/importPage.tsx
+msgid "import.uploading"
+msgstr "Enviando {0}…"
+
+#: src/onboarding/vendor.tsx
+msgid "vendor.key.other"
+msgstr "Usar outra chave"
+
+#: src/onboarding/vendor.tsx
+msgid "settings.ai.vendors.intro"
+msgstr "Use uma chave de um fornecedor de modelos. O fornecedor cobra de você pelo que usar. As chaves ficam neste computador e nunca são mostradas de novo."
+
+#: src/routes/signIn.tsx
+msgid "auth.sign-in.use-passkey"
+msgstr "Usar uma chave de acesso"
+
+#: src/auth/SetupFlow.tsx
+msgid "auth.setup.passkey.use-password"
+msgstr "Usar uma senha em vez disso"
+
+#: src/routes/signIn.tsx
+msgid "auth.sign-in.use-recovery"
+msgstr "Usar um código de recuperação"
+
+#: src/routes/SettingRow.tsx
+msgid "settings.types.all"
+msgstr "Usar todos os tipos de pergunta"
+
+#: src/onboarding/SettingsSections.tsx
+msgid "settings.ai.local.invalid"
+msgstr "Use um endereço neste computador, como http://127.0.0.1:11434/v1."
+
+#: src/auth/PasswordForm.tsx
+msgid "auth.password.too-short"
+msgstr "Use pelo menos 10 caracteres."
+
+#: src/components/labels.tsx
+msgid "goal-type.practical"
+msgstr "Usar na prática"
+
+#: src/routes/signIn.tsx
+msgid "auth.sign-in.use-password"
+msgstr "Usar senha"
+
+#: src/routes/signIn.tsx
+msgid "auth.sign-in.passkey.intro"
+msgstr "Use a chave de acesso que você criou para o Yuo neste ou em outro dispositivo."
+
+#: src/onboarding/vendor.tsx
+#: src/onboarding/vendorModels.tsx
+msgid "settings.ai.vendor.apply"
+msgstr "Usar estes modelos"
+
+#: src/onboarding/vendor.tsx
+#: src/routes/setup.tsx
+msgid "wizard.access.apply"
+msgstr "Usar isto e continuar"
+
+#: src/onboarding/vendor.tsx
+msgid "settings.ai.vendor.use"
+msgstr "Usar os modelos deste fornecedor"
+
+#: src/onboarding/vendor.tsx
+msgid "settings.ai.vendor.use.label"
+msgstr "Usar os modelos deste fornecedor: {vendor}"
+
+#: src/onboarding/profile.tsx
+msgid "profile.tz.description"
+msgstr "Usado nas suas revisões diárias e sequências. Digite uma cidade para procurar."
+
+#: src/routes/importPage.tsx
+msgid "import.preview.version"
+msgstr "Versão"
+
+#: src/onboarding/SettingsSections.tsx
+msgid "update.available"
+msgstr "A versão {latest} está disponível."
+
+#: src/onboarding/CliAccess.tsx
+msgid "cli.ready.version"
+msgstr "Versão {version}"
+
+#: src/routes/settings.tsx
+msgid "settings.updates.words"
+msgstr "versão atualização atualizar nova novo"
+
+#: src/components/labels.tsx
+msgid "job.target.rendition"
+msgstr "vídeo"
+
+#: src/routes/SettingRow.tsx
+msgid "settings.key.video-captions"
+msgstr "Legendas dos vídeos"
+
+#: src/routes/SettingRow.tsx
+msgid "settings.key.video-theme"
+msgstr "Cores dos vídeos"
+
+#: src/routes/SettingRow.tsx
+msgid "settings.key.video-length"
+msgstr "Duração dos vídeos"
+
+#: src/onboarding/ProbeSummary.tsx
+msgid "wizard.computer.video"
+msgstr "Lições em vídeo"
+
+#: src/sharing/labels.tsx
+msgid "share.personal.rendition"
+msgstr "Vídeo ou leitura"
+
+#: src/sharing/labels.tsx
+msgid "share.content.themes"
+msgstr "Temas de vídeo"
+
+#: src/routes/SettingRow.tsx
+msgid "settings.video-format.when-possible"
+msgstr "Vídeo quando possível"
+
+#: src/sharing/labels.tsx
+msgid "share.content.videos"
+msgstr "Vídeos"
+
+#: src/routes/settings.tsx
+msgid "settings.group.videos"
+msgstr "Vídeos"
+
+#: src/sharing/ExportDialog.tsx
+msgid "share.preview.size"
+msgstr "Vídeos e mídia"
+
+#: src/sharing/ExportDialog.tsx
+msgid "share.video-note"
+msgstr "Os vídeos são compartilhados prontos. O código que o Yuo escreveu para criá-los nunca é compartilhado."
+
+#: src/sharing/labels.tsx
+msgid "share.format.video"
+msgstr "Vídeos com legendas"
+
+#: src/path/PathGraph.tsx
+msgid "path.tree.controls.label"
+msgstr "Controles de visualização"
+
+#: src/components/labels.tsx
+msgid "request.status.pending"
+msgstr "Aguardando"
+
+#: src/onboarding/CliAccess.tsx
+msgid "cli.login.device.waiting"
+msgstr "Esperando você terminar na página de login…"
+
+#: src/tutor/texts.ts
+msgid "tutor.proposal.status.pending"
+msgstr "Aguardando a sua decisão"
+
+#: src/components/labels.tsx
+msgid "job.status.queued"
+msgstr "aguardando início"
+
+#: src/routes/SettingRow.tsx
+msgid "settings.tone.warm"
+msgstr "Caloroso"
+
+#: src/lesson/BlockRenderer.tsx
+msgid "lesson.callout.warning"
+msgstr "Atenção"
+
+#: src/routes/devices.tsx
+msgid "devices.credentials.title"
+msgstr "Formas de entrar"
+
+#: src/routes/setup.tsx
+msgid "wizard.recommendation.lead.short"
+msgstr "Recomendamos <0>{recommended}</0> para este computador."
+
+#: src/routes/SettingRow.tsx
+msgid "settings.weakens"
+msgstr "Enfraquece a aprendizagem:"
+
+#: src/auth/SetupFlow.tsx
+msgid "auth.setup.title"
+msgstr "Boas-vindas ao Yuo"
+
+#: src/routes/levelCheck.tsx
+msgid "level-check.title"
+msgstr "O que você já sabe?"
+
+#: src/routes/importPage.tsx
+msgid "import.preview.contents"
+msgstr "O que tem dentro"
+
+#: src/onboarding/SettingsSections.tsx
+msgid "update.notes"
+msgstr "Novidades (abre em uma nova aba)"
+
+#: src/review/Resolved.tsx
+msgid "review.report.reason"
+msgstr "O que há de errado nela? (opcional)"
+
+#: src/routes/nextSteps.tsx
+msgid "next.title"
+msgstr "E agora?"
+
+#: src/routes/pathView.tsx
+msgid "path.next.link"
+msgstr "E agora?"
+
+#: src/path/NextOffer.tsx
+msgid "next.offer.title"
+msgstr "E agora?"
+
+#: src/tutor/Nudges.tsx
+msgid "tutor.nudge.prefill.failed-test"
+msgstr "O que devo estudar antes de refazer o teste de {skill}?"
+
+#: src/routes/tutorMemory.tsx
+msgid "tutor.memory.add.text"
+msgstr "O que ele deve lembrar?"
+
+#: src/routes/requests.tsx
+msgid "request.field.prompt"
+msgstr "O que a lição deve abordar?"
+
+#: src/sharing/ExportDialog.tsx
+msgid "share.preview.title"
+msgstr "O que o pacote vai conter"
+
+#: src/tutor/DockPanel.tsx
+msgid "tutor.chips.summary"
+msgstr "O que o tutor vê com a sua próxima mensagem ({count})"
+
+#: src/sharing/ExportDialog.tsx
+msgid "share.profile.label"
+msgstr "O que compartilhar"
+
+#: src/routes/review.tsx
+#: src/routes/review.tsx
+msgid "review.chooser.intro"
+msgstr "O que você estudou, trazido de volta pouco antes de você esquecer."
+
+#: src/routes/pathNew.tsx
+msgid "path.new.field.goal.description"
+msgstr "O que você quer ser capaz de fazer no final."
+
+#: src/routes/pathNew.tsx
+msgid "path.new.field.title.description.topic"
+msgstr "O que você quer aprender, ex.: “SQL para analistas” ou “Inglês para viajar”."
+
+#: src/routes/jobs.tsx
+msgid "jobs.intro2"
+msgstr "No que o Yuo está trabalhando agora e tudo o que já fez."
+
+#: src/routes/jobs.tsx
+msgid "jobs.col.when"
+msgstr "Quando"
+
+#: src/onboarding/CliAccess.tsx
+msgid "cli.manual.after.install"
+msgstr "Quando terminar, escolha Verificar de novo."
+
+#: src/onboarding/access.tsx
+msgid "access.local.step.check"
+msgstr "Quando o download terminar, volte aqui e escolha Verificar de novo."
+
+#: src/routes/pathView.tsx
+msgid "path.skill.test.about"
+msgstr "Quando você se sentir com confiança: um teste curto sem dicas. Passe nele e a habilidade conta como dominada."
+
+#: src/onboarding/CliAccess.tsx
+msgid "cli.manual.after.login"
+msgstr "Depois de entrar, escolha Verificar de novo."
+
+#: src/routes/nextSteps.tsx
+msgid "next.where.title"
+msgstr "Para onde você quer ir?"
+
+#: src/routes/settings.tsx
+msgid "settings.group.videos.description3"
+msgstr "Se as lições chegam como vídeos, a sua duração, cores e legendas"
+
+#: src/routes/pathNew.tsx
+msgid "path.new.field.goal-type"
+msgstr "Por que você está aprendendo isto?"
+
+#: src/routes/setup.tsx
+msgid "wizard.recommendation.why"
+msgstr "Por que esta opção?"
+
+#: src/lesson/BlockRenderer.tsx
+msgid "lesson.worked-example.label"
+msgstr "Exemplo resolvido"
+
+#: src/routes/pathNew.tsx
+msgid "path.new.estimate.loading"
+msgstr "Calculando o custo…"
+
+#: src/onboarding/vendorModels.tsx
+msgid "vendor.estimate.loading"
+msgstr "Calculando o custo…"
+
+#: src/components/JobProgress.tsx
+#: src/components/JobProgress.tsx
+msgid "job.step.next"
+msgstr "Definindo o que vem depois"
+
+#: src/review/Results.tsx
+msgid "review.results.another-look"
+msgstr "Vale a pena rever"
+
+#. placeholder {0}: [...d.weak, ...d.shaky].join(", ")
+#: src/routes/nextSteps.tsx
+msgid "next.fact.weak"
+msgstr "Vale a pena rever: {0}"
+
+#. placeholder {0}: d.preview.join(", ")
+#: src/routes/nextSteps.tsx
+msgid "next.directions.adds"
+msgstr "Adicionaria: {0}"
+
+#: src/routes/setup.tsx
+msgid "wizard.path.waitlist"
+msgstr "Prefere não rodar o Yuo no seu próprio computador? Uma versão hospedada pode vir mais tarde."
+
+#: src/video/NotesBubble.tsx
+msgid "notes-bubble.hint"
+msgstr "Escreva uma pergunta quando ela surgir e continue assistindo. O momento do vídeo fica salvo com ela; envie todas ao tutor quando terminar."
+
+#: src/onboarding/SettingsSections.tsx
+msgid "settings.ai.role.generator"
+msgstr "Escreve as lições"
+
+#: src/routes/levelCheck.tsx
+msgid "level-check.preparing"
+msgstr "Escrevendo algumas perguntas para ver onde a sua trilha deve começar. Isso leva cerca de um minuto."
+
+#: src/components/labels.tsx
+msgid "job.kind.lesson"
+msgstr "Escrevendo uma lição"
+
+#: src/components/JobProgress.tsx
+msgid "job.step.items-support"
+msgstr "Escrevendo dicas e explicações"
+
+#: src/components/JobProgress.tsx
+msgid "job.step.items"
+msgstr "Escrevendo perguntas de prática"
+
+#: src/routes/nextSteps.tsx
+msgid "next.writing.questions"
+msgstr "Escrevendo perguntas para você. Isso leva cerca de um minuto."
+
+#: src/components/labels.tsx
+msgid "job.kind.items"
+msgstr "Escrevendo perguntas de revisão"
+
+#: src/components/JobProgress.tsx
+msgid "job.step.review-bank"
+msgstr "Escrevendo perguntas de revisão"
+
+#: src/components/JobProgress.tsx
+msgid "job.step.lesson-body"
+msgstr "Escrevendo a lição"
+
+#: src/components/JobProgress.tsx
+msgid "job.step.level-check"
+msgstr "Escrevendo as perguntas de nível"
+
+#: src/components/JobProgress.tsx
+#: src/components/JobProgress.tsx
+msgid "job.step.video-script"
+msgstr "Escrevendo o roteiro e as cenas"
+
+#: src/routes/pathView.tsx
+msgid "path.growing.write"
+msgstr "Escrevendo as suas primeiras lições"
+
+#: src/review/Hub.tsx
+msgid "review.hub.writing"
+msgstr "Escrevendo as suas perguntas de revisão. Esta página se atualiza sozinha."
+
+#: src/tutor/texts.ts
+msgid "tutor.stage.writing"
+msgstr "Escrevendo…"
+
+#: src/tutor/texts.ts
+msgid "tutor.memory.source.learner"
+msgstr "Escrito por você"
+
+#: src/auth/AuthError.tsx
+msgid "auth.error.password"
+msgstr "Senha errada."
+
+#: src/review/Results.tsx
+msgid "review.results.xp"
+msgstr "XP"
+
+#: src/routes/progress.tsx
+msgid "progress.xp"
+msgstr "XP no total"
+
+#: src/onboarding/SettingsSections.tsx
+#: src/onboarding/vendor.tsx
+msgid "settings.ai.key.remove.confirm"
+msgstr "Sim, remover a chave"
+
+#: src/routes/devices.tsx
+msgid "devices.list.revoke.confirm"
+msgstr "Sim, desconectar {label}"
+
+#: src/onboarding/desktop.tsx
+msgid "desktop.stop.confirm"
+msgstr "Sim, encerrar o Yuo"
+
+#: src/tutor/Thread.tsx
+#: src/tutor/Thread.tsx
+msgid "tutor.author.you"
+msgstr "Você"
+
+#: src/routes/placement.tsx
+msgid "placement.result.mastered"
+msgstr "Você já conhece estas habilidades; elas foram marcadas como dominadas:"
+
+#: src/routes/settings.tsx
+msgid "settings.you.title"
+msgstr "Você e este Yuo"
+
+#: src/tutor/texts.ts
+msgid "tutor.policy.review-after"
+msgstr "Você respondeu este cartão: o tutor pode explicá-lo e sugerir um truque para memorizar."
+
+#: src/tutor/texts.ts
+msgid "tutor.policy.practice-after"
+msgstr "Você respondeu esta pergunta: o tutor pode explicar a solução e a sua resposta."
+
+#: src/assessment/AssessmentRunner.tsx
+msgid "assessment.saved-offline"
+msgstr "Você está off-line. A sua resposta está salva e será corrigida quando você estiver on-line de novo."
+
+#: src/tutor/Proposals.tsx
+msgid "tutor.proposal.offline"
+msgstr "Você está off-line. A sua decisão está salva e será aplicada quando você estiver on-line de novo."
+
+#: src/routes/setup.tsx
+msgid "wizard.options.later"
+msgstr "Você pode alterar isto depois em Configurações."
+
+#: src/onboarding/desktop.tsx
+msgid "desktop.stopped.body"
+msgstr "Você pode fechar esta aba. Para usar o Yuo de novo, inicie-o pelo inicializador."
+
+#: src/routes/setup.tsx
+#: src/routes/setup.tsx
+msgid "wizard.access.for"
+msgstr "Você escolheu: {name}"
+
+#: src/path/NextOffer.tsx
+msgid "next.offer.branch"
+msgstr "Você concluiu um ramo. Escolha para onde a sua trilha vai agora: aprofundar, ampliar ou colocar em prática."
+
+#: src/assessment/AssessmentRunner.tsx
+msgid "assessment.summary.score"
+msgstr "Você acertou {right} de {total}."
+
+#: src/routes/pathView.tsx
+msgid "path.next.done"
+msgstr "Você domina todas as habilidades desta trilha."
+
+#: src/routes/review.tsx
+msgid "review.chooser.none"
+msgstr "Você ainda não tem trilhas. As revisões começam quando você concluir uma lição."
+
+#: src/tutor/texts.ts
+msgid "tutor.policy.practice-before"
+msgstr "Você ainda não respondeu esta pergunta, então o tutor dá perguntas que orientam e dicas, não a resposta."
+
+#: src/tutor/DockPanel.tsx
+msgid "tutor.thread.all.empty"
+msgstr "Você ainda não conversou com o tutor."
+
+#: src/onboarding/SettingsSections.tsx
+msgid "update.current"
+msgstr "Você tem a versão {version}."
+
+#: src/routes/importPage.tsx
+msgid "import.update.found"
+msgstr "Você já importou este pacote antes. <0>Ver essa trilha</0>. Atualize-a com esta versão ou importe uma cópia separada."
+
+#: src/tutor/Nudges.tsx
+msgid "tutor.nudge.repeated-error"
+msgstr "Você errou “{objective}” {misses} vezes nesta sessão. Vamos ver isso juntos?"
+
+#: src/review/Hub.tsx
+#: src/review/Hub.tsx
+#: src/routes/review.tsx
+msgid "review.hub.limit"
+msgstr "Você atingiu o limite de revisões de hoje. Mais revisões amanhã."
+
+#: src/path/NextOffer.tsx
+msgid "next.offer.open"
+msgstr "Você começou a escolher para onde a sua trilha vai agora."
+
+#: src/tutor/Thread.tsx
+msgid "tutor.cancelled"
+msgstr "Você parou esta resposta."
+
+#: src/review/Resolved.tsx
+msgid "review.feedback.sure"
+msgstr "Você tinha certeza: vale a pena olhar com mais atenção."
+
+#: src/path/SkillPanel.tsx
+msgid "path.panel.objectives"
+msgstr "Você vai aprender a"
+
+#: src/review/Player.tsx
+msgid "review.option.yours"
+msgstr "Sua resposta"
+
+#: src/items/ItemInput.tsx
+msgid "item.mark.wrong"
+msgstr "Sua resposta"
+
+#: src/items/ItemInput.tsx
+msgid "item.answer.label"
+msgstr "Sua resposta"
+
+#: src/items/ItemInput.tsx
+msgid "item.short-answer.label"
+msgstr "Sua resposta (de uma a três frases)"
+
+#: src/items/GradeFeedback.tsx
+msgid "item.grade.pending"
+msgstr "A sua resposta está sendo corrigida. O resultado aparece aqui quando estiver pronto."
+
+#: src/assessment/AssessmentRunner.tsx
+msgid "assessment.saved"
+msgstr "A sua resposta está salva."
+
+#: src/routes/pathView.tsx
+msgid "path.growing.checked"
+msgstr "As suas respostas foram recebidas"
+
+#: src/assessment/AssessmentRunner.tsx
+msgid "assessment.test.waiting"
+msgstr "As suas respostas estão salvas. O resultado aparece aqui assim que elas chegarem ao servidor."
+
+#: src/review/Results.tsx
+msgid "review.results.offline"
+msgstr "As suas respostas estão salvas. Os resultados aparecem aqui quando você estiver on-line de novo."
+
+#: src/routes/setup.tsx
+msgid "wizard.step.computer"
+msgstr "Seu computador"
+
+#: src/routes/devices.tsx
+msgid "devices.codes.confirm-text"
+msgstr "Os seus códigos atuais vão parar de funcionar. Gerar dez novos?"
+
+#: src/routes/progress.tsx
+msgid "progress.erase.title"
+msgstr "Os seus dados neste percurso"
+
+#: src/routes/setup.tsx
+msgid "wizard.step.path"
+msgstr "Sua primeira trilha"
+
+#: src/routes/pathNew.tsx
+msgid "path.new.field.goal"
+msgstr "Sua meta"
+
+#: src/onboarding/texts.tsx
+msgid "wizard.reason.gpu-memory-short"
+msgstr "A sua placa de vídeo tem {gb} GB de memória. Rodar o modelo neste computador exige {min} GB."
+
+#: src/onboarding/texts.tsx
+msgid "wizard.reason.gpu-memory"
+msgstr "A sua placa de vídeo tem {gb} GB de memória. O modelo precisa de {min} GB, então ele pode rodar neste computador."
+
+#: src/onboarding/profile.tsx
+msgid "profile.interests"
+msgstr "Seus interesses (opcional)"
+
+#: src/tutor/Nudges.tsx
+msgid "tutor.nudge.fast-guessing"
+msgstr "As suas últimas respostas vieram muito rápido e algumas estavam erradas. Vamos ver a próxima com calma, juntos?"
+
+#: src/onboarding/texts.tsx
+msgid "wizard.reason.unified-memory"
+msgstr "O seu Mac tem {gb} GB de memória compartilhada com a parte gráfica. O modelo precisa de {min} GB, então ele pode rodar neste computador."
+
+#: src/onboarding/texts.tsx
+msgid "wizard.reason.unified-memory-short"
+msgstr "O seu Mac tem {gb} GB de memória. Rodar o modelo neste computador exige {min} GB."
+
+#: src/onboarding/profile.tsx
+msgid "profile.name"
+msgstr "Seu nome"
+
+#: src/lesson/Notes.tsx
+msgid "notes.list.label"
+msgstr "Suas notas"
+
+#: src/onboarding/texts.tsx
+msgid "wizard.option.vendor"
+msgstr "A sua própria chave de API de um fornecedor de modelos"
+
+#: src/onboarding/SettingsSections.tsx
+msgid "settings.ai.vendors.title"
+msgstr "As suas próprias chaves de API"
+
+#: src/routes/settings.tsx
+msgid "settings.intro"
+msgstr "As suas próprias configurações valem para todas as suas trilhas, a menos que uma trilha defina as dela."
+
+#: src/routes/pathView.tsx
+msgid "path.growing.title"
+msgstr "A sua trilha está crescendo"
+
+#: src/routes/index.tsx
+msgid "home.title"
+msgstr "Suas trilhas"
+
+#: src/onboarding/SettingsSections.tsx
+#: src/routes/settings.tsx
+msgid "settings.profile.title"
+msgstr "Seu perfil"
+
+#: src/auth/RecoveryCodes.tsx
+msgid "auth.codes.title"
+msgstr "Seus códigos de recuperação"
+
+#: src/routes/requests.tsx
+msgid "request.list.title"
+msgstr "Seus pedidos"
+
+#: src/routes/skillTest.tsx
+msgid "skill-test.score.bar"
+msgstr "Sua pontuação"
+
+#: src/routes/skillTest.tsx
+msgid "skill-test.score"
+msgstr "Sua pontuação: {score}% (nota para passar {mark}%)"
+
+#: src/routes/SettingRow.tsx
+msgid "settings.source.learner"
+msgstr "sua configuração"
+
+#: src/onboarding/CliAccess.tsx
+msgid "cli.install.why"
+msgstr "A sua assinatura funciona por meio do {name}, um programa do próprio fabricante que roda na máquina onde o Yuo roda."
+
+#: src/onboarding/SettingsSections.tsx
+msgid "update.description"
+msgstr "A sua versão do Yuo e as mais novas"
+
+#: src/routes/settings.tsx
+msgid "settings.video-history.done"
+msgstr "O seu histórico de vídeos vistos foi eliminado."
+
+#: src/routes/root.tsx
+msgid "app.name"
+msgstr "Yuo"
+
+#: src/routes/nextSteps.tsx
+msgid "next.intro"
+msgstr "O Yuo faz algumas perguntas sobre para onde você quer ir e um quiz curto sobre o que vem a seguir. Depois sugere duas ou três direções. Nada muda na sua trilha até você escolher uma."
+
+#: src/onboarding/ProbeSummary.tsx
+msgid "wizard.computer.video.ready"
+msgstr "O Yuo pode criar vídeos aqui"
+
+#. placeholder {0}: stage.name
+#: src/routes/importPage.tsx
+msgid "import.refused.title"
+msgstr "O Yuo não pode importar {0}."
+
+#: src/onboarding/AiReady.tsx
+msgid "ai-ready.what.not-installed"
+msgstr "O Yuo não pode escrever agora: {name} não está instalado."
+
+#: src/onboarding/AiReady.tsx
+msgid "ai-ready.what.signed-out"
+msgstr "O Yuo não pode escrever agora: {name} não está conectado."
+
+#: src/onboarding/CliAccess.tsx
+msgid "cli.unknown.note"
+msgstr "O Yuo não conseguiu confirmar a conexão; ele vai tentar mesmo assim. Se as lições falharem, entre no {name} e verifique de novo."
+
+#: src/onboarding/vendor.tsx
+msgid "vendor.key.unreachable"
+msgstr "O Yuo não conseguiu acessar {vendor} para verificar a chave. Verifique a sua conexão com a internet e tente de novo."
+
+#: src/onboarding/vendorModels.tsx
+msgid "vendor.models.unreachable"
+msgstr "O Yuo não conseguiu acessar {vendor} para listar os modelos. Verifique a sua conexão com a internet e tente de novo."
+
+#: src/onboarding/vendorModels.tsx
+msgid "openrouter.models.unreachable"
+msgstr "O Yuo não conseguiu acessar o OpenRouter para listar os modelos. Verifique a sua conexão com a internet e tente de novo."
+
+#: src/routes/pathNew.tsx
+msgid "path.new.not-ready"
+msgstr "O Yuo não conseguiu iniciar a sua trilha: o programa da sua assinatura não está pronto. Resolva aqui e escolha Criar trilha de novo."
+
+#: src/onboarding/vendorModels.tsx
+msgid "vendor.estimate.unknown"
+msgstr "O Yuo ainda não conhece os preços destes modelos, então não consegue estimar uma trilha típica. {vendor} cobra de você pelo que usar."
+
+#: src/onboarding/SettingsSections.tsx
+msgid "update.unknown"
+msgstr "O Yuo ainda não procurou uma versão mais nova."
+
+#: src/onboarding/desktop.tsx
+msgid "desktop.stopped.title"
+msgstr "O Yuo foi encerrado"
+
+#: src/routes/index.tsx
+msgid "home.finish-setup"
+msgstr "O Yuo ainda não está totalmente configurado."
+
+#: src/components/ErrorNotice.tsx
+msgid "error.restarting"
+msgstr "O Yuo está reiniciando ou não pode ser alcançado agora. Tente de novo em instantes."
+
+#: src/onboarding/SettingsSections.tsx
+msgid "update.restarting"
+msgstr "O Yuo está reiniciando… Esta página recarrega sozinha quando a nova versão estiver pronta."
+
+#: src/routes/pathView.tsx
+msgid "path.working"
+msgstr "O Yuo está trabalhando nesta trilha. Esta página se atualiza sozinha."
+
+#: src/onboarding/desktop.tsx
+msgid "desktop.stop.intro"
+msgstr "O Yuo continua rodando em segundo plano enquanto esta aba está fechada, para poder preparar lições. Encerre-o quando não precisar dele."
+
+#: src/routes/setup.tsx
+msgid "wizard.computer.intro.short"
+msgstr "O Yuo analisa este computador para sugerir como escrever as suas lições. Nada sai deste computador."
+
+#: src/sharing/ExportDialog.tsx
+msgid "share.intro"
+msgstr "O Yuo cria um arquivo de pacote (.yuo.zip) que outro Yuo pode importar. Nada é enviado para lugar nenhum: você decide para onde o arquivo vai."
+
+#: src/onboarding/SettingsSections.tsx
+msgid "settings.desktop.title"
+msgstr "O Yuo neste computador"
+
+#: src/onboarding/desktop.tsx
+msgid "desktop.signed-out.too-soon"
+msgstr "O Yuo abriu uma aba há pouco. Procure por ela ou tente de novo em alguns segundos."
+
+#: src/onboarding/desktop.tsx
+msgid "desktop.signed-out.opening"
+msgstr "O Yuo se abre com o login feito em uma nova aba deste navegador. Esta aba continua sozinha quando isso terminar."
+
+#: src/onboarding/profile.tsx
+msgid "profile.minutes.description"
+msgstr "O Yuo planeja lições e revisões para caber neste tempo, de 5 a 120 minutos."
+
+#: src/onboarding/PlanMeter.tsx
+msgid "plan-meter.none.claude"
+msgstr "O Yuo mostra quanto do seu plano foi usado depois da primeira lição com o Claude Code."
+
+#: src/onboarding/PlanMeter.tsx
+msgid "plan-meter.none.codex"
+msgstr "O Yuo mostra quanto do seu plano foi usado depois da primeira lição com o Codex."
+
+#: src/onboarding/texts.tsx
+msgid "wizard.preset.claude.summary"
+msgstr "O Yuo usa o app Claude Code neste computador, com a conta que está conectada nele."
+
+#: src/onboarding/texts.tsx
+msgid "wizard.preset.codex.summary"
+msgstr "O Yuo usa o app Codex neste computador, com a conta que está conectada nele."
+
+#: src/onboarding/texts.tsx
+msgid "wizard.consent.claude"
+msgstr "O Yuo vai executar o app Claude Code instalado neste computador, conectado com a sua própria conta, para escrever lições e responder como seu tutor. O Yuo nunca lê nem guarda o seu login do Claude. Esse uso conta para os limites da sua assinatura, e a Anthropic pode cobrar o uso por ferramentas de terceiros como uso extra; o Yuo para e avisa você quando vê uma resposta de uso extra. Você pode mudar para outro modelo a qualquer momento em Configurações."
+
+#: src/onboarding/texts.tsx
+msgid "wizard.consent.codex"
+msgstr "O Yuo vai executar o app Codex instalado neste computador, conectado com a sua própria conta, para escrever lições e responder como seu tutor. O Yuo nunca lê nem guarda o seu login do ChatGPT. Esse uso conta para os limites do seu plano. Você pode mudar para outro modelo a qualquer momento em Configurações."
+
+#: src/onboarding/profile.tsx
+msgid "profile.content-lang.description"
+msgstr "O Yuo escreve suas lições, perguntas de prática e vídeos neste idioma. Uma trilha nova usa este idioma; uma trilha que você já tem mantém o dela."
+
+#: src/components/ErrorNotice.tsx
+msgid "error.network"
+msgstr "Não foi possível acessar o servidor do Yuo. Verifique se ele está em execução e tente de novo."
+
+#: src/path/PathGraph.tsx
+msgid "path.tree.controls.zoom-in"
+msgstr "Aumentar zoom"
+
+#: src/path/PathGraph.tsx
+msgid "path.tree.controls.zoom-out"
+msgstr "Diminuir zoom"
+
+#: src/routes/root.tsx
+msgid "footer.made-by"
+msgstr "Feito por {name}"

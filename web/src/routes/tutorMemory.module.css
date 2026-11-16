@@ -1,0 +1,43 @@
+@layer components {
+  .list {
+    display: grid;
+    gap: var(--yuo-space-2);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .entry {
+    display: grid;
+    gap: var(--yuo-space-2);
+
+    & p {
+      margin: 0;
+    }
+  }
+
+  .head {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--yuo-space-2);
+    align-items: baseline;
+  }
+
+  .entry[data-kind] {
+    border-inline-start: 4px solid var(--yuo-color-leaf);
+  }
+
+  .kind {
+    color: var(--yuo-color-fg);
+    font-weight: var(--yuo-weight-bold);
+  }
+
+  .text {
+    overflow-wrap: anywhere;
+  }
+
+  .sectionTitle {
+    margin: 0;
+    font-size: var(--yuo-text-xl);
+  }
+}

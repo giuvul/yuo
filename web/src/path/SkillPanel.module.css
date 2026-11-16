@@ -1,0 +1,226 @@
+/* The selected skill's panel (SkillPanel.tsx): a column beside the graph, or a bottom sheet. Semantic tokens only. */
+@layer components {
+  .panel {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    align-content: start;
+    gap: var(--yuo-space-2-5);
+    padding: var(--yuo-space-3);
+    border: 1px solid var(--yuo-color-border);
+    border-radius: var(--yuo-radius-3);
+    background: var(--yuo-color-surface);
+
+    & p {
+      margin: 0;
+    }
+
+    /* beside the graph: as tall as the canvas at most (the graph sets --panel-max), scrolling inside */
+    &[data-mode="side"] {
+      max-block-size: var(--panel-max, none);
+      overflow-y: auto;
+    }
+
+    /* the sheet sits under the tutor's button and dock, and leaves room for the button */
+    &[data-mode="sheet"] {
+      position: fixed;
+      z-index: 15;
+      inset-inline: 0;
+      inset-block-end: 0;
+      max-inline-size: 40rem;
+      max-block-size: min(62dvh, 34rem);
+      margin-inline: auto;
+      padding-block: var(--yuo-space-3-5) calc(4.5rem + env(safe-area-inset-bottom, 0px));
+      overflow-y: auto;
+      border-block-end: 0;
+      border-end-start-radius: 0;
+      border-end-end-radius: 0;
+      background: var(--yuo-color-bg);
+      box-shadow: var(--yuo-shadow-2);
+      animation: yuo-tree-sheet var(--yuo-duration-base) var(--yuo-ease-out);
+
+      /* the grab line */
+      &::before {
+        content: "";
+        position: absolute;
+        inset-block-start: var(--yuo-space-2);
+        inset-inline-start: 50%;
+        inline-size: 2.5rem;
+        block-size: 4px;
+        border-radius: var(--yuo-radius-full);
+        background: var(--yuo-color-border-strong);
+        transform: translateX(-50%);
+      }
+    }
+  }
+
+  @keyframes yuo-tree-sheet {
+    from {
+      opacity: 0;
+      transform: translateY(1.5rem);
+    }
+  }
+
+  .panelHeader {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--yuo-space-2);
+  }
+
+  .panelTitle {
+    margin: 0;
+    font-size: var(--yuo-text-xl);
+    overflow-wrap: anywhere;
+
+    &:focus-visible {
+      outline-offset: 4px;
+      border-radius: var(--yuo-radius-1);
+    }
+  }
+
+  .panelClose {
+    display: inline-grid;
+    flex: none;
+    place-items: center;
+    inline-size: 2.5rem;
+    block-size: 2.5rem;
+    margin-block-start: calc(-1 * var(--yuo-space-2));
+    margin-inline-end: calc(-1 * var(--yuo-space-2));
+    border: 0;
+    border-radius: var(--yuo-radius-full);
+    background: transparent;
+    color: var(--yuo-color-fg);
+    font-size: var(--yuo-text-lg);
+    cursor: pointer;
+
+    &[data-hovered] {
+      background: var(--yuo-color-surface-muted);
+    }
+
+    &[data-focus-visible] {
+      outline: 2px solid var(--yuo-color-focus);
+      outline-offset: 2px;
+    }
+
+    /* beside the graph the column is always there: Esc or another node is enough */
+    .panel[data-mode="side"] & {
+      display: none;
+    }
+  }
+
+  .panelStates {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--yuo-space-2);
+  }
+
+  .panelState {
+    padding-inline: var(--yuo-space-2);
+    border-radius: var(--yuo-radius-full);
+    background: var(--yuo-color-surface-muted);
+    color: var(--yuo-color-muted);
+    font-size: var(--yuo-text-xs);
+    font-weight: var(--yuo-weight-semibold);
+
+    &[data-state="mastered"] {
+      background: var(--yuo-color-success-bg);
+      color: var(--yuo-color-success);
+    }
+
+    &[data-state="needs_review"] {
+      background: var(--yuo-color-warning-bg);
+      color: var(--yuo-color-warning);
+    }
+  }
+
+  .panelNote {
+    color: var(--yuo-color-muted);
+    font-size: var(--yuo-text-sm);
+  }
+
+  .panelActions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--yuo-space-2);
+  }
+
+  .panelSection {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--yuo-space-1);
+  }
+
+  .panelHeading {
+    margin: 0;
+    color: var(--yuo-color-muted);
+    font-family: var(--yuo-font-sans);
+    font-size: var(--yuo-text-xs);
+    font-weight: var(--yuo-weight-bold);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .panelLessons {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    & > li:first-child {
+      border-block-start: 0;
+    }
+  }
+
+  .panelObjectives {
+    display: grid;
+    gap: var(--yuo-space-1);
+    margin: 0;
+    padding-inline-start: var(--yuo-space-4);
+    font-size: var(--yuo-text-sm);
+    line-height: var(--yuo-leading-normal);
+  }
+
+  .panelLinks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--yuo-space-2);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  /* another skill, as a button that selects its node */
+  .linked {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--yuo-space-2);
+    min-block-size: 2.25rem;
+    padding-block: var(--yuo-space-1);
+    padding-inline: var(--yuo-space-2) var(--yuo-space-2-5);
+    border: 1px solid var(--yuo-color-border-strong);
+    border-radius: var(--yuo-radius-full);
+    background: var(--yuo-color-surface);
+    color: var(--yuo-color-fg);
+    font: inherit;
+    font-size: var(--yuo-text-sm);
+    font-weight: var(--yuo-weight-semibold);
+    text-align: start;
+    cursor: pointer;
+
+    &[data-hovered] {
+      border-color: var(--yuo-color-leaf);
+    }
+
+    &[data-focus-visible] {
+      outline: 2px solid var(--yuo-color-focus);
+      outline-offset: 2px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .panel {
+      animation: none;
+    }
+  }
+}

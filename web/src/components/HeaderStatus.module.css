@@ -1,0 +1,71 @@
+@layer components {
+  .link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--yuo-space-1);
+    color: var(--yuo-color-muted);
+    text-decoration: none;
+
+    &:hover,
+    &[data-status="active"] {
+      color: var(--yuo-color-fg);
+    }
+  }
+
+  /* a quiet pill: "Jobs", or a growing sprout and "Generating…" */
+  .status {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--yuo-space-1);
+    min-block-size: 2rem;
+    padding-inline: var(--yuo-space-2-5);
+    border-radius: var(--yuo-radius-full);
+    color: var(--yuo-color-muted);
+    font-weight: var(--yuo-weight-medium);
+    text-decoration: none;
+
+    &:hover,
+    &[data-status="active"] {
+      background: var(--yuo-color-surface-muted);
+      color: var(--yuo-color-fg);
+    }
+
+    &[data-active] {
+      background: var(--yuo-color-surface-muted);
+      color: var(--yuo-color-fg);
+    }
+  }
+
+  /* a phone: the sprout (or the mark) is enough; the words stay for screen readers */
+  @media (max-width: 40rem) {
+    .status[data-active] .statusText,
+    .status[data-failed] .statusText {
+      position: absolute;
+      inline-size: 1px;
+      block-size: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+
+    .status[data-active],
+    .status[data-failed] {
+      padding-inline: var(--yuo-space-2);
+    }
+  }
+
+  .badge {
+    padding-inline: var(--yuo-space-2);
+    border-radius: var(--yuo-radius-full);
+    background: var(--yuo-color-highlight);
+    color: var(--yuo-color-highlight-fg);
+    font-size: var(--yuo-text-xs);
+    font-weight: var(--yuo-weight-bold);
+    line-height: var(--yuo-leading-normal);
+  }
+
+  .badgeError {
+    background: var(--yuo-color-danger-bg);
+    color: var(--yuo-color-danger);
+  }
+}

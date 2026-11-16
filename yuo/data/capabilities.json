@@ -1,0 +1,218 @@
+{
+  "_doc": "Per (adapter, model) capability: structured-output mode and per-role settings, from benchmark runs (mode, reviewer effort and tokens, output caps). `verified: false` = not measured on a real call yet.",
+  "models": [
+    {
+      "adapter": "claude-cli",
+      "model": "sonnet",
+      "mode": "native",
+      "verified": true,
+      "source": "benchmark runs",
+      "roles": {
+        "generator": {},
+        "reviewer": {},
+        "tutor": {},
+        "grader": {},
+        "utility": {}
+      }
+    },
+    {
+      "adapter": "claude-cli",
+      "model": "opus",
+      "mode": "native",
+      "verified": true,
+      "source": "video judge benchmark",
+      "roles": {
+        "reviewer": {},
+        "generator": {}
+      }
+    },
+    {
+      "adapter": "claude-cli",
+      "model": "haiku",
+      "mode": "native",
+      "verified": false,
+      "source": "-",
+      "roles": {
+        "utility": {}
+      }
+    },
+    {
+      "adapter": "openrouter",
+      "model": "deepseek/deepseek-v4-pro",
+      "mode": "prompt",
+      "verified": true,
+      "source": "prompt mode 100%; misses natural errors: not a reviewer; Alibaba avoided (no heading in lesson bodies; most repairs, heaviest reasoning in live runs)",
+      "roles": {
+        "generator": {
+          "max_tokens": 14000
+        },
+        "grader": {
+          "max_tokens": 6000
+        },
+        "utility": {
+          "max_tokens": 6000
+        }
+      },
+      "avoid": [
+        "Alibaba"
+      ]
+    },
+    {
+      "adapter": "openrouter",
+      "model": "qwen/qwen3.8-27b",
+      "mode": "native",
+      "verified": true,
+      "source": "native mode 94%; low effort: best open reviewer; bodies overrun 12k",
+      "roles": {
+        "generator": {
+          "effort": "low",
+          "max_tokens": 20000
+        },
+        "reviewer": {
+          "effort": "low",
+          "max_tokens": 12000
+        },
+        "tutor": {
+          "effort": "low",
+          "max_tokens": 6000
+        },
+        "grader": {
+          "effort": "low",
+          "max_tokens": 6000
+        },
+        "utility": {
+          "effort": "low",
+          "max_tokens": 6000
+        }
+      }
+    },
+    {
+      "adapter": "codex-cli",
+      "model": "gpt-6.1-sol",
+      "mode": "native",
+      "verified": true,
+      "source": "Tested 2026-11-15: lessons and the skill check generated on Windows with a real ChatGPT account (on gpt-5.5); the preset moved to gpt-6.1-sol the same day at his request, as ChatGPT sign-in retired gpt-5.5 on 2026-10-14",
+      "roles": {
+        "generator": {},
+        "reviewer": {},
+        "tutor": {},
+        "grader": {},
+        "utility": {}
+      }
+    },
+    {
+      "adapter": "local",
+      "model": "qwen3.8:27b",
+      "mode": "native",
+      "verified": false,
+      "source": "Ollama q4 build (18 GB) of the model measured through OpenRouter; the quantized local build is not measured",
+      "roles": {
+        "generator": {
+          "max_tokens": 20000
+        },
+        "reviewer": {
+          "max_tokens": 12000
+        },
+        "tutor": {
+          "max_tokens": 6000
+        },
+        "grader": {
+          "max_tokens": 6000
+        },
+        "utility": {
+          "max_tokens": 6000
+        }
+      }
+    }
+  ],
+  "presets": {
+    "claude": {
+      "generator": [
+        "claude-cli",
+        "sonnet"
+      ],
+      "reviewer": [
+        "claude-cli",
+        "opus"
+      ],
+      "tutor": [
+        "claude-cli",
+        "sonnet"
+      ],
+      "grader": [
+        "claude-cli",
+        "sonnet"
+      ],
+      "utility": [
+        "claude-cli",
+        "haiku"
+      ]
+    },
+    "codex": {
+      "generator": [
+        "codex-cli",
+        "gpt-6.1-sol"
+      ],
+      "reviewer": [
+        "codex-cli",
+        "gpt-6.1-sol"
+      ],
+      "tutor": [
+        "codex-cli",
+        "gpt-6.1-sol"
+      ],
+      "grader": [
+        "codex-cli",
+        "gpt-6.1-sol"
+      ],
+      "utility": [
+        "codex-cli",
+        "gpt-6.1-sol"
+      ]
+    },
+    "open": {
+      "generator": [
+        "openrouter",
+        "qwen/qwen3.8-27b"
+      ],
+      "reviewer": [
+        "openrouter",
+        "qwen/qwen3.8-27b"
+      ],
+      "tutor": [
+        "openrouter",
+        "qwen/qwen3.8-27b"
+      ],
+      "grader": [
+        "openrouter",
+        "qwen/qwen3.8-27b"
+      ],
+      "utility": [
+        "openrouter",
+        "qwen/qwen3.8-27b"
+      ]
+    },
+    "local": {
+      "generator": [
+        "local",
+        "qwen3.8:27b"
+      ],
+      "reviewer": [
+        "local",
+        "qwen3.8:27b"
+      ],
+      "tutor": [
+        "local",
+        "qwen3.8:27b"
+      ],
+      "grader": [
+        "local",
+        "qwen3.8:27b"
+      ],
+      "utility": [
+        "local",
+        "qwen3.8:27b"
+      ]
+    }
+  }
+}

@@ -1,0 +1,19 @@
+# the image needs only pyproject/uv.lock/README/LICENSE, yuo/, web/ and renderer/
+**
+!pyproject.toml
+!uv.lock
+!README.md
+!LICENSE
+!NOTICE
+!THIRD_PARTY_LICENSES
+!yuo/
+!web/
+!renderer/
+**/node_modules
+**/__pycache__
+web/dist
+web/test-results
+web/e2e
+web/playwright-report
+renderer/out
+.git

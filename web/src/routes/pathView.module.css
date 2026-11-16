@@ -1,0 +1,574 @@
+@layer components {
+  /* --- header ------------------------------------------------------------------------------------- */
+  .titleRow {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--yuo-space-3);
+
+    & p {
+      margin: 0;
+    }
+  }
+
+  .titleBlock {
+    display: grid;
+    gap: var(--yuo-space-1);
+    min-inline-size: 0;
+  }
+
+  /* the path's own actions, on the title's line (Share or export) */
+  .titleActions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--yuo-space-2);
+    margin-inline-start: auto;
+  }
+
+  .meta {
+    color: var(--yuo-color-muted);
+    font-size: var(--yuo-text-sm);
+  }
+
+  .goal {
+    max-inline-size: var(--yuo-measure);
+    margin-block-start: var(--yuo-space-1);
+  }
+
+  .sectionTitle {
+    margin: 0;
+    font-size: var(--yuo-text-xl);
+  }
+
+  /* --- work in progress ------------------------------------------------------------------------------ */
+  .working {
+    display: grid;
+    gap: var(--yuo-space-1);
+
+    & p {
+      margin: 0;
+    }
+  }
+
+  .jobList {
+    margin: 0;
+    padding-inline-start: calc(1.1rem + var(--yuo-space-2-5));
+    color: var(--yuo-color-muted);
+    font-size: var(--yuo-text-sm);
+    list-style: none;
+
+    & li + li {
+      margin-block-start: var(--yuo-space-1);
+    }
+  }
+
+  .jobName {
+    color: var(--yuo-color-fg);
+
+    &::after {
+      content: " ·";
+      color: var(--yuo-color-muted);
+    }
+  }
+
+  .jobTime::before {
+    content: " · ";
+  }
+
+  .growing {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: var(--yuo-space-3);
+    padding: var(--yuo-space-4);
+
+    @media (max-width: 30rem) {
+      grid-template-columns: minmax(0, 1fr);
+      padding: var(--yuo-space-3);
+    }
+
+    & p {
+      margin: 0;
+    }
+  }
+
+  .growingMark {
+    display: inline-grid;
+    place-items: center;
+    inline-size: 4rem;
+    block-size: 4rem;
+    border-radius: var(--yuo-radius-full);
+    background: var(--yuo-color-surface-muted);
+    color: var(--yuo-color-leaf);
+
+    & svg {
+      transform-origin: 20% 80%;
+      animation: yuo-sway calc(var(--yuo-duration-sway) / 2) var(--yuo-ease-gentle) infinite alternate;
+    }
+  }
+
+  @keyframes yuo-sway {
+    from {
+      transform: rotate(-6deg);
+    }
+    to {
+      transform: rotate(6deg);
+    }
+  }
+
+  /* --- up next ----------------------------------------------------------------------------------------- */
+  .overview {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--yuo-space-3);
+    padding: var(--yuo-space-3) var(--yuo-space-3-5);
+    border-inline-start: 4px solid var(--yuo-color-highlight);
+
+    & p {
+      margin: 0;
+    }
+  }
+
+  .overviewMain {
+    display: grid;
+    flex: 1 1 18rem;
+    gap: var(--yuo-space-1);
+    min-inline-size: 0;
+  }
+
+  .nextSkill {
+    color: var(--yuo-color-muted);
+    font-size: var(--yuo-text-sm);
+    font-weight: var(--yuo-weight-semibold);
+  }
+
+  .nextTitle {
+    font-family: var(--yuo-font-display);
+    font-size: var(--yuo-text-xl);
+    font-weight: var(--yuo-weight-heavy);
+    line-height: var(--yuo-leading-snug);
+  }
+
+  .overviewProgress {
+    display: grid;
+    grid-template-columns: minmax(0, 16rem) auto;
+    align-items: center;
+    gap: var(--yuo-space-2-5);
+    margin-block-start: var(--yuo-space-2);
+  }
+
+  .overviewLinks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--yuo-space-1) var(--yuo-space-3);
+    margin-block-start: var(--yuo-space-1);
+  }
+
+  .overviewLink {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--yuo-space-1);
+    color: var(--yuo-color-link);
+    font-size: var(--yuo-text-sm);
+    font-weight: var(--yuo-weight-medium);
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+      text-underline-offset: 0.2em;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--yuo-color-focus);
+      outline-offset: 2px;
+      border-radius: var(--yuo-radius-1);
+    }
+  }
+
+  .overviewCount {
+    color: var(--yuo-color-muted);
+    font-size: var(--yuo-text-xs);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* --- "Tree / List" --------------------------------------------------------------------------------- */
+  .viewRow {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--yuo-space-2);
+  }
+
+  .viewSwitch {
+    display: inline-flex;
+    padding: 2px;
+    border: 1px solid var(--yuo-color-border-strong);
+    border-radius: var(--yuo-radius-full);
+    background: var(--yuo-color-surface);
+  }
+
+  .viewOption {
+    min-block-size: 2.25rem;
+    padding-inline: var(--yuo-space-3);
+    border: 0;
+    border-radius: var(--yuo-radius-full);
+    background: transparent;
+    color: var(--yuo-color-muted);
+    font: inherit;
+    font-size: var(--yuo-text-sm);
+    font-weight: var(--yuo-weight-semibold);
+    cursor: pointer;
+    transition: background-color var(--yuo-duration-fast) var(--yuo-ease-standard);
+
+    &[data-hovered] {
+      color: var(--yuo-color-fg);
+    }
+
+    &[data-selected] {
+      background: var(--yuo-color-success-bg);
+      color: var(--yuo-color-fg);
+    }
+
+    &[data-focus-visible] {
+      outline: 2px solid var(--yuo-color-focus);
+      outline-offset: 2px;
+    }
+  }
+
+  /* --- the list: one vine per branch ----------------------------------------------------------------- */
+  .tree {
+    display: grid;
+    gap: var(--yuo-space-4);
+  }
+
+  .branch {
+    display: grid;
+    gap: var(--yuo-space-3);
+  }
+
+  .branchTitle {
+    margin: 0;
+    font-size: var(--yuo-text-xl);
+  }
+
+  .level {
+    margin-inline-start: var(--yuo-space-2);
+    padding-inline: var(--yuo-space-2);
+    border-radius: var(--yuo-radius-full);
+    background: var(--yuo-color-surface-muted);
+    color: var(--yuo-color-fg);
+    font-family: var(--yuo-font-sans);
+    font-size: var(--yuo-text-xs);
+    font-weight: var(--yuo-weight-semibold);
+    vertical-align: middle;
+  }
+
+  .vine {
+    /* the bud's size and how far down the skill card it sits (level with the skill's name) */
+    --bud: 2.25rem;
+    --bud-top: var(--yuo-space-3);
+    display: grid;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .node {
+    display: grid;
+    grid-template-columns: 4rem minmax(0, 1fr);
+    column-gap: var(--yuo-space-2);
+    padding-block-end: var(--yuo-space-3);
+
+    &:last-child {
+      padding-block-end: 0;
+    }
+  }
+
+  .stemCell {
+    position: relative;
+  }
+
+  /* from this bud's centre to the next one's, across this row */
+  .stem {
+    position: absolute;
+    inset-block-start: calc(var(--bud-top) + var(--bud) / 2);
+    inset-inline-start: 0;
+    inline-size: 100%;
+    /* the row plus its bottom padding: the next bud sits that far below this one */
+    block-size: calc(100% + var(--yuo-space-3));
+    overflow: visible;
+    fill: none;
+    stroke: var(--yuo-color-border-strong);
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-dasharray: 1 7;
+
+    &[data-grown] {
+      stroke: var(--yuo-color-leaf);
+      stroke-dasharray: none;
+    }
+  }
+
+  .leaf {
+    position: absolute;
+    inset-block-start: calc(50% + var(--yuo-space-3) / 2 + var(--bud-top) + var(--bud) / 2 - 0.9rem);
+    inline-size: 1.6rem;
+    z-index: 1;
+    block-size: 1.6rem;
+    /* opaque, so the dotted stem does not show through: the leaf sits on top of the line */
+    fill: color-mix(in oklch, var(--yuo-color-leaf) 35%, var(--yuo-color-bg));
+    stroke: none;
+
+    &[data-side="right"] {
+      inset-inline-start: 74%;
+      transform: rotate(-24deg);
+      transform-origin: 0 55%;
+    }
+
+    /* mirrored in place, so its base stays on the stem where it bulges left */
+    &[data-side="left"] {
+      inset-inline-end: 74%;
+      transform: scaleX(-1) rotate(-24deg);
+      transform-origin: 50% 55%;
+    }
+
+    &[data-grown] {
+      fill: var(--yuo-color-leaf);
+    }
+  }
+
+  .leafVein {
+    fill: none;
+    stroke: var(--yuo-color-surface);
+    stroke-width: 1.2;
+    stroke-linecap: round;
+    opacity: 0.6;
+  }
+
+  .bud {
+    position: absolute;
+    z-index: 1;
+    inset-block-start: var(--bud-top);
+    inset-inline-start: 50%;
+    display: grid;
+    place-items: center;
+    inline-size: var(--bud);
+    block-size: var(--bud);
+    border: 2px solid var(--yuo-color-leaf);
+    border-radius: var(--yuo-radius-full);
+    background: var(--yuo-color-surface);
+    color: var(--yuo-color-muted);
+    transform: translateX(-50%);
+
+    .node[data-node="done"] & {
+      border-color: var(--yuo-color-accent);
+      background: var(--yuo-color-accent);
+      color: var(--yuo-color-accent-fg);
+    }
+
+    .node[data-node="current"] & {
+      border-color: var(--yuo-color-highlight);
+      background: var(--yuo-color-highlight);
+
+      /* the bud breathes: a soft pollen halo that swells and settles (transform and opacity only) */
+      &::before {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        inset: -2px;
+        border-radius: inherit;
+        box-shadow: 0 0 0 5px color-mix(in oklch, var(--yuo-color-highlight) 30%, transparent);
+        will-change: transform, opacity;
+        animation: yuo-breathe var(--yuo-duration-breathe) var(--yuo-ease-gentle) infinite alternate;
+      }
+    }
+
+    .node[data-node="locked"] & {
+      border-color: var(--yuo-color-border-strong);
+    }
+  }
+
+  @keyframes yuo-breathe {
+    from {
+      opacity: 1;
+      transform: scale(1);
+    }
+    to {
+      opacity: 0.45;
+      transform: scale(1.18);
+    }
+  }
+
+  /* --- the vine grows on the first view: buds open one after another, each stem draws down to the next
+     bud and its leaf unfurls (one-off; static under reduced motion) ------------------------------------ */
+  .tree[data-fresh] {
+    & .bud {
+      animation: yuo-bud-in var(--yuo-duration-slower) var(--yuo-ease-spring)
+        calc(var(--yuo-order, 0) * var(--yuo-duration-stagger) * 3) backwards;
+    }
+
+    & .stem {
+      animation: yuo-stem-grow var(--yuo-duration-grow) var(--yuo-ease-out)
+        calc(var(--yuo-order, 0) * var(--yuo-duration-stagger) * 3 + var(--yuo-duration-fast)) backwards;
+    }
+
+    & .leaf {
+      animation: yuo-leaf-in var(--yuo-duration-slower) var(--yuo-ease-spring)
+        calc(var(--yuo-order, 0) * var(--yuo-duration-stagger) * 3 + var(--yuo-duration-slower)) backwards;
+    }
+
+    & .skill {
+      animation: yuo-skill-in var(--yuo-duration-slow) var(--yuo-ease-out)
+        calc(var(--yuo-order, 0) * var(--yuo-duration-stagger) * 3) backwards;
+    }
+  }
+
+  @keyframes yuo-bud-in {
+    from {
+      opacity: 0;
+      scale: 0.4;
+    }
+  }
+
+  @keyframes yuo-stem-grow {
+    from {
+      clip-path: inset(0 0 100% 0);
+    }
+    to {
+      clip-path: inset(0 0 0 0);
+    }
+  }
+
+  @keyframes yuo-leaf-in {
+    from {
+      opacity: 0;
+      scale: 0;
+    }
+  }
+
+  @keyframes yuo-skill-in {
+    from {
+      opacity: 0;
+      translate: 0 var(--yuo-space-2);
+    }
+  }
+
+  .budDot {
+    inline-size: 0.7rem;
+    block-size: 0.7rem;
+    border-radius: var(--yuo-radius-full);
+    background: var(--yuo-color-surface);
+  }
+
+  /* --- a skill beside its bud ------------------------------------------------------------------------ */
+  .skill {
+    display: grid;
+    gap: var(--yuo-space-2);
+    padding: var(--yuo-space-3);
+    border: 1px solid var(--yuo-color-border);
+    border-radius: var(--yuo-radius-3);
+    background: var(--yuo-color-surface);
+
+    & p {
+      margin: 0;
+    }
+
+    .node[data-node="current"] & {
+      border-color: var(--yuo-color-highlight);
+      box-shadow: var(--yuo-shadow-1);
+    }
+
+    .node[data-node="locked"] & {
+      border-style: dashed;
+      background: transparent;
+    }
+  }
+
+  .skillHeader {
+    display: grid;
+    gap: var(--yuo-space-2);
+  }
+
+  .skillHeading {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--yuo-space-1) var(--yuo-space-2);
+    min-block-size: var(--bud);
+  }
+
+  .skillTitle {
+    margin: 0;
+    font-size: var(--yuo-text-lg);
+  }
+
+  .skillState {
+    padding-inline: var(--yuo-space-2);
+    border-radius: var(--yuo-radius-full);
+    background: var(--yuo-color-surface-muted);
+    color: var(--yuo-color-muted);
+    font-size: var(--yuo-text-xs);
+    font-weight: var(--yuo-weight-semibold);
+
+    &[data-state="mastered"] {
+      background: var(--yuo-color-success-bg);
+      color: var(--yuo-color-success);
+    }
+
+    &[data-state="needs_review"] {
+      background: var(--yuo-color-warning-bg);
+      color: var(--yuo-color-warning);
+    }
+  }
+
+  .summary {
+    color: var(--yuo-color-muted);
+    font-size: var(--yuo-text-sm);
+  }
+
+  .unlocks {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--yuo-space-1);
+    color: var(--yuo-color-muted);
+    font-size: var(--yuo-text-sm);
+  }
+
+  /* --- lessons ----------------------------------------------------------------------------------------- */
+  .lessons {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .skillTest {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--yuo-space-2) var(--yuo-space-3);
+    padding-block-start: var(--yuo-space-3);
+    border-block-start: 1px dashed var(--yuo-color-border);
+  }
+
+  .skillTestText {
+    flex: 1 1 16rem;
+    margin: 0;
+    color: var(--yuo-color-muted);
+    font-size: var(--yuo-text-sm);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .growingMark svg,
+    .node[data-node="current"] .bud::before {
+      animation: none;
+    }
+  }
+}

@@ -1,0 +1,603 @@
+/* The path as a node graph (PathGraph.tsx). Semantic tokens only, flat fills, no gradients, no glows. The canvas
+   is the node-graph library's; its own stylesheet sits in the `vendor` layer (flow.css), so everything here wins
+   over it. Inside the canvas sizes are flow units (CSS pixels at zoom 1): the layout (radial.ts) knows each node's
+   box, and the learner zooms. Under reduced motion nothing here moves or pulses. */
+@layer components {
+  .area {
+    /* the graph may use the room beside the page column (root.module.css sets how wide the page area is) */
+    --graph-w: max(100%, min(80rem, var(--yuo-layout-inline, 100%) - 3rem));
+    /* most of the screen, and never so tall that the page above and below cannot be reached */
+    --canvas-h: clamp(32rem, 74dvh, 56rem);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--yuo-space-3);
+    inline-size: var(--graph-w);
+    margin-inline-start: calc((100% - var(--graph-w)) / 2);
+
+    &[data-mode="sheet"] {
+      --canvas-h: 70dvh;
+    }
+
+    &[data-contained] {
+      --graph-w: 100%;
+      --canvas-h: min(68dvh, 28rem);
+    }
+  }
+
+  /* --- branch chips ---------------------------------------------------------------------------------- */
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--yuo-space-2);
+  }
+
+  .chipGroup {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--yuo-space-2);
+  }
+
+  .chip {
+    display: grid;
+    gap: 0;
+    padding-block: var(--yuo-space-1);
+    padding-inline: var(--yuo-space-2-5);
+    border: 1px solid var(--yuo-color-border-strong);
+    border-radius: var(--yuo-radius-2);
+    background: var(--yuo-color-surface);
+    color: var(--yuo-color-fg);
+    font: inherit;
+    text-align: start;
+    cursor: pointer;
+    transition:
+      background-color var(--yuo-duration-fast) var(--yuo-ease-standard),
+      border-color var(--yuo-duration-fast) var(--yuo-ease-standard);
+
+    &[data-hovered] {
+      border-color: var(--yuo-color-leaf);
+    }
+
+    &[data-selected] {
+      border-color: var(--yuo-color-accent);
+      background: var(--yuo-color-success-bg);
+    }
+
+    &[data-focus-visible] {
+      outline: 2px solid var(--yuo-color-focus);
+      outline-offset: 2px;
+    }
+  }
+
+  .chipName {
+    font-size: var(--yuo-text-sm);
+    font-weight: var(--yuo-weight-bold);
+    line-height: var(--yuo-leading-snug);
+  }
+
+  .chipMeta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--yuo-space-2);
+    color: var(--yuo-color-muted);
+    font-size: var(--yuo-text-xs);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .chipLevel {
+    color: var(--yuo-color-fg);
+    font-weight: var(--yuo-weight-semibold);
+  }
+
+  /* --- the canvas and the panel beside it ------------------------------------------------------------ */
+  .grid {
+    --panel-max: var(--canvas-h);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+    gap: var(--yuo-space-3);
+
+    .area[data-mode="side"] &[data-panel] {
+      grid-template-columns: minmax(0, 1fr) 21rem;
+    }
+
+    /* full screen: the browser's own (the element is then the whole screen), or this fixed layer */
+    &[data-full] {
+      --panel-max: calc(100dvh - 2 * var(--yuo-space-2-5));
+      position: fixed;
+      z-index: 30;
+      inset: 0;
+      align-items: stretch;
+      padding: var(--yuo-space-2-5);
+      background: var(--yuo-color-bg);
+
+      & .column {
+        grid-template-rows: minmax(0, 1fr) auto;
+      }
+
+      & .canvas {
+        block-size: auto;
+      }
+    }
+  }
+
+  .column {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--yuo-space-2-5);
+    min-inline-size: 0;
+  }
+
+  .canvas {
+    /* the colour under the nodes: a name gets a rim of it where a link passes behind */
+    --canvas: var(--yuo-color-surface);
+    position: relative;
+    block-size: var(--canvas-h);
+    overflow: hidden;
+    border: 1px solid var(--yuo-color-border);
+    border-radius: calc(var(--yuo-radius-3) * 1.25);
+    background: var(--canvas);
+  }
+
+  /* --- the library's own parts, in Yuo's tokens ------------------------------------------------------- */
+  .flow {
+    --u: 1px;
+    --node: 48;
+    --xy-background-color: transparent;
+    --xy-attribution-background-color: var(--canvas);
+    --xy-controls-button-background-color: var(--yuo-color-surface);
+    --xy-controls-button-background-color-hover: var(--yuo-color-surface-muted);
+    --xy-controls-button-color: var(--yuo-color-fg);
+    --xy-controls-button-color-hover: var(--yuo-color-fg);
+    --xy-controls-button-border-color: var(--yuo-color-border);
+    --xy-controls-box-shadow: none;
+    --xy-minimap-background-color: var(--yuo-color-bg);
+    --xy-minimap-mask-background-color: color-mix(in srgb, var(--yuo-color-surface-muted) 78%, transparent);
+    --xy-minimap-mask-stroke-color: var(--yuo-color-border-strong);
+    --xy-minimap-mask-stroke-width: 2;
+    color: var(--yuo-color-fg);
+    font-family: var(--yuo-font-sans);
+
+    & :global(.react-flow__node) {
+      cursor: grab;
+
+      &:global(.dragging) {
+        cursor: grabbing;
+      }
+    }
+
+    & :global(.react-flow__pane) {
+      cursor: grab;
+
+      &:global(.dragging) {
+        cursor: grabbing;
+      }
+    }
+
+    & :global(.react-flow__panel) {
+      margin: var(--yuo-space-2-5);
+    }
+
+    & :global(.react-flow__attribution) {
+      margin: 0;
+      padding: 2px var(--yuo-space-2);
+      border-start-start-radius: var(--yuo-radius-1);
+      font-size: 0.625rem;
+
+      & a {
+        color: var(--yuo-color-muted);
+      }
+    }
+  }
+
+  .controls {
+    overflow: hidden;
+    border: 1px solid var(--yuo-color-border-strong);
+    border-radius: var(--yuo-radius-2);
+
+    & :global(.react-flow__controls-button) {
+      inline-size: 2.5rem;
+      block-size: 2.5rem;
+      padding: 0;
+      cursor: pointer;
+
+      & svg {
+        inline-size: 1rem;
+        block-size: 1rem;
+        max-inline-size: none;
+        max-block-size: none;
+      }
+
+      &:focus-visible {
+        outline: 2px solid var(--yuo-color-focus);
+        outline-offset: -3px;
+      }
+
+      &.own svg {
+        fill: none;
+        stroke: currentcolor;
+        stroke-width: 2.4;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+    }
+  }
+
+  /* said above the canvas while a very large path is open on one branch */
+  .note {
+    margin: 0;
+    color: var(--yuo-color-muted);
+    font-size: var(--yuo-text-sm);
+  }
+
+  .minimap {
+    overflow: hidden;
+    border: 1px solid var(--yuo-color-border-strong);
+    border-radius: var(--yuo-radius-2);
+  }
+
+  .mapDone {
+    fill: var(--yuo-color-accent);
+  }
+
+  .mapCurrent {
+    fill: var(--yuo-color-highlight);
+    stroke: var(--yuo-color-highlight-fg);
+  }
+
+  .mapOpen {
+    fill: var(--yuo-color-leaf);
+  }
+
+  .mapLocked {
+    fill: var(--yuo-color-border-strong);
+  }
+
+  .mapHub {
+    fill: var(--yuo-color-twig);
+  }
+
+  .mapHidden {
+    display: none;
+  }
+
+  /* --- links ------------------------------------------------------------------------------------------ */
+  /* where a node's links meet: the middle of its round part; the library's handle itself is not shown */
+  .anchor {
+    inset-block: calc(var(--node) * 0.5px) auto;
+    inset-inline: 50% auto;
+    inline-size: 1px;
+    block-size: 1px;
+    min-inline-size: 0;
+    min-block-size: 0;
+    border: 0;
+    background: none;
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+
+    .hub > &,
+    .start > & {
+      inset-block-start: 50%;
+    }
+  }
+
+  .vine {
+    fill: none;
+    stroke: var(--yuo-color-leaf);
+    stroke-width: 3;
+    stroke-linecap: round;
+    transition: opacity var(--yuo-duration-base) var(--yuo-ease-standard);
+
+    &[data-kind="spoke"] {
+      stroke-width: 4;
+    }
+
+    &[data-growth="grown"] {
+      stroke: var(--yuo-color-accent);
+    }
+
+    &[data-growth="dormant"] {
+      stroke: var(--yuo-color-twig);
+      stroke-width: 2;
+    }
+
+    /* a prerequisite on another branch: thin and dashed, quiet until one of its skills is selected */
+    &[data-cross] {
+      stroke: var(--yuo-color-border-strong);
+      stroke-width: 1.5;
+      stroke-dasharray: 1 6;
+    }
+
+    /* the selected skill's own links */
+    &[data-lit="own"] {
+      stroke: var(--yuo-color-fg);
+      stroke-width: 2.5;
+
+      &[data-cross] {
+        stroke-width: 2;
+        stroke-dasharray: 2 6;
+      }
+    }
+
+    /* the route from the start: pollen over a darker edge (.vineRim), so it reads on a light page too */
+    &[data-lit="route"] {
+      stroke: var(--yuo-color-highlight);
+      stroke-width: 4;
+    }
+
+    &[data-faded] {
+      opacity: 0.28;
+    }
+  }
+
+  .vineRim {
+    fill: none;
+    stroke: var(--yuo-color-highlight-fg);
+    stroke-width: 7;
+    stroke-linecap: round;
+  }
+
+  .rings {
+    display: block;
+    overflow: visible;
+
+    & circle {
+      fill: none;
+      stroke: var(--yuo-color-pattern-leaf);
+      stroke-width: 1;
+      opacity: 0.55;
+    }
+  }
+
+  /* --- nodes ------------------------------------------------------------------------------------------ */
+  /* a skill: the brand's round node (TreeNode.tsx) with its name under it; the whole thing is one button */
+  .skill {
+    display: grid;
+    align-content: start;
+    justify-items: center;
+    gap: 5px;
+    inline-size: 100%;
+    block-size: 100%;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--yuo-color-fg);
+    font: inherit;
+    cursor: pointer;
+
+    /* the round part */
+    & > :first-child {
+      transition:
+        transform var(--yuo-duration-fast) var(--yuo-ease-standard),
+        opacity var(--yuo-duration-base) var(--yuo-ease-standard);
+    }
+
+    &:hover > :first-child {
+      transform: scale(1.07);
+    }
+
+    &:focus-visible {
+      outline: none;
+
+      & > :first-child {
+        outline: 3px solid var(--yuo-color-focus);
+        outline-offset: 3px;
+      }
+    }
+
+    &[data-selected] {
+      & > :first-child::after {
+        content: "";
+        position: absolute;
+        inset: -8px;
+        border: 2.5px solid var(--yuo-color-fg);
+        border-radius: inherit;
+      }
+
+      &:focus-visible > :first-child {
+        outline-offset: 11px;
+      }
+    }
+
+    /* off the lit route or outside the framed branch: it steps back, its name stays readable */
+    &[data-off],
+    &[data-dim] {
+      & > :first-child {
+        opacity: 0.4;
+      }
+
+      & .label {
+        color: var(--yuo-color-muted);
+        font-weight: var(--yuo-weight-medium);
+      }
+    }
+  }
+
+  .label {
+    --r: 1.5px;
+    display: -webkit-box;
+    inline-size: 100%;
+    overflow: hidden;
+    font-size: 16px;
+    font-weight: var(--yuo-weight-bold);
+    line-height: 19px;
+    text-align: center;
+    overflow-wrap: anywhere;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
+    text-shadow:
+      var(--r) 0 0 var(--canvas),
+      calc(-1 * var(--r)) 0 0 var(--canvas),
+      0 var(--r) 0 var(--canvas),
+      0 calc(-1 * var(--r)) 0 var(--canvas),
+      var(--r) var(--r) 0 var(--canvas),
+      calc(-1 * var(--r)) var(--r) 0 var(--canvas),
+      var(--r) calc(-1 * var(--r)) 0 var(--canvas),
+      calc(-1 * var(--r)) calc(-1 * var(--r)) 0 var(--canvas);
+
+    .skill[data-kind="current"] & {
+      font-weight: var(--yuo-weight-heavy);
+    }
+  }
+
+  /* a branch's hub: a leaf badge with the branch's name and how far it is. A pill, so it is never taken for a
+     skill. */
+  .hub {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    inline-size: 100%;
+    block-size: 100%;
+    padding-block: 12px;
+    padding-inline: 14px 22px;
+    border: 2px solid var(--yuo-color-leaf);
+    border-radius: var(--yuo-radius-full);
+    background: var(--yuo-color-success-bg);
+    color: var(--yuo-color-fg);
+    cursor: pointer;
+    transition:
+      opacity var(--yuo-duration-base) var(--yuo-ease-standard),
+      border-color var(--yuo-duration-fast) var(--yuo-ease-standard);
+
+    &:hover {
+      border-color: var(--yuo-color-accent);
+    }
+
+    &[data-framed] {
+      border-color: var(--yuo-color-accent);
+      outline: 2px solid var(--yuo-color-accent);
+      outline-offset: 3px;
+    }
+
+    &[data-dim] {
+      opacity: 0.45;
+    }
+  }
+
+  .hubMark {
+    display: grid;
+    flex: none;
+    place-items: center;
+    inline-size: 46px;
+    block-size: 46px;
+    border-radius: var(--yuo-radius-full);
+    background: var(--yuo-color-accent);
+    color: var(--yuo-color-accent-fg);
+    font-size: 16px;
+  }
+
+  .hubText {
+    display: grid;
+    min-inline-size: 0;
+  }
+
+  /* the whole name, on as many lines as it needs: the hub is sized for it (radial.ts, hubBox) */
+  .hubTitle {
+    font-size: 15.5px;
+    font-weight: var(--yuo-weight-heavy);
+    line-height: 17px;
+    overflow-wrap: anywhere;
+  }
+
+  .hubMeta {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 6px;
+    color: var(--yuo-color-muted);
+    font-size: 12.5px;
+    font-variant-numeric: tabular-nums;
+    line-height: 15px;
+    white-space: nowrap;
+  }
+
+  .hubLevel {
+    color: var(--yuo-color-fg);
+    font-weight: var(--yuo-weight-bold);
+  }
+
+  /* where the path starts: a seedling in the middle */
+  .start {
+    display: grid;
+    align-content: center;
+    justify-items: center;
+    inline-size: 100%;
+    block-size: 100%;
+    border: 2px solid var(--yuo-color-leaf);
+    border-radius: var(--yuo-radius-full);
+    background: var(--yuo-color-surface);
+    color: var(--yuo-color-fg);
+    cursor: pointer;
+    transition: opacity var(--yuo-duration-base) var(--yuo-ease-standard);
+
+    &[data-dim] {
+      opacity: 0.45;
+    }
+  }
+
+  .startLabel {
+    margin-block-start: -2px;
+    font-size: 11px;
+    font-weight: var(--yuo-weight-heavy);
+    letter-spacing: 0.06em;
+    line-height: 13px;
+    text-transform: uppercase;
+  }
+
+  /* --- legend ----------------------------------------------------------------------------------------- */
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--yuo-space-1) var(--yuo-space-3);
+    margin: 0;
+    padding: 0;
+    color: var(--yuo-color-muted);
+    font-size: var(--yuo-text-xs);
+    list-style: none;
+  }
+
+  /* a phone's canvas: the hubs and the start are smaller (radial.ts, COMPACT), the names keep their size */
+  .canvas[data-compact] {
+    & .hub {
+      gap: 7px;
+      padding-block: 8px;
+      padding-inline: 10px 16px;
+    }
+
+    & .hubMark {
+      inline-size: 36px;
+      block-size: 36px;
+    }
+
+    & .hubTitle {
+      font-size: 14px;
+      line-height: 15px;
+    }
+
+    & .hubMeta {
+      font-size: 11px;
+      line-height: 12px;
+    }
+
+    & .start svg {
+      inline-size: 36px;
+    }
+
+    & .startLabel {
+      font-size: 9.5px;
+      line-height: 11px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .chip,
+    .vine,
+    .hub,
+    .start,
+    .skill > :first-child {
+      transition: none;
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+ "$id": "urn:yuo:package:1.0:record.branch",
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "additionalProperties": true,
+ "properties": {
+  "code": {
+   "maxLength": 128,
+   "pattern": "^[a-z0-9]+([._-][a-z0-9]+)*$",
+   "title": "Code",
+   "type": "string"
+  },
+  "extensions": {
+   "additionalProperties": true,
+   "title": "Extensions",
+   "type": "object"
+  },
+  "position": {
+   "minimum": 0,
+   "title": "Position",
+   "type": "integer"
+  },
+  "title": {
+   "maxLength": 200,
+   "title": "Title",
+   "type": "string"
+  }
+ },
+ "required": [
+  "code",
+  "title",
+  "position"
+ ],
+ "title": "BranchRecord",
+ "type": "object"
+}

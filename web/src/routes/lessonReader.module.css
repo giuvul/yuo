@@ -1,0 +1,128 @@
+@layer components {
+  /* one reading column: the title, the video and the text line up */
+  .article {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--yuo-space-4);
+    inline-size: 100%;
+    max-inline-size: var(--yuo-measure);
+    margin-inline: auto;
+
+    @media (max-width: 40rem) {
+      gap: var(--yuo-space-3-5);
+    }
+  }
+
+  .crumbSep {
+    flex: none;
+    color: var(--yuo-color-border-strong);
+  }
+
+  .metaItem {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--yuo-space-1);
+
+    & svg {
+      flex: none;
+    }
+  }
+
+  .body {
+    min-inline-size: 0;
+  }
+
+  .lessonNotes {
+    display: grid;
+    gap: var(--yuo-space-2);
+  }
+
+  .notesTitle {
+    margin: 0;
+    font-size: var(--yuo-text-lg);
+  }
+
+  .footer {
+    display: grid;
+    gap: var(--yuo-space-3);
+  }
+
+  /* the next step, as wide as the column */
+  .nextActions {
+    display: grid;
+    gap: var(--yuo-space-2);
+
+    & > :first-child {
+      min-block-size: 3rem;
+      font-size: var(--yuo-text-lg);
+    }
+  }
+
+  /* "Questions about this lesson?": a quiet panel that opens the tutor */
+  .tutorInvite {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: var(--yuo-space-3);
+    inline-size: 100%;
+    padding: var(--yuo-space-3);
+    border: 1px solid var(--yuo-color-border);
+    border-radius: var(--yuo-radius-3);
+    background: var(--yuo-color-surface-muted);
+    color: var(--yuo-color-fg);
+    font: inherit;
+    text-align: start;
+    cursor: pointer;
+    transition:
+      border-color var(--yuo-duration-fast) var(--yuo-ease-standard),
+      background-color var(--yuo-duration-fast) var(--yuo-ease-standard),
+      box-shadow var(--yuo-duration-base) var(--yuo-ease-standard),
+      transform var(--yuo-duration-base) var(--yuo-ease-standard);
+
+    &:hover {
+      border-color: var(--yuo-color-border-strong);
+      box-shadow: var(--yuo-shadow-1);
+      transform: translateY(-1px);
+    }
+
+    &:hover .tutorInviteChevron {
+      transform: translateX(2px);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--yuo-color-focus);
+      outline-offset: 2px;
+    }
+  }
+
+  .tutorInviteIcon {
+    display: inline-grid;
+    place-items: center;
+    inline-size: 2.5rem;
+    block-size: 2.5rem;
+    border-radius: var(--yuo-radius-full);
+    background: var(--yuo-color-surface);
+    color: var(--yuo-color-leaf);
+    font-size: var(--yuo-text-xl);
+  }
+
+  .tutorInviteText {
+    display: grid;
+    gap: var(--yuo-space-1);
+  }
+
+  .tutorInviteTitle {
+    font-weight: var(--yuo-weight-bold);
+  }
+
+  .tutorInviteBody {
+    color: var(--yuo-color-muted);
+    font-size: var(--yuo-text-sm);
+  }
+
+  .tutorInviteChevron {
+    flex: none;
+    color: var(--yuo-color-muted);
+    transition: transform var(--yuo-duration-fast) var(--yuo-ease-standard);
+  }
+}

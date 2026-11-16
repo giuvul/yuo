@@ -1,0 +1,92 @@
+@layer components {
+  .box {
+    border: 1px solid var(--yuo-color-border);
+    border-radius: var(--yuo-radius-3);
+    background: var(--yuo-color-surface);
+    box-shadow: var(--yuo-shadow-1);
+
+    /* only its own chevron: a closed box inside an open one keeps pointing down */
+    &[open] > .summary .chevron {
+      transform: rotate(180deg);
+    }
+
+    &[open] > .summary {
+      border-block-end: 1px solid var(--yuo-color-border);
+    }
+
+    &[data-nested] {
+      background: var(--yuo-color-surface-muted);
+      box-shadow: none;
+    }
+
+    &[data-nested] .title {
+      font-size: var(--yuo-text-md);
+    }
+
+    /* inside another box: less padding, so a phone keeps room for the text */
+    &[data-nested] > .summary,
+    &[data-nested] > .body {
+      padding-inline: var(--yuo-space-3);
+    }
+  }
+
+  .summary {
+    display: flex;
+    align-items: center;
+    gap: var(--yuo-space-3);
+    min-block-size: 3.5rem;
+    padding: var(--yuo-space-3) var(--yuo-space-4);
+    border-radius: var(--yuo-radius-3);
+    cursor: pointer;
+    list-style: none;
+
+    &::-webkit-details-marker {
+      display: none;
+    }
+
+    &:hover {
+      background: var(--yuo-color-surface-muted);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--yuo-color-focus);
+      outline-offset: 2px;
+    }
+  }
+
+  .text {
+    display: grid;
+    flex: 1;
+    gap: var(--yuo-space-1);
+    min-inline-size: 0;
+  }
+
+  .title {
+    margin: 0;
+    font-size: var(--yuo-text-lg);
+  }
+
+  .description {
+    color: var(--yuo-color-muted);
+    font-size: var(--yuo-text-sm);
+  }
+
+  .chevron {
+    flex: none;
+    color: var(--yuo-color-muted);
+    font-size: var(--yuo-text-xl);
+    transition: transform var(--yuo-duration-fast) var(--yuo-ease-standard);
+  }
+
+  .body {
+    display: grid;
+    gap: var(--yuo-space-3);
+    padding: var(--yuo-space-4);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .chevron {
+      transition: none;
+    }
+  }
+}

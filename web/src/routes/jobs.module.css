@@ -1,0 +1,94 @@
+@layer components {
+  /* the frame owns the rounded corners and clips the rows to them (a collapsed table cannot round its own); on a
+     narrow screen the table scrolls inside it */
+  .tableWrap {
+    overflow-x: auto;
+    border: 1px solid var(--yuo-color-border);
+    border-radius: var(--yuo-radius-3);
+    background: var(--yuo-color-surface);
+  }
+
+  .table {
+    inline-size: 100%;
+    border-spacing: 0;
+    border-collapse: separate;
+
+    & th,
+    & td {
+      padding: var(--yuo-space-2) var(--yuo-space-3);
+      border-block-end: 1px solid var(--yuo-color-border);
+      text-align: start;
+      vertical-align: top;
+    }
+
+    & tbody tr:last-child td {
+      border-block-end: 0;
+    }
+
+    & th {
+      background: var(--yuo-color-surface-muted);
+      color: var(--yuo-color-muted);
+      font-size: var(--yuo-text-xs);
+      font-weight: var(--yuo-weight-semibold);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+  }
+
+  .status {
+    &[data-status="failed"] {
+      color: var(--yuo-color-danger);
+    }
+
+    &[data-status="running"],
+    &[data-status="queued"] {
+      color: var(--yuo-color-link);
+    }
+
+    &[data-status="resolved"],
+    &[data-status="cancelled"] {
+      color: var(--yuo-color-muted);
+    }
+
+    &[data-status="waiting_resource"] {
+      color: var(--yuo-color-warning);
+    }
+  }
+
+  .progress {
+    display: block;
+    margin-block-start: var(--yuo-space-1);
+    color: var(--yuo-color-muted);
+    font-size: var(--yuo-text-sm);
+  }
+
+  .sectionTitle {
+    margin-block: var(--yuo-space-3) 0;
+    font-size: var(--yuo-text-lg);
+  }
+
+  .when {
+    white-space: nowrap;
+    color: var(--yuo-color-muted);
+    font-size: var(--yuo-text-sm);
+  }
+
+  .retry {
+    margin-block-start: var(--yuo-space-2);
+  }
+
+  .title {
+    font-weight: var(--yuo-weight-medium);
+  }
+
+  .id {
+    color: var(--yuo-color-muted);
+    font-size: var(--yuo-text-xs);
+  }
+
+  .raw {
+    display: block;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+}

@@ -1,0 +1,41 @@
+@layer components {
+  .logo {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  /* the letters and the left leaf take the text colour; the right leaf has its own (Moss on light, Mist on dark) */
+  .art {
+    flex: none;
+    fill: var(--yuo-color-fg);
+
+    & .leaf {
+      fill: var(--yuo-color-logo-leaf);
+    }
+
+    /* on a Forest surface in either theme: the app icon's treatment */
+    &[data-tone="inverse"] {
+      fill: var(--yuo-color-logo-inverse);
+
+      & .leaf {
+        fill: var(--yuo-color-logo-inverse-leaf);
+      }
+    }
+  }
+
+  .symbol {
+    display: none;
+  }
+
+  @media (max-width: 30rem) {
+    .logo[data-compact] {
+      & .full {
+        display: none;
+      }
+
+      & .symbol {
+        display: block;
+      }
+    }
+  }
+}

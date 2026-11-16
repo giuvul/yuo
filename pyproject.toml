@@ -1,0 +1,172 @@
+[project]
+name = "yuo"
+version = "1.0.0"
+description = "Self-hosted learning paths: generated lessons, practice, tests and a tutor."
+readme = "README.md"
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE"]
+requires-python = ">=3.14,<3.15"
+dependencies = [
+    "pydantic>=2.12",
+    "fastapi>=0.120",
+    "uvicorn>=0.38",
+    "structlog>=25.4",
+    "rfc8785>=0.1.4",
+    "openai>=3.35.1",
+    "anthropic>=1.15.0",
+    "cryptography>=50.0.2",
+    "keyring>=25.7.0",
+    "httpx>=0.28.1",
+    "fsrs>=6.3.2",
+    "onnxruntime>=1.31",
+    "numpy>=2.5",
+    "misaki>=0.9.4",
+    "spacy>=3.8.16",
+    "num2words>=0.5.14",
+    "en-core-web-sm",
+    "webauthn>=3.0.1",
+    "argon2-cffi>=25.1.0",
+    "genanki==0.13.1",
+    "tzdata>=2025.2",
+]
+
+
+[project.scripts]
+yuo = "yuo.cli:main"
+
+[dependency-groups]
+dev = [
+    "ruff",
+    "mypy",
+    "pytest",
+    "hypothesis",
+    "anyio",
+    "import-linter",
+    "pip-licenses",
+    "pip-audit",
+    "httpx>=0.28.1",
+]
+
+[build-system]
+requires = ["uv_build>=0.13,<0.14"]
+build-backend = "uv_build"
+
+[tool.uv]
+# Supply-chain cooldown: never resolve a release younger than 7 days.
+exclude-newer = "7 days"
+
+[tool.uv.build-backend]
+module-root = ""
+
+[tool.uv.sources]
+en-core-web-sm = { url = "https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl" }
+
+[tool.ruff]
+line-length = 110
+target-version = "py314"
+extend-exclude = ["web"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "SIM", "RUF", "S", "PTH", "TID"]
+ignore = ["S101", "S608", "E501"]  # asserts; SQL is built from model metadata, never from input; long SQL strings
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["S", "PTH"]
+"scripts/**" = ["S603", "S607"]
+# the only modules that start child processes (import contract): fixed argv lists, no shell
+"yuo/adapters/renderer/**" = ["S603", "S607", "S108"]
+"yuo/adapters/tts/**" = ["S603", "S607"]
+"yuo/adapters/tts/kokoro.py" = ["S603", "S607", "RUF001"]  # IPA symbols on purpose
+"yuo/adapters/tools/**" = ["S603", "S607"]
+# writer.run() executes its unit at once and blocks, so loop variables in the lambdas cannot go stale
+"yuo/app/service.py" = ["B023"]
+"yuo/app/items.py" = ["B023"]
+"yuo/app/study.py" = ["B023"]
+
+[tool.mypy]
+strict = true
+python_version = "3.14"
+plugins = ["pydantic.mypy"]
+mypy_path = "scripts"
+files = ["yuo", "scripts", "tests"]
+exclude = ["^web/", "^renderer/"]
+
+[[tool.mypy.overrides]]
+module = ["misaki", "misaki.*", "onnxruntime", "onnxruntime.*"]  # no type information shipped
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q --strict-markers"
+markers = [
+    "fitness: architecture fitness functions",
+    "live: calls a paid provider; skipped unless YUO_LIVE=1",
+]
+# genanki -> cached-property uses asyncio.iscoroutinefunction (removed in Python 3.16): theirs, tracked in m6-sharing
+filterwarnings = ["ignore:'asyncio.iscoroutinefunction' is deprecated:DeprecationWarning:cached_property"]
+
+[tool.importlinter]
+root_package = "yuo"
+include_external_packages = true
+
+[[tool.importlinter.contracts]]
+name = "Contexts do not import each other"
+type = "independence"
+modules = [
+    "yuo.setup",
+    "yuo.learning",
+    "yuo.curriculum",
+    "yuo.content",
+    "yuo.assessment",
+    "yuo.tutoring",
+    "yuo.generation",
+    "yuo.sharing",
+]
+
+[[tool.importlinter.contracts]]
+name = "The service's feature parts do not import each other (they meet through yuo.app.ports)"
+type = "independence"
+modules = [
+    "yuo.app.study",
+    "yuo.app.review",
+    "yuo.app.tutor",
+    "yuo.app.video",
+    "yuo.app.sharing",
+    "yuo.app.onboarding",
+    "yuo.app.next_steps",
+]
+
+[[tool.importlinter.contracts]]
+name = "Core depends on nothing else in yuo"
+type = "forbidden"
+source_modules = ["yuo.core"]
+forbidden_modules = [
+    "yuo.setup", "yuo.learning", "yuo.curriculum", "yuo.content", "yuo.assessment",
+    "yuo.tutoring", "yuo.generation", "yuo.sharing", "yuo.adapters", "yuo.db", "yuo.api",
+]
+
+[[tool.importlinter.contracts]]
+name = "The API does not touch the database layer"
+type = "forbidden"
+source_modules = ["yuo.api"]
+forbidden_modules = ["yuo.db"]
+
+[[tool.importlinter.contracts]]
+name = "Only adapters import vendor SDKs"
+type = "forbidden"
+source_modules = [
+    "yuo.core", "yuo.setup", "yuo.learning", "yuo.curriculum", "yuo.content", "yuo.assessment",
+    "yuo.tutoring", "yuo.generation", "yuo.sharing", "yuo.db", "yuo.api",
+]
+forbidden_modules = ["openai", "anthropic", "httpx", "langchain", "langchain_core", "genanki", "keyring"]
+allow_indirect_imports = true
+
+[[tool.importlinter.contracts]]
+name = "Only adapters spawn child processes (GPL tools only from adapters.tools: tests/fitness)"
+type = "forbidden"
+source_modules = [
+    "yuo.core", "yuo.setup", "yuo.learning", "yuo.curriculum", "yuo.content", "yuo.assessment",
+    "yuo.tutoring", "yuo.generation", "yuo.sharing", "yuo.db", "yuo.api",
+]
+forbidden_modules = ["subprocess"]
+allow_indirect_imports = true

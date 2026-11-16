@@ -1,0 +1,334 @@
+@layer components {
+  /* room for the tutor: the floating button at the bottom, the side panel on wide screens */
+  .layout {
+    /* how wide the page area is: a wide picture (the path tree) may use the room beside the page column */
+    --yuo-layout-inline: 100vw;
+    /* the header's full-width band must not make the page scroll sideways */
+    overflow-x: clip;
+  }
+
+  /* phones: the sheet covers the lower part; the page can still scroll above it */
+  @media (max-width: 63.999rem) {
+    .layout[data-dock="open"] {
+      padding-block-end: min(80dvh, 46rem);
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .layout[data-dock="open"] {
+      --yuo-layout-inline: calc(100vw - 24rem);
+      padding-inline-end: 24rem;
+    }
+  }
+
+  .shell {
+    /* the credit ends every page: at the foot of the window when the page is short */
+    display: flex;
+    flex-direction: column;
+    min-block-size: 100dvh;
+    padding-block: 0;
+    padding-inline: var(--yuo-space-3);
+    max-inline-size: 56rem;
+    margin-inline: auto;
+  }
+
+  .header {
+    position: sticky;
+    inset-block-start: 0;
+    z-index: 5;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-areas: "brand primary utility";
+    align-items: center;
+    gap: var(--yuo-space-2) var(--yuo-space-4);
+    padding-block: var(--yuo-space-2-5) 0;
+    margin-block-end: var(--yuo-space-4);
+    border-block-end: 1px solid var(--yuo-color-border);
+
+    /* a full-width band (not a box in the middle of the canopy light); opaque, so text scrolls cleanly under it */
+    &::before {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      inset-block: 0;
+      inset-inline: calc(50% - 50vw);
+      background: var(--yuo-color-bg);
+    }
+
+    /* signed out: the brand and at most an install button */
+    &:not(:has(.primary)) {
+      grid-template-columns: auto auto;
+      grid-template-areas: "brand utility";
+      justify-content: space-between;
+      padding-block-end: var(--yuo-space-2-5);
+    }
+  }
+
+  .brand {
+    grid-area: brand;
+    display: inline-flex;
+    padding-block-end: var(--yuo-space-2-5);
+    border-radius: var(--yuo-radius-1);
+    text-decoration: none;
+  }
+
+  /* primary destinations: tabs along the header's bottom line */
+  .primary {
+    grid-area: primary;
+    display: flex;
+    align-self: stretch;
+    align-items: stretch;
+    gap: var(--yuo-space-1);
+    min-inline-size: 0;
+  }
+
+  .navLink {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--yuo-space-2);
+    padding-block: var(--yuo-space-2);
+    padding-inline: var(--yuo-space-2-5);
+    border-block-end: 2px solid transparent;
+    margin-block-end: -1px;
+    color: var(--yuo-color-muted);
+    font-weight: var(--yuo-weight-semibold);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color var(--yuo-duration-fast) var(--yuo-ease-standard);
+
+    &:hover {
+      color: var(--yuo-color-fg);
+    }
+
+    &[data-status="active"] {
+      border-block-end-color: var(--yuo-color-accent);
+      color: var(--yuo-color-fg);
+    }
+  }
+
+  .navIcon {
+    display: inline-flex;
+    color: var(--yuo-color-leaf);
+  }
+
+  svg.navIcon {
+    flex: none;
+  }
+
+  /* utility: status, settings and the "more" menu */
+  .utility {
+    grid-area: utility;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--yuo-space-1) var(--yuo-space-2);
+    padding-block-end: var(--yuo-space-2-5);
+    font-size: var(--yuo-text-sm);
+  }
+
+  .iconLink,
+  .menuButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--yuo-space-1);
+    min-block-size: 2.25rem;
+    min-inline-size: 2.25rem;
+    padding-inline: var(--yuo-space-2);
+    border: 0;
+    border-radius: var(--yuo-radius-full);
+    background: transparent;
+    color: var(--yuo-color-muted);
+    font: inherit;
+    font-weight: var(--yuo-weight-medium);
+    text-decoration: none;
+    cursor: pointer;
+    transition:
+      background-color var(--yuo-duration-fast) var(--yuo-ease-standard),
+      color var(--yuo-duration-fast) var(--yuo-ease-standard);
+
+    & svg {
+      flex: none;
+      font-size: var(--yuo-text-lg);
+    }
+
+    &:hover,
+    &[data-hovered],
+    &[data-pressed],
+    &[data-status="active"] {
+      background: var(--yuo-color-surface-muted);
+      color: var(--yuo-color-fg);
+    }
+
+    &[data-focus-visible] {
+      outline: 2px solid var(--yuo-color-focus);
+      outline-offset: 2px;
+    }
+  }
+
+  .menuPopover {
+    min-inline-size: 12rem;
+    padding: var(--yuo-space-1);
+    border: 1px solid var(--yuo-color-border);
+    border-radius: var(--yuo-radius-2);
+    background: var(--yuo-color-surface);
+    box-shadow: var(--yuo-shadow-2);
+  }
+
+  .menu {
+    display: grid;
+    outline: none;
+  }
+
+  .menuItem {
+    display: flex;
+    align-items: center;
+    gap: var(--yuo-space-2);
+    padding-block: var(--yuo-space-2);
+    padding-inline: var(--yuo-space-2-5);
+    border-radius: var(--yuo-radius-1);
+    color: var(--yuo-color-fg);
+    cursor: pointer;
+    outline: none;
+
+    & svg {
+      flex: none;
+      color: var(--yuo-color-muted);
+    }
+
+    &[data-focused],
+    &[data-hovered] {
+      background: var(--yuo-color-surface-muted);
+    }
+
+    &[data-focus-visible] {
+      outline: 2px solid var(--yuo-color-focus);
+      outline-offset: -2px;
+    }
+
+    &[data-disabled] {
+      opacity: 0.5;
+      cursor: default;
+    }
+  }
+
+  .menuSeparator {
+    block-size: 1px;
+    margin-block: var(--yuo-space-1);
+    background: var(--yuo-color-border);
+  }
+
+  .navButton {
+    padding-block: var(--yuo-space-1);
+    padding-inline: 0;
+    border: 0;
+    background: none;
+    color: var(--yuo-color-muted);
+    font: inherit;
+    font-weight: var(--yuo-weight-medium);
+    cursor: pointer;
+
+    &:hover {
+      color: var(--yuo-color-fg);
+    }
+
+    &[data-focus-visible] {
+      outline: 2px solid var(--yuo-color-focus);
+      outline-offset: 2px;
+    }
+  }
+
+  /* a phone: brand and utilities on top, the destinations as tabs below */
+  @media (max-width: 40rem) {
+    .header {
+      grid-template-columns: auto minmax(0, 1fr);
+      grid-template-areas:
+        "brand utility"
+        "primary primary";
+      gap: 0 var(--yuo-space-2);
+      padding-block-start: var(--yuo-space-2);
+    }
+
+    .brand,
+    .utility {
+      padding-block-end: var(--yuo-space-1);
+    }
+
+    .primary {
+      margin-inline: calc(-1 * var(--yuo-space-2-5));
+    }
+
+    .iconLinkText {
+      position: absolute;
+      inline-size: 1px;
+      block-size: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+  }
+
+  .main {
+    flex: 1 0 auto;
+    display: grid;
+    align-content: start;
+    gap: var(--yuo-space-4);
+
+    /* a new screen (or a screen's content after loading) settles in: fades and rises a few pixels */
+    & > * {
+      animation: yuo-route-in var(--yuo-duration-slow) var(--yuo-ease-out) backwards;
+    }
+  }
+
+  /* the credit, at the end of every page: below the content, at the foot of the window when the page is short */
+  .footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0 var(--yuo-space-3);
+    margin-block-start: var(--yuo-space-5);
+    /* the text sits a little above the window's edge (1.5% of its height) */
+    padding-block: var(--yuo-space-1) calc(var(--yuo-space-1) + 1.5dvh + env(safe-area-inset-bottom, 0px));
+    color: var(--yuo-color-muted);
+    font-size: var(--yuo-text-xs);
+    opacity: 0.75;
+    transition: opacity var(--yuo-duration-fast) var(--yuo-ease-standard);
+
+    &:hover,
+    &:focus-within {
+      opacity: 1;
+    }
+
+    & a {
+      color: inherit;
+      text-underline-offset: 0.2em;
+    }
+
+    & a:hover {
+      color: var(--yuo-color-fg);
+    }
+
+    & a:focus-visible {
+      outline: 2px solid var(--yuo-color-focus);
+      outline-offset: 2px;
+      border-radius: var(--yuo-radius-1);
+    }
+  }
+
+  /* phones: the tutor button sits in the bottom corner; the credit keeps clear of it */
+  @media (max-width: 40rem) {
+    .footer {
+      justify-content: flex-start;
+      padding-inline-end: 5rem;
+      min-block-size: 4.5rem;
+      align-content: end;
+    }
+  }
+
+  @keyframes yuo-route-in {
+    from {
+      opacity: 0;
+      transform: translateY(var(--yuo-space-2));
+    }
+  }
+}

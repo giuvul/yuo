@@ -1,0 +1,104 @@
+/* A lesson's row on the path page (the list view and the tree's skill panel) and a failed job's notice. */
+@layer components {
+  .lesson {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--yuo-space-1) var(--yuo-space-2-5);
+    padding-block: var(--yuo-space-2);
+    border-block-start: 1px solid var(--yuo-color-border);
+  }
+
+  .lessonIcon {
+    display: inline-grid;
+    flex: none;
+    place-items: center;
+    inline-size: 1.25rem;
+    block-size: 1.25rem;
+  }
+
+  .lessonIconReady {
+    color: var(--yuo-color-leaf);
+  }
+
+  .lessonIconFailed {
+    color: var(--yuo-color-danger);
+  }
+
+  .lessonSpinner {
+    inline-size: 0.95rem;
+    block-size: 0.95rem;
+  }
+
+  .lessonDot {
+    inline-size: 0.6rem;
+    block-size: 0.6rem;
+    border: 1.5px dashed var(--yuo-color-border-strong);
+    border-radius: var(--yuo-radius-full);
+  }
+
+  .lessonTitle {
+    flex: 1 1 12rem;
+    min-inline-size: 0;
+    overflow-wrap: anywhere;
+
+    a& {
+      font-weight: var(--yuo-weight-semibold);
+    }
+  }
+
+  .state {
+    padding-inline: var(--yuo-space-2);
+    border-radius: var(--yuo-radius-full);
+    background: var(--yuo-color-surface-muted);
+    color: var(--yuo-color-muted);
+    font-size: var(--yuo-text-xs);
+    font-weight: var(--yuo-weight-semibold);
+
+    &[data-state="ready"] {
+      background: var(--yuo-color-success-bg);
+      color: var(--yuo-color-success);
+    }
+
+    &[data-state="failed"] {
+      background: var(--yuo-color-danger-bg);
+      color: var(--yuo-color-danger);
+    }
+
+    &[data-state="queued"],
+    &[data-state="generating"],
+    &[data-state="in_review"] {
+      background: var(--yuo-color-warning-bg);
+      color: var(--yuo-color-warning);
+    }
+  }
+
+  .kind {
+    padding-inline: var(--yuo-space-2);
+    border: 1px solid var(--yuo-color-border);
+    border-radius: var(--yuo-radius-full);
+    color: var(--yuo-color-muted);
+    font-size: var(--yuo-text-xs);
+
+    &[data-kind="remedial"] {
+      border-color: var(--yuo-color-warning);
+      color: var(--yuo-color-warning);
+    }
+
+    &[data-kind="requested"] {
+      border-color: var(--yuo-color-accent);
+      color: var(--yuo-color-fg);
+    }
+  }
+
+  .lessonError {
+    flex-basis: 100%;
+  }
+
+  .rawError {
+    display: block;
+    margin-block-start: var(--yuo-space-2);
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+}

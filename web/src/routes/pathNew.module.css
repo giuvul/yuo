@@ -1,0 +1,59 @@
+@layer components {
+  .page {
+    max-inline-size: var(--yuo-measure);
+  }
+
+  /* the cost of the path: a quiet mist panel with a coin icon, the amount readable at a glance */
+  .estimate {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: var(--yuo-space-2-5);
+    font-size: var(--yuo-text-sm);
+  }
+
+  .estimateIcon {
+    margin-block-start: 0.1rem;
+    color: var(--yuo-color-leaf);
+    font-size: var(--yuo-text-xl);
+  }
+
+  .estimateBody {
+    display: grid;
+    gap: var(--yuo-space-1);
+
+    & p {
+      margin: 0;
+    }
+  }
+
+  .estimateTitle {
+    color: var(--yuo-color-muted);
+
+    & strong {
+      font-weight: var(--yuo-weight-semibold);
+    }
+  }
+
+  .estimateAmount {
+    font-family: var(--yuo-font-display);
+    font-size: var(--yuo-text-lg);
+    font-weight: var(--yuo-weight-heavy);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* the wizard's last step: Back and "finish without a path" beside the submit */
+  .formNav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--yuo-space-2);
+    padding-block-start: var(--yuo-space-3);
+    border-block-start: 1px solid var(--yuo-color-border);
+
+    /* the submit stays on the trailing side when the row wraps on a phone */
+    & > :last-child {
+      margin-inline-start: auto;
+    }
+  }
+}

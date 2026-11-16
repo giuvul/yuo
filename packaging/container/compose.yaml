@@ -1,0 +1,60 @@
+# Yuo on a server: `docker compose up -d` in this folder after the three steps in README.md.
+# The app, and a render container with no network for model-written video code. Optional Caddy
+# in front (profile `caddy`) for a public HTTPS name; or Tailscale Serve on the host (`yuo expose tailscale`).
+
+name: yuo
+
+x-yuo: &yuo
+  image: ${YUO_IMAGE:-yuo:dev}
+  read_only: true
+  tmpfs:
+    - /tmp:size=512m
+  volumes:
+    - data:/data
+  security_opt:
+    - no-new-privileges:true
+  cap_drop: [ALL]
+  restart: unless-stopped
+
+services:
+  yuo:
+    <<: *yuo
+    secrets:
+      - yuo_key
+    environment:
+      YUO_ORIGIN: ${YUO_ORIGIN:?set YUO_ORIGIN in .env, e.g. https://yuo.203-0-113-7.sslip.io}
+      YUO_RENDER_SANDBOX: spool
+      YUO_ALLOWED_HOSTS: ${YUO_ALLOWED_HOSTS:-}
+    ports:
+      - "127.0.0.1:18765:18765"  # for Tailscale Serve or a proxy on the host; Caddy below uses the network
+    mem_limit: 2g
+
+  render:
+    <<: *yuo
+    command: ["render-worker"]
+    network_mode: none  # model-written scene code never reaches a network
+    mem_limit: 1500m
+    healthcheck:
+      test: ["CMD", "python", "-c", "import os,sys,time; sys.exit(time.time() - os.stat('/data/render/.render-worker').st_mtime > 30)"]
+      interval: 30s
+
+  caddy:
+    image: caddy:2.11.4-alpine
+    profiles: [caddy]
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      YUO_PUBLIC_HOST: ${YUO_PUBLIC_HOST:-}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy:/data
+    restart: unless-stopped
+
+volumes:
+  data:
+  caddy:
+
+secrets:
+  yuo_key:
+    file: ./yuo_key

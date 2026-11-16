@@ -1,0 +1,213 @@
+{
+ "$defs": {
+  "ItemVersionRecord": {
+   "additionalProperties": true,
+   "properties": {
+    "data_class": {
+     "default": "C",
+     "enum": [
+      "C",
+      "F"
+     ],
+     "title": "Data Class",
+     "type": "string"
+    },
+    "difficulty": {
+     "enum": [
+      "introductory",
+      "foundational",
+      "intermediate",
+      "advanced",
+      "expert"
+     ],
+     "title": "Difficulty",
+     "type": "string"
+    },
+    "extensions": {
+     "additionalProperties": true,
+     "title": "Extensions",
+     "type": "object"
+    },
+    "lang": {
+     "title": "Lang",
+     "type": "string"
+    },
+    "objectives": {
+     "items": {
+      "type": "string"
+     },
+     "title": "Objectives",
+     "type": "array",
+     "x-ref": "objective"
+    },
+    "origin_lesson": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Origin Lesson",
+     "x-ref": "lesson"
+    },
+    "payload": {
+     "additionalProperties": true,
+     "title": "Payload",
+     "type": "object"
+    },
+    "provenance": {
+     "$ref": "#/$defs/Provenance"
+    },
+    "resets_review": {
+     "default": false,
+     "title": "Resets Review",
+     "type": "boolean"
+    },
+    "support": {
+     "additionalProperties": true,
+     "title": "Support",
+     "type": "object"
+    },
+    "type_version": {
+     "minimum": 1,
+     "title": "Type Version",
+     "type": "integer"
+    },
+    "version_hash": {
+     "pattern": "^[0-9a-f]{64}$",
+     "title": "Version Hash",
+     "type": "string"
+    },
+    "version_no": {
+     "minimum": 1,
+     "title": "Version No",
+     "type": "integer"
+    }
+   },
+   "required": [
+    "version_hash",
+    "version_no",
+    "type_version",
+    "lang",
+    "difficulty",
+    "payload",
+    "support",
+    "provenance"
+   ],
+   "title": "ItemVersionRecord",
+   "type": "object"
+  },
+  "Provenance": {
+   "additionalProperties": true,
+   "description": "Who made a version; never part of its hash (spec §5).",
+   "properties": {
+    "author_kind": {
+     "default": "system",
+     "enum": [
+      "system",
+      "learner"
+     ],
+     "title": "Author Kind",
+     "type": "string"
+    },
+    "authorship": {
+     "enum": [
+      "generated",
+      "human",
+      "human_edited",
+      "translated"
+     ],
+     "title": "Authorship",
+     "type": "string"
+    },
+    "licence": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Licence"
+    },
+    "upstream": {
+     "anyOf": [
+      {
+       "additionalProperties": true,
+       "type": "object"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Upstream"
+    }
+   },
+   "required": [
+    "authorship"
+   ],
+   "title": "Provenance",
+   "type": "object"
+  }
+ },
+ "$id": "urn:yuo:package:1.0:record.item",
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "additionalProperties": true,
+ "properties": {
+  "code": {
+   "maxLength": 128,
+   "pattern": "^[a-z0-9]+([._-][a-z0-9]+)*$",
+   "title": "Code",
+   "type": "string"
+  },
+  "current": {
+   "anyOf": [
+    {
+     "pattern": "^[0-9a-f]{64}$",
+     "type": "string"
+    },
+    {
+     "type": "null"
+    }
+   ],
+   "default": null,
+   "title": "Current"
+  },
+  "extensions": {
+   "additionalProperties": true,
+   "title": "Extensions",
+   "type": "object"
+  },
+  "skill": {
+   "pattern": "^[a-z0-9]+([._-][a-z0-9]+)*$",
+   "title": "Skill",
+   "type": "string",
+   "x-ref": "skill"
+  },
+  "type_key": {
+   "maxLength": 60,
+   "title": "Type Key",
+   "type": "string"
+  },
+  "versions": {
+   "items": {
+    "$ref": "#/$defs/ItemVersionRecord"
+   },
+   "title": "Versions",
+   "type": "array"
+  }
+ },
+ "required": [
+  "code",
+  "skill",
+  "type_key"
+ ],
+ "title": "ItemRecord",
+ "type": "object"
+}

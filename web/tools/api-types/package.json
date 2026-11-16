@@ -1,0 +1,11 @@
+{
+  "name": "yuo-web-api-types",
+  "version": "0.0.0",
+  "private": true,
+  "license": "Apache-2.0",
+  "description": "Isolated install of openapi-typescript: it needs the TypeScript 5 JS API, the app uses TypeScript 7 (no JS API).",
+  "devDependencies": {
+    "openapi-typescript": "7.13.0",
+    "typescript": "5.9.3"
+  }
+}

@@ -1,0 +1,348 @@
+@layer components {
+  .wizard {
+    max-inline-size: var(--yuo-measure);
+    margin-inline: auto;
+  }
+
+  .wizardTitle {
+    font-size: var(--yuo-text-2xl);
+  }
+
+  .stepCard {
+    gap: var(--yuo-space-3-5);
+    padding: var(--yuo-space-4);
+
+    @media (max-width: 30rem) {
+      padding: var(--yuo-space-3);
+    }
+
+    & p {
+      margin: 0;
+    }
+  }
+
+  .stepHead {
+    display: grid;
+    gap: var(--yuo-space-1);
+  }
+
+  .stepTitle {
+    margin: 0;
+    font-size: var(--yuo-text-2xl);
+
+    &:focus {
+      outline: none;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--yuo-color-focus);
+      outline-offset: 2px;
+    }
+  }
+
+  /* Back on the leading side, the step's actions on the trailing side, primary last */
+  .stepNav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--yuo-space-2);
+    padding-block-start: var(--yuo-space-3);
+    border-block-start: 1px solid var(--yuo-color-border);
+
+    /* the submit stays on the trailing side when the row wraps on a phone */
+    & > :last-child {
+      margin-inline-start: auto;
+    }
+  }
+
+  .stepActions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: var(--yuo-space-2);
+    margin-inline-start: auto;
+  }
+
+  .small {
+    font-size: var(--yuo-text-sm);
+  }
+
+  /* why this option is recommended: a quiet panel with a sparkle */
+  .why {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: var(--yuo-space-2-5);
+  }
+
+  .whyIcon {
+    margin-block-start: 0.15rem;
+    color: var(--yuo-color-leaf);
+  }
+
+  .whyBody {
+    display: grid;
+    gap: var(--yuo-space-2);
+    font-size: var(--yuo-text-sm);
+  }
+
+  .chosen {
+    display: flex;
+    align-items: center;
+    gap: var(--yuo-space-2-5);
+    padding: var(--yuo-space-2-5) var(--yuo-space-3);
+    border-radius: var(--yuo-radius-2);
+    background: var(--yuo-color-surface-muted);
+    font-weight: var(--yuo-weight-semibold);
+  }
+
+  .chosenIcon {
+    display: inline-flex;
+    color: var(--yuo-color-leaf);
+  }
+
+  /* a form's footer in the wizard: Back on the leading side, the submit on the trailing side */
+  .formNav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--yuo-space-2);
+    padding-block-start: var(--yuo-space-3);
+    border-block-start: 1px solid var(--yuo-color-border);
+  }
+
+  .summary {
+    display: grid;
+    grid-template-columns: minmax(8rem, max-content) minmax(0, 1fr);
+    gap: var(--yuo-space-2) var(--yuo-space-3);
+    margin: 0;
+    padding: var(--yuo-space-3);
+    border-radius: var(--yuo-radius-2);
+    background: var(--yuo-color-surface-muted);
+    font-size: var(--yuo-text-sm);
+
+    & dt {
+      color: var(--yuo-color-muted);
+      font-weight: var(--yuo-weight-medium);
+    }
+
+    & dd {
+      font-weight: var(--yuo-weight-semibold);
+    }
+
+    & dd {
+      margin: 0;
+      overflow-wrap: anywhere;
+    }
+  }
+
+  @media (max-width: 30rem) {
+    .summary {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0;
+
+      & dd {
+        margin-block-end: var(--yuo-space-2);
+      }
+    }
+  }
+
+  .plainList {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .reasons {
+    margin: 0;
+    padding-inline-start: 1.25rem;
+    display: grid;
+    gap: var(--yuo-space-1);
+  }
+
+  /* the cost of a typical path, under each option */
+  .optionEstimate {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: start;
+    gap: var(--yuo-space-2);
+    margin-block-start: var(--yuo-space-1);
+    padding: var(--yuo-space-2) var(--yuo-space-2-5);
+    border-radius: var(--yuo-radius-1);
+    background: var(--yuo-color-surface-muted);
+    color: var(--yuo-color-fg);
+    font-weight: var(--yuo-weight-medium);
+  }
+
+  .optionEstimateIcon {
+    color: var(--yuo-color-leaf);
+  }
+
+  /* a subscription whose program is not on this computer yet: said on the option, not hidden */
+  .optionNote {
+    display: block;
+    margin-block-end: var(--yuo-space-1);
+    color: var(--yuo-color-warning);
+    font-size: var(--yuo-text-sm);
+    font-weight: var(--yuo-weight-semibold);
+  }
+
+  .steps {
+    display: grid;
+    gap: var(--yuo-space-2);
+    margin: 0;
+    padding-inline-start: 1.25rem;
+  }
+
+  .subTitle {
+    margin: 0;
+    font-size: var(--yuo-text-lg);
+  }
+
+  .partTitle {
+    margin: 0;
+    font-size: var(--yuo-text-md);
+  }
+
+  /* Settings > AI access: its parts one under the other, each after a rule, evenly spaced */
+  .parts {
+    display: grid;
+    gap: var(--yuo-space-3-5);
+  }
+
+  .part + .part {
+    padding-block-start: var(--yuo-space-3-5);
+    border-block-start: 1px solid var(--yuo-color-border);
+  }
+
+  /* spacing comes from the grid gaps alone: paragraph margins on top made the gaps uneven */
+  .parts :where(p) {
+    margin: 0;
+  }
+
+  .modelsInUse {
+    display: grid;
+    gap: var(--yuo-space-1);
+  }
+
+  .modelName {
+    display: block;
+  }
+
+  .modelDetail {
+    display: block;
+    color: var(--yuo-color-muted);
+    font-size: var(--yuo-text-sm);
+  }
+
+  .comboRow {
+    display: flex;
+    gap: var(--yuo-space-1);
+
+    & input {
+      flex: 1;
+      min-inline-size: 0;
+    }
+  }
+
+  .numberGroup {
+    display: flex;
+    align-items: center;
+    gap: var(--yuo-space-1);
+  }
+
+  .numberInput {
+    inline-size: 7rem;
+    text-align: center;
+  }
+
+  .section {
+    display: grid;
+    gap: var(--yuo-space-3);
+  }
+
+  .sectionTitle {
+    margin: 0;
+    font-size: var(--yuo-text-xl);
+  }
+
+  .stopped {
+    display: grid;
+    justify-items: start;
+    gap: var(--yuo-space-3);
+    max-inline-size: 30rem;
+    margin-block: var(--yuo-space-6);
+    margin-inline: auto;
+    padding: var(--yuo-space-4);
+    border: 1px solid var(--yuo-color-border);
+    border-radius: var(--yuo-radius-3);
+    background: var(--yuo-color-surface);
+    box-shadow: var(--yuo-shadow-2);
+
+    & p {
+      margin: 0;
+    }
+  }
+
+  .stoppedMark {
+    display: inline-grid;
+    place-items: center;
+    inline-size: 4.5rem;
+    block-size: 4.5rem;
+    border-radius: var(--yuo-radius-3);
+    background: var(--yuo-color-surface-muted);
+    color: var(--yuo-color-fg);
+  }
+
+  /* a cost estimate: a quiet mist panel with a coin icon */
+  .estimatePanel {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: var(--yuo-space-2-5);
+  }
+
+  .estimateIcon {
+    margin-block-start: 0.1rem;
+    color: var(--yuo-color-leaf);
+    font-size: var(--yuo-text-lg);
+  }
+
+  .estimateBody {
+    display: grid;
+    gap: var(--yuo-space-1);
+
+    & p {
+      margin: 0;
+    }
+  }
+
+  .vendorList {
+    display: grid;
+    gap: var(--yuo-space-3);
+  }
+
+  .vendorItem {
+    padding-block-start: var(--yuo-space-2);
+    border-block-start: 1px solid var(--yuo-color-border);
+  }
+
+  /* model ids are long and have no spaces: wrap them rather than widen the page on a phone */
+  .modelButton {
+    min-inline-size: 0;
+    max-inline-size: 100%;
+  }
+
+  .modelValue {
+    min-inline-size: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .modelPopover {
+    max-inline-size: calc(100vw - 2rem);
+  }
+
+  .modelOption {
+    overflow-wrap: anywhere;
+  }
+}

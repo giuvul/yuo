@@ -1,0 +1,10 @@
+{$YUO_PUBLIC_HOST} {
+	encode zstd gzip
+	reverse_proxy yuo:18765 {
+		flush_interval -1
+		# while the app restarts (an update), hold requests and retry instead of answering 502
+		lb_try_duration 30s
+		lb_try_interval 250ms
+	}
+	header -Server
+}

@@ -1,0 +1,604 @@
+{
+  "$description": "Yuo primitives (Grove, 2026-11-12): OKLCH ramps; brand colours are exact steps (mist = neutral.100, moss = green.600, forest = green.800, pollen = pollen.300, clay = clay.500, night = neutral.950).",
+  "color": {
+    "green": {
+      "50": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "oklch",
+          "components": [
+            0.975,
+            0.014,
+            158
+          ],
+          "hex": "#EFFAF3"
+        }
+      },
+      "100": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "oklch",
+          "components": [
+            0.955,
+            0.018,
+            158
+          ],
+          "hex": "#E7F4EB"
+        }
+      },
+      "200": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "oklch",
+          "components": [
+            0.905,
+            0.028,
+            158
+          ],
+          "hex": "#D1E6D9"
+        }
+      },
+      "300": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "oklch",
+          "components": [
+            0.835,
+            0.041,
+            158
+          ],
+          "hex": "#B4D2BF"
+        }
+      },
+      "400": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "oklch",
+          "components": [
+            0.745,
+            0.058,
+            158
+          ],
+          "hex": "#8EB89E"
+        }
+      },
+      "500": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "oklch",
+          "components": [
+            0.645,
+            0.075,
+            158
+          ],
+          "hex": "#659C7C"
+        }
+      },
+      "600": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "oklch",
+          "components": [
+            0.539,
+            0.069,
+            151.6
+          ],
+          "hex": "#4F7A5A"
+        }
+      },
+      "700": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "oklch",
+          "components": [
+            0.445,
+            0.057,
+            158
+          ],
+          "hex": "#385E48"
+        }
+      },
+      "800": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "oklch",
+          "components": [
+            0.325,
+            0.041,
+            165.4
+          ],
+          "hex": "#1E3B2F"
+        }
+      },
+      "900": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "oklch",
+          "components": [
+            0.255,
+            0.02,
+            158
+          ],
+          "hex": "#1B261F"
+        }
+      },
+      "950": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "oklch",
+          "components": [
+            0.2,
+            0.01,
+            158
+          ],
+          "hex": "#131714"
+        }
+      },
+      "dim": {
+        "$type": "color",
+        "$description": "a dark tinted background for notices in the dark theme",
+        "$value": {
+          "colorSpace": "oklch",
+          "components": [
+            0.3,
+            0.035,
+            158
+          ],
+          "hex": "#1E3327"
+        }
+      }
+    },
+    "neutral": {
+      "50": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "oklch",
+          "components": [
+            0.978,
+            0.006,
+            120
+          ],
+          "hex": "#F7F8F3"
+        }
+      },
+      "100": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "oklch",
+          "components": [
+            0.958,
+            0.011,
+            136.6
+          ],
+          "hex": "#EEF3EC"
+        }
+      },
+      "200": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "oklch",
+          "components": [
+            0.915,
+            0.014,
+            150
+          ],
+          "hex": "#DDE6DE"
+        }
+      },
+      "300": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "oklch",
+          "components": [
+            0.85,
+            0.014,
+            150
+          ],
+          "hex": "#C8D0C9"
+        }
+      },
+      "400": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "oklch",
+          "components": [
+            0.76,
+            0.014,
+            150
+          ],
+          "hex": "#ABB4AC"
+        }
+      },
+      "500": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "oklch",
+          "components": [
+            0.66,
+            0.014,
+            150
+          ],
+          "hex": "#8C958E"
+        }
+      },
+      "600": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "oklch",
+          "components": [
+            0.555,
+            0.014,
+            150
+          ],
+          "hex": "#6D756F"
+        }
+      },
+      "700": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "oklch",
+          "components": [
+            0.46,
+            0.014,
+            150
+          ],
+          "hex": "#535A54"
+        }
+      },
+      "800": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "oklch",
+          "components": [
+            0.36,
+            0.014,
+            150
+          ],
+          "hex": "#383F39"
+        }
+      },
+      "900": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "oklch",
+          "components": [
+            0.27,
+            0.014,
+            150
+          ],
+          "hex": "#222823"
+        }
+      },
+      "950": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "oklch",
+          "components": [
+            0.216,
+            0.023,
+            165.5
+          ],
+          "hex": "#0F1D17"
+        }
+      }
+    },
+    "pollen": {
+      "50": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "oklch",
+          "components": [
+            0.975,
+            0.025,
+            85
+          ],
+          "hex": "#FFF6E4"
+        }
+      },
+      "100": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "oklch",
+          "components": [
+            0.955,
+            0.036,
+            85
+          ],
+          "hex": "#FBEFD5"
+        }
+      },
+      "200": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "oklch",
+          "components": [
+            0.905,
+            0.056,
+            85
+          ],
+          "hex": "#F1DEB6"
+        }
+      },
+      "300": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "oklch",
+          "components": [
+            0.834,
+            0.141,
+            85.4
+          ],
+          "hex": "#F2C14E"
+        }
+      },
+      "400": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "oklch",
+          "components": [
+            0.745,
+            0.117,
+            85
+          ],
+          "hex": "#CEA64D"
+        }
+      },
+      "500": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "oklch",
+          "components": [
+            0.645,
+            0.132,
+            85
+          ],
+          "hex": "#B28601"
+        }
+      },
+      "600": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "oklch",
+          "components": [
+            0.54,
+            0.109,
+            85
+          ],
+          "hex": "#8C6804"
+        }
+      },
+      "700": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "oklch",
+          "components": [
+            0.445,
+            0.091,
+            85
+          ],
+          "hex": "#6B4F00"
+        }
+      },
+      "800": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "oklch",
+          "components": [
+            0.325,
+            0.065,
+            85
+          ],
+          "hex": "#433102"
+        }
+      },
+      "900": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "oklch",
+          "components": [
+            0.255,
+            0.04,
+            85
+          ],
+          "hex": "#2C210A"
+        }
+      },
+      "950": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "oklch",
+          "components": [
+            0.2,
+            0.019,
+            85
+          ],
+          "hex": "#1A150C"
+        }
+      },
+      "dim": {
+        "$type": "color",
+        "$description": "a dark tinted background for notices in the dark theme",
+        "$value": {
+          "colorSpace": "oklch",
+          "components": [
+            0.3,
+            0.045,
+            85
+          ],
+          "hex": "#382C11"
+        }
+      }
+    },
+    "clay": {
+      "50": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "oklch",
+          "components": [
+            0.975,
+            0.011,
+            40
+          ],
+          "hex": "#FEF4F1"
+        }
+      },
+      "100": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "oklch",
+          "components": [
+            0.955,
+            0.022,
+            40
+          ],
+          "hex": "#FEECE5"
+        }
+      },
+      "200": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "oklch",
+          "components": [
+            0.905,
+            0.048,
+            40
+          ],
+          "hex": "#FDD6C8"
+        }
+      },
+      "300": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "oklch",
+          "components": [
+            0.835,
+            0.071,
+            40
+          ],
+          "hex": "#F3BAA6"
+        }
+      },
+      "400": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "oklch",
+          "components": [
+            0.745,
+            0.101,
+            40
+          ],
+          "hex": "#E4967B"
+        }
+      },
+      "500": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "oklch",
+          "components": [
+            0.621,
+            0.124,
+            40.1
+          ],
+          "hex": "#C46A4A"
+        }
+      },
+      "600": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "oklch",
+          "components": [
+            0.54,
+            0.13,
+            40
+          ],
+          "hex": "#AB502E"
+        }
+      },
+      "700": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "oklch",
+          "components": [
+            0.445,
+            0.098,
+            40
+          ],
+          "hex": "#803E27"
+        }
+      },
+      "800": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "oklch",
+          "components": [
+            0.325,
+            0.058,
+            40
+          ],
+          "hex": "#4D291C"
+        }
+      },
+      "900": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "oklch",
+          "components": [
+            0.255,
+            0.035,
+            40
+          ],
+          "hex": "#311D16"
+        }
+      },
+      "950": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "oklch",
+          "components": [
+            0.2,
+            0.017,
+            40
+          ],
+          "hex": "#1D1410"
+        }
+      },
+      "dim": {
+        "$type": "color",
+        "$description": "a dark tinted background for notices in the dark theme",
+        "$value": {
+          "colorSpace": "oklch",
+          "components": [
+            0.3,
+            0.045,
+            40
+          ],
+          "hex": "#41261C"
+        }
+      }
+    },
+    "bark": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "oklch",
+        "components": [
+          0.312,
+          0.023,
+          58.6
+        ],
+        "hex": "#3A2E25"
+      }
+    },
+    "white": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          1,
+          1,
+          1
+        ],
+        "hex": "#FFFFFF"
+      }
+    }
+  }
+}

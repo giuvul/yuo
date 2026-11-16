@@ -1,0 +1,127 @@
+/* `vendor`: a library's own stylesheet (path/flow.css), so the components layer can restyle it */
+@layer reset, tokens, fonts, base, vendor, components, utilities;
+
+@import "./tokens.css" layer(tokens);
+/* Grove type (Yuo Brand Identity, section 6): Nunito for everything (Black for headings), JetBrains Mono for code.
+   Bundled (Yuo works offline), SIL Open Font License. */
+@import "@fontsource-variable/nunito/wght.css" layer(fonts);
+@import "@fontsource-variable/nunito/wght-italic.css" layer(fonts);
+@import "@fontsource-variable/jetbrains-mono/wght.css" layer(fonts);
+
+@layer reset {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+  }
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    background: var(--yuo-color-bg);
+    color: var(--yuo-color-fg);
+    font-family: var(--yuo-font-sans);
+    font-size: var(--yuo-text-md);
+    line-height: var(--yuo-leading-normal);
+    font-optical-sizing: auto;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a {
+    color: var(--yuo-color-link);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.18em;
+
+    &:hover {
+      text-decoration-thickness: 2px;
+    }
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--yuo-color-focus);
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background: var(--yuo-color-highlight);
+    color: var(--yuo-color-highlight-fg);
+  }
+
+  code,
+  pre,
+  kbd {
+    font-family: var(--yuo-font-mono);
+    font-size: 0.92em;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--yuo-font-display);
+    font-weight: var(--yuo-weight-heavy);
+    line-height: var(--yuo-leading-tight);
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-weight: var(--yuo-weight-black);
+  }
+
+  h1 {
+    font-size: var(--yuo-text-3xl);
+  }
+
+  h2 {
+    font-size: var(--yuo-text-xl);
+  }
+
+  h3 {
+    font-size: var(--yuo-text-lg);
+  }
+
+  h4 {
+    font-size: var(--yuo-text-md);
+  }
+
+  hr {
+    border: 0;
+    border-block-start: 1px solid var(--yuo-color-border);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      /* staggered growth must not leave things hidden for their delay */
+      animation-delay: 0s !important;
+      transition-duration: 0.01ms !important;
+      transition-delay: 0s !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer utilities {
+  .visually-hidden {
+    position: absolute;
+    inline-size: 1px;
+    block-size: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}

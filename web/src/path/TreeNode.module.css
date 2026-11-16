@@ -1,0 +1,147 @@
+/* A skill's node (TreeNode.tsx): the brand's node set. Semantic tokens only, flat fills. `--node` is the diameter
+   in units of `--u` (1/16 rem by default, so a node follows the root font; the graph sets its own unit). */
+@layer components {
+  /* the round node: an outlined Moss circle unless its state says otherwise */
+  .disc {
+    position: relative;
+    display: grid;
+    flex: none;
+    place-items: center;
+    inline-size: calc(var(--node, 44) * var(--u, 0.0625rem));
+    block-size: calc(var(--node, 44) * var(--u, 0.0625rem));
+    border: 2px solid var(--yuo-color-leaf);
+    border-radius: var(--yuo-radius-full);
+    background: var(--yuo-color-surface);
+    color: var(--yuo-color-muted);
+    font-size: calc(var(--node, 44) * var(--u, 0.0625rem) / 2);
+    transition: transform var(--yuo-duration-fast) var(--yuo-ease-standard);
+
+    &[data-kind="done"] {
+      border-color: var(--yuo-color-accent);
+      background: var(--yuo-color-accent);
+      color: var(--yuo-color-accent-fg);
+    }
+
+    &[data-kind="current"] {
+      border-color: var(--yuo-color-highlight);
+      background: var(--yuo-color-highlight);
+      color: var(--yuo-color-highlight-fg);
+    }
+
+    &[data-kind="locked"] {
+      border-color: var(--yuo-color-twig);
+      background: var(--yuo-color-bg);
+    }
+
+    /* mastered, and due again: the check stays, a Clay ring goes round it */
+    &[data-kind="review"] {
+      border: 3px solid var(--yuo-color-illus-clay);
+      background: var(--yuo-color-accent);
+      /* a hairline of the page between the ring and the fill (an inset ring, not a shadow) */
+      box-shadow: inset 0 0 0 2px var(--yuo-color-bg);
+      color: var(--yuo-color-accent-fg);
+    }
+
+    /* in a row of text (the legend, a link to another skill): small, still, without its marks */
+    &[data-small] {
+      --node: 20;
+
+      &::before,
+      & .mark {
+        display: none;
+      }
+    }
+
+    /* the one to learn now breathes: a soft pollen ring that swells and settles */
+    &[data-current]::before {
+      content: "";
+      position: absolute;
+      inset: calc(-6 * var(--u, 0.0625rem));
+      border: 3px solid var(--yuo-color-highlight);
+      border-radius: inherit;
+      opacity: 0.55;
+      will-change: transform, opacity;
+      animation: yuo-tree-breathe var(--yuo-duration-breathe) var(--yuo-ease-gentle) infinite alternate;
+    }
+  }
+
+  @keyframes yuo-tree-breathe {
+    from {
+      opacity: 0.7;
+      transform: scale(0.96);
+    }
+    to {
+      opacity: 0.25;
+      transform: scale(1.14);
+    }
+  }
+
+  .dot {
+    inline-size: 0.6em;
+    block-size: 0.6em;
+    border-radius: var(--yuo-radius-full);
+    background: currentcolor;
+  }
+
+  /* mastery so far, as an arc on an open node */
+  .arc {
+    position: absolute;
+    inset: -2px;
+    inline-size: calc(100% + 4px);
+    block-size: calc(100% + 4px);
+    fill: none;
+    stroke: var(--yuo-color-leaf);
+    stroke-width: 5;
+    stroke-linecap: round;
+  }
+
+  /* small marks on a node's edge: needs review (below), a lesson being written or failed (above) */
+  .mark {
+    position: absolute;
+    inset-block-start: -0.22em;
+    inset-inline-end: -0.3em;
+    display: grid;
+    place-items: center;
+    inline-size: 0.86em;
+    block-size: 0.86em;
+    border: 1px solid var(--yuo-color-border-strong);
+    border-radius: var(--yuo-radius-full);
+    background: var(--yuo-color-surface);
+    color: var(--yuo-color-leaf);
+    font-size: 1em;
+
+    & svg {
+      inline-size: 0.6em;
+      block-size: 0.6em;
+    }
+
+    &[data-mark="review"] {
+      inset-block: auto -0.22em;
+      border-color: var(--yuo-color-bg);
+      background: var(--yuo-color-illus-clay);
+      color: var(--yuo-color-bg);
+    }
+
+    &[data-mark="failed"] {
+      border-color: var(--yuo-color-danger);
+      background: var(--yuo-color-danger-bg);
+      color: var(--yuo-color-danger);
+    }
+  }
+
+  .sample {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--yuo-space-2);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .disc {
+      transition: none;
+    }
+
+    .disc[data-current]::before {
+      animation: none;
+    }
+  }
+}

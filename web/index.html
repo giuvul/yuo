@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content" />
+    <meta name="color-scheme" content="light dark" />
+    <!-- the cascade layer order, before any stylesheet: a layer ranks where it is first seen, and the
+         bundler may link a chunk's stylesheet ahead of the main one -->
+    <style>
+      @layer reset, tokens, fonts, base, vendor, components, utilities;
+    </style>
+    <!-- the theme chosen in Yuo, before the first paint; src/theme.ts keeps this copy -->
+    <script>
+      try {
+        var t = localStorage.getItem("yuo.theme");
+        if (t === "light" || t === "dark") document.documentElement.dataset.theme = t;
+      } catch (e) {}
+    </script>
+    <meta name="theme-color" content="#F7F8F3" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0F1D17" media="(prefers-color-scheme: dark)" />
+    <meta name="description" content="Your own learning paths, lessons, practice and tutor." />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <title>Yuo</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

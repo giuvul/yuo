@@ -1,0 +1,12 @@
+/* Holds the graph's place while its code loads, so the page does not jump. */
+@layer components {
+  .loading {
+    display: grid;
+    place-items: center;
+    min-block-size: min(70dvh, 36rem);
+
+    &[data-contained] {
+      min-block-size: 26rem;
+    }
+  }
+}

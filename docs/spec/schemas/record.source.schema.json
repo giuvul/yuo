@@ -1,0 +1,76 @@
+{
+ "$id": "urn:yuo:package:1.0:record.source",
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "additionalProperties": true,
+ "properties": {
+  "accessed_at": {
+   "anyOf": [
+    {
+     "type": "string"
+    },
+    {
+     "type": "null"
+    }
+   ],
+   "default": null,
+   "title": "Accessed At"
+  },
+  "citation": {
+   "additionalProperties": true,
+   "title": "Citation",
+   "type": "object"
+  },
+  "extensions": {
+   "additionalProperties": true,
+   "title": "Extensions",
+   "type": "object"
+  },
+  "key": {
+   "maxLength": 200,
+   "title": "Key",
+   "type": "string"
+  },
+  "kind": {
+   "maxLength": 40,
+   "title": "Kind",
+   "type": "string"
+  },
+  "published_at": {
+   "anyOf": [
+    {
+     "type": "string"
+    },
+    {
+     "type": "null"
+    }
+   ],
+   "default": null,
+   "title": "Published At"
+  },
+  "title": {
+   "maxLength": 500,
+   "title": "Title",
+   "type": "string"
+  },
+  "url": {
+   "anyOf": [
+    {
+     "maxLength": 2000,
+     "type": "string"
+    },
+    {
+     "type": "null"
+    }
+   ],
+   "default": null,
+   "title": "Url"
+  }
+ },
+ "required": [
+  "key",
+  "kind",
+  "title"
+ ],
+ "title": "SourceRecord",
+ "type": "object"
+}

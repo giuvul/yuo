@@ -1,0 +1,142 @@
+@layer components {
+  /* one subscription program: a calm bordered card, the state on top, one step below */
+  .card {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--yuo-space-2-5);
+    padding: var(--yuo-space-3);
+    border: 1px solid var(--yuo-color-border);
+    border-radius: var(--yuo-radius-2);
+    background: var(--yuo-color-surface);
+    text-align: start;
+
+    & p {
+      margin: 0;
+    }
+  }
+
+  .head {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    gap: var(--yuo-space-2-5);
+  }
+
+  /* the state as a shape too, never colour alone: a check, a sprout, a key, a program */
+  .mark {
+    display: inline-grid;
+    place-items: center;
+    inline-size: 2rem;
+    block-size: 2rem;
+    border-radius: var(--yuo-radius-full);
+    background: var(--yuo-color-surface-muted);
+    color: var(--yuo-color-leaf);
+    font-size: var(--yuo-text-lg);
+  }
+
+  .card[data-tone="ready"] .mark {
+    background: var(--yuo-color-success-bg);
+    color: var(--yuo-color-success);
+  }
+
+  .card[data-tone="todo"] .mark,
+  .card[data-tone="unknown"] .mark {
+    background: var(--yuo-color-warning-bg);
+    color: var(--yuo-color-warning);
+  }
+
+  .title {
+    margin: 0;
+    font-family: inherit;
+    font-size: var(--yuo-text-md);
+    font-weight: var(--yuo-weight-bold);
+    line-height: var(--yuo-leading-snug);
+  }
+
+  .meta {
+    padding-inline-start: calc(2rem + var(--yuo-space-2-5));
+    color: var(--yuo-color-muted);
+    font-size: var(--yuo-text-sm);
+  }
+
+  .working {
+    display: flex;
+    align-items: center;
+    gap: var(--yuo-space-2-5);
+    color: var(--yuo-color-leaf);
+
+    & > span {
+      color: var(--yuo-color-fg);
+    }
+  }
+
+  /* what the program itself said (not translated): smaller, and it may be long */
+  .detail {
+    font-size: var(--yuo-text-sm);
+    overflow-wrap: anywhere;
+  }
+
+  .steps {
+    display: grid;
+    gap: var(--yuo-space-1);
+    margin: 0;
+    padding-inline-start: 1.25rem;
+  }
+
+  .codeForm {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: end;
+    gap: var(--yuo-space-2);
+
+    & > :first-child {
+      flex: 1 1 14rem;
+      min-inline-size: 0;
+    }
+  }
+
+  .manual {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--yuo-space-2);
+    font-size: var(--yuo-text-sm);
+  }
+
+  .command {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: var(--yuo-space-1) var(--yuo-space-2);
+  }
+
+  .commandText {
+    margin: 0;
+    padding: var(--yuo-space-2) var(--yuo-space-2-5);
+    border-radius: var(--yuo-radius-1);
+    background: var(--yuo-color-code-bg);
+    font-size: var(--yuo-text-sm);
+    overflow-x: auto;
+    white-space: pre;
+    user-select: all;
+  }
+
+  .copied {
+    grid-column: 1 / -1;
+    color: var(--yuo-color-muted);
+
+    &:empty {
+      display: none;
+    }
+  }
+
+  .after {
+    color: var(--yuo-color-muted);
+  }
+
+  /* several programs, or a notice with the card under it */
+  .group {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--yuo-space-2-5);
+  }
+}

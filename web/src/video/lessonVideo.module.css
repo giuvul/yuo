@@ -1,0 +1,38 @@
+@layer components {
+  .section {
+    display: grid;
+    gap: var(--yuo-space-2);
+  }
+
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--yuo-space-3);
+    margin: 0;
+    font-size: var(--yuo-text-sm);
+  }
+
+  .download {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--yuo-space-1);
+    color: var(--yuo-color-muted);
+
+    &:hover {
+      color: var(--yuo-color-fg);
+    }
+
+    & svg {
+      flex: none;
+    }
+  }
+}
+
+@layer components {
+  /* the notes bubble was hidden: this brings it back (NotesBubble.tsx) */
+  .notesAgain {
+    display: flex;
+    justify-content: flex-end;
+    margin-block-start: var(--yuo-space-1);
+  }
+}

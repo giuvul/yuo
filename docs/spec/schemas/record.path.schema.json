@@ -1,0 +1,87 @@
+{
+ "$id": "urn:yuo:package:1.0:record.path",
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "additionalProperties": true,
+ "properties": {
+  "authors": {
+   "items": {
+    "additionalProperties": true,
+    "type": "object"
+   },
+   "title": "Authors",
+   "type": "array"
+  },
+  "code": {
+   "maxLength": 128,
+   "pattern": "^[a-z0-9]+([._-][a-z0-9]+)*$",
+   "title": "Code",
+   "type": "string"
+  },
+  "content_lang": {
+   "maxLength": 35,
+   "minLength": 2,
+   "title": "Content Lang",
+   "type": "string"
+  },
+  "difficulty": {
+   "enum": [
+    "introductory",
+    "foundational",
+    "intermediate",
+    "advanced",
+    "expert"
+   ],
+   "title": "Difficulty",
+   "type": "string"
+  },
+  "extensions": {
+   "additionalProperties": true,
+   "title": "Extensions",
+   "type": "object"
+  },
+  "goal": {
+   "maxLength": 4000,
+   "title": "Goal",
+   "type": "string"
+  },
+  "goal_type": {
+   "enum": [
+    "exam",
+    "practical",
+    "understanding",
+    "curiosity"
+   ],
+   "title": "Goal Type",
+   "type": "string"
+  },
+  "licence": {
+   "maxLength": 200,
+   "minLength": 1,
+   "title": "Licence",
+   "type": "string"
+  },
+  "subject": {
+   "maxLength": 2000,
+   "title": "Subject",
+   "type": "string"
+  },
+  "title": {
+   "maxLength": 200,
+   "minLength": 1,
+   "title": "Title",
+   "type": "string"
+  }
+ },
+ "required": [
+  "code",
+  "title",
+  "subject",
+  "goal",
+  "goal_type",
+  "difficulty",
+  "content_lang",
+  "licence"
+ ],
+ "title": "PathRecord",
+ "type": "object"
+}

@@ -1,0 +1,283 @@
+{
+  "$description": "Yuo semantic colours, dark theme. Components use only these (as --yuo-color-<name>).",
+  "color": {
+    "bg": {
+      "$type": "color",
+      "$value": "{color.neutral.950}",
+      "$description": "page background"
+    },
+    "surface": {
+      "$type": "color",
+      "$value": "{color.green.900}",
+      "$description": "cards and panels"
+    },
+    "surface-muted": {
+      "$type": "color",
+      "$value": "{color.green.950}",
+      "$description": "quiet panels inside a page (estimate, tutor)"
+    },
+    "border": {
+      "$type": "color",
+      "$value": "{color.neutral.800}",
+      "$description": "hairlines"
+    },
+    "border-strong": {
+      "$type": "color",
+      "$value": "{color.neutral.600}",
+      "$description": "input and control borders"
+    },
+    "fg": {
+      "$type": "color",
+      "$value": "{color.neutral.100}",
+      "$description": "text"
+    },
+    "muted": {
+      "$type": "color",
+      "$value": "{color.neutral.400}",
+      "$description": "secondary text"
+    },
+    "accent": {
+      "$type": "color",
+      "$value": "{color.green.300}",
+      "$description": "primary action background"
+    },
+    "accent-fg": {
+      "$type": "color",
+      "$value": "{color.neutral.950}",
+      "$description": "text on the primary action"
+    },
+    "accent-hover": {
+      "$type": "color",
+      "$value": "{color.green.200}",
+      "$description": "primary action, hovered"
+    },
+    "link": {
+      "$type": "color",
+      "$value": "{color.green.300}",
+      "$description": "links"
+    },
+    "focus": {
+      "$type": "color",
+      "$value": "{color.pollen.300}",
+      "$description": "focus ring"
+    },
+    "highlight": {
+      "$type": "color",
+      "$value": "{color.pollen.300}",
+      "$description": "progress, the current lesson (pollen)"
+    },
+    "highlight-fg": {
+      "$type": "color",
+      "$value": "{color.neutral.950}",
+      "$description": "text on highlight"
+    },
+    "success": {
+      "$type": "color",
+      "$value": "{color.green.300}",
+      "$description": "success text"
+    },
+    "success-bg": {
+      "$type": "color",
+      "$value": "{color.green.dim}",
+      "$description": "success background"
+    },
+    "warning": {
+      "$type": "color",
+      "$value": "{color.pollen.300}",
+      "$description": "warning text"
+    },
+    "warning-bg": {
+      "$type": "color",
+      "$value": "{color.pollen.dim}",
+      "$description": "warning background"
+    },
+    "danger": {
+      "$type": "color",
+      "$value": "{color.clay.300}",
+      "$description": "error text"
+    },
+    "danger-bg": {
+      "$type": "color",
+      "$value": "{color.clay.dim}",
+      "$description": "error background"
+    },
+    "info-bg": {
+      "$type": "color",
+      "$value": "{color.green.dim}",
+      "$description": "information background"
+    },
+    "code-bg": {
+      "$type": "color",
+      "$value": "{color.neutral.900}",
+      "$description": "code background"
+    },
+    "track": {
+      "$type": "color",
+      "$value": "{color.neutral.800}",
+      "$description": "progress track"
+    },
+    "leaf": {
+      "$type": "color",
+      "$value": "{color.green.400}",
+      "$description": "leaf and branch drawings"
+    },
+    "logo-leaf": {
+      "$type": "color",
+      "$value": "{color.neutral.100}",
+      "$description": "the logo's right leaf: Moss on light, one-colour Mist on dark"
+    },
+    "logo-inverse": {
+      "$type": "color",
+      "$value": "{color.neutral.100}",
+      "$description": "the logo on a Forest surface (the app icon's treatment)"
+    },
+    "logo-inverse-leaf": {
+      "$type": "color",
+      "$value": "{color.green.600}",
+      "$description": "the right leaf of the logo on a Forest surface"
+    },
+    "media-bg": {
+      "$type": "color",
+      "$value": "{color.green.900}",
+      "$description": "behind a lesson video and its poster"
+    },
+    "media-bar": {
+      "$type": "color",
+      "$value": "{color.green.950}",
+      "$description": "the video control bar"
+    },
+    "media-fg": {
+      "$type": "color",
+      "$value": "{color.neutral.100}",
+      "$description": "controls and text on the video bar"
+    },
+    "scrim": {
+      "$type": "color",
+      "$value": "{color.green.950}",
+      "$description": "behind a modal dialog (used with transparency)"
+    },
+    "pattern-leaf": {
+      "$type": "color",
+      "$value": "{color.green.dim}",
+      "$description": "decorative only: the botanical leaf pattern behind the page (never behind text alone)"
+    },
+    "mote": {
+      "$type": "color",
+      "$value": "{color.pollen.300}",
+      "$description": "decorative only: pollen motes, shown at low opacity"
+    },
+    "illus-deep": {
+      "$type": "color",
+      "$value": "{color.green.400}",
+      "$description": "illustrations and the skill tree only"
+    },
+    "illus-mid": {
+      "$type": "color",
+      "$value": "{color.green.600}",
+      "$description": "illustrations and the skill tree only"
+    },
+    "illus-soft": {
+      "$type": "color",
+      "$value": "{color.green.700}",
+      "$description": "illustrations and the skill tree only"
+    },
+    "illus-ground": {
+      "$type": "color",
+      "$value": "{color.green.dim}",
+      "$description": "illustrations and the skill tree only"
+    },
+    "illus-paper": {
+      "$type": "color",
+      "$value": "{color.neutral.200}",
+      "$description": "illustrations and the skill tree only"
+    },
+    "illus-sun": {
+      "$type": "color",
+      "$value": "{color.pollen.300}",
+      "$description": "illustrations only: the Pollen sun"
+    },
+    "illus-clay": {
+      "$type": "color",
+      "$value": "{color.clay.500}",
+      "$description": "illustrations only: a small Clay accent"
+    },
+    "illus-bark": {
+      "$type": "color",
+      "$value": "{color.clay.700}",
+      "$description": "illustrations only: trunks and details"
+    },
+    "twig": {
+      "$type": "color",
+      "$value": "{color.neutral.600}",
+      "$description": "a dormant branch, a locked node's outline, prerequisite tendrils (3:1 on the page)"
+    }
+  },
+  "shadow": {
+    "1": {
+      "$type": "shadow",
+      "$description": "darker shadows: forest-tinted ones do not show on the night background",
+      "$value": [
+        {
+          "color": {
+            "colorSpace": "srgb",
+            "components": [
+              0,
+              0,
+              0
+            ],
+            "alpha": 0.35
+          },
+          "offsetX": {
+            "value": 0,
+            "unit": "px"
+          },
+          "offsetY": {
+            "value": 1,
+            "unit": "px"
+          },
+          "blur": {
+            "value": 3,
+            "unit": "px"
+          },
+          "spread": {
+            "value": 0,
+            "unit": "px"
+          }
+        }
+      ]
+    },
+    "2": {
+      "$type": "shadow",
+      "$description": "darker shadows: forest-tinted ones do not show on the night background",
+      "$value": [
+        {
+          "color": {
+            "colorSpace": "srgb",
+            "components": [
+              0,
+              0,
+              0
+            ],
+            "alpha": 0.45
+          },
+          "offsetX": {
+            "value": 0,
+            "unit": "px"
+          },
+          "offsetY": {
+            "value": 8,
+            "unit": "px"
+          },
+          "blur": {
+            "value": 24,
+            "unit": "px"
+          },
+          "spread": {
+            "value": 0,
+            "unit": "px"
+          }
+        }
+      ]
+    }
+  }
+}

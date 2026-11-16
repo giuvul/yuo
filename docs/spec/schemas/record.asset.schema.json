@@ -1,0 +1,45 @@
+{
+ "$id": "urn:yuo:package:1.0:record.asset",
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "additionalProperties": true,
+ "properties": {
+  "bytes": {
+   "minimum": 0,
+   "title": "Bytes",
+   "type": "integer"
+  },
+  "extensions": {
+   "additionalProperties": true,
+   "title": "Extensions",
+   "type": "object"
+  },
+  "kind": {
+   "maxLength": 40,
+   "title": "Kind",
+   "type": "string"
+  },
+  "media_type": {
+   "maxLength": 100,
+   "title": "Media Type",
+   "type": "string"
+  },
+  "present": {
+   "title": "Present",
+   "type": "boolean"
+  },
+  "sha256": {
+   "pattern": "^[0-9a-f]{64}$",
+   "title": "Sha256",
+   "type": "string"
+  }
+ },
+ "required": [
+  "sha256",
+  "media_type",
+  "kind",
+  "bytes",
+  "present"
+ ],
+ "title": "AssetRecord",
+ "type": "object"
+}

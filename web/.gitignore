@@ -1,0 +1,7 @@
+node_modules/
+dist/
+# lingui compile output (the app imports .po via @lingui/vite-plugin)
+src/locales/*/messages.ts
+src/locales/*/messages.js
+test-results/
+playwright-report/

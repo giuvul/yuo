@@ -1,0 +1,2201 @@
+{
+  "$schema": "http://cyclonedx.org/schema/bom-1.5.schema.json",
+  "bomFormat": "CycloneDX",
+  "components": [
+    {
+      "bom-ref": "@fontsource-variable/jetbrains-mono@5.3.0",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://registry.npmjs.org/@fontsource-variable/jetbrains-mono/-/jetbrains-mono-5.3.0.tgz"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "177db1a52d8db06628422d800d290a4e0a498fba336a3b0680327cc284e7aa398807e7710c8a889a3978a57655104c6ef14159da7761997d7c1014bf85dcf72f"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "OFL-1.1"
+          }
+        }
+      ],
+      "name": "@fontsource-variable/jetbrains-mono",
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@fontsource-variable/jetbrains-mono"
+        }
+      ],
+      "purl": "pkg:npm/%40fontsource-variable/jetbrains-mono@5.3.0",
+      "scope": "required",
+      "type": "library",
+      "version": "5.3.0"
+    },
+    {
+      "bom-ref": "@fontsource-variable/nunito@5.3.0",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://registry.npmjs.org/@fontsource-variable/nunito/-/nunito-5.3.0.tgz"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "b70d1c87b7af2034b0a1e532fb45f3a1c6077db4562de0913c9cb6d8a81bacb8c32c06cdc3f7c4ac18a2975d12b2bb374a3af9e73699aebdfa6bdef98fc70191"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "OFL-1.1"
+          }
+        }
+      ],
+      "name": "@fontsource-variable/nunito",
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@fontsource-variable/nunito"
+        }
+      ],
+      "purl": "pkg:npm/%40fontsource-variable/nunito@5.3.0",
+      "scope": "required",
+      "type": "library",
+      "version": "5.3.0"
+    },
+    {
+      "bom-ref": "@internationalized/date@3.12.4",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://registry.npmjs.org/@internationalized/date/-/date-3.12.4.tgz"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "3357449f87355351ec4a569547cba966d4aabd7ad39070dfbf5f07d35b82489ca354b0f19c1477f2ffdf33179c9a5c17291e22f4779972681000f13a03e68625"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "name": "@internationalized/date",
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@internationalized/date"
+        }
+      ],
+      "purl": "pkg:npm/%40internationalized/date@3.12.4",
+      "scope": "required",
+      "type": "library",
+      "version": "3.12.4"
+    },
+    {
+      "bom-ref": "@internationalized/number@3.6.9",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://registry.npmjs.org/@internationalized/number/-/number-3.6.9.tgz"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "1a05b2d9c68effe855f6c4ffa024d6187bdb8e624c3d3f64917ce82912e7904abb69d821851ed4a6b86f63db17aca7eba7735c0df845e904075d1d4a7d06c1f2"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "name": "@internationalized/number",
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@internationalized/number"
+        }
+      ],
+      "purl": "pkg:npm/%40internationalized/number@3.6.9",
+      "scope": "required",
+      "type": "library",
+      "version": "3.6.9"
+    },
+    {
+      "bom-ref": "@internationalized/string@3.2.10",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://registry.npmjs.org/@internationalized/string/-/string-3.2.10.tgz"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "3c3c7afffbc74a94671dfc6a32ab68d75cd0be1b1a53be0ede62afd85ff47a270665c97d34b8d098695b1f3fcbb09879b4b2a9e00e0bed9553ccdd7f326313bc"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "name": "@internationalized/string",
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@internationalized/string"
+        }
+      ],
+      "purl": "pkg:npm/%40internationalized/string@3.2.10",
+      "scope": "required",
+      "type": "library",
+      "version": "3.2.10"
+    },
+    {
+      "bom-ref": "@lingui/react@5.9.5",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://registry.npmjs.org/@lingui/react/-/react-5.9.5.tgz"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "8f362803f7f88eb4dfa4e07e8eb321942f37e54c2a49725d7a9afb71f5ac9a0f91a69dc7052444b5fae881acf52ea2c8fc05679267e9d74328e953a9ffca9e39"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "name": "@lingui/react",
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@lingui/react"
+        }
+      ],
+      "purl": "pkg:npm/%40lingui/react@5.9.5",
+      "scope": "required",
+      "type": "library",
+      "version": "5.9.5"
+    },
+    {
+      "bom-ref": "@react-types/shared@3.37.0",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://registry.npmjs.org/@react-types/shared/-/shared-3.37.0.tgz"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "54d959ba27eee2d1ddc563df1efa0c7cab0703d9154c21a476ebf9bca5537629e6f301c524d872541e51cc83224458f4ab744aa026cfebcbb6cdaa014a216e7a"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "name": "@react-types/shared",
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@react-types/shared"
+        }
+      ],
+      "purl": "pkg:npm/%40react-types/shared@3.37.0",
+      "scope": "required",
+      "type": "library",
+      "version": "3.37.0"
+    },
+    {
+      "bom-ref": "@swc/helpers@0.5.23",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://registry.npmjs.org/@swc/helpers/-/helpers-0.5.23.tgz"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "e654ac30e4d751178f8250dfbee01052a9067a4f47836924b0e61acb69b4f9747ef9bd8d5982ffe2c5b2baf54122cf282a725ac64762f7085a2ffb2a375dda7f"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "name": "@swc/helpers",
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@swc/helpers"
+        }
+      ],
+      "purl": "pkg:npm/%40swc/helpers@0.5.23",
+      "scope": "required",
+      "type": "library",
+      "version": "0.5.23"
+    },
+    {
+      "bom-ref": "@tanstack/history@1.162.5",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://registry.npmjs.org/@tanstack/history/-/history-1.162.5.tgz"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "c35f98bf0993930b799fcc94a841f721667d0ec9a8ac2656fc44372981e7a8480890e6691f9e0dbd6ebf129ab70f36fc1f489f21e617f0f131beb34b207e4520"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "name": "@tanstack/history",
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@tanstack/history"
+        }
+      ],
+      "purl": "pkg:npm/%40tanstack/history@1.162.5",
+      "scope": "required",
+      "type": "library",
+      "version": "1.162.5"
+    },
+    {
+      "bom-ref": "@tanstack/query-core@5.104.5",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://registry.npmjs.org/@tanstack/query-core/-/query-core-5.104.5.tgz"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "43de2023c3a977e09b75534e763f190b257c5aa2d88adac3ab5b7de9773c5994fa958d2be6246724b5d80f131ec7b1047f6bfe997be7e05723681292c57650f4"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "name": "@tanstack/query-core",
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@tanstack/query-core"
+        }
+      ],
+      "purl": "pkg:npm/%40tanstack/query-core@5.104.5",
+      "scope": "required",
+      "type": "library",
+      "version": "5.104.5"
+    },
+    {
+      "bom-ref": "@tanstack/react-query@5.104.5",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://registry.npmjs.org/@tanstack/react-query/-/react-query-5.104.5.tgz"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "44e46015ed39d94fbddf079a36eaa0eea1eaeef3553735cdfd5ad7a83e1b6c0b9009652a3a5da5579522f5f956939095bccc8bfc1876ed05a1cf01f469a3b1f6"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "name": "@tanstack/react-query",
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@tanstack/react-query"
+        }
+      ],
+      "purl": "pkg:npm/%40tanstack/react-query@5.104.5",
+      "scope": "required",
+      "type": "library",
+      "version": "5.104.5"
+    },
+    {
+      "bom-ref": "@tanstack/react-router@1.170.45",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://registry.npmjs.org/@tanstack/react-router/-/react-router-1.170.45.tgz"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "eadba220015bf36cec93f631bde251c868dbb26ea421f814ba81fba82a764766921ef796e96d2dffa8fe4a7e26d6222503694b53872fa28aa4b34f3f60c39387"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "name": "@tanstack/react-router",
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@tanstack/react-router"
+        }
+      ],
+      "purl": "pkg:npm/%40tanstack/react-router@1.170.45",
+      "scope": "required",
+      "type": "library",
+      "version": "1.170.45"
+    },
+    {
+      "bom-ref": "@tanstack/react-store@0.11.2",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://registry.npmjs.org/@tanstack/react-store/-/react-store-0.11.2.tgz"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "a23e4ee439a231613e8a1f928a85f66b20b591b2bb7777e92f1d01ef97cf26bf67637cd4fa1a16d35d32afae2a5ec63ff5fca22d51366e7e6618d577a309bc45"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "name": "@tanstack/react-store",
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@tanstack/react-store"
+        }
+      ],
+      "purl": "pkg:npm/%40tanstack/react-store@0.11.2",
+      "scope": "required",
+      "type": "library",
+      "version": "0.11.2"
+    },
+    {
+      "bom-ref": "@tanstack/router-core@1.171.38",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://registry.npmjs.org/@tanstack/router-core/-/router-core-1.171.38.tgz"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "5d1655c623ba0487b1202984a375df3e6a68cb22e16e381a309b0e373e2021fe68632b34522686d412464728fdc7c4193c365c061bc032e4d837bd304b157480"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "name": "@tanstack/router-core",
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@tanstack/router-core"
+        }
+      ],
+      "purl": "pkg:npm/%40tanstack/router-core@1.171.38",
+      "scope": "required",
+      "type": "library",
+      "version": "1.171.38"
+    },
+    {
+      "bom-ref": "@tanstack/store@0.11.2",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://registry.npmjs.org/@tanstack/store/-/store-0.11.2.tgz"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "b09e268e897cb90b0757480e273ce3c177e1d85c26f92cf4fbc75eaa24e6e2319b31d8f33525bec590859b49146bcef4ba177cca2f83a4a9d96f929ce1aa5ad1"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "name": "@tanstack/store",
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@tanstack/store"
+        }
+      ],
+      "purl": "pkg:npm/%40tanstack/store@0.11.2",
+      "scope": "required",
+      "type": "library",
+      "version": "0.11.2"
+    },
+    {
+      "bom-ref": "@types/d3-color@3.1.3",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://registry.npmjs.org/@types/d3-color/-/d3-color-3.1.3.tgz"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "88ef74b1cb61f5601b9a0bfba20a2ae7b3bd6292a61416e6a04a021c3076c4c058d3efca56ba806820f2084d7a754b2978ebc8c4515123ed2c12da83ab2d9be0"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "name": "@types/d3-color",
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@types/d3-color"
+        }
+      ],
+      "purl": "pkg:npm/%40types/d3-color@3.1.3",
+      "scope": "required",
+      "type": "library",
+      "version": "3.1.3"
+    },
+    {
+      "bom-ref": "@types/d3-drag@3.0.7",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://registry.npmjs.org/@types/d3-drag/-/d3-drag-3.0.7.tgz"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "1c4de354a97353d01a31accdb9fa28449e59a5698b22873dd00dfb594d893267aadbcc35150a8266cc07677c51f92bb161fb731eae9653a2891efab12b34f1c5"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "name": "@types/d3-drag",
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@types/d3-drag"
+        }
+      ],
+      "purl": "pkg:npm/%40types/d3-drag@3.0.7",
+      "scope": "required",
+      "type": "library",
+      "version": "3.0.7"
+    },
+    {
+      "bom-ref": "@types/d3-interpolate@3.0.4",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://registry.npmjs.org/@types/d3-interpolate/-/d3-interpolate-3.0.4.tgz"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "9a02cf11396ba55575611248825af8133e3b83b6318e5d658fb60ab223026f6ed5247f56f0d54ce816fd77c924a46fee0104b90266c0e3cab6200a2528aa3530"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "name": "@types/d3-interpolate",
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@types/d3-interpolate"
+        }
+      ],
+      "purl": "pkg:npm/%40types/d3-interpolate@3.0.4",
+      "scope": "required",
+      "type": "library",
+      "version": "3.0.4"
+    },
+    {
+      "bom-ref": "@types/d3-selection@3.0.12",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://registry.npmjs.org/@types/d3-selection/-/d3-selection-3.0.12.tgz"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "41efca5988448882311acec7ac002331f4a1c4a95dc75f5226daf9ceee777f769f3ec759373ec71ed7532d7a3f92a7a258d5d5c9c236e244a77f3058913ce983"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "name": "@types/d3-selection",
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@types/d3-selection"
+        }
+      ],
+      "purl": "pkg:npm/%40types/d3-selection@3.0.12",
+      "scope": "required",
+      "type": "library",
+      "version": "3.0.12"
+    },
+    {
+      "bom-ref": "@types/d3-transition@3.0.9",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://registry.npmjs.org/@types/d3-transition/-/d3-transition-3.0.9.tgz"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "b994b9b217f1ccedeb1a5bb4702ddb8e63052ac5eff9299965c829d0a0f6dadb38b865e9e445581b3bbfd1877065e2a675d85c01c718b511092a43df5e466e0a"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "name": "@types/d3-transition",
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@types/d3-transition"
+        }
+      ],
+      "purl": "pkg:npm/%40types/d3-transition@3.0.9",
+      "scope": "required",
+      "type": "library",
+      "version": "3.0.9"
+    },
+    {
+      "bom-ref": "@types/d3-zoom@3.0.9",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://registry.npmjs.org/@types/d3-zoom/-/d3-zoom-3.0.9.tgz"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "d2c135e34e970582468aa0f702eb1397d66a0bfff69885e2c79d6d6e89b6e600c203cae2e319d2660dbc09a484f12ae5e850a5a8005429fb27d2a82181d7a930"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "name": "@types/d3-zoom",
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@types/d3-zoom"
+        }
+      ],
+      "purl": "pkg:npm/%40types/d3-zoom@3.0.9",
+      "scope": "required",
+      "type": "library",
+      "version": "3.0.9"
+    },
+    {
+      "bom-ref": "@xyflow/react@12.12.0",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://registry.npmjs.org/@xyflow/react/-/react-12.12.0.tgz"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "ef8a172344609b512edf770740077be09ea8560087f666c5c935506ec1a0a769265b08741ddb41af654fd38cfc99b3c3f8cff13baf67a86e5d0c4b7bfc4376ad"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "name": "@xyflow/react",
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@xyflow/react"
+        }
+      ],
+      "purl": "pkg:npm/%40xyflow/react@12.12.0",
+      "scope": "required",
+      "type": "library",
+      "version": "12.12.0"
+    },
+    {
+      "bom-ref": "@xyflow/system@0.0.83",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://registry.npmjs.org/@xyflow/system/-/system-0.0.83.tgz"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "6bffde0e37b3dd6645e3b69a3d37d55030f438834eabe595c01642453a86fa6d1ae5eb97f04c252788cc6355b1cf439c8f8c4e79e909ef4576d8fab4965f1127"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "name": "@xyflow/system",
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/@xyflow/system"
+        }
+      ],
+      "purl": "pkg:npm/%40xyflow/system@0.0.83",
+      "scope": "required",
+      "type": "library",
+      "version": "0.0.83"
+    },
+    {
+      "bom-ref": "aria-hidden@1.2.6",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://registry.npmjs.org/aria-hidden/-/aria-hidden-1.2.6.tgz"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "8a4dd9802f5d63f95855533ef8e212b1a6037a0d6d6f456d3f9b8bde8ba1d64a0639a50c0cfa5b1487a2e099058a659414f9fdd2c6cc34c5d000854e96760a24"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "name": "aria-hidden",
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/aria-hidden"
+        }
+      ],
+      "purl": "pkg:npm/aria-hidden@1.2.6",
+      "scope": "required",
+      "type": "library",
+      "version": "1.2.6"
+    },
+    {
+      "bom-ref": "ce-la-react@0.3.2",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://registry.npmjs.org/ce-la-react/-/ce-la-react-0.3.2.tgz"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "409ea4e25383fdbb48d3cc46f2304fc510865ef0a7bac186913b225e4d2edcda94bbf5be057467143e0f623c2daa1f005a619ae4b0db1a4d1f2d0b2aaf49d230"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "name": "ce-la-react",
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/ce-la-react"
+        }
+      ],
+      "purl": "pkg:npm/ce-la-react@0.3.2",
+      "scope": "required",
+      "type": "library",
+      "version": "0.3.2"
+    },
+    {
+      "bom-ref": "classcat@5.0.5",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://registry.npmjs.org/classcat/-/classcat-5.0.5.tgz"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "2616544fb245710cbf1335bad3993f92d1ed9dca28f6f9f25bfd86b29358c0594dd42fd69a3b95ff1b52d387bd48e90bdac4ddc3454067650609c43d951ea9eb"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "name": "classcat",
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/classcat"
+        }
+      ],
+      "purl": "pkg:npm/classcat@5.0.5",
+      "scope": "required",
+      "type": "library",
+      "version": "5.0.5"
+    },
+    {
+      "bom-ref": "client-only@0.0.1",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://registry.npmjs.org/client-only/-/client-only-0.0.1.tgz"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "215dcebb48d233366b777a59e3c9cb913f4303b020d699cfcda8908695bb73745b72aab3bf3cd5bbe2fc81fa8ca7ff08336310b528aa682c6badc7eef08f2b30"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "name": "client-only",
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/client-only"
+        }
+      ],
+      "purl": "pkg:npm/client-only@0.0.1",
+      "scope": "required",
+      "type": "library",
+      "version": "0.0.1"
+    },
+    {
+      "bom-ref": "clsx@2.1.1",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://registry.npmjs.org/clsx/-/clsx-2.1.1.tgz"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "7989b441606d52b0566561b4777f3a386030d7a67df793e2395a3607b6e35926c779d1a5e5ed1959aabae6438681448d7ac1080e407d2126d383f24af5d84264"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "name": "clsx",
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/clsx"
+        }
+      ],
+      "purl": "pkg:npm/clsx@2.1.1",
+      "scope": "required",
+      "type": "library",
+      "version": "2.1.1"
+    },
+    {
+      "bom-ref": "commander@15.0.0",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://registry.npmjs.org/commander/-/commander-15.0.0.tgz"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "cfaeeee1987308bfd3c9dbb5949011b4465859b59a37ba182c76ecbb3a1cafacb837a59901a806dd1438156eb5575ff4fa3226a63dbddd77eb7189ddd6ac6d3e"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "name": "commander",
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/katex/node_modules/commander"
+        }
+      ],
+      "purl": "pkg:npm/commander@15.0.0",
+      "scope": "required",
+      "type": "library",
+      "version": "15.0.0"
+    },
+    {
+      "bom-ref": "cookie-es@3.1.1",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://registry.npmjs.org/cookie-es/-/cookie-es-3.1.1.tgz"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "51a5f1c0849824f4ebf61c10c4c15867b90d8525dba0c5cff99dd3457e9fd7f3726863dfb8d5193963f5a5411bef90761e37e494860b5517d6885649c82e8da6"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "name": "cookie-es",
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/cookie-es"
+        }
+      ],
+      "purl": "pkg:npm/cookie-es@3.1.1",
+      "scope": "required",
+      "type": "library",
+      "version": "3.1.1"
+    },
+    {
+      "bom-ref": "d3-color@3.1.1",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://registry.npmjs.org/d3-color/-/d3-color-3.1.1.tgz"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "95f69bf31d018f450eed236c63c75949b34803a8a96e41375f4346f67aa30aee827c21d9b1eb839ce48963b86274aae3a4ffbe8b5336a93f8594074f29846294"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "ISC"
+          }
+        }
+      ],
+      "name": "d3-color",
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/d3-color"
+        }
+      ],
+      "purl": "pkg:npm/d3-color@3.1.1",
+      "scope": "required",
+      "type": "library",
+      "version": "3.1.1"
+    },
+    {
+      "bom-ref": "d3-dispatch@3.0.2",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://registry.npmjs.org/d3-dispatch/-/d3-dispatch-3.0.2.tgz"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "b00cc7e18e27b0ba3c792ab0e632a266df8b536c1998bfea4be3a4c501a38706b307f0fb4d8df847f40ad5eb217c6afb71910aca6299fc769e9bb9be96ef7c4a"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "ISC"
+          }
+        }
+      ],
+      "name": "d3-dispatch",
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/d3-dispatch"
+        }
+      ],
+      "purl": "pkg:npm/d3-dispatch@3.0.2",
+      "scope": "required",
+      "type": "library",
+      "version": "3.0.2"
+    },
+    {
+      "bom-ref": "d3-drag@3.0.1",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://registry.npmjs.org/d3-drag/-/d3-drag-3.0.1.tgz"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "3967a86b20aaf09ebd854223bcbf8c6fa43a39a8ff7f21d5e57697072114006f8952321f4c60e7937a86a5c5eb0f756643705257de9f71b33a7eaabb0b4b5b3c"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "ISC"
+          }
+        }
+      ],
+      "name": "d3-drag",
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/d3-drag"
+        }
+      ],
+      "purl": "pkg:npm/d3-drag@3.0.1",
+      "scope": "required",
+      "type": "library",
+      "version": "3.0.1"
+    },
+    {
+      "bom-ref": "d3-ease@3.0.2",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://registry.npmjs.org/d3-ease/-/d3-ease-3.0.2.tgz"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "079ce72aa466291380378a07590e745bfaa2b158c0f465e1d9632c54a745569e03c5699caceb307aa81439456cbf9b61f7a930699968914e92955e09de06a4d7"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "name": "d3-ease",
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/d3-ease"
+        }
+      ],
+      "purl": "pkg:npm/d3-ease@3.0.2",
+      "scope": "required",
+      "type": "library",
+      "version": "3.0.2"
+    },
+    {
+      "bom-ref": "d3-force@3.0.0",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://registry.npmjs.org/d3-force/-/d3-force-3.0.0.tgz"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "cf157f4ac03e538cad7bcd39d4fe040b27630ff4bea9e62d9da23202cf6d8070aa7e0ba66bf6804038e8f3903d67a10a8418ab1d12475c88095257df4f8c1d2e"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "ISC"
+          }
+        }
+      ],
+      "name": "d3-force",
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/d3-force"
+        }
+      ],
+      "purl": "pkg:npm/d3-force@3.0.0",
+      "scope": "required",
+      "type": "library",
+      "version": "3.0.0"
+    },
+    {
+      "bom-ref": "d3-interpolate@3.0.2",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://registry.npmjs.org/d3-interpolate/-/d3-interpolate-3.0.2.tgz"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "211cc653ad83b7186fb2749358c408767a19ea003e0425b00689f510923a4a3a0de7de7bf7d6facff4110735df16113c8aea543e9df4e36c81368d124cfaa7cd"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "ISC"
+          }
+        }
+      ],
+      "name": "d3-interpolate",
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/d3-interpolate"
+        }
+      ],
+      "purl": "pkg:npm/d3-interpolate@3.0.2",
+      "scope": "required",
+      "type": "library",
+      "version": "3.0.2"
+    },
+    {
+      "bom-ref": "d3-quadtree@3.0.2",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://registry.npmjs.org/d3-quadtree/-/d3-quadtree-3.0.2.tgz"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "f4bbbd9aa24a45b224d1dea62838e9bcf51168f7701d52b90986dc75dd3fe2f060cf895dcffed320eb1ede434446c07218d7e5779f0a11ca39d3b033b495b24d"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "ISC"
+          }
+        }
+      ],
+      "name": "d3-quadtree",
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/d3-quadtree"
+        }
+      ],
+      "purl": "pkg:npm/d3-quadtree@3.0.2",
+      "scope": "required",
+      "type": "library",
+      "version": "3.0.2"
+    },
+    {
+      "bom-ref": "d3-selection@3.0.1",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://registry.npmjs.org/d3-selection/-/d3-selection-3.0.1.tgz"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "38349fdf9bea0ab9427e9ee1ae6d1e663bcea2c4974982e3aaf22584c055f6af553b1ec40491baa5cfae5c1b30119349802189faa9ca61c5aeb5b6432317bf5e"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "ISC"
+          }
+        }
+      ],
+      "name": "d3-selection",
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/d3-selection"
+        }
+      ],
+      "purl": "pkg:npm/d3-selection@3.0.1",
+      "scope": "required",
+      "type": "library",
+      "version": "3.0.1"
+    },
+    {
+      "bom-ref": "d3-timer@3.0.2",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://registry.npmjs.org/d3-timer/-/d3-timer-3.0.2.tgz"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "d489756a58aba15484aebbf96ae951071018fbbf839daa0b21619dd42e92b014d60dea1b5a23ff57af6fc1bf2f4fa69b47590ac1a35ed75f7aa66690d5f2bdd0"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "ISC"
+          }
+        }
+      ],
+      "name": "d3-timer",
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/d3-timer"
+        }
+      ],
+      "purl": "pkg:npm/d3-timer@3.0.2",
+      "scope": "required",
+      "type": "library",
+      "version": "3.0.2"
+    },
+    {
+      "bom-ref": "d3-transition@3.0.2",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://registry.npmjs.org/d3-transition/-/d3-transition-3.0.2.tgz"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "45c8c2b1d160c85a0307e4172c2e66eb46644cdd24f731fea2fa0b9537499c34b501b7db72ea3088ce2908a49339c94d89b4b87f827871bbf69bb3bbcbc35339"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "ISC"
+          }
+        }
+      ],
+      "name": "d3-transition",
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/d3-transition"
+        }
+      ],
+      "purl": "pkg:npm/d3-transition@3.0.2",
+      "scope": "required",
+      "type": "library",
+      "version": "3.0.2"
+    },
+    {
+      "bom-ref": "d3-zoom@3.0.1",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://registry.npmjs.org/d3-zoom/-/d3-zoom-3.0.1.tgz"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "91f8c3dc10d0bbf14e6ada59e8974c4b22280f04f1229236f724932362796650da1f559bb8919027643da099164c46445bdf23ea275ece8a26483dc29f6cf08b"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "ISC"
+          }
+        }
+      ],
+      "name": "d3-zoom",
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/d3-zoom"
+        }
+      ],
+      "purl": "pkg:npm/d3-zoom@3.0.1",
+      "scope": "required",
+      "type": "library",
+      "version": "3.0.1"
+    },
+    {
+      "bom-ref": "idb@8.0.4",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://registry.npmjs.org/idb/-/idb-8.0.4.tgz"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "8ddd084c2acdf996a1e09ed1fd9da39d1dd6ec0e015c30239a8eb63305ae4a3c428ae79401fed7e6b6e8744762756cde927c171e62e97599288a20a9a4d8b7d1"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "ISC"
+          }
+        }
+      ],
+      "name": "idb",
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/idb"
+        }
+      ],
+      "purl": "pkg:npm/idb@8.0.4",
+      "scope": "required",
+      "type": "library",
+      "version": "8.0.4"
+    },
+    {
+      "bom-ref": "isbot@5.2.2",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://registry.npmjs.org/isbot/-/isbot-5.2.2.tgz"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "8907015dc77e46ffe992e6d1c86876bad5b68f5a0f1b985963a4d48553e9a8ae06fa8dc86f1a49371d3886092c8dcfcdec62b9a44a2b5310de837d5c160124ff"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Unlicense"
+          }
+        }
+      ],
+      "name": "isbot",
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/isbot"
+        }
+      ],
+      "purl": "pkg:npm/isbot@5.2.2",
+      "scope": "required",
+      "type": "library",
+      "version": "5.2.2"
+    },
+    {
+      "bom-ref": "katex@0.19.0",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://registry.npmjs.org/katex/-/katex-0.19.0.tgz"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "bfa4f39f3df327bbb79e2442a034ecba6336f870365d7702bbe58069c09e1c3db3de9f40f4ab3df3ba391737d31813747bc034be3120203bcb6c80ab5e9770fd"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "name": "katex",
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/katex"
+        }
+      ],
+      "purl": "pkg:npm/katex@0.19.0",
+      "scope": "required",
+      "type": "library",
+      "version": "0.19.0"
+    },
+    {
+      "bom-ref": "media-chrome@4.19.3",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://registry.npmjs.org/media-chrome/-/media-chrome-4.19.3.tgz"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "07970f7e7e455139b7922e7c425124d82077c45a358b98ccd496af54dddb57cd68d3d7289100bea9654655665663d628a3ab22f5679a41950d9f8ef65b36cd55"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "name": "media-chrome",
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/media-chrome"
+        }
+      ],
+      "purl": "pkg:npm/media-chrome@4.19.3",
+      "scope": "required",
+      "type": "library",
+      "version": "4.19.3"
+    },
+    {
+      "bom-ref": "openapi-fetch@0.17.0",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://registry.npmjs.org/openapi-fetch/-/openapi-fetch-0.17.0.tgz"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "3ec6d9475c003dc1bdd5e12d84a84df999fdd85307c6ffbf7da1022308d77717d338319219e818bf4b1cd4e973f8760fbca3aea177e9fb4a40d9756dd9c23422"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "name": "openapi-fetch",
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/openapi-fetch"
+        }
+      ],
+      "purl": "pkg:npm/openapi-fetch@0.17.0",
+      "scope": "required",
+      "type": "library",
+      "version": "0.17.0"
+    },
+    {
+      "bom-ref": "openapi-typescript-helpers@0.1.0",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://registry.npmjs.org/openapi-typescript-helpers/-/openapi-typescript-helpers-0.1.0.tgz"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "38a4c63ed8618af2f0fdf1f3e9cdce3ed83bdaf8bceaa68c96a6c9b95276dea3af43ee77bb0d67ec77669091626e5a05ed01230eb0e4cc988e26ea1c90cfe58f"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "name": "openapi-typescript-helpers",
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/openapi-typescript-helpers"
+        }
+      ],
+      "purl": "pkg:npm/openapi-typescript-helpers@0.1.0",
+      "scope": "required",
+      "type": "library",
+      "version": "0.1.0"
+    },
+    {
+      "bom-ref": "react-aria@3.53.1",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://registry.npmjs.org/react-aria/-/react-aria-3.53.1.tgz"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "762922b323a325ddc3d9f16b2035a6556cea88bcf907ce86cd9bf5cf1b3bc48e1d55cd09233ff559ae76236d2062f54bd965de157972818b257bf41c38c86d72"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "name": "react-aria",
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/react-aria"
+        }
+      ],
+      "purl": "pkg:npm/react-aria@3.53.1",
+      "scope": "required",
+      "type": "library",
+      "version": "3.53.1"
+    },
+    {
+      "bom-ref": "react-aria-components@1.22.1",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://registry.npmjs.org/react-aria-components/-/react-aria-components-1.22.1.tgz"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "5131da60739a33bd5b3828c63c5e740dc2f2c25af0028744eb720feb82c1e243be3a2cdab5010bf137ac54438cf3e4e405e4a01e87e5278e77f3c22525f6bb6b"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "name": "react-aria-components",
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/react-aria-components"
+        }
+      ],
+      "purl": "pkg:npm/react-aria-components@1.22.1",
+      "scope": "required",
+      "type": "library",
+      "version": "1.22.1"
+    },
+    {
+      "bom-ref": "react-stately@3.51.0",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://registry.npmjs.org/react-stately/-/react-stately-3.51.0.tgz"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "6097269005eed973903fdee13bfab3fdc0b7aaff649e2de8561c019715abdf9f011de3c9529635e57c0bdd849130ac58b78124b253ea033d752518ab31f00d1b"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "name": "react-stately",
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/react-stately"
+        }
+      ],
+      "purl": "pkg:npm/react-stately@3.51.0",
+      "scope": "required",
+      "type": "library",
+      "version": "3.51.0"
+    },
+    {
+      "bom-ref": "seroval@1.6.11",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://registry.npmjs.org/seroval/-/seroval-1.6.11.tgz"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "8696fa5e730218dfc0fbbf547fc57bfe24c6932cb26b3367e57d02a02029ed4cbdbd3dd14fc8d9f462dc9f11a85638373fc000adb7b86551eae82f284f66b490"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "name": "seroval",
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/seroval"
+        }
+      ],
+      "purl": "pkg:npm/seroval@1.6.11",
+      "scope": "required",
+      "type": "library",
+      "version": "1.6.11"
+    },
+    {
+      "bom-ref": "seroval-plugins@1.6.11",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://registry.npmjs.org/seroval-plugins/-/seroval-plugins-1.6.11.tgz"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "2e60779ddf292f7f632872af9e94d48dc8c1b4dc11f0c2edcbfc9d011f2a6df5ede63ebfe8aa91d5ab6ec3c715983dbf943c4092f030ab9b48fc7b22b03f45aa"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "name": "seroval-plugins",
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/seroval-plugins"
+        }
+      ],
+      "purl": "pkg:npm/seroval-plugins@1.6.11",
+      "scope": "required",
+      "type": "library",
+      "version": "1.6.11"
+    },
+    {
+      "bom-ref": "tslib@2.8.1",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://registry.npmjs.org/tslib/-/tslib-2.8.1.tgz"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "a0916ef781d06fe29576e49440bef09e99aa9df98bb0e03f9c087a6fa107d30084a0ad3f98f79753a737c0a0d5f373243ae1cf447b525ca294f7d2016b34bfdb"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "0BSD"
+          }
+        }
+      ],
+      "name": "tslib",
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/tslib"
+        }
+      ],
+      "purl": "pkg:npm/tslib@2.8.1",
+      "scope": "required",
+      "type": "library",
+      "version": "2.8.1"
+    },
+    {
+      "bom-ref": "use-sync-external-store@1.7.0",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://registry.npmjs.org/use-sync-external-store/-/use-sync-external-store-1.7.0.tgz"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "e8bf847a280731085d6883cd20550ac1f5894b058543c8096c9d832ceb39b0321e813c11f5f471be7337b9c8872a3219845cfe280bf67a6856311bc398c718f0"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "name": "use-sync-external-store",
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/use-sync-external-store"
+        }
+      ],
+      "purl": "pkg:npm/use-sync-external-store@1.7.0",
+      "scope": "required",
+      "type": "library",
+      "version": "1.7.0"
+    },
+    {
+      "bom-ref": "zustand@4.5.7",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://registry.npmjs.org/zustand/-/zustand-4.5.7.tgz"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "087394cbb9aede56c3ea8e8b24b7e59698e4ce11d7481957f01f7ea8f75d52c21f785e52fd4679ab49260ac9d1a93d541c54197213450c3ccc6d0b2e7ac1d697"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "name": "zustand",
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/zustand"
+        }
+      ],
+      "purl": "pkg:npm/zustand@4.5.7",
+      "scope": "required",
+      "type": "library",
+      "version": "4.5.7"
+    }
+  ],
+  "dependencies": [
+    {
+      "dependsOn": [
+        "@fontsource-variable/jetbrains-mono@5.3.0",
+        "@fontsource-variable/nunito@5.3.0",
+        "@lingui/react@5.9.5",
+        "@tanstack/react-query@5.104.5",
+        "@tanstack/react-router@1.170.45",
+        "@xyflow/react@12.12.0",
+        "d3-force@3.0.0",
+        "idb@8.0.4",
+        "katex@0.19.0",
+        "media-chrome@4.19.3",
+        "openapi-fetch@0.17.0",
+        "react-aria-components@1.22.1"
+      ],
+      "ref": "yuo-web@0.0.0"
+    },
+    {
+      "dependsOn": [],
+      "ref": "@fontsource-variable/jetbrains-mono@5.3.0"
+    },
+    {
+      "dependsOn": [],
+      "ref": "@fontsource-variable/nunito@5.3.0"
+    },
+    {
+      "dependsOn": [
+        "@swc/helpers@0.5.23"
+      ],
+      "ref": "@internationalized/date@3.12.4"
+    },
+    {
+      "dependsOn": [
+        "@swc/helpers@0.5.23"
+      ],
+      "ref": "@internationalized/number@3.6.9"
+    },
+    {
+      "dependsOn": [
+        "@swc/helpers@0.5.23"
+      ],
+      "ref": "@internationalized/string@3.2.10"
+    },
+    {
+      "dependsOn": [],
+      "ref": "@lingui/react@5.9.5"
+    },
+    {
+      "dependsOn": [],
+      "ref": "@react-types/shared@3.37.0"
+    },
+    {
+      "dependsOn": [
+        "tslib@2.8.1"
+      ],
+      "ref": "@swc/helpers@0.5.23"
+    },
+    {
+      "dependsOn": [],
+      "ref": "@tanstack/history@1.162.5"
+    },
+    {
+      "dependsOn": [],
+      "ref": "@tanstack/query-core@5.104.5"
+    },
+    {
+      "dependsOn": [
+        "@tanstack/query-core@5.104.5"
+      ],
+      "ref": "@tanstack/react-query@5.104.5"
+    },
+    {
+      "dependsOn": [
+        "@tanstack/history@1.162.5",
+        "@tanstack/react-store@0.11.2",
+        "@tanstack/router-core@1.171.38",
+        "isbot@5.2.2"
+      ],
+      "ref": "@tanstack/react-router@1.170.45"
+    },
+    {
+      "dependsOn": [
+        "@tanstack/store@0.11.2",
+        "use-sync-external-store@1.7.0"
+      ],
+      "ref": "@tanstack/react-store@0.11.2"
+    },
+    {
+      "dependsOn": [
+        "@tanstack/history@1.162.5",
+        "cookie-es@3.1.1",
+        "seroval@1.6.11",
+        "seroval-plugins@1.6.11"
+      ],
+      "ref": "@tanstack/router-core@1.171.38"
+    },
+    {
+      "dependsOn": [],
+      "ref": "@tanstack/store@0.11.2"
+    },
+    {
+      "dependsOn": [],
+      "ref": "@types/d3-color@3.1.3"
+    },
+    {
+      "dependsOn": [
+        "@types/d3-selection@3.0.12"
+      ],
+      "ref": "@types/d3-drag@3.0.7"
+    },
+    {
+      "dependsOn": [
+        "@types/d3-color@3.1.3"
+      ],
+      "ref": "@types/d3-interpolate@3.0.4"
+    },
+    {
+      "dependsOn": [],
+      "ref": "@types/d3-selection@3.0.12"
+    },
+    {
+      "dependsOn": [
+        "@types/d3-selection@3.0.12"
+      ],
+      "ref": "@types/d3-transition@3.0.9"
+    },
+    {
+      "dependsOn": [
+        "@types/d3-interpolate@3.0.4",
+        "@types/d3-selection@3.0.12"
+      ],
+      "ref": "@types/d3-zoom@3.0.9"
+    },
+    {
+      "dependsOn": [
+        "@xyflow/system@0.0.83",
+        "classcat@5.0.5",
+        "zustand@4.5.7"
+      ],
+      "ref": "@xyflow/react@12.12.0"
+    },
+    {
+      "dependsOn": [
+        "@types/d3-drag@3.0.7",
+        "@types/d3-interpolate@3.0.4",
+        "@types/d3-selection@3.0.12",
+        "@types/d3-transition@3.0.9",
+        "@types/d3-zoom@3.0.9",
+        "d3-drag@3.0.1",
+        "d3-interpolate@3.0.2",
+        "d3-selection@3.0.1",
+        "d3-zoom@3.0.1"
+      ],
+      "ref": "@xyflow/system@0.0.83"
+    },
+    {
+      "dependsOn": [
+        "tslib@2.8.1"
+      ],
+      "ref": "aria-hidden@1.2.6"
+    },
+    {
+      "dependsOn": [],
+      "ref": "ce-la-react@0.3.2"
+    },
+    {
+      "dependsOn": [],
+      "ref": "classcat@5.0.5"
+    },
+    {
+      "dependsOn": [],
+      "ref": "client-only@0.0.1"
+    },
+    {
+      "dependsOn": [],
+      "ref": "clsx@2.1.1"
+    },
+    {
+      "dependsOn": [],
+      "ref": "cookie-es@3.1.1"
+    },
+    {
+      "dependsOn": [],
+      "ref": "d3-color@3.1.1"
+    },
+    {
+      "dependsOn": [],
+      "ref": "d3-dispatch@3.0.2"
+    },
+    {
+      "dependsOn": [
+        "d3-dispatch@3.0.2",
+        "d3-selection@3.0.1"
+      ],
+      "ref": "d3-drag@3.0.1"
+    },
+    {
+      "dependsOn": [],
+      "ref": "d3-ease@3.0.2"
+    },
+    {
+      "dependsOn": [
+        "d3-dispatch@3.0.2",
+        "d3-quadtree@3.0.2",
+        "d3-timer@3.0.2"
+      ],
+      "ref": "d3-force@3.0.0"
+    },
+    {
+      "dependsOn": [
+        "d3-color@3.1.1"
+      ],
+      "ref": "d3-interpolate@3.0.2"
+    },
+    {
+      "dependsOn": [],
+      "ref": "d3-quadtree@3.0.2"
+    },
+    {
+      "dependsOn": [],
+      "ref": "d3-selection@3.0.1"
+    },
+    {
+      "dependsOn": [],
+      "ref": "d3-timer@3.0.2"
+    },
+    {
+      "dependsOn": [
+        "d3-selection@3.0.1",
+        "d3-color@3.1.1",
+        "d3-dispatch@3.0.2",
+        "d3-ease@3.0.2",
+        "d3-interpolate@3.0.2",
+        "d3-timer@3.0.2"
+      ],
+      "ref": "d3-transition@3.0.2"
+    },
+    {
+      "dependsOn": [
+        "d3-dispatch@3.0.2",
+        "d3-drag@3.0.1",
+        "d3-interpolate@3.0.2",
+        "d3-selection@3.0.1",
+        "d3-transition@3.0.2"
+      ],
+      "ref": "d3-zoom@3.0.1"
+    },
+    {
+      "dependsOn": [],
+      "ref": "idb@8.0.4"
+    },
+    {
+      "dependsOn": [],
+      "ref": "isbot@5.2.2"
+    },
+    {
+      "dependsOn": [
+        "commander@15.0.0"
+      ],
+      "ref": "katex@0.19.0"
+    },
+    {
+      "dependsOn": [],
+      "ref": "commander@15.0.0"
+    },
+    {
+      "dependsOn": [
+        "ce-la-react@0.3.2"
+      ],
+      "ref": "media-chrome@4.19.3"
+    },
+    {
+      "dependsOn": [
+        "openapi-typescript-helpers@0.1.0"
+      ],
+      "ref": "openapi-fetch@0.17.0"
+    },
+    {
+      "dependsOn": [],
+      "ref": "openapi-typescript-helpers@0.1.0"
+    },
+    {
+      "dependsOn": [
+        "@internationalized/date@3.12.4",
+        "@internationalized/number@3.6.9",
+        "@internationalized/string@3.2.10",
+        "@react-types/shared@3.37.0",
+        "@swc/helpers@0.5.23",
+        "aria-hidden@1.2.6",
+        "clsx@2.1.1",
+        "react-stately@3.51.0",
+        "use-sync-external-store@1.7.0"
+      ],
+      "ref": "react-aria@3.53.1"
+    },
+    {
+      "dependsOn": [
+        "@internationalized/date@3.12.4",
+        "@internationalized/string@3.2.10",
+        "@react-types/shared@3.37.0",
+        "@swc/helpers@0.5.23",
+        "client-only@0.0.1",
+        "react-aria@3.53.1",
+        "react-stately@3.51.0",
+        "use-sync-external-store@1.7.0"
+      ],
+      "ref": "react-aria-components@1.22.1"
+    },
+    {
+      "dependsOn": [
+        "@internationalized/date@3.12.4",
+        "@internationalized/number@3.6.9",
+        "@internationalized/string@3.2.10",
+        "@react-types/shared@3.37.0",
+        "@swc/helpers@0.5.23",
+        "use-sync-external-store@1.7.0"
+      ],
+      "ref": "react-stately@3.51.0"
+    },
+    {
+      "dependsOn": [],
+      "ref": "seroval@1.6.11"
+    },
+    {
+      "dependsOn": [
+        "seroval@1.6.11"
+      ],
+      "ref": "seroval-plugins@1.6.11"
+    },
+    {
+      "dependsOn": [],
+      "ref": "tslib@2.8.1"
+    },
+    {
+      "dependsOn": [],
+      "ref": "use-sync-external-store@1.7.0"
+    },
+    {
+      "dependsOn": [
+        "use-sync-external-store@1.7.0"
+      ],
+      "ref": "zustand@4.5.7"
+    }
+  ],
+  "metadata": {
+    "component": {
+      "bom-ref": "yuo-web@0.0.0",
+      "externalReferences": [],
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "name": "web",
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": ""
+        },
+        {
+          "name": "cdx:npm:package:private",
+          "value": "true"
+        }
+      ],
+      "purl": "pkg:npm/yuo-web@0.0.0",
+      "scope": "required",
+      "type": "library",
+      "version": "0.0.0"
+    },
+    "lifecycles": [
+      {
+        "phase": "pre-build"
+      }
+    ]
+  },
+  "specVersion": "1.5",
+  "version": 1
+}

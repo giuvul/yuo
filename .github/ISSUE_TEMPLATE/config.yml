@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Report a security problem
+    url: https://github.com/giuvul/yuo/security/advisories/new
+    about: Privately, never in a public issue.
+  - name: Install with an AI assistant
+    url: https://github.com/giuvul/yuo/blob/main/SETUP.md
+    about: Step-by-step setup, for people and AI assistants.

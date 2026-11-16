@@ -1,0 +1,176 @@
+@layer components {
+  .item {
+    display: grid;
+    gap: var(--yuo-space-3-5);
+    padding: var(--yuo-space-4);
+
+    @media (max-width: 40rem) {
+      padding: var(--yuo-space-3);
+    }
+
+    & > p {
+      margin: 0;
+    }
+  }
+
+  /* "Question 2 of 5" and a row of small segments: done in leaf, the current one in pollen */
+  .itemTop {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--yuo-space-2) var(--yuo-space-3);
+  }
+
+  .counter {
+    margin: 0;
+    color: var(--yuo-color-muted);
+    font-size: var(--yuo-text-sm);
+    font-weight: var(--yuo-weight-semibold);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .dots {
+    display: flex;
+    flex: 0 1 14rem;
+    gap: var(--yuo-space-1);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    & li {
+      flex: 1;
+      block-size: 0.375rem;
+      border-radius: var(--yuo-radius-full);
+      background: var(--yuo-color-track);
+      transition: background-color var(--yuo-duration-base) var(--yuo-ease-standard);
+    }
+
+    & li[data-state="done"] {
+      background: var(--yuo-color-leaf);
+    }
+
+    & li[data-state="current"] {
+      background: var(--yuo-color-highlight);
+    }
+  }
+
+  .prompt {
+    margin: 0;
+    font-size: var(--yuo-text-xl);
+    line-height: var(--yuo-leading-snug);
+    white-space: pre-wrap;
+    text-wrap: pretty;
+  }
+
+  .hints {
+    display: grid;
+    gap: var(--yuo-space-1);
+    margin: 0;
+    padding-block: var(--yuo-space-2-5);
+    padding-inline: var(--yuo-space-5) var(--yuo-space-3);
+    border-inline-start: 3px solid var(--yuo-color-highlight);
+    border-radius: var(--yuo-radius-2);
+    background: var(--yuo-color-warning-bg);
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--yuo-space-2);
+
+    @media (max-width: 40rem) {
+      display: grid;
+
+      & > * {
+        inline-size: 100%;
+      }
+    }
+  }
+
+  /* the end of an attempt */
+  .done {
+    display: grid;
+    gap: var(--yuo-space-3);
+    padding: var(--yuo-space-4);
+
+    @media (max-width: 40rem) {
+      padding: var(--yuo-space-3);
+    }
+
+    & > p {
+      margin: 0;
+    }
+  }
+
+  .doneHead {
+    display: flex;
+    align-items: center;
+    gap: var(--yuo-space-3);
+  }
+
+  .doneMark {
+    display: inline-grid;
+    flex: none;
+    place-items: center;
+    inline-size: 3rem;
+    block-size: 3rem;
+    border-radius: var(--yuo-radius-full);
+    background: var(--yuo-color-success-bg);
+    color: var(--yuo-color-success);
+    font-size: var(--yuo-text-2xl);
+    animation: yuo-grow-in var(--yuo-duration-slow) var(--yuo-ease-out);
+  }
+
+  @keyframes yuo-grow-in {
+    from {
+      transform: scale(0.6);
+      opacity: 0;
+    }
+  }
+
+  .doneTitle {
+    margin: 0;
+    font-size: var(--yuo-text-2xl);
+  }
+
+  .score {
+    display: grid;
+    gap: var(--yuo-space-2);
+  }
+
+  .scoreText {
+    margin: 0;
+    font-size: var(--yuo-text-lg);
+    font-weight: var(--yuo-weight-semibold);
+  }
+
+  /* a test result: the outcome, the score and what changed */
+  .result {
+    display: grid;
+    gap: var(--yuo-space-2);
+
+    & p,
+    & ul {
+      margin: 0;
+    }
+  }
+}
+
+@layer components {
+  /* the score along a bar, with a notch at the pass mark */
+  .scoreBar {
+    position: relative;
+    padding-block: var(--yuo-space-1);
+  }
+
+  .passMark {
+    position: absolute;
+    inset-block: 0;
+    inline-size: 2px;
+    margin-inline-start: -1px;
+    border-radius: var(--yuo-radius-full);
+    background: var(--yuo-color-fg);
+  }
+}

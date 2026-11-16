@@ -1,0 +1,50 @@
+@layer components {
+  .bar {
+    display: flex;
+    align-items: center;
+    gap: var(--yuo-space-2);
+    max-inline-size: 18rem;
+  }
+
+  .track {
+    flex: 1;
+    block-size: 0.45rem;
+    border-radius: var(--yuo-radius-full);
+    background: var(--yuo-color-track);
+    overflow: hidden;
+  }
+
+  .fill {
+    display: block;
+    block-size: 100%;
+    border-radius: inherit;
+    background: var(--yuo-color-highlight);
+    transition: inline-size var(--yuo-duration-slow) var(--yuo-ease-out);
+
+    /* grows in from the start when it first appears */
+    transform-origin: left center;
+    animation: yuo-fill var(--yuo-duration-grow) var(--yuo-ease-out) var(--yuo-duration-fast) backwards;
+
+    &:dir(rtl) {
+      transform-origin: right center;
+    }
+
+    .full & {
+      background: var(--yuo-color-accent);
+    }
+  }
+
+  @keyframes yuo-fill {
+    from {
+      transform: scaleX(0);
+    }
+  }
+
+  .value {
+    min-inline-size: 2.5rem;
+    color: var(--yuo-color-muted);
+    font-size: var(--yuo-text-xs);
+    font-variant-numeric: tabular-nums;
+    text-align: end;
+  }
+}

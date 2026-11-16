@@ -1,0 +1,191 @@
+@layer components {
+  .body {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--yuo-space-3-5);
+    max-inline-size: var(--yuo-measure);
+    font-size: var(--yuo-text-lg);
+    line-height: var(--yuo-leading-reading);
+
+    @media (max-width: 40rem) {
+      font-size: var(--yuo-text-md);
+    }
+
+    /* key terms: a soft pollen wash behind bold words, like a highlighter used with care */
+    & strong {
+      padding-inline: 0.2em;
+      margin-inline: -0.05em;
+      border-radius: var(--yuo-radius-1);
+      background: color-mix(in oklch, var(--yuo-color-highlight) 32%, transparent);
+      font-weight: var(--yuo-weight-semibold);
+      box-decoration-break: clone;
+      -webkit-box-decoration-break: clone;
+    }
+  }
+
+  .anchored {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--yuo-space-1);
+  }
+
+  .heading {
+    margin-block: var(--yuo-space-3) 0;
+    line-height: var(--yuo-leading-tight);
+  }
+
+  h2.heading {
+    font-size: var(--yuo-text-2xl);
+  }
+
+  h3.heading {
+    font-size: var(--yuo-text-xl);
+  }
+
+  h4.heading,
+  h5.heading,
+  h6.heading {
+    font-size: var(--yuo-text-lg);
+  }
+
+  .paragraph,
+  .list,
+  .steps {
+    margin: 0;
+  }
+
+  .list,
+  .steps {
+    display: grid;
+    gap: var(--yuo-space-2);
+    padding-inline-start: 1.5rem;
+
+    & ::marker {
+      color: var(--yuo-color-leaf);
+      font-weight: var(--yuo-weight-bold);
+    }
+  }
+
+  .inlineCode {
+    padding-inline: 0.3em;
+    border-radius: var(--yuo-radius-1);
+    background: var(--yuo-color-code-bg);
+    font-size: 0.88em;
+  }
+
+  .codeFigure {
+    margin: 0;
+  }
+
+  .code {
+    margin: 0;
+    padding: var(--yuo-space-3);
+    overflow-x: auto;
+    border: 1px solid var(--yuo-color-border);
+    border-radius: var(--yuo-radius-2);
+    background: var(--yuo-color-code-bg);
+    font-size: var(--yuo-text-sm);
+    line-height: var(--yuo-leading-normal);
+    tab-size: 2;
+  }
+
+  .caption {
+    margin-block-start: var(--yuo-space-1);
+    color: var(--yuo-color-muted);
+    font-size: var(--yuo-text-sm);
+  }
+
+  .mathDisplay {
+    overflow-x: auto;
+    padding-block: var(--yuo-space-1);
+    text-align: center;
+  }
+
+  .mathSource {
+    white-space: pre-wrap;
+  }
+
+  .callout,
+  .workedExample {
+    display: grid;
+    gap: var(--yuo-space-2);
+    padding: var(--yuo-space-3) var(--yuo-space-3-5);
+    border: 1px solid transparent;
+    border-inline-start: 4px solid var(--yuo-color-leaf);
+    border-radius: var(--yuo-radius-2);
+    background: var(--yuo-color-info-bg);
+    font-size: var(--yuo-text-md);
+
+    & > p,
+    & > ul,
+    & > ol {
+      margin: 0;
+    }
+  }
+
+  .calloutWarning {
+    border-inline-start-color: var(--yuo-color-danger);
+    background: var(--yuo-color-danger-bg);
+  }
+
+  .calloutExample {
+    border-inline-start-color: var(--yuo-color-highlight);
+    background: var(--yuo-color-surface);
+    border-color: var(--yuo-color-border);
+  }
+
+  .calloutDefinition {
+    border-inline-start-color: var(--yuo-color-accent);
+    border-color: var(--yuo-color-border);
+    background: var(--yuo-color-surface);
+  }
+
+  .workedExample {
+    border-color: var(--yuo-color-border);
+    border-inline-start-color: var(--yuo-color-highlight);
+    background: var(--yuo-color-surface);
+  }
+
+  .calloutLabel {
+    margin: 0;
+    color: var(--yuo-color-muted);
+    font-size: var(--yuo-text-xs);
+    font-weight: var(--yuo-weight-bold);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+
+    .calloutWarning > & {
+      color: var(--yuo-color-danger);
+    }
+  }
+
+  .workedTitle {
+    margin: 0;
+    font-weight: var(--yuo-weight-semibold);
+  }
+
+  .glossary {
+    margin: 0;
+    padding: var(--yuo-space-2-5) var(--yuo-space-3);
+    border: 1px dashed var(--yuo-color-border-strong);
+    border-radius: var(--yuo-radius-2);
+    font-size: var(--yuo-text-md);
+
+    & dt {
+      font-weight: var(--yuo-weight-bold);
+    }
+
+    & dfn {
+      padding-inline: 0.2em;
+      border-radius: var(--yuo-radius-1);
+      background: color-mix(in oklch, var(--yuo-color-highlight) 32%, transparent);
+      font-style: normal;
+    }
+
+    & dd {
+      margin: 0;
+      color: var(--yuo-color-muted);
+    }
+  }
+}

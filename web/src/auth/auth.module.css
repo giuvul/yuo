@@ -1,0 +1,114 @@
+@layer components {
+  /* sign-in and first run: one calm card in the middle */
+  .narrow {
+    inline-size: 100%;
+    max-inline-size: 30rem;
+    margin-block: var(--yuo-space-4);
+    margin-inline: auto;
+    padding: var(--yuo-space-4);
+    border: 1px solid var(--yuo-color-border);
+    border-radius: var(--yuo-radius-3);
+    background: var(--yuo-color-surface);
+    box-shadow: var(--yuo-shadow-2);
+
+    @media (max-width: 40rem) {
+      margin-block: var(--yuo-space-2);
+      padding: var(--yuo-space-3);
+    }
+
+    & > p {
+      margin: 0;
+    }
+  }
+
+  .mark {
+    display: inline-grid;
+    justify-self: start;
+    place-items: center;
+    inline-size: 4rem;
+    block-size: 4rem;
+    border-radius: var(--yuo-radius-3);
+    background: var(--yuo-color-surface-muted);
+    color: var(--yuo-color-fg);
+  }
+
+  .narrow > .tagline {
+    color: var(--yuo-color-leaf);
+    font-weight: var(--yuo-weight-bold);
+    margin-block-start: calc(var(--yuo-space-2) * -1);
+  }
+
+  /* other ways to sign in, under a hairline */
+  .others {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--yuo-space-2);
+    padding-block-start: var(--yuo-space-3);
+    border-block-start: 1px solid var(--yuo-color-border);
+  }
+
+  .codes {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
+    gap: var(--yuo-space-2);
+    margin: 0;
+    padding: var(--yuo-space-3);
+    padding-inline-start: calc(var(--yuo-space-3) + 1.5rem);
+    border: 1px solid var(--yuo-color-border);
+    border-radius: var(--yuo-radius-2);
+    background: var(--yuo-color-code-bg);
+  }
+
+  .code {
+    font-family: var(--yuo-font-mono);
+    font-size: var(--yuo-text-md);
+    letter-spacing: 0.04em;
+    user-select: all;
+  }
+
+  .list {
+    display: grid;
+    gap: var(--yuo-space-3);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .item {
+    display: grid;
+    gap: var(--yuo-space-1);
+    padding-block-end: var(--yuo-space-3);
+    border-block-end: 1px solid var(--yuo-color-border);
+
+    &:last-child {
+      padding-block-end: 0;
+      border-block-end: 0;
+    }
+
+    & p {
+      margin: 0;
+    }
+  }
+
+  .itemHead {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--yuo-space-2);
+    overflow-wrap: anywhere;
+  }
+
+  .badge {
+    padding-inline: var(--yuo-space-2);
+    border-radius: var(--yuo-radius-full);
+    background: var(--yuo-color-info-bg);
+    color: var(--yuo-color-fg);
+    font-size: var(--yuo-text-xs);
+    font-weight: var(--yuo-weight-semibold);
+  }
+
+  .agent {
+    font-size: var(--yuo-text-xs);
+    overflow-wrap: anywhere;
+  }
+}

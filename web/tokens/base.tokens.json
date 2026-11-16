@@ -1,0 +1,513 @@
+{
+  "$description": "Yuo base scales (Grove): type, space (4 px base), radius, elevation, motion, layout.",
+  "font": {
+    "display": {
+      "$type": "fontFamily",
+      "$value": [
+        "Nunito Variable",
+        "Nunito",
+        "ui-rounded",
+        "system-ui",
+        "sans-serif"
+      ],
+      "$description": "headings (Nunito Black for h1 to h3)"
+    },
+    "sans": {
+      "$type": "fontFamily",
+      "$value": [
+        "Nunito Variable",
+        "Nunito",
+        "ui-rounded",
+        "system-ui",
+        "-apple-system",
+        "Segoe UI",
+        "Roboto",
+        "sans-serif"
+      ],
+      "$description": "UI and reading (Yuo Brand Identity, 6.2)"
+    },
+    "mono": {
+      "$type": "fontFamily",
+      "$value": [
+        "JetBrains Mono Variable",
+        "JetBrains Mono",
+        "ui-monospace",
+        "SF Mono",
+        "Menlo",
+        "Consolas",
+        "monospace"
+      ]
+    }
+  },
+  "text": {
+    "xs": {
+      "$type": "dimension",
+      "$value": {
+        "value": 0.75,
+        "unit": "rem"
+      }
+    },
+    "sm": {
+      "$type": "dimension",
+      "$value": {
+        "value": 0.875,
+        "unit": "rem"
+      }
+    },
+    "md": {
+      "$type": "dimension",
+      "$value": {
+        "value": 1,
+        "unit": "rem"
+      }
+    },
+    "lg": {
+      "$type": "dimension",
+      "$value": {
+        "value": 1.125,
+        "unit": "rem"
+      }
+    },
+    "xl": {
+      "$type": "dimension",
+      "$value": {
+        "value": 1.375,
+        "unit": "rem"
+      }
+    },
+    "2xl": {
+      "$type": "dimension",
+      "$value": {
+        "value": 1.75,
+        "unit": "rem"
+      }
+    },
+    "3xl": {
+      "$type": "dimension",
+      "$value": {
+        "value": 2.25,
+        "unit": "rem"
+      }
+    },
+    "4xl": {
+      "$type": "dimension",
+      "$value": {
+        "value": 3,
+        "unit": "rem"
+      }
+    }
+  },
+  "leading": {
+    "tight": {
+      "$type": "number",
+      "$value": 1.2
+    },
+    "snug": {
+      "$type": "number",
+      "$value": 1.35
+    },
+    "normal": {
+      "$type": "number",
+      "$value": 1.55
+    },
+    "reading": {
+      "$type": "number",
+      "$value": 1.7
+    }
+  },
+  "weight": {
+    "regular": {
+      "$type": "fontWeight",
+      "$value": 400
+    },
+    "medium": {
+      "$type": "fontWeight",
+      "$value": 500
+    },
+    "semibold": {
+      "$type": "fontWeight",
+      "$value": 600
+    },
+    "bold": {
+      "$type": "fontWeight",
+      "$value": 700
+    },
+    "heavy": {
+      "$type": "fontWeight",
+      "$value": 800
+    },
+    "black": {
+      "$type": "fontWeight",
+      "$value": 900
+    }
+  },
+  "space": {
+    "1": {
+      "$type": "dimension",
+      "$value": {
+        "value": 0.25,
+        "unit": "rem"
+      }
+    },
+    "2": {
+      "$type": "dimension",
+      "$value": {
+        "value": 0.5,
+        "unit": "rem"
+      }
+    },
+    "2-5": {
+      "$type": "dimension",
+      "$value": {
+        "value": 0.75,
+        "unit": "rem"
+      }
+    },
+    "3": {
+      "$type": "dimension",
+      "$value": {
+        "value": 1,
+        "unit": "rem"
+      }
+    },
+    "3-5": {
+      "$type": "dimension",
+      "$value": {
+        "value": 1.5,
+        "unit": "rem"
+      }
+    },
+    "4": {
+      "$type": "dimension",
+      "$value": {
+        "value": 2,
+        "unit": "rem"
+      }
+    },
+    "5": {
+      "$type": "dimension",
+      "$value": {
+        "value": 3,
+        "unit": "rem"
+      }
+    },
+    "6": {
+      "$type": "dimension",
+      "$value": {
+        "value": 4,
+        "unit": "rem"
+      }
+    }
+  },
+  "radius": {
+    "1": {
+      "$type": "dimension",
+      "$value": {
+        "value": 0.375,
+        "unit": "rem"
+      }
+    },
+    "2": {
+      "$type": "dimension",
+      "$value": {
+        "value": 0.75,
+        "unit": "rem"
+      }
+    },
+    "3": {
+      "$type": "dimension",
+      "$value": {
+        "value": 1,
+        "unit": "rem"
+      }
+    },
+    "full": {
+      "$type": "dimension",
+      "$value": {
+        "value": 999,
+        "unit": "rem"
+      }
+    }
+  },
+  "duration": {
+    "fast": {
+      "$type": "duration",
+      "$value": {
+        "value": 120,
+        "unit": "ms"
+      }
+    },
+    "base": {
+      "$type": "duration",
+      "$value": {
+        "value": 200,
+        "unit": "ms"
+      }
+    },
+    "slow": {
+      "$type": "duration",
+      "$value": {
+        "value": 320,
+        "unit": "ms"
+      }
+    },
+    "slower": {
+      "$type": "duration",
+      "$value": {
+        "value": 480,
+        "unit": "ms"
+      },
+      "$description": "a one-off flourish: a check drawing in, a leaf popping"
+    },
+    "grow": {
+      "$type": "duration",
+      "$value": {
+        "value": 900,
+        "unit": "ms"
+      },
+      "$description": "growth on mount: the vine, a bar filling"
+    },
+    "count": {
+      "$type": "duration",
+      "$value": {
+        "value": 1100,
+        "unit": "ms"
+      },
+      "$description": "a number counting up (XP)"
+    },
+    "stagger": {
+      "$type": "duration",
+      "$value": {
+        "value": 90,
+        "unit": "ms"
+      },
+      "$description": "delay between siblings growing one after another"
+    },
+    "sprout": {
+      "$type": "duration",
+      "$value": {
+        "value": 2400,
+        "unit": "ms"
+      },
+      "$description": "one cycle of the working sprout (Generating)"
+    },
+    "breathe": {
+      "$type": "duration",
+      "$value": {
+        "value": 2800,
+        "unit": "ms"
+      },
+      "$description": "one breath of the current skill's bud"
+    },
+    "sway": {
+      "$type": "duration",
+      "$value": {
+        "value": 6000,
+        "unit": "ms"
+      },
+      "$description": "a slow sway (empty-state sprout)"
+    },
+    "float": {
+      "$type": "duration",
+      "$value": {
+        "value": 28000,
+        "unit": "ms"
+      },
+      "$description": "a pollen mote crossing the page"
+    },
+    "drift": {
+      "$type": "duration",
+      "$value": {
+        "value": 72000,
+        "unit": "ms"
+      },
+      "$description": "the leaf pattern sliding by one tile (ambient background)"
+    },
+    "drift-slow": {
+      "$type": "duration",
+      "$value": {
+        "value": 104000,
+        "unit": "ms"
+      },
+      "$description": "the slowest ambient layer (growth rings)"
+    },
+    "$description": "UI transitions (fast, base, slow), one-off flourishes, and the long ambient loops (all off under reduced motion)"
+  },
+  "ease": {
+    "standard": {
+      "$type": "cubicBezier",
+      "$value": [
+        0.2,
+        0,
+        0,
+        1
+      ]
+    },
+    "out": {
+      "$type": "cubicBezier",
+      "$value": [
+        0,
+        0,
+        0.2,
+        1
+      ]
+    },
+    "gentle": {
+      "$type": "cubicBezier",
+      "$value": [
+        0.45,
+        0,
+        0.55,
+        1
+      ],
+      "$description": "in-out for loops: breathing, sway, drift"
+    },
+    "spring": {
+      "$type": "cubicBezier",
+      "$value": [
+        0.34,
+        1.56,
+        0.64,
+        1
+      ],
+      "$description": "a small overshoot: a leaf or sprout popping in"
+    }
+  },
+  "measure": {
+    "$type": "dimension",
+    "$value": {
+      "value": 42,
+      "unit": "rem"
+    },
+    "$description": "reading column width (about 70 characters)"
+  },
+  "page": {
+    "$type": "dimension",
+    "$value": {
+      "value": 64,
+      "unit": "rem"
+    },
+    "$description": "widest page content"
+  },
+  "elevation": {
+    "1": {
+      "$type": "shadow",
+      "$value": [
+        {
+          "color": {
+            "colorSpace": "srgb",
+            "components": [
+              0.118,
+              0.231,
+              0.184
+            ],
+            "alpha": 0.06
+          },
+          "offsetX": {
+            "value": 0,
+            "unit": "px"
+          },
+          "offsetY": {
+            "value": 1,
+            "unit": "px"
+          },
+          "blur": {
+            "value": 2,
+            "unit": "px"
+          },
+          "spread": {
+            "value": 0,
+            "unit": "px"
+          }
+        },
+        {
+          "color": {
+            "colorSpace": "srgb",
+            "components": [
+              0.118,
+              0.231,
+              0.184
+            ],
+            "alpha": 0.06
+          },
+          "offsetX": {
+            "value": 0,
+            "unit": "px"
+          },
+          "offsetY": {
+            "value": 2,
+            "unit": "px"
+          },
+          "blur": {
+            "value": 8,
+            "unit": "px"
+          },
+          "spread": {
+            "value": 0,
+            "unit": "px"
+          }
+        }
+      ]
+    },
+    "2": {
+      "$type": "shadow",
+      "$value": [
+        {
+          "color": {
+            "colorSpace": "srgb",
+            "components": [
+              0.118,
+              0.231,
+              0.184
+            ],
+            "alpha": 0.08
+          },
+          "offsetX": {
+            "value": 0,
+            "unit": "px"
+          },
+          "offsetY": {
+            "value": 4,
+            "unit": "px"
+          },
+          "blur": {
+            "value": 12,
+            "unit": "px"
+          },
+          "spread": {
+            "value": 0,
+            "unit": "px"
+          }
+        },
+        {
+          "color": {
+            "colorSpace": "srgb",
+            "components": [
+              0.118,
+              0.231,
+              0.184
+            ],
+            "alpha": 0.1
+          },
+          "offsetX": {
+            "value": 0,
+            "unit": "px"
+          },
+          "offsetY": {
+            "value": 12,
+            "unit": "px"
+          },
+          "blur": {
+            "value": 32,
+            "unit": "px"
+          },
+          "spread": {
+            "value": -8,
+            "unit": "px"
+          }
+        }
+      ]
+    },
+    "$description": "shadow primitives; the themes publish them as --yuo-shadow-*"
+  }
+}

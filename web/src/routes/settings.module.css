@@ -1,0 +1,245 @@
+@layer components {
+  /* the sticky header stays above a section a jump link scrolls to */
+  .page :where([id]) {
+    scroll-margin-block-start: var(--yuo-space-6);
+  }
+
+  .devices {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: var(--yuo-space-3);
+    padding: var(--yuo-space-3);
+    border: 1px solid var(--yuo-color-border);
+    border-radius: var(--yuo-radius-3);
+    background: var(--yuo-color-surface);
+    box-shadow: var(--yuo-shadow-1);
+    color: var(--yuo-color-fg);
+    font-weight: var(--yuo-weight-medium);
+    text-decoration: none;
+
+    &:hover {
+      border-color: var(--yuo-color-border-strong);
+    }
+
+    &:hover .devicesChevron {
+      transform: translateX(2px);
+    }
+  }
+
+  .devicesIcon {
+    display: inline-grid;
+    place-items: center;
+    inline-size: 2.5rem;
+    block-size: 2.5rem;
+    border-radius: var(--yuo-radius-full);
+    background: var(--yuo-color-surface-muted);
+    color: var(--yuo-color-leaf);
+    font-size: var(--yuo-text-xl);
+  }
+
+  .devicesChevron {
+    flex: none;
+    color: var(--yuo-color-muted);
+    transition: transform var(--yuo-duration-fast) var(--yuo-ease-standard);
+  }
+
+  .list {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  /* search results: each match on its own card, outside its closed section */
+  .hits {
+    gap: var(--yuo-space-3);
+
+    & > .setting {
+      padding: var(--yuo-space-4);
+      border: 1px solid var(--yuo-color-border);
+      border-radius: var(--yuo-radius-3);
+      background: var(--yuo-color-surface);
+    }
+  }
+
+  .sectionHits {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--yuo-space-2);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    & a {
+      display: inline-flex;
+      align-items: center;
+      min-block-size: 2.25rem;
+      padding-inline: var(--yuo-space-3);
+      border: 1px solid var(--yuo-color-border);
+      border-radius: var(--yuo-radius-full);
+      background: var(--yuo-color-surface);
+      font-weight: var(--yuo-weight-medium);
+    }
+  }
+
+  .search {
+    position: relative;
+    display: block;
+    max-inline-size: 32rem;
+
+    /* the clear button React Aria adds is not used: Escape clears */
+    & button {
+      display: none;
+    }
+  }
+
+  .searchIcon {
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-start: var(--yuo-space-3);
+    color: var(--yuo-color-muted);
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+
+  .searchInput {
+    padding-inline-start: calc(var(--yuo-space-3) * 2 + 1em);
+
+    &::-webkit-search-cancel-button {
+      display: none;
+    }
+  }
+
+  .groupTitle {
+    margin: 0;
+    margin-block-start: var(--yuo-space-4);
+    font-size: var(--yuo-text-2xl);
+  }
+
+  .setting {
+    display: grid;
+    gap: var(--yuo-space-2);
+    padding-block: var(--yuo-space-4);
+
+    & + & {
+      border-block-start: 1px solid var(--yuo-color-border);
+    }
+
+    &:first-child {
+      padding-block-start: 0;
+    }
+
+    &:last-child {
+      padding-block-end: 0;
+    }
+
+    & p {
+      margin: 0;
+    }
+
+    & details {
+      color: var(--yuo-color-muted);
+      font-size: var(--yuo-text-sm);
+
+      & p {
+        margin-block-start: var(--yuo-space-1);
+      }
+    }
+
+    & summary {
+      inline-size: fit-content;
+      border-radius: var(--yuo-radius-1);
+      color: var(--yuo-color-link);
+      font-weight: var(--yuo-weight-semibold);
+      cursor: pointer;
+    }
+  }
+
+  .hits > .setting:first-child,
+  .hits > .setting:last-child {
+    padding-block: var(--yuo-space-4);
+  }
+
+  .title {
+    margin: 0;
+    font-size: var(--yuo-text-md);
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--yuo-space-1);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .tag {
+    padding-inline: var(--yuo-space-2);
+    border-radius: var(--yuo-radius-full);
+    background: var(--yuo-color-surface-muted);
+    color: var(--yuo-color-muted);
+    font-size: var(--yuo-text-xs);
+    font-weight: var(--yuo-weight-medium);
+  }
+
+  .editor {
+    display: grid;
+    gap: var(--yuo-space-2);
+    padding-block-start: var(--yuo-space-3);
+    border-block-start: 1px solid var(--yuo-color-border);
+  }
+
+  .switch {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--yuo-space-2);
+    cursor: pointer;
+
+    &[data-focus-visible] .track {
+      outline: 2px solid var(--yuo-color-focus);
+      outline-offset: 2px;
+    }
+
+    &[data-selected] .track {
+      background: var(--yuo-color-accent);
+    }
+
+    &[data-selected] .thumb {
+      transform: translateX(1.1rem);
+      background: var(--yuo-color-accent-fg);
+    }
+  }
+
+  .track {
+    display: inline-flex;
+    align-items: center;
+    inline-size: 2.5rem;
+    block-size: 1.4rem;
+    padding: 0.2rem;
+    border-radius: var(--yuo-radius-full);
+    background: var(--yuo-color-border-strong);
+    transition: background-color var(--yuo-duration-fast) var(--yuo-ease-standard);
+  }
+
+  .thumb {
+    inline-size: 1rem;
+    block-size: 1rem;
+    border-radius: var(--yuo-radius-full);
+    background: var(--yuo-color-surface);
+    box-shadow: var(--yuo-shadow-1);
+    transition: transform var(--yuo-duration-fast) var(--yuo-ease-out);
+  }
+
+  .numberGroup {
+    display: flex;
+    align-items: center;
+    gap: var(--yuo-space-1);
+  }
+
+  .numberInput {
+    inline-size: 7rem;
+    text-align: center;
+  }
+}

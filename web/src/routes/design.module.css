@@ -1,0 +1,114 @@
+@layer components {
+  .swatches {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
+    gap: var(--yuo-space-2-5);
+  }
+
+  .swatch {
+    display: grid;
+    gap: var(--yuo-space-1);
+    font-size: var(--yuo-text-xs);
+  }
+
+  .chip {
+    block-size: 3rem;
+    border: 1px solid var(--yuo-color-border);
+    border-radius: var(--yuo-radius-2);
+  }
+
+  .typeRow {
+    display: grid;
+    grid-template-columns: 3rem minmax(0, 1fr);
+    align-items: baseline;
+    gap: var(--yuo-space-3);
+  }
+
+  .display {
+    font-family: var(--yuo-font-display);
+    font-weight: var(--yuo-weight-heavy);
+    line-height: var(--yuo-leading-tight);
+  }
+
+  .reading {
+    max-inline-size: var(--yuo-measure);
+    line-height: var(--yuo-leading-reading);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    gap: var(--yuo-space-3);
+  }
+
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--yuo-space-1);
+    min-block-size: 2rem;
+    padding-inline: var(--yuo-space-2-5);
+    border-radius: var(--yuo-radius-full);
+    background: var(--yuo-color-surface-muted);
+    font-size: var(--yuo-text-sm);
+    font-weight: var(--yuo-weight-medium);
+  }
+
+  .countCard {
+    display: grid;
+    gap: var(--yuo-space-1);
+  }
+
+  .countValue {
+    font-family: var(--yuo-font-display);
+    font-size: var(--yuo-text-3xl);
+    font-weight: var(--yuo-weight-heavy);
+    line-height: var(--yuo-leading-tight);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .barStack {
+    display: grid;
+    align-content: center;
+    gap: var(--yuo-space-3);
+  }
+
+  .watermarkCard {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    min-block-size: 8rem;
+  }
+
+  .forestTile {
+    display: inline-grid;
+    place-items: center;
+    inline-size: 4rem;
+    block-size: 4rem;
+    border-radius: var(--yuo-radius-3);
+    background: var(--yuo-color-media-bg);
+  }
+
+  .iconGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(5.5rem, 1fr));
+    gap: var(--yuo-space-2);
+  }
+
+  .iconCell {
+    display: grid;
+    justify-items: center;
+    gap: var(--yuo-space-1);
+    padding: var(--yuo-space-2);
+    border-radius: var(--yuo-radius-2);
+    background: var(--yuo-color-surface);
+    font-size: var(--yuo-text-xs);
+  }
+
+  .nodeSet {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--yuo-space-3) var(--yuo-space-3-5);
+    font-size: var(--yuo-text-sm);
+    font-weight: var(--yuo-weight-semibold);
+  }
+}

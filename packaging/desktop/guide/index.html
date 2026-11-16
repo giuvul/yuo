@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'">
+<title>Installing Yuo on your computer</title>
+<style>
+  :root { color-scheme: light dark; --fg: #1d2330; --muted: #5b6475; --bg: #fbfaf7; --box: #f0ede6; --accent: #2f6f5e; }
+  @media (prefers-color-scheme: dark) { :root { --fg: #e8e6e1; --muted: #a3a9b5; --bg: #171a20; --box: #232831; --accent: #7cc2ad; } }
+  body { font: 16px/1.6 system-ui, sans-serif; color: var(--fg); background: var(--bg); margin: 0; padding: 2rem max(1rem, 5vw); }
+  main { max-width: 42rem; margin: auto; }
+  h1, h2 { line-height: 1.25; } h2 { margin-top: 2.5rem; border-top: 1px solid var(--box); padding-top: 1.5rem; }
+  ol li { margin: .4rem 0; } .muted { color: var(--muted); }
+  .dialog { background: var(--box); border-left: 4px solid var(--accent); padding: .6rem 1rem; margin: .6rem 0; }
+  code { background: var(--box); padding: 0 .3rem; border-radius: 3px; }
+</style>
+</head>
+<body>
+<main>
+<h1>Installing Yuo on your computer</h1>
+<p>Yuo runs on your own computer. You double-click one file; a window opens, installs what Yuo needs (about
+400&nbsp;MB, a few minutes the first time) and then opens Yuo in your browser. You never type a command.</p>
+<p class="muted">Yuo is free software and is not signed with a paid certificate yet, so Windows and macOS warn
+you the first time. This page shows what you will see and what to click. Everything Yuo installs goes into one
+folder in your user account; nothing is installed for other users.</p>
+
+<h2 id="windows">Windows 10 and 11</h2>
+<ol>
+  <li>Unzip the download: right-click it, <b>Extract All…</b>, <b>Extract</b>.</li>
+  <li>Open the extracted folder and double-click <b>Yuo-Windows</b> (or <code>Yuo-Windows.bat</code>).</li>
+  <li>Windows asks:
+    <div class="dialog">Open File - Security Warning. The publisher could not be verified. Are you sure you want to run this software?</div>
+    Click <b>Run</b>. If you see <i>"Windows protected your PC"</i> instead, click <b>More info</b>, then <b>Run anyway</b>.</li>
+  <li>A black window opens and shows what it is doing. Keep it open while you use Yuo; closing it stops Yuo.</li>
+  <li>Your browser opens Yuo. Next time, double-click <b>Yuo-Windows</b> again; it starts in seconds.</li>
+</ol>
+<h3 id="smart-app-control">Smart App Control</h3>
+<p>On some new Windows 11 computers <b>Smart App Control</b> is on. It blocks programs that have no signature,
+including the Python that Yuo installs, and it offers no "Run anyway". The window then says Smart App Control is
+on, or Yuo stops with <i>"An Application Control policy has blocked this file"</i>.</p>
+<ol>
+  <li>Open <b>Windows Security</b> &gt; <b>App &amp; browser control</b> &gt; <b>Smart App Control settings</b>.</li>
+  <li>Choose <b>Off</b> only if you are comfortable doing so: it protects against unknown programs in general.
+    On recent Windows 11 versions you can turn it on again later.</li>
+  <li>If you prefer to keep it on, Yuo cannot run on this computer yet; a signed version is planned.</li>
+</ol>
+
+<h2 id="macos">macOS (Apple silicon: M1 or later)</h2>
+<p class="muted">Not yet tested on a real Mac. Intel Macs are not supported: some parts Yuo uses are not built for them.</p>
+<ol>
+  <li>Double-click the download to unzip it, then double-click <b>Yuo-macOS.command</b>.</li>
+  <li>macOS says the file cannot be opened because Apple cannot check it. Click <b>Done</b> (not Move to Trash).</li>
+  <li>Open <b>System Settings</b> &gt; <b>Privacy &amp; Security</b>, scroll down, and next to the message about
+    Yuo-macOS.command click <b>Open Anyway</b>. Enter your Mac password if asked.</li>
+  <li>Double-click <b>Yuo-macOS.command</b> again and click <b>Open</b>. A Terminal window opens and runs by itself;
+    you do not type anything. Keep it open while you use Yuo.</li>
+</ol>
+
+<h2 id="linux">Linux</h2>
+<ol>
+  <li>Unzip the download and open the folder.</li>
+  <li>Double-click <b>Yuo-Linux.sh</b>. If your file manager opens it as text, right-click it, choose
+    <b>Properties</b> &gt; <b>Permissions</b> and allow <b>executing as a program</b>, or choose <b>Run as a Program</b>.</li>
+  <li>After the first start Yuo is also in your applications menu.</li>
+</ol>
+
+<h2 id="data">Where your things are</h2>
+<ul>
+  <li>Windows: <code>%LOCALAPPDATA%\Yuo</code> &middot; macOS: <code>~/Library/Application Support/Yuo</code> &middot;
+    Linux: <code>~/.local/share/yuo-desktop</code></li>
+  <li>Your learning data is in its <code>data</code> folder, with a checked backup every day in <code>data/backups</code>.</li>
+  <li>If something goes wrong, <code>logs/launcher.log</code> in the same folder says what happened.</li>
+  <li>Yuo listens only on this computer (address <code>127.0.0.1</code>); nothing on your network can reach it.</li>
+</ul>
+
+<h2 id="updates">Updates</h2>
+<p>Yuo looks for a new version once a day (you can turn this off in Settings). When there is one, Settings offers
+to download it; Yuo checks the download against the published checksum and installs it the next time it starts.
+Before the new version changes your data it makes a backup; if the new version does not start, Yuo puts your data
+back and runs the previous version.</p>
+
+<h2 id="check">For technical users: checking the download</h2>
+<p>Each release lists the SHA-256 of the zip in <code>SHA256SUMS</code>. The launcher downloads <code>uv</code> from
+its official GitHub release and checks it against a hash written in the launcher; Python comes from uv's managed
+builds and Yuo's dependencies are installed with <code>--require-hashes</code> from the release's lock.</p>
+</main>
+</body>
+</html>

@@ -1,0 +1,172 @@
+@layer components {
+  .card {
+    display: grid;
+    gap: var(--yuo-space-3);
+    max-inline-size: var(--yuo-measure);
+    padding: var(--yuo-space-4);
+    border: 1px solid var(--yuo-color-border);
+    border-radius: var(--yuo-radius-3);
+    background: var(--yuo-color-surface);
+    box-shadow: var(--yuo-shadow-1);
+
+    @media (max-width: 30rem) {
+      padding: var(--yuo-space-3);
+    }
+
+    & h2,
+    & p {
+      margin: 0;
+    }
+  }
+
+  .heading {
+    display: flex;
+    align-items: center;
+    gap: var(--yuo-space-2-5);
+
+    & h2 {
+      font-size: var(--yuo-text-xl);
+    }
+  }
+
+  .headingIcon {
+    display: inline-grid;
+    flex: none;
+    place-items: center;
+    inline-size: 2.5rem;
+    block-size: 2.5rem;
+    border-radius: var(--yuo-radius-full);
+    background: var(--yuo-color-surface-muted);
+    color: var(--yuo-color-leaf);
+    font-size: var(--yuo-text-lg);
+  }
+
+  .progressRow {
+    display: grid;
+    gap: var(--yuo-space-1);
+  }
+
+  .counter {
+    color: var(--yuo-color-muted);
+    font-size: var(--yuo-text-sm);
+    font-weight: var(--yuo-weight-semibold);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* each new question fades in: the answer was taken */
+  .question {
+    display: grid;
+    gap: var(--yuo-space-3);
+    animation: yuo-question-in var(--yuo-duration-slow) var(--yuo-ease-out);
+  }
+
+  @keyframes yuo-question-in {
+    from {
+      opacity: 0;
+      transform: translateY(0.5rem);
+    }
+  }
+
+  .prompt {
+    font-family: var(--yuo-font-display);
+    font-size: var(--yuo-text-xl);
+    font-weight: var(--yuo-weight-bold);
+    line-height: var(--yuo-leading-snug);
+  }
+
+  .options {
+    display: grid;
+    gap: var(--yuo-space-2);
+  }
+
+  .option {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    gap: var(--yuo-space-2-5);
+    inline-size: 100%;
+    min-block-size: 3.25rem;
+    padding-block: var(--yuo-space-2-5);
+    padding-inline: var(--yuo-space-2-5) var(--yuo-space-3);
+    border: 1px solid var(--yuo-color-border-strong);
+    border-radius: var(--yuo-radius-2);
+    background: var(--yuo-color-surface);
+    color: var(--yuo-color-fg);
+    font: inherit;
+    text-align: start;
+    cursor: pointer;
+    transition:
+      border-color var(--yuo-duration-fast) var(--yuo-ease-standard),
+      background-color var(--yuo-duration-fast) var(--yuo-ease-standard),
+      transform var(--yuo-duration-fast) var(--yuo-ease-standard);
+
+    &[data-hovered] {
+      border-color: var(--yuo-color-accent);
+      background: var(--yuo-color-surface-muted);
+    }
+
+    &[data-focus-visible] {
+      outline: 2px solid var(--yuo-color-focus);
+      outline-offset: 2px;
+      border-color: var(--yuo-color-accent);
+    }
+
+    &[data-pressed] {
+      transform: scale(0.99);
+      border-color: var(--yuo-color-accent);
+      background: var(--yuo-color-surface-muted);
+    }
+
+    &[data-disabled] {
+      cursor: default;
+      opacity: 0.6;
+    }
+  }
+
+  .letter {
+    display: inline-grid;
+    flex: none;
+    place-items: center;
+    inline-size: 2rem;
+    block-size: 2rem;
+    border: 1.5px solid var(--yuo-color-border-strong);
+    border-radius: var(--yuo-radius-full);
+    color: var(--yuo-color-muted);
+    font-size: var(--yuo-text-sm);
+    font-weight: var(--yuo-weight-bold);
+
+    .option[data-hovered] &,
+    .option[data-pressed] & {
+      border-color: var(--yuo-color-accent);
+      background: var(--yuo-color-accent);
+      color: var(--yuo-color-accent-fg);
+    }
+  }
+
+  .optionText {
+    overflow-wrap: anywhere;
+  }
+
+  /* an honest answer, not a failure: dashed, in the quiet panel colour */
+  .dontKnow {
+    border-style: dashed;
+    background: var(--yuo-color-surface-muted);
+
+    & .letter {
+      border-style: dashed;
+      color: var(--yuo-color-leaf);
+    }
+  }
+
+  .footer {
+    display: flex;
+    justify-content: flex-end;
+    padding-block-start: var(--yuo-space-2);
+    border-block-start: 1px solid var(--yuo-color-border);
+  }
+
+  .topics {
+    margin: 0;
+    padding-inline-start: 1.2rem;
+  }
+}

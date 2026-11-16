@@ -1,0 +1,200 @@
+{
+ "$defs": {
+  "Inventory": {
+   "properties": {
+    "counts": {
+     "additionalProperties": {
+      "additionalProperties": {
+       "type": "integer"
+      },
+      "type": "object"
+     },
+     "title": "Counts",
+     "type": "object"
+    },
+    "files": {
+     "items": {
+      "$ref": "#/$defs/InventoryFile"
+     },
+     "title": "Files",
+     "type": "array"
+    },
+    "total_bytes": {
+     "minimum": 0,
+     "title": "Total Bytes",
+     "type": "integer"
+    }
+   },
+   "required": [
+    "files",
+    "counts",
+    "total_bytes"
+   ],
+   "title": "Inventory",
+   "type": "object"
+  },
+  "InventoryFile": {
+   "properties": {
+    "bytes": {
+     "minimum": 0,
+     "title": "Bytes",
+     "type": "integer"
+    },
+    "path": {
+     "title": "Path",
+     "type": "string"
+    },
+    "sha256": {
+     "pattern": "^[0-9a-f]{64}$",
+     "title": "Sha256",
+     "type": "string"
+    }
+   },
+   "required": [
+    "path",
+    "sha256",
+    "bytes"
+   ],
+   "title": "InventoryFile",
+   "type": "object"
+  }
+ },
+ "$id": "urn:yuo:package:1.0:manifest",
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "additionalProperties": true,
+ "properties": {
+  "authors": {
+   "items": {
+    "additionalProperties": true,
+    "type": "object"
+   },
+   "title": "Authors",
+   "type": "array"
+  },
+  "content_lang": {
+   "title": "Content Lang",
+   "type": "string"
+  },
+  "content_version": {
+   "pattern": "^\\d+\\.\\d+\\.\\d+$",
+   "title": "Content Version",
+   "type": "string"
+  },
+  "contents": {
+   "items": {
+    "type": "string"
+   },
+   "title": "Contents",
+   "type": "array"
+  },
+  "created_at": {
+   "title": "Created At",
+   "type": "string"
+  },
+  "created_with": {
+   "additionalProperties": {
+    "type": "string"
+   },
+   "title": "Created With",
+   "type": "object"
+  },
+  "extensions": {
+   "additionalProperties": true,
+   "title": "Extensions",
+   "type": "object"
+  },
+  "format": {
+   "const": "yuo.package",
+   "title": "Format",
+   "type": "string"
+  },
+  "format_version": {
+   "pattern": "^\\d+\\.\\d+\\.\\d+$",
+   "title": "Format Version",
+   "type": "string"
+  },
+  "inventory": {
+   "$ref": "#/$defs/Inventory"
+  },
+  "licence": {
+   "title": "Licence",
+   "type": "string"
+  },
+  "licences_used": {
+   "items": {
+    "type": "string"
+   },
+   "title": "Licences Used",
+   "type": "array"
+  },
+  "package_uid": {
+   "pattern": "^pkg_[0-9a-z]{26}$",
+   "title": "Package Uid",
+   "type": "string"
+  },
+  "parent_package_digest": {
+   "anyOf": [
+    {
+     "pattern": "^[0-9a-f]{64}$",
+     "type": "string"
+    },
+    {
+     "type": "null"
+    }
+   ],
+   "default": null,
+   "title": "Parent Package Digest"
+  },
+  "profile": {
+   "enum": [
+    "structure",
+    "full",
+    "custom"
+   ],
+   "title": "Profile",
+   "type": "string"
+  },
+  "required_exercise_types": {
+   "items": {
+    "additionalProperties": true,
+    "type": "object"
+   },
+   "title": "Required Exercise Types",
+   "type": "array"
+  },
+  "title": {
+   "maxLength": 200,
+   "title": "Title",
+   "type": "string"
+  },
+  "translation_of_package_uid": {
+   "anyOf": [
+    {
+     "type": "string"
+    },
+    {
+     "type": "null"
+    }
+   ],
+   "default": null,
+   "title": "Translation Of Package Uid"
+  }
+ },
+ "required": [
+  "format",
+  "format_version",
+  "package_uid",
+  "content_version",
+  "profile",
+  "contents",
+  "title",
+  "content_lang",
+  "licence",
+  "licences_used",
+  "created_with",
+  "created_at",
+  "inventory"
+ ],
+ "title": "Manifest",
+ "type": "object"
+}

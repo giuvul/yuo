@@ -1,0 +1,184 @@
+@layer components {
+  .checkbox[data-selected]:not([data-mark]) {
+    border-color: var(--yuo-color-accent);
+    border-width: 2px;
+    background: var(--yuo-color-surface-muted);
+  }
+
+  .checkbox::before {
+    border-radius: var(--yuo-radius-1);
+  }
+
+  .checkbox[data-selected]::before {
+    border: 0.32rem solid currentColor;
+  }
+
+  .cloze {
+    margin: 0;
+    font-size: var(--yuo-text-lg);
+    line-height: 2.4;
+  }
+
+  .gap {
+    display: inline-block;
+    margin-inline: var(--yuo-space-1);
+  }
+
+  .gapInput {
+    inline-size: 9rem;
+    max-inline-size: 100%;
+    min-block-size: 2.25rem;
+    padding-block: var(--yuo-space-1);
+    border-style: dashed;
+    border-width: 0 0 2px;
+    border-radius: var(--yuo-radius-1) var(--yuo-radius-1) 0 0;
+    background: var(--yuo-color-surface-muted);
+  }
+
+  .ordering {
+    display: grid;
+    gap: var(--yuo-space-2);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: step;
+  }
+
+  .orderRow {
+    display: flex;
+    align-items: center;
+    gap: var(--yuo-space-2-5);
+    padding: var(--yuo-space-2) var(--yuo-space-2) var(--yuo-space-2) var(--yuo-space-3);
+    border: 1px solid var(--yuo-color-border-strong);
+    border-radius: var(--yuo-radius-2);
+    background: var(--yuo-color-surface);
+    counter-increment: step;
+
+    &::before {
+      content: counter(step);
+      display: inline-grid;
+      flex: none;
+      place-items: center;
+      inline-size: 1.6rem;
+      block-size: 1.6rem;
+      border-radius: var(--yuo-radius-full);
+      background: var(--yuo-color-surface-muted);
+      color: var(--yuo-color-muted);
+      font-size: var(--yuo-text-xs);
+      font-weight: var(--yuo-weight-bold);
+    }
+  }
+
+  .orderText {
+    flex: 1;
+    min-inline-size: 0;
+  }
+
+  .matching {
+    display: grid;
+    gap: var(--yuo-space-2);
+  }
+
+  .matchRow {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+    align-items: center;
+    gap: var(--yuo-space-2) var(--yuo-space-3);
+
+    @media (max-width: 30rem) {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
+  .matchLeft {
+    font-weight: var(--yuo-weight-semibold);
+  }
+
+  .selectButton {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--yuo-space-2);
+    text-align: start;
+    cursor: pointer;
+  }
+
+  .popover {
+    min-inline-size: var(--trigger-width);
+    border: 1px solid var(--yuo-color-border);
+    border-radius: var(--yuo-radius-2);
+    background: var(--yuo-color-surface);
+    box-shadow: var(--yuo-shadow-2);
+  }
+
+  .listbox {
+    max-block-size: 18rem;
+    overflow: auto;
+    padding: var(--yuo-space-1);
+    outline: none;
+  }
+
+  .option {
+    padding: var(--yuo-space-2);
+    border-radius: var(--yuo-radius-1);
+    cursor: pointer;
+    outline: none;
+
+    &[data-focused],
+    &[data-hovered] {
+      background: var(--yuo-color-surface-muted);
+    }
+
+    &[data-selected] {
+      font-weight: var(--yuo-weight-bold);
+    }
+  }
+
+  /* the turned flashcard */
+  .cardBack {
+    padding: var(--yuo-space-3);
+    border: 1px solid var(--yuo-color-border);
+    border-inline-start: 4px solid var(--yuo-color-highlight);
+    border-radius: var(--yuo-radius-2);
+    background: var(--yuo-color-surface-muted);
+    animation: yuo-turn var(--yuo-duration-base) var(--yuo-ease-out);
+
+    & p {
+      margin: 0;
+    }
+  }
+
+  @keyframes yuo-turn {
+    from {
+      transform: rotateX(30deg);
+      opacity: 0;
+    }
+  }
+
+  .feedback {
+    display: grid;
+    gap: var(--yuo-space-2);
+
+    & p,
+    & ul {
+      margin: 0;
+    }
+  }
+
+  .verdict {
+    font-size: var(--yuo-text-lg);
+    font-weight: var(--yuo-weight-bold);
+  }
+
+  .detail {
+    color: var(--yuo-color-fg);
+  }
+
+  .label {
+    font-weight: var(--yuo-weight-bold);
+  }
+
+  .preWrap {
+    white-space: pre-wrap;
+  }
+}

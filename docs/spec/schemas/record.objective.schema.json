@@ -1,0 +1,55 @@
+{
+ "$id": "urn:yuo:package:1.0:record.objective",
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "additionalProperties": true,
+ "properties": {
+  "bloom_level": {
+   "anyOf": [
+    {
+     "maxLength": 40,
+     "type": "string"
+    },
+    {
+     "type": "null"
+    }
+   ],
+   "default": null,
+   "title": "Bloom Level"
+  },
+  "code": {
+   "maxLength": 128,
+   "pattern": "^[a-z0-9]+([._-][a-z0-9]+)*$",
+   "title": "Code",
+   "type": "string"
+  },
+  "extensions": {
+   "additionalProperties": true,
+   "title": "Extensions",
+   "type": "object"
+  },
+  "position": {
+   "minimum": 0,
+   "title": "Position",
+   "type": "integer"
+  },
+  "skill": {
+   "pattern": "^[a-z0-9]+([._-][a-z0-9]+)*$",
+   "title": "Skill",
+   "type": "string",
+   "x-ref": "skill"
+  },
+  "statement": {
+   "maxLength": 2000,
+   "title": "Statement",
+   "type": "string"
+  }
+ },
+ "required": [
+  "code",
+  "skill",
+  "statement",
+  "position"
+ ],
+ "title": "ObjectiveRecord",
+ "type": "object"
+}

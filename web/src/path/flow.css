@@ -1,0 +1,3 @@
+/* The node-graph library's own stylesheet, put in the `vendor` layer (styles/global.css) so PathGraph.module.css,
+   which is in the components layer, restyles it with Yuo's tokens whatever the specificity. */
+@import "@xyflow/react/dist/style.css" layer(vendor);

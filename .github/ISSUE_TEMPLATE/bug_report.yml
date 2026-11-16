@@ -1,0 +1,60 @@
+name: Bug report
+description: Something in Yuo does not work as it should.
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting. Leave out API keys, setup codes, passwords and personal data.
+        Security problems go through the private form in SECURITY.md, not here.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you did, what you expected, and what happened instead.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open a path
+        2. Start the skill test
+        3. ...
+  - type: input
+    id: version
+    attributes:
+      label: Yuo version
+      description: Settings > Updates shows it.
+      placeholder: "1.0.0"
+    validations:
+      required: true
+  - type: dropdown
+    id: install
+    attributes:
+      label: How you run Yuo
+      options:
+        - Server version (Docker) on my own computer
+        - Server version (Docker) on a server
+        - Desktop app on Windows
+        - Desktop app on macOS
+        - Desktop app on Linux
+    validations:
+      required: true
+  - type: input
+    id: ai
+    attributes:
+      label: AI in use
+      placeholder: "Claude subscription, OpenRouter with Qwen 3.8, a local model, ..."
+  - type: input
+    id: browser
+    attributes:
+      label: Browser and device
+      placeholder: "Firefox on Windows 11, Safari on iPhone, ..."
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: "`docker compose logs --since 10m yuo` on the server version, `logs/launcher.log` beside the data folder on the desktop app."
+      render: text

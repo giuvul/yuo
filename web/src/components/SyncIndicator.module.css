@@ -1,0 +1,49 @@
+@layer components {
+  .indicator {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--yuo-space-1) var(--yuo-space-2);
+    margin: 0;
+    color: var(--yuo-color-muted);
+    font-size: var(--yuo-text-sm);
+  }
+
+  .dot {
+    flex: none;
+    inline-size: 0.55rem;
+    block-size: 0.55rem;
+    border-radius: var(--yuo-radius-full);
+    background: var(--yuo-color-leaf);
+  }
+
+  .indicator[data-state="pending"] .dot {
+    background: var(--yuo-color-highlight);
+  }
+
+  .indicator[data-state="offline"] .dot,
+  .indicator[data-state="signed-out"] .dot {
+    background: var(--yuo-color-danger);
+  }
+
+  .indicator:not([data-state="synced"]) {
+    color: var(--yuo-color-fg);
+  }
+
+  .extra::before {
+    content: "·";
+    margin-inline-end: var(--yuo-space-2);
+  }
+
+  /* a phone: "Synced" is the quiet default, so the dot alone says it; anything else keeps its words */
+  @media (max-width: 40rem) {
+    .indicator[data-state="synced"] .text {
+      position: absolute;
+      inline-size: 1px;
+      block-size: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+  }
+}

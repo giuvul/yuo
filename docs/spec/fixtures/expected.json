@@ -1,0 +1,21 @@
+{
+ "invalid/dag-cycle": "prerequisite cycle",
+ "invalid/hash-mismatch": "hash differs",
+ "invalid/html-in-body": "unknown block",
+ "invalid/link-in-text": "text with marks only",
+ "invalid/manifest-not-first": "first entry",
+ "invalid/media-sniff": "its bytes are not",
+ "invalid/newer-major": "newer than this Yuo",
+ "invalid/not-listed": "inventory mismatch",
+ "invalid/path-traversal": "bad file name",
+ "invalid/svg-with-script": "not allowed",
+ "invalid/version-hash": "version hash does not match",
+ "invalid/zip-bomb": "compression ratio",
+ "valid/custom-items-only": null,
+ "valid/full": null,
+ "valid/minimal": null,
+ "valid/older-version": null,
+ "valid/structure": null,
+ "valid/unknown-exercise-type": null,
+ "valid/unknown-extension": null
+}

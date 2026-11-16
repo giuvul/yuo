@@ -1,0 +1,123 @@
+@layer components {
+  .card {
+    display: grid;
+    gap: var(--yuo-space-3);
+    max-inline-size: var(--yuo-measure);
+
+    & p {
+      margin: 0;
+    }
+  }
+
+  .heading {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--yuo-space-2-5);
+  }
+
+  .headingIcon {
+    display: inline-grid;
+    flex: none;
+    place-items: center;
+    inline-size: 2.5rem;
+    block-size: 2.5rem;
+    border-radius: var(--yuo-radius-full);
+    background: var(--yuo-color-surface-muted);
+    color: var(--yuo-color-leaf);
+    font-size: var(--yuo-text-lg);
+  }
+
+  .subtitle {
+    margin: 0;
+    font-size: var(--yuo-text-lg);
+  }
+
+  .facts {
+    display: grid;
+    gap: var(--yuo-space-1);
+    margin: 0;
+    padding-inline-start: var(--yuo-space-4);
+  }
+
+  .question {
+    display: grid;
+    gap: var(--yuo-space-2);
+    padding-block-start: var(--yuo-space-3);
+    border-block-start: 1px solid var(--yuo-color-border);
+  }
+
+  .directions {
+    display: grid;
+    gap: var(--yuo-space-3);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    max-inline-size: var(--yuo-measure);
+  }
+
+  .direction {
+    display: grid;
+    gap: var(--yuo-space-2);
+    border-inline-start: 4px solid var(--yuo-color-leaf);
+
+    & p {
+      margin: 0;
+    }
+  }
+
+  .directionHead {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--yuo-space-2);
+  }
+
+  .kind {
+    color: var(--yuo-color-muted);
+    font-size: var(--yuo-text-sm);
+    font-weight: var(--yuo-weight-semibold);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .directionTitle {
+    margin: 0;
+    font-size: var(--yuo-text-lg);
+    text-wrap: balance;
+  }
+
+  .confirm {
+    display: grid;
+    gap: var(--yuo-space-2);
+    padding: var(--yuo-space-3);
+    border-radius: var(--yuo-radius-2);
+    background: var(--yuo-color-surface-muted);
+    animation: yuo-confirm-in var(--yuo-duration-base) var(--yuo-ease-out);
+  }
+
+  @keyframes yuo-confirm-in {
+    from {
+      opacity: 0;
+      transform: translateY(-0.25rem);
+    }
+  }
+
+  /* the checkpoint's invitation on the path page */
+  .offer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--yuo-space-3);
+
+    & p {
+      margin: 0;
+    }
+  }
+
+  .offerText {
+    display: grid;
+    gap: var(--yuo-space-1);
+    min-inline-size: 0;
+  }
+}

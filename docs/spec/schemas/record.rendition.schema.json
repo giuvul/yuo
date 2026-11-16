@@ -1,0 +1,276 @@
+{
+ "$defs": {
+  "Provenance": {
+   "additionalProperties": true,
+   "description": "Who made a version; never part of its hash (spec §5).",
+   "properties": {
+    "author_kind": {
+     "default": "system",
+     "enum": [
+      "system",
+      "learner"
+     ],
+     "title": "Author Kind",
+     "type": "string"
+    },
+    "authorship": {
+     "enum": [
+      "generated",
+      "human",
+      "human_edited",
+      "translated"
+     ],
+     "title": "Authorship",
+     "type": "string"
+    },
+    "licence": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Licence"
+    },
+    "upstream": {
+     "anyOf": [
+      {
+       "additionalProperties": true,
+       "type": "object"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Upstream"
+    }
+   },
+   "required": [
+    "authorship"
+   ],
+   "title": "Provenance",
+   "type": "object"
+  },
+  "RenditionAssetUse": {
+   "properties": {
+    "lang": {
+     "title": "Lang",
+     "type": "string"
+    },
+    "recipe_hash": {
+     "pattern": "^[0-9a-f]{64}$",
+     "title": "Recipe Hash",
+     "type": "string"
+    },
+    "role": {
+     "enum": [
+      "video",
+      "subtitles",
+      "poster",
+      "audio",
+      "image"
+     ],
+     "title": "Role",
+     "type": "string"
+    },
+    "sha256": {
+     "pattern": "^[0-9a-f]{64}$",
+     "title": "Sha256",
+     "type": "string",
+     "x-ref": "asset"
+    }
+   },
+   "required": [
+    "role",
+    "lang",
+    "recipe_hash",
+    "sha256"
+   ],
+   "title": "RenditionAssetUse",
+   "type": "object"
+  },
+  "RenditionVersionRecord": {
+   "additionalProperties": true,
+   "properties": {
+    "assets": {
+     "items": {
+      "$ref": "#/$defs/RenditionAssetUse"
+     },
+     "title": "Assets",
+     "type": "array"
+    },
+    "data_class": {
+     "default": "C",
+     "enum": [
+      "C",
+      "F"
+     ],
+     "title": "Data Class",
+     "type": "string"
+    },
+    "duration_s": {
+     "anyOf": [
+      {
+       "minimum": 0,
+       "type": "number"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Duration S"
+    },
+    "extensions": {
+     "additionalProperties": true,
+     "title": "Extensions",
+     "type": "object"
+    },
+    "lang": {
+     "title": "Lang",
+     "type": "string"
+    },
+    "lesson_version_hash": {
+     "pattern": "^[0-9a-f]{64}$",
+     "title": "Lesson Version Hash",
+     "type": "string"
+    },
+    "narration": {
+     "anyOf": [
+      {
+       "additionalProperties": true,
+       "type": "object"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Narration"
+    },
+    "provenance": {
+     "$ref": "#/$defs/Provenance"
+    },
+    "renderer": {
+     "maxLength": 80,
+     "title": "Renderer",
+     "type": "string"
+    },
+    "spec_kind": {
+     "const": "rendered",
+     "title": "Spec Kind",
+     "type": "string"
+    },
+    "theme": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Theme"
+    },
+    "version_hash": {
+     "pattern": "^[0-9a-f]{64}$",
+     "title": "Version Hash",
+     "type": "string"
+    },
+    "version_no": {
+     "minimum": 1,
+     "title": "Version No",
+     "type": "integer"
+    },
+    "voice": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Voice"
+    }
+   },
+   "required": [
+    "version_hash",
+    "version_no",
+    "lang",
+    "lesson_version_hash",
+    "renderer",
+    "spec_kind",
+    "assets",
+    "provenance"
+   ],
+   "title": "RenditionVersionRecord",
+   "type": "object"
+  }
+ },
+ "$id": "urn:yuo:package:1.0:record.rendition",
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "additionalProperties": true,
+ "properties": {
+  "code": {
+   "maxLength": 160,
+   "pattern": "^[a-z0-9]+([._-][a-z0-9]+)*$",
+   "title": "Code",
+   "type": "string"
+  },
+  "current": {
+   "anyOf": [
+    {
+     "pattern": "^[0-9a-f]{64}$",
+     "type": "string"
+    },
+    {
+     "type": "null"
+    }
+   ],
+   "default": null,
+   "title": "Current"
+  },
+  "extensions": {
+   "additionalProperties": true,
+   "title": "Extensions",
+   "type": "object"
+  },
+  "kind": {
+   "enum": [
+    "reading",
+    "video",
+    "slides",
+    "audio"
+   ],
+   "title": "Kind",
+   "type": "string"
+  },
+  "lesson": {
+   "pattern": "^[a-z0-9]+([._-][a-z0-9]+)*$",
+   "title": "Lesson",
+   "type": "string",
+   "x-ref": "lesson"
+  },
+  "versions": {
+   "items": {
+    "$ref": "#/$defs/RenditionVersionRecord"
+   },
+   "title": "Versions",
+   "type": "array"
+  }
+ },
+ "required": [
+  "code",
+  "lesson",
+  "kind"
+ ],
+ "title": "RenditionRecord",
+ "type": "object"
+}

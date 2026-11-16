@@ -1,0 +1,16 @@
+{
+  "_doc": "Subscription plan capacity in API-equivalent USD (the CLI's own notional price), used to show a path's estimate as a share of a plan's 5-hour window and week. Not published by the vendors: Claude rows are user measurements; refresh when they move. Codex rows are estimates (2026-11-15): OpenAI publishes local messages per 5-hour window (Plus: 15-160 GPT-6.1 Sol messages), says a typical task uses 2-15 credits on GPT-5.6 Sol (half that on GPT-6.1 Sol, whose credits per token are half) and its credit rates per token are 25 times the API dollar rates (GPT-6.1 Sol: 50 credits vs USD 2 per million input tokens), so 1 credit is about USD 0.04 of API price; so a Plus window is about 15 x 0.30 to 160 x 0.04 = USD 4.5 to 6.4; 5.5 is used. null: the plan has no such limit (Pro has no 5-hour window) or OpenAI does not publish it (every weekly limit).",
+  "updated": "2026-11-15",
+  "plans": [
+    {"cli": "claude-cli", "plan": "pro", "label": "Pro", "window_usd": 11, "week_usd": 157,
+     "source": "wokey.ai/claude-usage-limits: 103 accounts, week of 2026-10-19 to 10-26"},
+    {"cli": "claude-cli", "plan": "max5x", "label": "Max 5x", "window_usd": 55, "week_usd": 770,
+     "source": "not measured: window 5x Pro (published multiplier); week half of Max 20x (botfarm.run, Feb 2026: 523 vs 1,100)"},
+    {"cli": "claude-cli", "plan": "max20x", "label": "Max 20x", "window_usd": 263, "week_usd": 1602,
+     "source": "wokey.ai/claude-usage-limits: 21 accounts, week of 2026-10-19 to 10-26"},
+    {"cli": "codex-cli", "plan": "plus", "label": "Plus", "window_usd": 5.5, "week_usd": null,
+     "source": "estimate from learn.chatgpt.com/docs/pricing (message ranges, credit rates) and developers.openai.com/api/docs/pricing, 2026-11-15; weekly limit not published"},
+    {"cli": "codex-cli", "plan": "pro", "label": "Pro", "window_usd": null, "week_usd": null,
+     "source": "learn.chatgpt.com/docs/pricing, 2026-11-15: Pro plans have no five-hour limit; weekly limit not published"}
+  ]
+}
