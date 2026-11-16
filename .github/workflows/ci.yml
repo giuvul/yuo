@@ -22,7 +22,10 @@ jobs:
       - name: Install
         run: |
           uv sync --locked
-          cd web && npm ci --before="$(date -u -d '7 days ago' +%Y-%m-%dT%H:%M:%SZ)"
+          (cd web && npm ci --before="$(date -u -d '7 days ago' +%Y-%m-%dT%H:%M:%SZ)")
+          (cd renderer && npm ci --ignore-scripts --no-audit --no-fund)
+      - name: ffmpeg (the browser tests play a real test-pattern video)
+        run: sudo apt-get update -q && sudo apt-get install -y -q --no-install-recommends ffmpeg
       - name: Playwright browsers
         run: cd web && npx playwright install --with-deps --only-shell chromium
       - name: Checks

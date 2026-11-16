@@ -128,7 +128,8 @@ class Learner:
 
 
 def progress(rt: Runtime, path_id: str) -> dict[str, Any]:
-    return rt.service.progress(path_id)
+    result: dict[str, Any] = rt.service.progress(path_id)
+    return result
 
 
 def skill_states(rt: Runtime, path_id: str) -> list[str]:

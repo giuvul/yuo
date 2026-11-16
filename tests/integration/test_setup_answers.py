@@ -3,6 +3,7 @@
 import json
 from collections.abc import Iterator
 from pathlib import Path
+from typing import Any, cast
 
 import pytest
 from fastapi.testclient import TestClient
@@ -111,7 +112,9 @@ def test_the_command_checks_and_saves_them(
     data = tmp_path / "data"
     monkeypatch.setenv("YUO_DATA_DIR", str(data))
     given = tmp_path / "answers.json"
-    given.write_text(json.dumps(ANSWERS | {"profile": ANSWERS["profile"] | {"tz": "Nowhere/Land"}}))
+    given.write_text(
+        json.dumps(ANSWERS | {"profile": cast(dict[str, Any], ANSWERS["profile"]) | {"tz": "Nowhere/Land"}})
+    )
     assert cli.main(["setup-answers", str(given)]) == 0
     out = capsys.readouterr()
     assert "profile.tz" in out.err and "About you and Your first path" in out.out

@@ -165,7 +165,7 @@ describe("layoutFor", () => {
       expect(overlaps(layoutFor(path, canvas))).toEqual([]);
     }
     expect(overlaps(layoutFor(path, tall, true))).toEqual([]); // the narrow nodes of a phone canvas
-  });
+  }, 30_000); // seven full layouts of the crowded sample: several seconds on a small CI machine
 });
 
 describe("labelLines", () => {
