@@ -269,6 +269,8 @@ test("ask the tutor about a lesson and a selected passage", async ({ page }) => 
   });
   await page.getByRole("button", { name: "Ask the tutor about this" }).click();
   const dock = page.getByRole("complementary", { name: "Tutor" });
+  // the context chips sit in a section that starts closed
+  await dock.getByText(/What the tutor sees with your next message/).click();
   await expect(dock.getByText(/^Selected: “/)).toBeVisible();
   await expect(dock.getByText("Ask about this lesson: explanations, examples, questions.")).toBeVisible();
   await dock.getByRole("textbox", { name: "Message to Tutor" }).fill("What does this paragraph mean?");
@@ -297,6 +299,7 @@ test("in practice, a guess before answering gets the guess reply", async ({ page
   await expect(page.getByRole("button", { name: "Check answer" })).toBeVisible();
   const dock = await openTutor(page);
   await expect(dock.getByText(/You have not answered this question yet/)).toBeVisible();
+  await dock.getByText(/What the tutor sees with your next message/).click();
   await expect(dock.getByText("Question 1 of 3")).toBeVisible();
   await dock.getByRole("textbox", { name: "Message to Tutor" }).fill("Is it b?");
   await page.keyboard.press("Enter");
