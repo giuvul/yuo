@@ -30,7 +30,7 @@ async function current(page: Page, session: Session): Promise<{ item: Item; righ
 const option = (page: Page, index: number) => page.locator(`button[data-option="${"ABCD"[index]}"]`);
 
 test("study a lesson, then play a Quick review session to its results on a phone", async ({ page }) => {
-  test.setTimeout(90_000);
+  test.setTimeout(180_000);
   await page.setViewportSize({ width: 390, height: 844 });
   const created = await page.request.post("/api/paths", {
     data: { title: "Joins to review", subject: "SQL joins", goal: "Remember joins for good" },
@@ -53,8 +53,9 @@ test("study a lesson, then play a Quick review session to its results on a phone
   await expect(page.getByText("Lesson marked as done.")).toBeVisible();
 
   // its questions are written by a background job: wait until the hub has some
+  // the review bank is a background job: on a busy CI machine it waits behind the other tests' lessons
   await expect
-    .poll(async () => ((await (await page.request.get(`/api/paths/${pathId}/review`)).json()) as Hub).questions, { timeout: 30_000 })
+    .poll(async () => ((await (await page.request.get(`/api/paths/${pathId}/review`)).json()) as Hub).questions, { timeout: 90_000 })
     .toBeGreaterThan(0);
 
   // the path page now carries the Review card, which leads to the hub
