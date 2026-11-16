@@ -22,8 +22,9 @@ WORKDIR /opt/yuo/renderer
 COPY renderer/package.json renderer/package-lock.json ./
 RUN npm ci --ignore-scripts --no-audit --no-fund
 COPY renderer/ ./
+# the binary is chrome-headless-shell on x64 and headless_shell in the arm64 build
 RUN node -e "import('@remotion/renderer').then(r => r.ensureBrowser())" \
- && chrome="$(find node_modules/.remotion -name chrome-headless-shell -type f | head -n 1)" \
+ && chrome="$(find node_modules/.remotion -type f \( -name chrome-headless-shell -o -name headless_shell \) | head -n 1)" \
  && test -n "$chrome" && ln -s "/opt/yuo/renderer/$chrome" /opt/yuo/renderer/chrome-headless-shell
 
 # --- Python, the app and the voice model ------------------------------------------------------------------
