@@ -12,7 +12,7 @@ their own machine. Their data stays on the machine Yuo runs on.
 Yuo comes in two versions. **Recommend the server version (Docker)**, on the person's own computer or on a
 server: it is the full Yuo, videos included. The desktop app needs no Docker but is **text only**: it does not
 make videos, so lessons are readings with practice questions and the tutor. Offer it only as the fallback
-(section 4).
+(section 4), and only on a computer the person sits at: never on a server or VPS.
 
 ## 0. How to use this file
 
@@ -96,8 +96,10 @@ Ask only what section 2 did not answer, in one message where possible. Offer a d
 2. **Which devices will you learn on?** Only this computer, or also your phone or other computers?
 3. **Do you want narrated video lessons?** Suggest yes: they are a large part of how Yuo teaches. They need
    the server version (Docker), on this computer or on a server; if Docker is missing, say that you can
-   install it (section 5, with its size). The desktop app is text only: lessons are readings with practice
-   questions and the tutor, and it cannot add videos later without a new install.
+   install it (section 5, with its size). On a personal computer, the desktop app is the text-only
+   alternative: lessons are readings with practice questions and the tutor, and it cannot add videos later
+   without a new install. On a server, do not mention the desktop app: there the server version is the only
+   one.
 4. **How should Yuo reach an AI model?** Suggest what section 2 found, briefly:
    - a **Claude** or **ChatGPT subscription** they already pay for: Yuo runs the vendor's own program (Claude
      Code or Codex) with the person's own sign-in, explains what that means before they agree, and uses part
@@ -156,8 +158,14 @@ itself from this draft, so do not write a syllabus.
 | Yuo on a server, tried first from one computer | **Server version on a server** (5c) through an **SSH tunnel**: nothing opened, HTTPS can come later. |
 | Yuo on their own computer, and Docker is not possible or not wanted | **Desktop app** (5a). Text only: no videos. |
 
-Propose the server version by default, and install Docker first if it is missing (5.0). Propose the desktop
-app only when:
+Propose the server version by default, and install Docker first if it is missing (5.0).
+
+**On a server or VPS, the server version is the only route; never offer the desktop app there.** The desktop
+app listens only on the machine it runs on and opens in that machine's browser, with no sign-in for other
+devices, so nobody could use it on a server. If Docker cannot run on the server, or the person does not want
+it there, say so and suggest the desktop app on their own computer instead, as a separate install there.
+
+On a personal computer, propose the desktop app only when:
 
 - the person does not want Docker or videos, after you have told them what they give up;
 - the computer cannot run Docker (Docker Desktop needs WSL 2 and hardware virtualization on Windows, macOS 13
@@ -215,7 +223,8 @@ after installing, Docker Desktop is still starting, or on Linux the new group ne
 
 ### 5a. Desktop app
 
-Text only: it does not make videos. Use it only as section 4 says.
+Text only: it does not make videos. Use it only as section 4 says, and only on the person's own computer,
+never on a server.
 
 1. Read `latest.json`. Download `desktop.url` and check its SHA-256 against `desktop.sha256`. Stop if it
    differs.
