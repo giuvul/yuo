@@ -34,12 +34,14 @@ make videos, so lessons are readings with practice questions and the tutor. Offe
   their own machine, nothing leaves. Video narration runs locally. Do not promise more than this.
 - **Stop on errors.** Show the error and the relevant log lines, say what you think happened, and propose a
   fix. Do not work around security (disabling the render sandbox, opening extra ports, running as root).
-- **Give the person Yuo's address as soon as it answers.** The moment the health check passes, save the
-  answers (section 6, a few seconds) and hand over the address and the one-time code, before any notes or
-  tidying up. On the person's own computer, also open the address in their browser yourself (`open URL` on
-  macOS, `start URL` on Windows, `xdg-open URL` on Linux). On a server, give the exact link they can click,
-  and the tunnel command first if they use one (5c). While a long download runs (the image is several GB),
-  say what is happening and roughly how long it takes.
+- **Give the person Yuo's link as soon as it answers.** The moment the health check passes, save the
+  answers (section 6, a few seconds), then send the full link to the setup page and the one-time code, before
+  any notes or tidying up. Do not open a browser for them: they open the link themselves. Make it a link
+  that works on the device they are using now: you may be on a server while they talk to you from a phone
+  or another computer (a chat app, a remote session), where `localhost` means their own device. Then give
+  the address that device can reach (the HTTPS or Tailscale name of 5c), or the SSH tunnel command to run
+  first; if nothing reaches Yuo from that device yet, say so and offer one of the routes in 5c. While a long
+  download runs (the image is several GB), say what is happening and roughly how long it takes.
 - **Versions.** Install the release named in `latest.json` (section 1). The desktop download has a SHA-256 to
   check; the server version is pinned by its version tag.
 
@@ -267,8 +269,7 @@ Yuo available after a restart.
 6. Right away: if you collected answers, save them (`docker compose exec -T yuo yuo setup-answers - <
    setup-answers.json`, format in section 6), then get the one-time code with
    `docker compose logs yuo | grep -A2 "one-time code"`, give the person the code and
-   `http://localhost:18765/setup`, and open that address in their browser (section 0). The rest of section 6
-   can follow while they sign in.
+   `http://localhost:18765/setup` as a link (section 0). The rest of section 6 can follow while they sign in.
 
 Run every `docker compose` command in `packaging/container`: Compose reads `.env` there.
 

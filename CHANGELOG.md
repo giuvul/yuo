@@ -9,7 +9,7 @@ All notable changes are listed here. The format follows Keep a Changelog; versio
 - **A second copy on the same machine** no longer touches the first: `YUO_PROJECT` and `YUO_HOST_PORT` in
   `.env` give it its own containers, data volume and port. Existing installs keep their names.
 - **Setup with an AI assistant**: the assistant hands over Yuo's address and setup code as soon as Yuo
-  answers, and opens it in the browser on the person's own computer; a new SSH tunnel route to try Yuo on a
+  answers, as a link that works on the device the person is using; a new SSH tunnel route to try Yuo on a
   server without opening anything; consistent memory, disk and volume figures; the Remotion licence note
   for work computers.
 - The answers file an assistant saves for Yuo's setup is readable by Yuo only.
