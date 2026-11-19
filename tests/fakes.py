@@ -355,6 +355,118 @@ def blind(answer: Any = "b") -> dict[str, Any]:
     return {"answer": answer, "confidence": "high", "reason": "fake"}
 
 
+def material_digest(text: str) -> dict[str, Any]:
+    codes = re.findall(r'<material chunk="(c\d+)"', text)
+    return {
+        "digests": [
+            {
+                "chunk": c,
+                "kind": "teaching",
+                "summary": f"Chunk {c} explains part of the subject.",
+                "concepts": ["derivative", f"concept {c}"],
+                "definitions": [],
+                "formulas": [],
+                "notation": [],
+            }
+            for c in codes
+        ]
+    }
+
+
+def material_outline(text: str) -> dict[str, Any]:
+    codes = re.findall(r"^- (c\d+) \[", text, re.MULTILINE)
+    topics = [
+        {
+            "title": f"Topic {n + 1}",
+            "summary": "What it teaches.",
+            "chunks": codes[i : i + 2],
+            "concepts": ["derivative"],
+        }
+        for n, i in enumerate(range(0, len(codes), 2))
+    ]
+    return {"topics": topics, "skipped": []}
+
+
+def course_outline(text: str, extra: bool = False) -> dict[str, Any]:
+    code = re.search(r"\(code `([a-z0-9.-]+)`\)", text)
+    assert code is not None
+    c = code.group(1)
+    topics = re.findall(r"^- (m\d+\.t\d+) \[", text, re.MULTILINE)
+    skills = []
+    prev: str | None = None
+    for n, t in enumerate(topics, 1):
+        sc = f"{c}.s{n}"
+        skills.append(
+            {
+                "code": sc,
+                "title": f"Skill {n}",
+                "summary": "Built on the material.",
+                "unit": f"Chapter {n}",
+                "topics": [t],
+                "not_in_material": False,
+                "requires": [prev] if prev else [],
+                "objectives": [
+                    {"code": f"{sc}.o1", "statement": "Explain the idea", "bloom_level": "understand"}
+                ],
+                "lessons": [{"code": f"{sc}.l1", "title": f"Lesson {n}"}],
+            }
+        )
+        prev = sc
+    if extra:
+        skills.append(
+            {
+                "code": f"{c}.extra",
+                "title": "A prerequisite",
+                "summary": "Not in the material.",
+                "unit": "Before",
+                "topics": [],
+                "not_in_material": True,
+                "requires": [],
+                "objectives": [
+                    {"code": f"{c}.extra.o1", "statement": "Recall it", "bloom_level": "remember"}
+                ],
+                "lessons": [{"code": f"{c}.extra.l1", "title": "Refresher"}],
+            }
+        )
+    return {"skills": skills, "skipped": []}
+
+
+def joined_outline(text: str) -> dict[str, Any]:
+    """The plan as it was, with a new file's topics: the first joins the first skill, the others are new skills."""
+    found = re.search(r"The current plan \(JSON\):\n(.*?)\n\nThe learner checked", text, re.DOTALL)
+    assert found is not None
+    plan: dict[str, Any] = json.loads(found.group(1))
+    code = re.search(r"\(code `([a-z0-9.-]+)`\)", text)
+    assert code is not None
+    used = {t for sk in plan["skills"] for t in sk["topics"]} | {x.split(":")[0] for x in plan["skipped"]}
+    new = [t for t in re.findall(r"^- (m\d+\.t\d+) \[", text, re.MULTILINE) if t not in used]
+    if new:
+        plan["skills"][0]["topics"].append(new[0])
+    for n, t in enumerate(new[1:], 1):
+        sc = f"{code.group(1)}.n{t.replace('.', '-')}"
+        plan["skills"].append(
+            {
+                "code": sc,
+                "title": f"New skill {n}",
+                "summary": "From the new lecture.",
+                "unit": "Lecture",
+                "topics": [t],
+                "not_in_material": False,
+                "requires": [plan["skills"][0]["code"]],
+                "objectives": [{"code": f"{sc}.o1", "statement": "Explain it", "bloom_level": "understand"}],
+                "lessons": [{"code": f"{sc}.l1", "title": f"New lesson {n}"}],
+            }
+        )
+    return plan
+
+
+def course_links(text: str) -> dict[str, Any]:
+    m = re.search(r"Pairs worth checking \(their concepts overlap\): ([a-z0-9.-]+) / ([a-z0-9.-]+)", text)
+    if not m:
+        return {"requires": [], "related": []}
+    return {"requires": [], "related": [{"a": m.group(1), "b": m.group(2), "note": "both use derivatives"}]}
+
+
 def stage_of(request: Request) -> str:
     text = "\n".join(m.content for m in request.messages)
     for needle, stage in (
@@ -362,6 +474,14 @@ def stage_of(request: Request) -> str:
         ("Propose how a learner's path goes on", "next_directions"),
         ("Grow an existing skill tree", "next_grow"),
         ("Write a short level check", "level_check"),
+        ("is checking the plan of their learning path", "tree_revise"),
+        ("Summarise each chunk of a learner's study material", "material_digest"),
+        ("Group a learner's study material into topics", "material_outline"),
+        ("Their text could\nnot be extracted", "material_vision"),
+        ("Organise a learner's study material into one learning path", "studies_arrange"),
+        ("The learner checked this plan and asked for changes", "course_revise"),
+        ("Plan a course of a learner's studies", "course_outline"),
+        ("Find where the courses depend on each other", "course_links"),
         ("Plan a learning path", "tree"),
         ("Write one reading lesson", "lesson"),
         ("independent reviewer", "review"),
@@ -418,6 +538,37 @@ class FakeLLM:
                 return tree()
             case "level_check":
                 return level_check()
+            case "material_digest":
+                return material_digest(text)
+            case "material_outline":
+                return material_outline(text)
+            case "material_vision":
+                pages = re.search(r"images of pages ([\d, ]+) of", text)
+                assert pages and request.messages[-1].images  # the page images go with the request
+                return {
+                    "pages": [
+                        {
+                            "page": int(n),
+                            "text": f"$f'(x) = \\lim_{{h \\to 0}} \\frac{{f(x+h) - f(x)}}{{h}}$ on page {n}",
+                        }
+                        for n in pages.group(1).split(", ")
+                    ]
+                }
+            case "studies_arrange":
+                return studies_arrange(text)
+            case "course_outline":
+                return course_outline(text)
+            case "course_revise" if "New material was added" in text:
+                return {"changes": ["The new lecture joined the plan."], "outline": joined_outline(text)}
+            case "course_revise":
+                return {
+                    "changes": ["Split the first skill in two."],
+                    "outline": course_outline(text, extra=True),
+                }
+            case "course_links":
+                return course_links(text)
+            case "tree_revise":
+                return {"changes": ["Added a third skill to each branch."], "tree": tree(skills_per_branch=3)}
             case "next_check":
                 return next_check()
             case "next_directions":
@@ -440,7 +591,7 @@ class FakeLLM:
             case "blind":
                 return self.solve(json.loads(text.split("\n\n", 1)[1]))
             case "blind_batch":
-                views = json.loads(text.split("\n\n", 1)[1])
+                views = json.loads(text.split("\n\n", 1)[1].split("\n\nThese items are about", 1)[0])
                 return {f"item_{v['n']}": self.solve(v) for v in views}
             case "grade":
                 return {
@@ -526,3 +677,31 @@ def answer_for(view_item: dict[str, Any], llm: FakeLLM) -> Any:
     if t == "short_answer":
         return "All rows of the left table are kept."
     return llm.solve(view_item["view"])["answer"]
+
+
+def studies_arrange(text: str) -> dict[str, Any]:
+    """Files whose names start with "Physics" make one course, the others another; "one course" in the learner's
+    feedback merges them."""
+    files = [(int(n), name) for n, name in re.findall(r"^(\d+)\. (.+?) \(", text, re.M)]
+    physics = [n for n, name in files if name.lower().startswith("physics")]
+    rest = [n for n, _ in files if n not in physics]
+    feedback = text.split("asked for changes", 1)[1] if "asked for changes" in text else ""
+    if "one course" in feedback:
+        courses = [{"title": "Engineering basics", "files": [n for n, _ in files]}]
+        message = "All your files are now one course."
+    else:
+        courses = [
+            c
+            for c in (
+                {"title": "Analysis 1", "term": "Year 1", "files": rest},
+                {"title": "Physics 1", "files": physics},
+            )
+            if c["files"]
+        ]
+        message = "Your physics files are one course and the analysis files another."
+    return {
+        "title": "Mechanical Engineering",
+        "goal": "Pass the first-year exams.",
+        "courses": courses,
+        "message": message,
+    }

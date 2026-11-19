@@ -59,7 +59,7 @@ const GROUPS: Group[] = [
     id: "lessons",
     title: msg({ id: "settings.group.lessons", message: "Lessons" }),
     description: msg({ id: "settings.group.lessons.description", message: "Length, your own wishes, lessons prepared ahead" }),
-    keys: ["lesson.reading_length", "custom_instructions", "generation.buffer"],
+    keys: ["lesson.reading_length", "custom_instructions", "generation.buffer", "material.transcription"],
   },
   {
     id: "videos",

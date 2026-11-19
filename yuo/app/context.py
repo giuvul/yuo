@@ -47,6 +47,7 @@ class AppContext:
     updates: Any = None  # adapters.updates.Updates
     plan_meter: Any = None  # the subscription CLIs' last plan readings
     cli: Any = None  # adapters.cli_access.CliAccess: are the subscription CLIs installed and signed in
+    transcriber: Any = None  # core.documents.Transcriber: speech to text for recorded lectures
     answers_file: Path | None = None  # setup-answers.json in the data folder (yuo.app.setup_answers)
 
 

@@ -18,6 +18,8 @@ import { FailedJob, LessonRow, WRITING } from "../path/LessonRow";
 import { LazyPathGraph } from "../path/LazyPathGraph";
 import { readPathView, writePathView, type PathViewMode } from "../path/viewPref";
 import { LevelCheck } from "./levelCheck";
+import { PlanPreview } from "./planPreview";
+import { Studies } from "../material/Studies";
 import { NEXT_OPEN, NextOffer } from "../path/NextOffer";
 import { LessonRequests } from "./requests";
 import { rootRoute } from "./root";
@@ -457,7 +459,12 @@ function PathPage() {
   const treeJob = latest.get(`tree:${p.id}`);
   const failedTreeJob = treeJob?.status === "failed" && p.branches.length === 0 ? treeJob : undefined;
   const waitsForLevelCheck = p.level_check === "preparing" || p.level_check === "ready";
-  const planning = !waitsForLevelCheck && p.branches.length === 0 && hasActiveJobs(p);
+  // the plan is shown before it is built (after the level check, when there is one)
+  const inPreview =
+    !waitsForLevelCheck && (p.preview === "drafting" || p.preview === "ready" || p.preview === "revising");
+  // a path from the learner's own material, before it is built: its courses, files and plan
+  const studies = p.origin === "courses" && p.status === "draft";
+  const planning = !waitsForLevelCheck && !inPreview && !studies && p.branches.length === 0 && hasActiveJobs(p);
   const { nodes, current } = skillNodes(p, progress.data);
   const meta = p.subject && p.subject !== p.title ? p.subject : null;
   return (
@@ -478,13 +485,23 @@ function PathPage() {
         ) : null}
       </div>
       {waitsForLevelCheck ? <LevelCheck pathId={pathId} /> : null}
+      {inPreview ? <PlanPreview pathId={pathId} /> : null}
+      {studies ? <Studies pathId={pathId} /> : null}
       {planning ? <Growing checked={p.level_check === "done"} /> : null}
-      {!waitsForLevelCheck && !planning ? (
+      {!waitsForLevelCheck && !planning && !inPreview && !studies ? (
         <ActiveJobs jobs={p.branches.length > 0 ? p.jobs.filter((j) => j.kind !== "tree") : p.jobs} />
       ) : null}
-      {failedTreeJob && !waitsForLevelCheck ? <FailedJob job={failedTreeJob} /> : null}
+      {failedTreeJob && !waitsForLevelCheck && !inPreview ? <FailedJob job={failedTreeJob} /> : null}
       {p.branches.length > 0 ? <Overview path={p} progress={progress.data} current={current} /> : null}
       {p.branches.length > 0 ? <NextOffer pathId={pathId} /> : null}
+      {p.origin === "courses" && p.status !== "draft" ? (
+        <details className={styles.material}>
+          <summary>
+            <Trans id="path.material">Your material</Trans>
+          </summary>
+          <Studies pathId={pathId} />
+        </details>
+      ) : null}
       {p.level_check === "none" && offersPlacement(p, progress.data) ? (
         <Notice role="status">
           <div className={ui.row}>
@@ -499,7 +516,7 @@ function PathPage() {
       ) : null}
       {p.branches.length > 0 ? <ReviewEntry pathId={pathId} hub={hub.data} /> : null}
       {p.branches.length > 0 ? <ViewSwitch view={view} onChange={chooseView} /> : null}
-      {waitsForLevelCheck && p.branches.length === 0 ? null : view === "tree" && p.branches.length > 0 ? (
+      {(waitsForLevelCheck || inPreview) && p.branches.length === 0 ? null : view === "tree" && p.branches.length > 0 ? (
         <LazyPathGraph
           path={p}
           progress={progress.data}

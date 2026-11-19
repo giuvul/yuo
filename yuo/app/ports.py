@@ -34,6 +34,14 @@ class PathInputs(Protocol):
         """What generation needs to know about a path (language, level, goal...) and its data class."""
         ...
 
+    def skill_material(
+        self, c: sqlite3.Connection, skill_id: str, lesson_id: str, budget: int
+    ) -> dict[str, Any] | None:
+        """The learner's own material behind a skill (a lesson's share when `lesson_id` names one): excerpts,
+        the course's adherence and where they come from, and matching tasks from its past exams and exercises
+        (`exam_style`); None for a skill not built on material."""
+        ...
+
 
 class SettingsReader(Protocol):
     def setting(self, key: str, scopes: dict[settings.Level, str | None] | None = None) -> Any:
@@ -86,3 +94,9 @@ class VideoRetry(Protocol):
     def retry_video(self, lesson_id: str) -> str:
         """Make a lesson's video again after it failed; the job id."""
         ...
+
+
+class ReviewHubs(Protocol):
+    """A path's review hub: what is due and how each learned skill's memory holds."""
+
+    def review_hub(self, path_id: str) -> dict[str, Any]: ...

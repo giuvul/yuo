@@ -19,7 +19,9 @@ class Heading(BaseModel):
 
 class Paragraph(BaseModel):
     type: Literal["paragraph"]
-    text: str = Field(description="markdown-lite: **bold**, *italic*, `code`; no HTML, no links")
+    text: str = Field(
+        description="markdown-lite: **bold**, *italic*, `code`, $LaTeX$ for inline maths; no HTML, no links"
+    )
 
 
 class ListBlock(BaseModel):
@@ -123,10 +125,23 @@ def lesson_rules(draft: LessonDraft, *, length: str = "medium") -> list[str]:
 # --- stored form ---------------------------------------------------------------------------------
 
 _MARKS = re.compile(r"(\*\*[^*]+\*\*|`[^`]+`|\*[^*]+\*)")
+# inline maths: $...$ with no space just inside the dollars, so "$5 and $10" stays text
+MATH = re.compile(r"(?<![\\$])\$(?=\S)([^$\n]+?)(?<=\S)\$(?!\$)")
 
 
 def inlines(text: str) -> list[dict[str, Any]]:
-    """markdown-lite -> inline runs with marks."""
+    """markdown-lite -> inline runs with marks; $...$ is a maths run (its LaTeX, not parsed further)."""
+    out: list[dict[str, Any]] = []
+    at = 0
+    for m in MATH.finditer(text):
+        out.extend(_marked(text[at : m.start()]))
+        out.append({"text": m.group(1), "marks": ["math"]})
+        at = m.end()
+    out.extend(_marked(text[at:]))
+    return out
+
+
+def _marked(text: str) -> list[dict[str, Any]]:
     out: list[dict[str, Any]] = []
     for part in _MARKS.split(text):
         if not part:
@@ -213,7 +228,7 @@ _BLOCK_KEYS: dict[str, set[str]] = {
     "worked_example": {"title", "steps"},
     "glossary_term": {"term", "definition"},
 }
-_INLINE_MARKS = {"bold", "italic", "code"}
+_INLINE_MARKS = {"bold", "italic", "code", "math"}
 
 
 def _inlines_ok(runs: Any, where: str) -> list[str]:

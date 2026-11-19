@@ -35,6 +35,26 @@ EXTRA: list[str] = [
 
 # Objects added by later migrations (the key is the migration number); 0001 above never changes.
 LATER: dict[int, list[str]] = {
+    5: [
+        "CREATE INDEX course_path ON course (path_id, position);",
+        "CREATE INDEX material_course ON material (course_id, position);",
+        "CREATE INDEX material_path ON material (path_id);",
+        "CREATE INDEX material_section_parent ON material_section (parent_id);",
+        "CREATE INDEX skill_anchor_section ON skill_anchor (section_id);",
+        "CREATE INDEX item_version_source_section ON item_version_source (section_id);",
+        # search over the material's chunks: external-content FTS5 on material_section (chunks only)
+        "CREATE VIRTUAL TABLE material_fts USING fts5(\n"
+        "  title, text, content='material_section', content_rowid='rowid',\n"
+        "  tokenize='unicode61 remove_diacritics 2'\n);",
+        "INSERT INTO material_fts (material_fts, rank) VALUES ('secure-delete', 1);",
+        "CREATE TRIGGER material_section_ai AFTER INSERT ON material_section WHEN NEW.text IS NOT NULL BEGIN\n"
+        "  INSERT INTO material_fts (rowid, title, text) VALUES (NEW.rowid, NEW.title, NEW.text);\nEND;",
+        "CREATE TRIGGER material_section_ad AFTER DELETE ON material_section WHEN OLD.text IS NOT NULL BEGIN\n"
+        "  INSERT INTO material_fts (material_fts, rowid, title, text) VALUES ('delete', OLD.rowid, OLD.title, OLD.text);\nEND;",
+        "CREATE TRIGGER material_section_au AFTER UPDATE OF title, text ON material_section BEGIN\n"
+        "  INSERT INTO material_fts (material_fts, rowid, title, text) SELECT 'delete', OLD.rowid, OLD.title, OLD.text WHERE OLD.text IS NOT NULL;\n"
+        "  INSERT INTO material_fts (rowid, title, text) SELECT NEW.rowid, NEW.title, NEW.text WHERE NEW.text IS NOT NULL;\nEND;",
+    ],
     3: [
         # review sessions look questions up by objective (item_version_objective's key starts with the version)
         "CREATE INDEX item_version_objective_objective ON item_version_objective (objective_id);",

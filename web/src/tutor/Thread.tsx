@@ -16,6 +16,7 @@ import { ProposalCard } from "./Proposals";
 import { CHIP_KINDS, REVIEW_TEMPLATES, SCOPES, STAGES, TEMPLATES, errorText } from "./texts";
 import { SendIcon } from "../components/icons";
 import styles from "./tutor.module.css";
+import { MathText } from "../components/MathText";
 
 const MESSAGE_MAX = 4000;
 
@@ -143,7 +144,7 @@ function TutorBody({ m, tutorName, questions }: { m: TutorMessage; tutorName: st
   const remembered = m.memory_ids.length;
   return (
     <>
-      <p className={styles.text}>{template ? i18n._(template) : m.text}</p>
+      <p className={styles.text}>{template ? i18n._(template) : <MathText text={m.text} />}</p>
       {m.guard === "checked" || m.guard === "blocked" ? (
         <p className={styles.meta}>
           <Trans id="tutor.guard.checked">Checked for answer leaks before it was shown.</Trans>

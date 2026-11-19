@@ -18,19 +18,22 @@ def _copy_migrations(tmp: Path) -> Path:
 def test_migrations_are_idempotent_and_versioned(db_path: Path) -> None:
     assert migrate(db_path, "test") == []
     c = sqlite3.connect(db_path)
-    assert c.execute("PRAGMA user_version").fetchone()[0] == 4
+    assert c.execute("PRAGMA user_version").fetchone()[0] == 7
     assert c.execute("SELECT version, name FROM schema_migration").fetchall() == [
         (1, "initial"),
         (2, "level_check"),
         (3, "review"),
         (4, "next_steps"),
+        (5, "material"),
+        (6, "material_vision"),
+        (7, "studies_arrange"),
     ]
 
 
 def test_an_install_on_0001_gets_the_level_check_stage(tmp_path: Path) -> None:
     db = tmp_path / "old.db"
     assert migrate(db, "0.7.3", _copy_migrations(tmp_path)) == [1]
-    assert migrate(db, "0.7.4") == [2, 3, 4]
+    assert migrate(db, "0.7.4") == [2, 3, 4, 5, 6, 7]
     c = sqlite3.connect(db)
     assert c.execute("SELECT count(*) FROM stage_kind WHERE key = 'level_check'").fetchone()[0] == 1
 

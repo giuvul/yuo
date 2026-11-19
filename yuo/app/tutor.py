@@ -32,6 +32,7 @@ from yuo.generation.runner import BudgetExceeded
 from yuo.generation.structured import StructuredFailure, generate_structured
 from yuo.learning import events as ev
 from yuo.learning import projections as pj
+from yuo.material import chunks as ch
 from yuo.setup import settings
 from yuo.tutoring import guard, nudges
 from yuo.tutoring import prompts as tp
@@ -47,6 +48,10 @@ TEST_ATTEMPT_WINDOW = timedelta(hours=3)  # an open test attempt older than this
 REPLY_TOKENS = 1500
 CHECK_TOKENS = 2000
 EXCERPT_CHARS = 6000
+MATERIAL_CHARS = 12000  # about 3k tokens of the learner's own pages in a turn
+SEARCH_CHARS = 6000  # and up to this much found by searching the rest of their material for the question
+SEARCH_HITS = 3
+_WORD = re.compile(r"\w{4,}")
 TEMPLATE_FOR = {
     "practice.before_attempt": "tutor.guess",
     "review.before_recall": "tutor.review",
@@ -347,6 +352,13 @@ class Tutor(Part):
         if r.item_version_id and r.policy.item:
             n, of = _position_numbers(r.position)
             chips.append({"kind": "item", "label": r.position or "this question", "n": n, "of": of})
+        if not r.policy.sealed and (sections := _material_sections(c, r)):
+            titles = list(dict.fromkeys(x["material"] for x in sections))
+            chips.append({"kind": "material", "label": ", ".join(titles)[:80], "n": len(sections)})
+        elif not r.policy.sealed and r.path_id and (titles := _material_titles(c, r.path_id)):
+            chips.append(
+                {"kind": "material", "label": ", ".join(titles)[:80], "n": 0}
+            )  # searched per question
         sel = ctx.get("selection") or {}
         if (
             isinstance(sel, dict)
@@ -649,8 +661,8 @@ class Tutor(Part):
             self.broker.publish("tutor.message", self._message(c, tid))
             client = json.loads(queued[-1]["context"]).get("client", {})
             r = self._resolve(c, learner, client)  # again: the item may have been answered since it was sent
-            ctx = self._turn_context(c, learner, r, client, cid, [q["id"] for q in queued])
-        texts = [json.loads(q["content"])["text"] for q in queued]
+            texts = [json.loads(q["content"])["text"] for q in queued]
+            ctx = self._turn_context(c, learner, r, client, cid, [q["id"] for q in queued], " ".join(texts))
         try:
             outcome = self._answer(tid, r, ctx, texts)
         except Exception as e:
@@ -667,6 +679,7 @@ class Tutor(Part):
         client: dict[str, Any],
         cid: str,
         skip: list[str],
+        query: str = "",
     ) -> tp.TurnContext:
         p = r.policy
         ctx = tp.TurnContext(
@@ -702,6 +715,19 @@ class Tutor(Part):
             idx = next((i for i, b in enumerate(blocks) if isinstance(b, dict) and b.get("bid") == bid), None)
             part = blocks[max(0, idx - 2) : idx + 3] if idx is not None else blocks
             ctx.lesson = {"title": title, "excerpt": plain_text(part)[:EXCERPT_CHARS]}
+        if not p.sealed and "material" not in excluded:
+            # the pages the lesson (or the skill) was written from, the parts nearest the question first, then
+            # what a search of the rest of the learner's material finds for the question
+            sections = _material_sections(c, r)
+            picked = sel.get("text") if isinstance(sel, dict) else None
+            focus = f"{query} {picked if isinstance(picked, str) else ''}"
+            found = _material_search(c, r.path_id, focus, {x["id"] for x in sections}) if r.path_id else []
+            if sections or found:
+                ctx.material = {
+                    "adherence": (sections or found)[0]["adherence"] or "grounded",
+                    "excerpts": (_material_excerpts(sections, focus, MATERIAL_CHARS) if sections else [])
+                    + (_material_excerpts(found, focus, SEARCH_CHARS) if found else []),
+                }
         if isinstance(sel, dict) and isinstance(sel.get("text"), str) and "selection" not in excluded:
             ctx.selection = sel["text"][:1000] or None
         if "notes" not in excluded:
@@ -1342,3 +1368,104 @@ class _Outcome:
 
 
 __all__ = ["POLICIES", "Tutor", "TutorWorker"]
+
+
+def _material_sections(c: sqlite3.Connection, r: Resolved) -> list[sqlite3.Row]:
+    """The learner's own pages behind what is on screen: the sections a lesson cites, else the skill's
+    primary sections (a question, a skill page). Empty for a path not built from material."""
+    ids: list[str] = []
+    if r.lesson_version_id:
+        row = c.execute(
+            "SELECT l.extensions ->> '$.yuo.sources' FROM lesson_version v JOIN lesson l ON l.id = v.lesson_id "
+            "WHERE v.id = ?",
+            (r.lesson_version_id,),
+        ).fetchone()
+        if row and row[0]:
+            ids = [x["section_id"] for x in json.loads(row[0]) if isinstance(x, dict) and x.get("section_id")]
+    if not ids and r.skill_id:
+        ids = [
+            x[0]
+            for x in c.execute(
+                "SELECT a.section_id FROM skill_anchor a JOIN material_section s ON s.id = a.section_id "
+                "JOIN material m ON m.id = s.material_id WHERE a.skill_id = ? AND a.role = 'primary' "
+                "ORDER BY m.position, s.position LIMIT 12",
+                (r.skill_id,),
+            )
+        ]
+    if not ids:
+        return []
+    marks = ",".join("?" * len(ids))
+    rows = {
+        x["id"]: x
+        for x in c.execute(
+            "SELECT s.id, s.text, s.loc_kind, s.loc_start, s.loc_end, m.title AS material, k.adherence "
+            "FROM material_section s JOIN material m ON m.id = s.material_id LEFT JOIN course k ON k.id = m.course_id "
+            f"WHERE s.id IN ({marks}) AND s.text IS NOT NULL",
+            ids,
+        )
+    }
+    return [rows[i] for i in dict.fromkeys(ids) if i in rows]
+
+
+def _material_titles(c: sqlite3.Connection, path_id: str) -> list[str]:
+    return [
+        x[0]
+        for x in c.execute(
+            "SELECT title FROM material WHERE path_id = ? AND state = 'ready' ORDER BY position LIMIT 6",
+            (path_id,),
+        )
+    ]
+
+
+def _material_search(c: sqlite3.Connection, path_id: str, focus: str, exclude: set[str]) -> list[sqlite3.Row]:
+    """The chunks of the path's material that best match the question (full-text ranking), past exams and
+    exercises included, leaving out those already given."""
+    words = sorted({w.lower() for w in _WORD.findall(focus) if len(w) >= 4 and not w.isdigit()})[:30]
+    if not words:
+        return []
+    rows = c.execute(
+        "SELECT s.id, s.text, s.loc_kind, s.loc_start, s.loc_end, m.title AS material, k.adherence "
+        "FROM material_fts f JOIN material_section s ON s.rowid = f.rowid JOIN material m ON m.id = s.material_id "
+        "LEFT JOIN course k ON k.id = m.course_id WHERE material_fts MATCH ? AND m.path_id = ? AND "
+        "s.level = 'chunk' AND s.text IS NOT NULL ORDER BY f.rank LIMIT ?",
+        (" OR ".join(f'"{w}"' for w in words), path_id, SEARCH_HITS + len(exclude)),
+    ).fetchall()
+    return [x for x in rows if x["id"] not in exclude][:SEARCH_HITS]
+
+
+def _material_excerpts(sections: list[sqlite3.Row], focus: str, budget: int) -> list[dict[str, str]]:
+    """Fit the sections into `budget` characters: all of them when they fit, else the paragraphs that share
+    the most words with the question (and the selection), kept in reading order with gaps marked."""
+    paras = [
+        (si, pi, t.strip())
+        for si, x in enumerate(sections)
+        for pi, t in enumerate(re.split(r"\n\s*\n", x["text"]))
+        if t.strip()
+    ]
+    if sum(len(t) for *_, t in paras) > budget:
+        words = {w.lower() for w in _WORD.findall(focus)}
+
+        def score(p: tuple[int, int, str]) -> int:
+            return len(words & {w.lower() for w in _WORD.findall(p[2])})
+
+        kept: set[tuple[int, int]] = set()
+        used = 0
+        for si, pi, t in sorted(paras, key=lambda p: (-score(p), p[0], p[1])):
+            if used + len(t) > budget:
+                if kept:
+                    continue
+                t = t[:budget]
+            kept.add((si, pi))
+            used += len(t)
+        paras = [(si, pi, t[:budget]) for si, pi, t in paras if (si, pi) in kept]
+    out: list[dict[str, str]] = []
+    last: tuple[int, int] | None = None
+    for si, pi, t in paras:
+        x = sections[si]
+        if last is None or last[0] != si:
+            where = f"{x['material']}, {ch.locator(x['loc_kind'], x['loc_start'], x['loc_end'])}"
+            out.append({"where": where, "text": t})
+        else:
+            out[-1]["text"] += ("\n\n" if pi == last[1] + 1 else "\n\n[…]\n\n") + t
+        last = (si, pi)
+    return out

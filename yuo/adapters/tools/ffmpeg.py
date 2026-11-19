@@ -30,6 +30,18 @@ class FFmpeg:
             [self.ffmpeg, "-y", "-loglevel", "error", "-i", str(src), "-ac", "1", "-ar", str(rate), str(dst)]
         )
 
+    def program(self) -> str:
+        """The executable's path, for a program that runs it itself (the transcriber's audio decoding)."""
+        return self.ffmpeg
+
+    def to_speech(self, src: Path, dst: Path) -> None:
+        """The speech of a recording, small: mono, 16 kHz, Opus at 24 kbit/s (about 11 MB an hour)."""
+        self._run(
+            [self.ffmpeg, "-y", "-loglevel", "error", "-i", str(src), "-vn", "-ac", "1", "-ar", "16000",
+             "-c:a", "libopus", "-b:a", "24k", "-application", "voip", "-f", "ogg", str(dst)],
+            timeout=3600,
+        )  # fmt: skip
+
     def duration(self, path: Path) -> float:
         out = self._run(
             [self.ffprobe, "-v", "error", "-show_entries", "format=duration", "-of", "json", str(path)]

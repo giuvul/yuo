@@ -1,6 +1,7 @@
 import { createRouter, type RouterHistory } from "@tanstack/react-router";
 import { rootRoute } from "./routes/root";
 import { indexRoute } from "./routes/index";
+import { pathsRoute } from "./routes/paths";
 import { lessonRoute } from "./routes/lessonReader";
 import { pathNewRoute } from "./routes/pathNew";
 import { pathViewRoute } from "./routes/pathView";
@@ -14,6 +15,7 @@ import { setupRoute } from "./routes/setup";
 import { signInRoute } from "./routes/signIn";
 import { devicesRoute } from "./routes/devices";
 import { skillTestRoute } from "./routes/skillTest";
+import { mockExamRoute } from "./routes/mockExam";
 import { nextStepsRoute } from "./routes/nextSteps";
 import { tutorMemoryRoute } from "./routes/tutorMemory";
 import { importRoute } from "./routes/importPage";
@@ -21,12 +23,14 @@ import { designRoute, designTreeRoute } from "./routes/design";
 
 const routeTree = rootRoute.addChildren([
   indexRoute,
+  pathsRoute,
   setupRoute,
   pathNewRoute,
   pathViewRoute,
   lessonRoute,
   practiceRoute,
   skillTestRoute,
+  mockExamRoute,
   nextStepsRoute,
   placementRoute,
   progressRoute,

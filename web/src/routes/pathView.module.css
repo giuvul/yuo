@@ -36,6 +36,23 @@
     margin-block-start: var(--yuo-space-1);
   }
 
+  /* a path from the learner's own material: its files, and what new ones add */
+  .material {
+    border: 1px solid var(--yuo-color-border);
+    border-radius: var(--yuo-radius-2);
+    padding: var(--yuo-space-2-5) var(--yuo-space-3);
+    background: var(--yuo-color-surface);
+
+    & > summary {
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    &[open] > summary {
+      margin-block-end: var(--yuo-space-3);
+    }
+  }
+
   .sectionTitle {
     margin: 0;
     font-size: var(--yuo-text-xl);

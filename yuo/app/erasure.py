@@ -95,6 +95,22 @@ class Erasure:
         self.writer.run(after)
         return counts
 
+    def path_whole(self, path_id: str) -> dict[str, int]:
+        """Delete the path and everything in it, the learner's answers and files included."""
+        with self.readers.connection() as c:
+            if c.execute("SELECT 1 FROM path WHERE id = ?", (path_id,)).fetchone() is None:
+                raise NotFound(path_id)
+            if c.execute(
+                f"SELECT 1 FROM generation_job WHERE status = 'running' AND (target_id IN ({_PATH_TARGETS}) "
+                "OR target_id IN (SELECT id FROM course WHERE path_id = :p) "
+                "OR target_id IN (SELECT id FROM material WHERE path_id = :p))",
+                {"p": path_id},
+            ).fetchone():
+                raise Conflict(
+                    "something is being written for this path right now: try again when it has finished"
+                )
+        return self._erase(engine.path_whole(path_id))
+
     def _erase(self, plan: engine.Plan) -> dict[str, int]:
         counts = engine.erase(self.writer, self.blobs, plan)
         learner = self.learner()

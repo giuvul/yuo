@@ -18,9 +18,12 @@ from yuo.adapters.scheduler import FsrsScheduler
 from yuo.app.context import AppContext, Part
 from yuo.app.erasure import Erasure
 from yuo.app.forms import PathForm
+from yuo.app.home import Home
 from yuo.app.job_status import JOB_COLUMNS, JobStatus
+from yuo.app.material import Materials
 from yuo.app.next_steps import NextSteps
 from yuo.app.onboarding import Onboarding
+from yuo.app.plan_preview import PlanPreview
 from yuo.app.repo import find_path, get_path, get_skill, path_state, save_path_state
 from yuo.app.review import Review
 from yuo.app.sharing import Sharing
@@ -102,9 +105,13 @@ class Service(Part):
         self.sharing = Sharing(self.ctx, learners=self, buffer=self.study)
         self.next_steps = NextSteps(self.ctx, models=self, paths=self, buffer=self.study)
         self.wizard = Onboarding(self.ctx, learners=self)
+        self.preview = PlanPreview(self.ctx, models=self, paths=self, buffer=self.study)
+        self.materials = Materials(self.ctx, learners=self, models=self, paths=self, buffer=self.study)
         self.jobs = JobStatus(self.ctx, lessons=self, videos=self.videos)
+        self.dashboard = Home(self.ctx, learners=self, reviews=self.reviews)
         self._parts: tuple[Part, ...] = (
             self.study, self.reviews, self.tutor, self.videos, self.sharing, self.next_steps, self.wizard, self.jobs,
+            self.preview, self.materials, self.dashboard,
         )  # fmt: skip
         self.erasure = Erasure(writer, readers, blobs, self.scheduler, self.ensure_learner)
 
@@ -125,6 +132,9 @@ class Service(Part):
             "grade": self.study.handle_grade,
             "request": self.study.handle_request,
             "rendition": self.videos.handle_rendition,
+            "material": self.materials.handle_material,
+            "course": self.materials.handle_course,
+            "course_links": self.materials.handle_links,
         }
 
     # --- subscription CLIs: checked before any generation ----------------------------------------
@@ -294,6 +304,8 @@ class Service(Part):
             )
             if form.custom_instructions:
                 settings.put(c, "custom_instructions", form.custom_instructions, "path", path_id)
+            if form.preview:  # the plan is shown to the learner before it is built (yuo/app/plan_preview.py)
+                save_path_state(c, path_id, "preview", {"status": "drafting", "rounds": []})
             if form.level_check:  # the tree waits for the learner's answers (or a skip)
                 save_path_state(c, path_id, "level_check", {"status": "preparing"})
                 return enqueue(c, "tree", EntityKind.PATH, path_id, priority=URGENT_PRIORITY)
@@ -303,6 +315,14 @@ class Service(Part):
         if self.worker:
             self.worker.wake()
         return path_id, job
+
+    def skill_material(
+        self, c: sqlite3.Connection, skill_id: str, lesson_id: str, budget: int
+    ) -> dict[str, Any] | None:
+        found = self.materials.lesson_material(c, skill_id, lesson_id, budget)
+        if found is not None:
+            found["exam_style"] = self.materials.exam_examples(c, skill_id)
+        return found
 
     def path_inputs(self, c: sqlite3.Connection, path_id: str) -> tuple[dict[str, Any], DataClass]:
         p = get_path(c, path_id)
@@ -338,6 +358,11 @@ class Service(Part):
             if state["status"] == "preparing":
                 self._write_level_check(job)
             return  # the tree waits for the learner's answers
+        with self.readers.connection() as c:
+            preview = self.preview.wants_preview(c, job.target_id)
+        if preview == "revising":
+            self.preview.revise(job)
+            return
         gen = self.binding("generator")
         out = self.runner.run(
             job.id,
@@ -359,6 +384,10 @@ class Service(Part):
             },
             data_class=dclass,
         )
+
+        if preview == "drafting":
+            self.writer.run(lambda c: self.preview.store_draft(c, job.target_id, out.value))
+            return
 
         def unit(c: sqlite3.Connection) -> None:
             if c.execute("SELECT count(*) FROM branch WHERE path_id = ?", (job.target_id,)).fetchone()[0]:
@@ -506,6 +535,30 @@ class Service(Part):
             self.worker.wake()
         return job
 
+    def accept_lesson_draft(self, lesson_id: str) -> str:
+        """A lesson that failed its review: publish its best rejected draft (the fewest major, then minor issues)
+        with the reviewer's notes shown in it, instead of writing it again."""
+
+        def unit(c: sqlite3.Connection) -> str:
+            row = c.execute("SELECT state FROM lesson WHERE id = ?", (lesson_id,)).fetchone()
+            if row is None:
+                raise NotFound(lesson_id)
+            if row[0] != "failed":
+                raise Conflict("only a lesson that failed its review can be accepted as it is")
+            best = _best_draft(c, lesson_id)
+            if best is None:
+                raise Conflict("this lesson has no draft to accept")
+            c.execute(
+                "UPDATE lesson SET state = 'queued', extensions = json_set(extensions, '$.yuo.accept', ?) WHERE id = ?",
+                (best, lesson_id),
+            )
+            return enqueue(c, "lesson", EntityKind.LESSON, lesson_id)
+
+        job = self.writer.run(unit)
+        if self.worker:
+            self.worker.wake()
+        return job
+
     # --- lesson job: write, gate, publish, item --------------------------------------------------
 
     def _lesson_context(self, c: sqlite3.Connection, lesson_id: str) -> dict[str, Any]:
@@ -536,6 +589,9 @@ class Service(Part):
         )
         if ext.get("remedial"):
             length = "short"
+        material = self.materials.lesson_material(c, skill["id"], lesson_id)
+        if material:  # the learner's own files: personal, like their own words
+            dclass = DataClass.FREE_TEXT
         request = None
         if ext.get("request_id"):  # the learner's own words shape the lesson, so it is personal (F)
             row = c.execute("SELECT prompt FROM lesson_request WHERE id = ?", (ext["request_id"],)).fetchone()
@@ -557,7 +613,8 @@ class Service(Part):
                 "objectives": [{"code": o["code"], "statement": o["statement"]} for o in objectives],
             }
             | ({"remedial": ext["remedial"]} if ext.get("remedial") else {})
-            | ({"request": request} if request else {}),
+            | ({"request": request} if request else {})
+            | ({"material": material} if material else {}),
         }
 
     def handle_lesson(self, job: Job) -> None:
@@ -585,6 +642,12 @@ class Service(Part):
     def _lesson(self, job: Job) -> None:
         with self.readers.connection() as c:
             ctx = self._lesson_context(c, job.target_id)
+            accept = c.execute(
+                "SELECT extensions ->> '$.yuo.accept' FROM lesson WHERE id = ?", (job.target_id,)
+            ).fetchone()[0]
+        if accept:
+            self._accept_draft(job, ctx, accept)
+            return
         lesson_id, dclass = job.target_id, ctx["data_class"]
         gen, rev = self.binding("generator"), self.binding("reviewer")
         independent = models.independence_warning(gen, rev) is None
@@ -615,7 +678,8 @@ class Service(Part):
                     "difficulty": ctx["inputs"]["difficulty"],
                     "body": body,
                     "objectives": ctx["inputs"]["objectives"],
-                },
+                }
+                | ({"material": ctx["inputs"]["material"]} if "material" in ctx["inputs"] else {}),
                 data_class=dclass,
                 upstream=[body_out.output_hash],
                 fix_round=fix_round,
@@ -648,7 +712,7 @@ class Service(Part):
                 continue
             self.writer.run(
                 lambda c: self._publish_lesson(
-                    c, lesson_id, version_id, body_out.value, body, ctx["objectives"]
+                    c, lesson_id, version_id, body_out.value.title, body, ctx["objectives"]
                 )
             )
             published = (version_id, body)
@@ -658,7 +722,73 @@ class Service(Part):
             raise StageFailed(
                 f"the lesson failed review twice (attempt {job.attempt} of {MAX_ATTEMPTS})", retryable=True
             )
-        self.study.make_practice(job, ctx["lesson"], published[0], published[1])
+        self._after_publish(job, ctx, published[0], published[1], notes=None)
+
+    def _accept_draft(self, job: Job, ctx: dict[str, Any], version_id: str) -> None:
+        """Publish a rejected draft the learner accepted, with what its reviewer found wrong."""
+        with self.readers.connection() as c:
+            v = c.execute(
+                "SELECT title, body FROM lesson_version WHERE id = ? AND lesson_id = ?",
+                (version_id, job.target_id),
+            ).fetchone()
+            issues = _review_issues(c, version_id)
+        if v is None:
+            raise StageFailed("the accepted draft is gone", retryable=False)
+        body = json.loads(v["body"])
+
+        def unit(c: sqlite3.Connection) -> str:
+            # a rejected version stays rejected (versions are immutable): the accepted one is its copy
+            vid = new_id()
+            no = c.execute(
+                "SELECT coalesce(max(version_no), 0) + 1 FROM lesson_version WHERE lesson_id = ?",
+                (job.target_id,),
+            ).fetchone()[0]
+            c.execute(
+                "INSERT INTO lesson_version (id, lesson_id, version_no, version_hash, lang, translation_of_version_hash, "
+                "derived_from_version_id, title, body, est_minutes, status, published_at, created_at, authorship, "
+                "acquired_via, author_kind, author_ref, produced_by_stage_run_id, upstream, licence, personal_inputs) "
+                "SELECT ?, lesson_id, ?, version_hash, lang, NULL, id, title, body, est_minutes, 'in_review', NULL, ?, "
+                "authorship, acquired_via, author_kind, author_ref, produced_by_stage_run_id, upstream, licence, "
+                "personal_inputs FROM lesson_version WHERE id = ?",
+                (vid, no, clock.now(), version_id),
+            )
+            self._publish_lesson(c, job.target_id, vid, v["title"], body, ctx["objectives"])
+            return vid
+
+        published = self.writer.run(unit)
+        self._after_publish(job, ctx, published, body, notes={"version_id": published, "issues": issues})
+
+    def _after_publish(
+        self,
+        job: Job,
+        ctx: dict[str, Any],
+        version_id: str,
+        body: list[dict[str, Any]],
+        *,
+        notes: dict[str, Any] | None,
+    ) -> None:
+        lesson_id = job.target_id
+        sources = json.dumps(ctx["inputs"]["material"]["sources"]) if "material" in ctx["inputs"] else None
+
+        def unit(c: sqlite3.Connection) -> None:
+            c.execute(
+                "UPDATE lesson SET extensions = json_remove(json_set(extensions, '$.yuo.review_notes', json(?)), "
+                "'$.yuo.accept') WHERE id = ?",
+                (json.dumps(notes), lesson_id),
+            )
+            if notes is None:  # passed its review: no notes
+                c.execute(
+                    "UPDATE lesson SET extensions = json_remove(extensions, '$.yuo.review_notes') WHERE id = ?",
+                    (lesson_id,),
+                )
+            if sources is not None:  # where in the learner's files this lesson comes from
+                c.execute(
+                    "UPDATE lesson SET extensions = json_set(extensions, '$.yuo.sources', json(?)) WHERE id = ?",
+                    (sources, lesson_id),
+                )
+
+        self.writer.run(unit)
+        self.study.make_practice(job, ctx["lesson"], version_id, body)
         # the lesson's review questions, written ahead so the first review does not wait
         self.writer.run(lambda c: self.reviews.queue_review_bank(c, lesson_id))
         self.writer.run(lambda c: self.study.top_up_buffer(c, ctx["lesson"]["path_id"]))
@@ -713,7 +843,7 @@ class Service(Part):
         c: sqlite3.Connection,
         lesson_id: str,
         version_id: str,
-        draft: LessonDraft,
+        title: str,
         body: list[dict[str, Any]],
         objectives: list[dict[str, Any]],
     ) -> None:
@@ -734,7 +864,7 @@ class Service(Part):
             c.execute("DELETE FROM lesson_search_doc WHERE lesson_version_id = ?", (old,))
         c.execute(
             "INSERT INTO lesson_search_doc (lesson_version_id, title, body) VALUES (?, ?, ?)",
-            (version_id, draft.title, plain_text(body)),
+            (version_id, title, plain_text(body)),
         )
         c.execute(
             "INSERT INTO publication (id, head_kind, head_id, version_id, at, by) VALUES (?, 'lesson', ?, ?, ?, "
@@ -748,9 +878,45 @@ class Service(Part):
         with self.readers.connection() as c:
             return _rows(
                 c,
-                "SELECT id, title, subject, status, difficulty, content_lang, created_at FROM path "
-                "ORDER BY created_at DESC",
+                "SELECT id, title, subject, goal, target_date, status, difficulty, content_lang, created_at "
+                "FROM path ORDER BY created_at DESC",
             )
+
+    def update_path(self, path_id: str, changes: dict[str, Any]) -> dict[str, Any]:
+        """The learner renames the path, rewrites its goal or exam date, or archives it and brings it back.
+        Only a path that is built can be archived (a draft is still being planned: delete it instead)."""
+
+        def unit(c: sqlite3.Connection) -> None:
+            p = get_path(c, path_id)
+            sets: dict[str, Any] = {}
+            for key in ("title", "subject", "goal"):
+                if key in changes:
+                    text = str(changes[key] or "").strip()
+                    if not text:
+                        raise InvalidInput(f"{key} cannot be empty")
+                    sets[key] = text[:200] if key != "goal" else text[:2000]
+            if "target_date" in changes:
+                sets["target_date"] = changes["target_date"] or None
+            if "status" in changes:
+                status = changes["status"]
+                if status == "archived" and p["status"] == "draft":
+                    raise Conflict("a path still being planned cannot be archived")
+                if status == "active" and p["status"] != "archived":
+                    raise Conflict("only an archived path can be brought back")
+                sets["status"] = status
+            if not sets:
+                return
+            sets["updated_at"] = clock.now()
+            c.execute(
+                f"UPDATE path SET {', '.join(f'{k} = ?' for k in sets)} WHERE id = ?",
+                (*sets.values(), path_id),
+            )
+
+        self.writer.run(unit)
+        return next(p for p in self.paths() if p["id"] == path_id)
+
+    def delete_path(self, path_id: str) -> dict[str, int]:
+        return self.erasure.path_whole(path_id)
 
     def path_view(self, path_id: str) -> dict[str, Any]:
         with self.readers.connection() as c:
@@ -761,6 +927,10 @@ class Service(Part):
             if p is None:
                 raise NotFound(path_id)
             check = (path_state(p, "level_check") or {}).get("status", "none")
+            preview = (path_state(p, "preview") or {}).get("status", "none")
+            origin = (json.loads(p["extensions"] or "{}").get("yuo") or {}).get("origin", "goal")
+            if origin == "courses":  # the courses' plan has its own states (yuo/app/material.py)
+                preview = "none"
             branches = _rows(
                 c, "SELECT id, code, title FROM branch WHERE path_id = ? ORDER BY position", path_id
             )
@@ -789,11 +959,14 @@ class Service(Part):
                             "code": r["code"],
                             "kind": r["kind"],
                             "state": r["state"],
+                            "has_draft": bool(r["drafts"]),
                             "title": r["vtitle"]
                             or json.loads(r["extensions"]).get("yuo", {}).get("planned_title"),
                         }
                         for r in c.execute(
-                            "SELECT l.id, l.code, l.kind, l.state, l.extensions, v.title AS vtitle FROM lesson l "
+                            "SELECT l.id, l.code, l.kind, l.state, l.extensions, v.title AS vtitle, l.state = 'failed' "
+                            "AND EXISTS (SELECT 1 FROM lesson_version x WHERE x.lesson_id = l.id AND x.status = "
+                            "'rejected') AS drafts FROM lesson l "
                             "LEFT JOIN lesson_version v ON v.id = l.current_version_id WHERE l.skill_id = ? "
                             "ORDER BY l.position",
                             (s["id"],),
@@ -814,13 +987,21 @@ class Service(Part):
             )
         out = dict(p)
         del out["extensions"]
-        return out | {"branches": branches, "jobs": jobs, "level_check": check}
+        return out | {
+            "branches": branches,
+            "jobs": jobs,
+            "level_check": check,
+            "preview": preview,
+            "origin": origin,
+        }
 
     def lesson_view(self, lesson_id: str) -> dict[str, Any]:
         with self.readers.connection() as c:
             r = c.execute(
                 "SELECT l.id, l.state, l.path_id, l.skill_id, v.id AS version_id, v.title, v.body, v.est_minutes, "
-                "v.lang, s.title AS skill_title, p.title AS path_title FROM lesson l "
+                "v.lang, s.title AS skill_title, p.title AS path_title, l.extensions ->> '$.yuo.sources' AS sources, "
+                "l.extensions ->> '$.yuo.review_notes' AS notes "
+                "FROM lesson l "
                 "JOIN skill s ON s.id = l.skill_id JOIN path p ON p.id = l.path_id "
                 "LEFT JOIN lesson_version v ON v.id = l.current_version_id WHERE l.id = ?",
                 (lesson_id,),
@@ -835,6 +1016,10 @@ class Service(Part):
         out = dict(r)
         out["body"] = json.loads(r["body"]) if r["body"] else None
         out["practice_items"] = items
+        out["sources"] = _merge_sources(json.loads(r["sources"])) if r["sources"] else []
+        notes = json.loads(out.pop("notes") or "null")
+        # accepted without passing its review: what the reviewer found, shown with the lesson
+        out["review_notes"] = notes["issues"] if notes and notes["version_id"] == r["version_id"] else None
         out["video"] = self.videos.video_of(lesson_id)
         out["video_unavailable"] = self.videos.video_unavailable()
         return out
@@ -1091,3 +1276,49 @@ def _check(
             clock.now(),
         ),
     )
+
+
+def _review_issues(c: sqlite3.Connection, version_id: str) -> list[dict[str, Any]]:
+    """What the reviewer found in a lesson version (its last review), most serious first."""
+    row = c.execute(
+        "SELECT details FROM quality_check WHERE subject_version_id = ? AND \"check\" = 'reviewer' ORDER BY at DESC "
+        "LIMIT 1",
+        (version_id,),
+    ).fetchone()
+    issues = json.loads(row[0]).get("issues", []) if row else []
+    return sorted(
+        ({k: i.get(k, "") for k in ("severity", "where", "claim", "correction")} for i in issues),
+        key=lambda i: i["severity"] != "major",
+    )
+
+
+def _best_draft(c: sqlite3.Connection, lesson_id: str) -> str | None:
+    """The rejected version with the fewest major issues, then minor ones, then the latest."""
+    best: tuple[int, int, int] | None = None
+    found = None
+    for vid, no in c.execute(
+        "SELECT id, version_no FROM lesson_version WHERE lesson_id = ? AND status = 'rejected'", (lesson_id,)
+    ).fetchall():
+        issues = _review_issues(c, vid)
+        majors = sum(i["severity"] == "major" for i in issues)
+        rank = (majors, len(issues) - majors, -no)
+        if best is None or rank < best:
+            best, found = rank, vid
+    return found
+
+
+def _merge_sources(sources: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Where a lesson comes from in the learner's files, one entry per file with its range (pages, slides, time)."""
+    out: dict[str, dict[str, Any]] = {}
+    for x in sources:
+        m = out.get(x["material_id"])
+        if m is None:
+            out[x["material_id"]] = {
+                k: x[k] for k in ("material_id", "title", "kind", "loc_kind", "loc_start", "loc_end")
+            }
+        else:
+            m["loc_start"], m["loc_end"] = (
+                min(m["loc_start"], x["loc_start"]),
+                max(m["loc_end"], x["loc_end"]),
+            )
+    return list(out.values())

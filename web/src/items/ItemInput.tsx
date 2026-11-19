@@ -27,6 +27,7 @@ import { Button } from "../components/ui";
 import { ChoiceField, ChoiceMarkView, ui, type ChoiceMark } from "../components/ui";
 import { clozeParts, move, RATINGS, type Draft } from "./answers";
 import styles from "./items.module.css";
+import { MathText, plainMath } from "../components/MathText";
 
 type Props = {
   item: Item;
@@ -84,7 +85,14 @@ function Mcq({ item, draft, onChange, disabled, correct }: Props) {
   return (
     <ChoiceField
       label={t({ id: "item.answer.label", message: "Your answer" })}
-      choices={item.view.options.map((o) => ({ value: o.id, label: `${o.id}. ${o.text}` }))}
+      choices={item.view.options.map((o) => ({
+        value: o.id,
+        label: (
+          <>
+            {o.id}. <MathText text={o.text} />
+          </>
+        ),
+      }))}
       value={draft.choice}
       onChange={(choice) => onChange({ type: "mcq", choice })}
       isDisabled={disabled}
@@ -113,7 +121,9 @@ function Multi({ item, draft, onChange, disabled, correct }: Props) {
           const mark = marks?.[o.id];
           return (
             <Checkbox key={o.id} value={o.id} className={`${ui.radio} ${styles.checkbox}`} data-mark={mark}>
-              <span className={ui.radioText}>{`${o.id}. ${o.text}`}</span>
+              <span className={ui.radioText}>
+                {o.id}. <MathText text={o.text} />
+              </span>
               {mark ? <ChoiceMarkView mark={mark} label={markLabels[mark]} /> : null}
             </Checkbox>
           );
@@ -131,7 +141,12 @@ function Cloze({ item, draft, onChange, disabled }: Props) {
   return (
     <p className={styles.cloze}>
       {clozeParts(item.view.text).map((part, k) => {
-        if (typeof part === "string") return <span key={k}>{part}</span>;
+        if (typeof part === "string")
+          return (
+            <span key={k}>
+              <MathText text={part} />
+            </span>
+          );
         const i = part - 1;
         if (i < 0 || i >= draft.gaps.length) return <span key={k}>…</span>;
         const n = part;
@@ -164,10 +179,13 @@ function Ordering({ item, draft, onChange, disabled }: Props) {
       </p>
       <ol className={styles.ordering} aria-labelledby={`order-${item.item_version_id}`}>
         {draft.order.map((id, i) => {
-          const step = text.get(id) ?? id;
+          const raw = text.get(id) ?? id;
+          const step = plainMath(raw);
           return (
             <li key={id} className={styles.orderRow}>
-              <span className={styles.orderText}>{step}</span>
+              <span className={styles.orderText}>
+                <MathText text={raw} />
+              </span>
               <span className={ui.row}>
                 <AriaButton
                   className={`${ui.button} ${ui.secondary} ${ui.small}`}
@@ -210,7 +228,9 @@ function Matching({ item, draft, onChange, disabled }: Props) {
           isDisabled={disabled}
           placeholder={t({ id: "item.matching.placeholder", message: "Choose a match" })}
         >
-          <Label className={styles.matchLeft}>{left}</Label>
+          <Label className={styles.matchLeft}>
+            <MathText text={left} />
+          </Label>
           <AriaButton className={`${ui.input} ${styles.selectButton}`}>
             <SelectValue />
             <span aria-hidden="true">▾</span>
@@ -218,8 +238,8 @@ function Matching({ item, draft, onChange, disabled }: Props) {
           <Popover className={styles.popover}>
             <ListBox className={styles.listbox}>
               {item.view.right.map((right) => (
-                <ListBoxItem key={right} id={right} className={styles.option} textValue={right}>
-                  {right}
+                <ListBoxItem key={right} id={right} className={styles.option} textValue={plainMath(right)}>
+                  <MathText text={right} />
                 </ListBoxItem>
               ))}
             </ListBox>
@@ -270,7 +290,9 @@ function Flashcard({ item, draft, onChange, disabled }: Props) {
     <div className={ui.stack}>
       <div className={styles.cardBack}>
         <p className={styles.label}>{t({ id: "item.flashcard.back", message: "Answer" })}</p>
-        <p className={styles.preWrap}>{back}</p>
+        <p className={styles.preWrap}>
+          <MathText text={back} />
+        </p>
       </div>
       <ChoiceField
         label={t({

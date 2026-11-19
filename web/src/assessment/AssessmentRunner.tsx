@@ -19,6 +19,7 @@ import type { Outcome } from "../outbox/outbox";
 import { uuid7 } from "../outbox/uuid7";
 import { useTutorRefs } from "../tutor/context";
 import styles from "./assessment.module.css";
+import { MathText } from "../components/MathText";
 
 type Assessment = AssessmentOut & { assessment_id: string };
 
@@ -156,7 +157,7 @@ function ItemCard({
         </ol>
       </div>
       <h2 id={`q-${item.item_version_id}`} className={styles.prompt}>
-        {prompt || t({ id: "assessment.cloze.prompt", message: "Fill in the gaps" })}
+        {prompt ? <MathText text={prompt} /> : t({ id: "assessment.cloze.prompt", message: "Fill in the gaps" })}
       </h2>
 
       <ItemInput
@@ -170,7 +171,9 @@ function ItemCard({
       {hints.length > 0 ? (
         <ol className={styles.hints} aria-label={t({ id: "assessment.hints.label", message: "Hints" })}>
           {hints.map((h) => (
-            <li key={h.level}>{h.text}</li>
+            <li key={h.level}>
+              <MathText text={h.text} />
+            </li>
           ))}
         </ol>
       ) : null}

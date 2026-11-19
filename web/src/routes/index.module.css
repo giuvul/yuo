@@ -1,37 +1,77 @@
 @layer components {
-  .titleRow {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--yuo-space-3);
-  }
-
-  .actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--yuo-space-2);
-  }
-
-  .list {
+  .home {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 22rem), 1fr));
-    gap: var(--yuo-space-3);
-    margin: 0;
-    padding: 0;
-    list-style: none;
+    gap: var(--yuo-space-4);
+  }
 
-    & > li {
-      display: grid;
+  /* --- greeting ------------------------------------------------------------------------------- */
+
+  .hello {
+    display: grid;
+    gap: var(--yuo-space-1);
+  }
+
+  .greeting {
+    display: flex;
+    align-items: flex-end;
+    gap: var(--yuo-space-2);
+    margin: 0;
+    font-family: var(--yuo-font-display);
+    font-size: var(--yuo-text-3xl);
+    font-weight: var(--yuo-weight-heavy);
+    line-height: var(--yuo-leading-tight);
+  }
+
+  .greetingSprout {
+    margin-block-end: 0.15em;
+    color: var(--yuo-color-leaf);
+    transform: rotate(12deg);
+  }
+
+  .summary {
+    margin: 0;
+    color: var(--yuo-color-muted);
+  }
+
+  /* --- layout: the work on the left, how it goes on the right ---------------------------------- */
+
+  .grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--yuo-space-4);
+
+    @media (min-width: 52rem) {
+      grid-template-columns: minmax(0, 1fr) minmax(13rem, 17rem);
+      align-items: start;
     }
   }
 
-  .pathCard {
+  .main,
+  .side {
     display: grid;
-    grid-template-columns: auto minmax(0, 1fr) auto;
-    align-items: start;
+    gap: var(--yuo-space-4);
+    min-inline-size: 0;
+  }
+
+  .side {
     gap: var(--yuo-space-3);
-    padding: var(--yuo-space-3);
+  }
+
+  /* --- the next step -------------------------------------------------------------------------- */
+
+  .next {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    gap: var(--yuo-space-4);
+    padding: var(--yuo-space-3) var(--yuo-space-4);
+
+    @media (min-width: 40rem) {
+      padding-block: var(--yuo-space-4);
+      padding-inline: var(--yuo-space-4) min(5rem, 12%);
+    }
+    overflow: hidden;
     border: 1px solid var(--yuo-color-border);
     border-radius: var(--yuo-radius-3);
     background: var(--yuo-color-surface);
@@ -53,131 +93,278 @@
       outline: 2px solid var(--yuo-color-focus);
       outline-offset: 2px;
     }
+  }
 
-    &[data-status="archived"],
-    &[data-status="paused"] {
-      background: var(--yuo-color-surface-muted);
-      box-shadow: none;
+  .nextMark {
+    position: relative;
+    display: inline-grid;
+    place-items: center;
+    inline-size: 3.5rem;
+    block-size: 3.5rem;
+    border-radius: var(--yuo-radius-full);
+    background: var(--yuo-color-success-bg);
+    color: var(--yuo-color-leaf);
+
+    @media (min-width: 40rem) {
+      inline-size: 4.5rem;
+      block-size: 4.5rem;
     }
   }
 
-  .pathIcon {
-    display: inline-grid;
-    place-items: center;
-    inline-size: 2.75rem;
-    block-size: 2.75rem;
-    border-radius: var(--yuo-radius-2);
-    background: var(--yuo-color-surface-muted);
-    color: var(--yuo-color-fg);
+  .nextMark svg {
+    inline-size: 62%;
+    block-size: 62%;
   }
 
-  .pathBody {
+  .nextBody {
+    position: relative;
     display: grid;
     gap: var(--yuo-space-1);
     min-inline-size: 0;
   }
 
-  .pathTitle {
+  .nextTitle {
     font-family: var(--yuo-font-display);
-    font-size: var(--yuo-text-lg);
+    font-size: var(--yuo-text-xl);
+
+    @media (min-width: 40rem) {
+      font-size: var(--yuo-text-2xl);
+    }
+
     font-weight: var(--yuo-weight-heavy);
-    line-height: var(--yuo-leading-snug);
+    line-height: var(--yuo-leading-tight);
     overflow-wrap: anywhere;
+    text-wrap: balance;
   }
 
-  .meta {
+  .nextMeta {
     color: var(--yuo-color-muted);
-    font-size: var(--yuo-text-sm);
+
+    @media (min-width: 40rem) {
+      font-size: var(--yuo-text-lg);
+    }
   }
 
-  .progress {
+  .vine {
+    position: absolute;
+    inset-block-end: 0;
+    inset-inline-end: 0;
+    inline-size: min(7rem, 30%);
+    pointer-events: none;
+
+    @media (min-width: 40rem) {
+      inline-size: min(12rem, 40%);
+    }
+  }
+
+  .vineStem {
+    fill: none;
+    stroke: var(--yuo-color-leaf);
+    stroke-width: 1.4;
+    stroke-linecap: round;
+    opacity: 0.55;
+  }
+
+  .vineLeaf {
+    fill: var(--yuo-color-leaf);
+    opacity: 0.4;
+  }
+
+  /* --- today ---------------------------------------------------------------------------------- */
+
+  .today {
     display: grid;
-    gap: var(--yuo-space-1);
-    margin-block-start: var(--yuo-space-2);
-  }
-
-  .progressText {
-    color: var(--yuo-color-muted);
-    font-size: var(--yuo-text-xs);
-    font-variant-numeric: tabular-nums;
-  }
-
-  .pathSide {
-    display: grid;
-    justify-items: end;
     gap: var(--yuo-space-2);
   }
 
-  .pathArrow {
-    color: var(--yuo-color-muted);
-    transition: transform var(--yuo-duration-base) var(--yuo-ease-standard);
-
-    .pathCard:hover & {
-      transform: translateX(2px);
-      color: var(--yuo-color-fg);
-    }
-  }
-
-  /* no paths yet: a sprout and one clear action */
-  .empty {
-    position: relative;
-    isolation: isolate;
-    overflow: hidden;
-    display: grid;
-    justify-items: center;
-    gap: var(--yuo-space-2-5);
-    padding-block: var(--yuo-space-5);
-    padding-inline: var(--yuo-space-3);
-    text-align: center;
-
-    & p {
-      max-inline-size: 30rem;
-      margin: 0;
-    }
-  }
-
-  .emptyMark {
-    display: inline-grid;
-    place-items: center;
-    inline-size: 6rem;
-    block-size: 6rem;
-    border-radius: var(--yuo-radius-full);
-    background: var(--yuo-color-surface-muted);
-    color: var(--yuo-color-fg);
-
-    /* the sprout sways a little, as if in a breeze */
-    & > * {
-      transform-origin: 50% 90%;
-      animation: yuo-empty-sway var(--yuo-duration-sway) var(--yuo-ease-gentle) infinite alternate;
-    }
-  }
-
-  @keyframes yuo-empty-sway {
-    from {
-      transform: rotate(-3deg);
-    }
-    to {
-      transform: rotate(3deg);
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .emptyMark > * {
-      animation: none;
-    }
-  }
-
-  .emptyTitle {
+  .todayTitle {
+    margin: 0;
     font-family: var(--yuo-font-display);
     font-size: var(--yuo-text-2xl);
     font-weight: var(--yuo-weight-heavy);
   }
 
-  .emptyActions {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+  .todayList {
+    display: grid;
     gap: var(--yuo-space-2);
-    margin-block-start: var(--yuo-space-2);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .quiet {
+    padding: var(--yuo-space-3);
+    border: 1px dashed var(--yuo-color-border);
+    border-radius: var(--yuo-radius-3);
+    color: var(--yuo-color-muted);
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: var(--yuo-space-3);
+    padding: var(--yuo-space-2-5) var(--yuo-space-3);
+    border: 1px solid var(--yuo-color-border);
+    border-radius: var(--yuo-radius-2);
+    background: var(--yuo-color-surface);
+    box-shadow: var(--yuo-shadow-1);
+  }
+
+  .rowIcon {
+    display: inline-grid;
+    place-items: center;
+    inline-size: 1.75rem;
+    color: var(--yuo-color-leaf);
+
+    &[data-tone="warning"] {
+      color: var(--yuo-color-illus-sun);
+    }
+  }
+
+  .rowBody {
+    display: grid;
+    gap: 0.125rem;
+    min-inline-size: 0;
+  }
+
+  .rowTitle {
+    font-weight: var(--yuo-weight-medium);
+    overflow-wrap: anywhere;
+  }
+
+  .rowDetail {
+    color: var(--yuo-color-muted);
+    font-size: var(--yuo-text-sm);
+  }
+
+  .rowAction {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  @media (max-width: 30rem) {
+    .row {
+      grid-template-columns: auto minmax(0, 1fr);
+    }
+
+    .rowAction {
+      grid-column: 2;
+      justify-content: flex-start;
+    }
+  }
+
+  /* --- the side cards ------------------------------------------------------------------------- */
+
+  .card {
+    display: grid;
+    gap: var(--yuo-space-2);
+    padding: var(--yuo-space-3);
+    border: 1px solid var(--yuo-color-border);
+    border-radius: var(--yuo-radius-3);
+    background: var(--yuo-color-surface);
+    box-shadow: var(--yuo-shadow-1);
+  }
+
+  .cardTitle {
+    margin: 0;
+    font-size: var(--yuo-text-md);
+    font-weight: var(--yuo-weight-bold);
+  }
+
+  .muted {
+    color: var(--yuo-color-muted);
+    font-size: var(--yuo-text-sm);
+  }
+
+  .progress {
+    display: flex;
+    align-items: center;
+    gap: var(--yuo-space-3);
+  }
+
+  .ring {
+    flex: none;
+    inline-size: 4.25rem;
+    block-size: 4.25rem;
+  }
+
+  .ringTrack,
+  .ringValue {
+    fill: none;
+    stroke-width: 6;
+  }
+
+  .ringTrack {
+    stroke: var(--yuo-color-track);
+  }
+
+  .ringValue {
+    stroke: var(--yuo-color-illus-sun);
+    stroke-linecap: round;
+  }
+
+  .ringText {
+    fill: var(--yuo-color-fg);
+    font-family: var(--yuo-font-display);
+    font-size: 1.15rem;
+    font-weight: var(--yuo-weight-heavy);
+  }
+
+  .progressBody {
+    display: grid;
+    gap: 0.125rem;
+  }
+
+  .progressStatus {
+    font-weight: var(--yuo-weight-bold);
+  }
+
+  .stats {
+    display: grid;
+    gap: var(--yuo-space-2);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .stat {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    gap: var(--yuo-space-2);
+
+    & > span:last-child {
+      display: grid;
+    }
+  }
+
+  .statIcon {
+    display: inline-grid;
+    place-items: center;
+    inline-size: 1.75rem;
+    color: var(--yuo-color-leaf);
+
+    &[data-tone="flame"] {
+      color: var(--yuo-color-illus-sun);
+    }
+  }
+
+  .statValue {
+    font-weight: var(--yuo-weight-bold);
+  }
+
+  .statLabel {
+    color: var(--yuo-color-muted);
+    font-size: var(--yuo-text-sm);
+  }
+
+  .insight {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: start;
+    gap: var(--yuo-space-2);
+    margin: 0;
+    font-size: var(--yuo-text-sm);
   }
 }

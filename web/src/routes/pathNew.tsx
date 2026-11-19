@@ -17,6 +17,7 @@ import { CliAccess } from "../onboarding/CliAccess";
 import { PlanMeterNow, meterCli } from "../onboarding/PlanMeter";
 import { PlanUsageList } from "../onboarding/PlanUsage";
 import styles from "./pathNew.module.css";
+import { MaterialStart } from "../material/StudiesForm";
 
 export const pathNewRoute = createRoute({
   getParentRoute: () => rootRoute,
@@ -93,9 +94,10 @@ function NewPathPage() {
         <Trans id="path.new.title">New learning path</Trans>
       </h1>
       <p className={ui.muted}>
-        <Trans id="path.new.intro.check">
+        <Trans id="path.new.intro.preview">
           Name what you want to learn and what you want to be able to do. A few questions then show what you
-          already know, and Yuo plans the path from there.
+          already know, and Yuo plans the path from there. You see the plan and can change it before anything
+          is written.
         </Trans>
       </p>
       <div className={ui.card}>
@@ -112,11 +114,61 @@ const GOAL_ICONS: Record<GoalType, ReactNode> = {
   curiosity: <SparkleIcon />,
 };
 
+type Start = "goal" | "courses";
+
 /**
- * The new-path form with the estimate for the bound models; also the wizard's last step, which puts
- * Back and "finish without a path" in `secondary`, beside the submit.
+ * The new-path form: from a goal (described in words), or from the learner's own courses and material.
+ * Also the wizard's last step, which puts Back and "finish without a path" in `secondary`.
  */
 export function NewPathForm({
+  onCreated,
+  secondary,
+  prefill,
+}: {
+  onCreated: (pathId: string) => void;
+  secondary?: ReactNode;
+  prefill?: SetupAnswersPath | null;
+}) {
+  const { t } = useLingui();
+  const [start, setStart] = useState<Start>("goal");
+  return (
+    <div className={ui.stack}>
+      <ChoiceCards
+        label={t({ id: "path.new.start", message: "Start from" })}
+        choices={[
+          {
+            value: "goal" as const,
+            label: t({ id: "path.new.start.goal", message: "A goal" }),
+            description: t({
+              id: "path.new.start.goal.description",
+              message: "Describe what you want to learn; Yuo plans it and writes the lessons.",
+            }),
+            icon: <SparkleIcon />,
+          },
+          {
+            value: "courses" as const,
+            label: t({ id: "path.new.start.courses", message: "My own material" }),
+            description: t({
+              id: "path.new.start.courses.description",
+              message: "Build on your books, slides, notes and recordings: for a degree, an exam, or anything you are reading.",
+            }),
+            icon: <BookIcon />,
+          },
+        ]}
+        value={start}
+        onChange={setStart}
+        compact
+      />
+      {start === "goal" ? (
+        <GoalPathForm onCreated={onCreated} secondary={secondary} prefill={prefill} />
+      ) : (
+        <MaterialStart onCreated={onCreated} secondary={secondary} />
+      )}
+    </div>
+  );
+}
+
+function GoalPathForm({
   onCreated,
   secondary,
   prefill,
@@ -164,6 +216,7 @@ export function NewPathForm({
             goal_type: goalType,
             custom_instructions: instructions.trim(),
             level_check: true,
+            preview: true,
           },
           {
             onSuccess: (r) => onCreated(r.path_id),

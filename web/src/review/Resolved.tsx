@@ -14,6 +14,7 @@ import { BookIcon, CheckIcon, LeafIcon } from "../components/icons";
 import { Button, ButtonLink, Field, Notice, ui } from "../components/ui";
 import { reportItem } from "./api";
 import styles from "./review.module.css";
+import { MathText } from "../components/MathText";
 
 /** The feedback once a question is resolved: the verdict, why, the idea behind it and where to read it again. */
 export function Resolved({ feedback }: { feedback: Graded }) {
@@ -54,13 +55,17 @@ export function Resolved({ feedback }: { feedback: Graded }) {
             <Trans id="review.feedback.sure">You were sure: worth a closer look.</Trans>
           </p>
         ) : null}
-        {feedback.solution ? <p className={styles.preWrap}>{feedback.solution}</p> : null}
+        {feedback.solution ? (
+          <p className={styles.preWrap}>
+            <MathText text={feedback.solution} />
+          </p>
+        ) : null}
         {feedback.concept ? (
           <p>
             <span className={styles.detailLabel}>
               <Trans id="review.feedback.concept">Idea</Trans>
             </span>{" "}
-            {feedback.concept}
+            <MathText text={feedback.concept} />
           </p>
         ) : null}
         {revisit ? (

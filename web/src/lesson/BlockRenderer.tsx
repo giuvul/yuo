@@ -5,11 +5,13 @@ import { useState, type ReactNode } from "react";
 import { parseBody, type Block, type CalloutVariant, type Inline } from "./blocks";
 import { MathBlock } from "./MathBlock";
 import styles from "./blocks.module.css";
+import { MathText } from "../components/MathText";
 
 function Inlines({ runs }: { runs: Inline[] }) {
   return (
     <>
       {runs.map((run, i) => {
+        if (run.marks.includes("math")) return <MathBlock key={i} latex={run.text} display={false} />;
         let node: ReactNode = run.text;
         if (run.marks.includes("code")) node = <code className={styles.inlineCode}>{node}</code>;
         if (run.marks.includes("italic")) node = <em>{node}</em>;
@@ -53,7 +55,11 @@ function BlockView({ block }: { block: Block }) {
     case "heading": {
       // the page title is the h1; body headings start one level below it
       const Tag = HEADINGS[Math.min(Math.max(Math.round(block.level), 1), HEADINGS.length) - 1] ?? "h2";
-      return <Tag className={styles.heading}>{block.text}</Tag>;
+      return (
+        <Tag className={styles.heading}>
+          <MathText text={block.text} />
+        </Tag>
+      );
     }
     case "paragraph":
       return (
@@ -99,7 +105,11 @@ function BlockView({ block }: { block: Block }) {
           <p className={styles.calloutLabel}>
             <WorkedExampleLabel />
           </p>
-          {block.title ? <p className={styles.workedTitle}>{block.title}</p> : null}
+          {block.title ? (
+            <p className={styles.workedTitle}>
+              <MathText text={block.title} />
+            </p>
+          ) : null}
           <ol className={styles.steps}>
             {block.steps.map((step, i) => (
               <li key={i}>
@@ -113,9 +123,13 @@ function BlockView({ block }: { block: Block }) {
       return (
         <dl className={styles.glossary}>
           <dt>
-            <dfn>{block.term}</dfn>
+            <dfn>
+              <MathText text={block.term} />
+            </dfn>
           </dt>
-          <dd>{block.definition}</dd>
+          <dd>
+            <MathText text={block.definition} />
+          </dd>
         </dl>
       );
   }

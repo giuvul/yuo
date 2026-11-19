@@ -524,6 +524,22 @@ define(
     )
 )
 
+define(
+    SettingDef(
+        "material.transcription",
+        "CFG-85",
+        ("installation",),
+        "accurate",
+        Literal["faster", "accurate"],
+        explanation="How your recorded lectures are transcribed on this computer. Faster uses a smaller speech "
+        "model: about three times quicker, with a few more mistakes in short words and notation (in a test, 97% of "
+        "the words matched).",
+        example="Faster: a 90-minute lecture takes about 8 minutes instead of about 23 on a 4-core server.",
+        suggestion="more accurate; faster when you add many hours of recordings at once",
+        impact=("time", "learning"),
+    )
+)
+
 # --- desktop, onboarding, themes, updates --------------------------------------------------------
 define(
     SettingDef(

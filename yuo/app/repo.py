@@ -1,8 +1,9 @@
 """Row lookups and the path's own state, shared by the service's parts.
 
 Functions over a connection, so they work inside a writer unit and a read connection alike. The path keeps
-two pieces of Yuo state in `path.extensions.yuo` (spec 1.0 lets an implementation keep its own data there):
-`level_check` (the check before the tree is planned) and `next` (the "What next?" checkpoint).
+three pieces of Yuo state in `path.extensions.yuo` (spec 1.0 lets an implementation keep its own data there):
+`level_check` (the check before the tree is planned), `preview` (the plan the learner checks before it is
+built) and `next` (the "What next?" checkpoint).
 """
 
 import json
@@ -12,7 +13,7 @@ from typing import Any, Literal
 from yuo.core import clock
 from yuo.core.errors import NotFound
 
-PathState = Literal["level_check", "next"]
+PathState = Literal["level_check", "next", "preview", "arrange"]
 
 
 def find_path(c: sqlite3.Connection, path_id: str) -> sqlite3.Row | None:

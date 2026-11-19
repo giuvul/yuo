@@ -11,7 +11,7 @@ import structlog
 
 from yuo.app.context import AppContext, Part
 from yuo.app.erasure import projection_settings
-from yuo.app.items import TEST_TYPES, ItemContext, make_items, practice_mix
+from yuo.app.items import ITEM_MATERIAL_BUDGET, TEST_TYPES, ItemContext, make_items, practice_mix
 from yuo.app.ports import Learners, Models, PathInputs, SettingsReader
 from yuo.app.repo import get_skill
 from yuo.app.stages import grade_spec, place_spec
@@ -33,6 +33,7 @@ if TYPE_CHECKING:
 log = structlog.get_logger(__name__)
 TEST_SIZE = 5  # items per skill test
 PLACEMENT_PER_SKILL = 2
+MOCK_MAX = 20  # questions in a course's mock exam: two per skill, one when the course has more than ten
 
 
 def _rows(c: sqlite3.Connection, sql: str, *args: Any) -> list[dict[str, Any]]:
@@ -78,6 +79,16 @@ class Study(Part):
             "archived_at IS NULL ORDER BY position",
             skill_id,
         )
+        # questions on a skill built on the learner's material are written from it (the lesson's share of it
+        # for a lesson's practice), and under "only my material" must be answerable from it alone
+        lesson = (
+            c.execute("SELECT lesson_id FROM lesson_version WHERE id = ?", (origin,)).fetchone()
+            if origin
+            else None
+        )
+        material = self.paths.skill_material(c, skill_id, lesson[0] if lesson else "", ITEM_MATERIAL_BUDGET)
+        if material:
+            dclass = DataClass.FREE_TEXT
         return ItemContext(
             s["path_id"],
             skill_id,
@@ -90,6 +101,7 @@ class Study(Part):
             use,
             body,
             origin,
+            material,
         )
 
     def generator_and_reviewer(self) -> tuple[Any, Any, bool]:
@@ -147,6 +159,7 @@ class Study(Part):
         skill_id: str | None,
         version_ids: list[str],
         pass_mark: float | None = None,
+        mock_course: str | None = None,
     ) -> dict[str, Any]:
         learner = self.learners.ensure_learner()
         aid = new_id()
@@ -166,6 +179,10 @@ class Study(Part):
                 k: settings.effective(c, k, {"learner": learner})[0]
                 for k in ("practice.solution_after", "skill_test.pass_mark", "tutor.test_policy")
             }
+            if (
+                mock_course
+            ):  # a course's mock exam: a skill test with no skill, scored per skill, nothing mastered
+                snapshot["mock_course"] = mock_course
             c.execute(
                 "INSERT INTO assessment (id, learner_id, purpose, skill_id, item_version_ids, policy, pass_mark, "
                 "settings_snapshot, created_at) VALUES (?, ?, ?, ?, json(?), ?, ?, json(?), ?)",
@@ -392,6 +409,25 @@ class Study(Part):
         written: list[str] = []
         server = ev.server_device(c)
         mark = float(a["pass_mark"] or 0.8)
+        mock = json.loads(a["settings_snapshot"] or "{}").get("mock_course")
+        if mock:  # a mock exam: the score and each skill's share, no test result or placement written
+            per_skill: dict[str, list[float]] = {}
+            for v in pinned:
+                sid = c.execute(
+                    "SELECT i.skill_id FROM item_version v JOIN item i ON i.id = v.item_id WHERE v.id = ?",
+                    (v,),
+                ).fetchone()[0]
+                per_skill.setdefault(sid, []).append(float(scores.get(v, 0.0)))
+            score = sum(float(scores.get(v, 0.0)) for v in pinned) / len(pinned)
+            return {
+                "mock": {
+                    "course_id": mock,
+                    "score": round(score, 6),
+                    "pass_mark": mark,
+                    "passed": score >= mark - 1e-9,
+                    "skills": {k: round(sum(x) / len(x), 6) for k, x in per_skill.items()},
+                }
+            }, written
         if a["purpose"] == "skill_test":
             score = sum(float(scores.get(v, 0.0)) for v in pinned) / len(pinned)
             passed = score >= mark - 1e-9
@@ -534,8 +570,11 @@ class Study(Part):
                     (job.target_id,),
                 )
             ]
+        # a retry writes the missing questions as other kinds, so one kind that keeps failing its checks for
+        # this skill does not hold the whole test back
         wanted = [
-            (TEST_TYPES[(n - 1) % len(TEST_TYPES)], f"{code}.t{n}") for n in range(have + 1, TEST_SIZE + 1)
+            (TEST_TYPES[(n - 2 + job.attempt) % len(TEST_TYPES)], f"{code}.t{n}")
+            for n in range(have + 1, TEST_SIZE + 1)
         ]
         make_items(
             self.runner, self.writer, job.id, ctx, wanted, gen, rev, independent=independent, avoid=avoid
@@ -545,6 +584,47 @@ class Study(Part):
                 raise StageFailed(
                     "could not build a full skill test: some items were rejected", retryable=True
                 )
+
+    def start_mock_exam(self, course_id: str) -> dict[str, Any]:
+        """A course's mock exam: questions from every skill's test bank, scored like a skill test at the end, with
+        no mastery written. Skills whose bank is not written yet are queued first (the client asks again)."""
+        with self.readers.connection() as c:
+            row = c.execute("SELECT branch_id FROM course WHERE id = ?", (course_id,)).fetchone()
+            if row is None:
+                raise NotFound(f"course {course_id}")
+            if row[0] is None:
+                raise Conflict("the course is not built yet")
+            skills = [
+                r[0]
+                for r in c.execute(
+                    "SELECT id FROM skill WHERE branch_id = ? AND archived_at IS NULL ORDER BY position",
+                    (row[0],),
+                )
+            ][:MOCK_MAX]
+            if not skills:
+                raise Conflict("the course has no skills")
+            banks = {s: self.test_items(c, s) for s in skills}
+            mark = float(self.config.setting("skill_test.pass_mark"))
+            # a skill whose questions could not all be written (its last bank job failed) goes in with what it has
+            gave_up = {
+                s
+                for s in skills
+                if c.execute(
+                    "SELECT status FROM generation_job WHERE kind = 'test_bank' AND target_id = ? "
+                    "ORDER BY created_at DESC LIMIT 1",
+                    (s,),
+                ).fetchone()
+                == ("failed",)
+            }
+        per = 2 if len(skills) * 2 <= MOCK_MAX else 1
+        missing = [s for s in skills if len(banks[s]) < per and s not in gave_up]
+        if missing:
+            jobs = [self._queue_once("test_bank", EntityKind.SKILL, s) for s in missing]
+            return {"job_id": jobs[0]}
+        items = [v for s in skills for v in banks[s][:per]]
+        if not items:
+            raise Conflict("no questions could be written for this course")
+        return self._assessment("skill_test", None, items, pass_mark=mark, mock_course=course_id)
 
     def start_placement(self, path_id: str) -> dict[str, Any]:
         mark = float(self.config.setting("skill_test.pass_mark"))

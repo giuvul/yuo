@@ -1,6 +1,6 @@
 [project]
 name = "yuo"
-version = "1.0.1"
+version = "1.1.0"
 description = "Self-hosted learning paths: generated lessons, practice, tests and a tutor."
 readme = "README.md"
 license = "Apache-2.0"
@@ -28,6 +28,7 @@ dependencies = [
     "argon2-cffi>=25.1.0",
     "genanki==0.13.1",
     "tzdata>=2025.2",
+    "pypdfium2>=4.30",
 ]
 
 
@@ -78,6 +79,7 @@ ignore = ["S101", "S608", "E501"]  # asserts; SQL is built from model metadata, 
 "yuo/adapters/tts/**" = ["S603", "S607"]
 "yuo/adapters/tts/kokoro.py" = ["S603", "S607", "RUF001"]  # IPA symbols on purpose
 "yuo/adapters/tools/**" = ["S603", "S607"]
+"yuo/adapters/transcribe/**" = ["S603", "S607"]
 # writer.run() executes its unit at once and blocks, so loop variables in the lambdas cannot go stale
 "yuo/app/service.py" = ["B023"]
 "yuo/app/items.py" = ["B023"]
@@ -92,7 +94,7 @@ files = ["yuo", "scripts", "tests"]
 exclude = ["^web/", "^renderer/"]
 
 [[tool.mypy.overrides]]
-module = ["misaki", "misaki.*", "onnxruntime", "onnxruntime.*"]  # no type information shipped
+module = ["misaki", "misaki.*", "onnxruntime", "onnxruntime.*", "pypdfium2", "pypdfium2.*", "faster_whisper"]  # no type information shipped
 ignore_missing_imports = true
 
 [tool.pytest.ini_options]
@@ -121,6 +123,7 @@ modules = [
     "yuo.tutoring",
     "yuo.generation",
     "yuo.sharing",
+    "yuo.material",
 ]
 
 [[tool.importlinter.contracts]]
@@ -134,6 +137,9 @@ modules = [
     "yuo.app.sharing",
     "yuo.app.onboarding",
     "yuo.app.next_steps",
+    "yuo.app.plan_preview",
+    "yuo.app.material",
+    "yuo.app.home",
 ]
 
 [[tool.importlinter.contracts]]
@@ -156,9 +162,11 @@ name = "Only adapters import vendor SDKs"
 type = "forbidden"
 source_modules = [
     "yuo.core", "yuo.setup", "yuo.learning", "yuo.curriculum", "yuo.content", "yuo.assessment",
-    "yuo.tutoring", "yuo.generation", "yuo.sharing", "yuo.db", "yuo.api",
+    "yuo.tutoring", "yuo.generation", "yuo.sharing", "yuo.db", "yuo.api", "yuo.material",
 ]
-forbidden_modules = ["openai", "anthropic", "httpx", "langchain", "langchain_core", "genanki", "keyring"]
+forbidden_modules = [
+    "openai", "anthropic", "httpx", "langchain", "langchain_core", "genanki", "keyring", "pypdfium2",
+]
 allow_indirect_imports = true
 
 [[tool.importlinter.contracts]]

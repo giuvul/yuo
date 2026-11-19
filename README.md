@@ -94,8 +94,9 @@ machine too.
 
 Yuo also downloads a few things that carry none of your data: its own updates (a daily check of the release
 file, which you can turn off in Settings), public model prices from OpenRouter, and the programs and voice
-model it needs. On a server, the HTTPS certificate or Tailscale you set up connects your devices to it, not
-to anyone else. Sharing a path or exporting it happens only when you do it.
+model it needs. The first recorded lecture you add downloads the speech recognition (faster-whisper and its
+model, about 1 GB); your recordings are transcribed on your machine. On a server, the HTTPS certificate or
+Tailscale you set up connects your devices to it, not to anyone else. Sharing a path or exporting it happens only when you do it.
 
 ## Install by hand
 

@@ -20,6 +20,8 @@ function pathWith(
     difficulty: "foundational",
     content_lang: "en",
     level_check: "none",
+    preview: "none",
+    origin: "goal",
     jobs,
     branches: [
       {
@@ -34,7 +36,7 @@ function pathWith(
             summary: "SELECT and WHERE",
             requires: [],
             objectives: [],
-            lessons: lessons.map((l) => ({ kind: "core", ...l, code: l.id })),
+            lessons: lessons.map((l) => ({ kind: "core", has_draft: false, ...l, code: l.id })),
           },
         ],
       },
@@ -134,6 +136,27 @@ describe("path view", () => {
     expect(calls.some((c) => c.method === "POST" && c.path === "/api/lessons/l2/generate")).toBe(true);
     expect(await screen.findByText("Queued")).toBeInTheDocument();
     expect(screen.getByText(/Writing a lesson/).closest("li")).toHaveTextContent("waiting to start");
+  });
+});
+
+describe("a lesson that failed its review", () => {
+  beforeAll(async () => {
+    await activateLocale("en");
+  });
+  beforeEach(() => localStorage.setItem("yuo.path.view", "list"));
+  afterEach(() => localStorage.clear());
+
+  it("can be accepted with the reviewer's feedback", async () => {
+    const { calls } = mockApi({
+      ...appRoutes,
+      "GET /api/paths/p1": () =>
+        json(pathWith([{ id: "l3", state: "failed", title: "Sorting", has_draft: true } as never])),
+      "POST /api/lessons/l3/accept": () => json({ job_id: "j9" }, 202),
+    });
+    const user = userEvent.setup();
+    renderApp("/paths/p1");
+    await user.click(await screen.findByRole("button", { name: "Accept “Sorting” with the reviewer's feedback" }));
+    await waitFor(() => expect(calls.some((c) => c.method === "POST" && c.path === "/api/lessons/l3/accept")).toBe(true));
   });
 });
 
@@ -272,6 +295,7 @@ describe("new path", () => {
       goal_type: "exam",
       custom_instructions: "Use R",
       level_check: true,
+      preview: true,
     });
   });
 
@@ -401,6 +425,54 @@ describe("new path", () => {
     await user.click(screen.getByRole("button", { name: "I don’t know yet" }));
     await waitFor(() => expect(posted).toEqual({ answers: [0, null], skip: false }));
     expect(calls.some((c) => c.method === "POST" && c.path === "/api/paths/p1/level-check")).toBe(true);
+  });
+
+  it("shows the plan before it is built, sends the learner's changes and builds it", async () => {
+    const tree = {
+      branches: [
+        {
+          code: "basics",
+          title: "Basics",
+          skills: [
+            { code: "basics.select", title: "Selecting rows", summary: "SELECT and WHERE", requires: [], objectives: [], lessons: [{ code: "l1", title: "First query" }] },
+            { code: "basics.join", title: "Joins", summary: "Combine tables", requires: ["basics.select"], objectives: [], lessons: [{ code: "l2", title: "Inner joins" }] },
+          ],
+        },
+      ],
+    };
+    const view = (status: string, extra = {}) => ({ status, version: 1, tree, changes: [], feedback: [], job_id: null, failed: false, ...extra });
+    const posted: { path: string; body: unknown }[] = [];
+    let current = view("ready");
+    mockApi({
+      ...appRoutes,
+      "GET /api/paths/p1": () => json({ ...pathWith([]), status: "draft", branches: [], preview: "ready" }),
+      "GET /api/paths/p1/progress": () => json({ skills: {} }),
+      "GET /api/paths/p1/proposals": () => json([]),
+      "GET /api/paths/p1/preview": () => json(current),
+      "POST /api/paths/p1/preview/feedback": (_req, body) => {
+        posted.push({ path: "feedback", body });
+        current = view("ready", { version: 2, changes: ["Added a part on window functions."], feedback: ["add windows"] });
+        return json(current);
+      },
+      "POST /api/paths/p1/preview/build": () => {
+        posted.push({ path: "build", body: null });
+        return json(view("built"));
+      },
+    });
+    const user = userEvent.setup();
+    renderApp("/paths/p1");
+
+    expect(await screen.findByText("Joins")).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Your plan" })).toBeInTheDocument();
+    expect(screen.getByText("After: Selecting rows")).toBeInTheDocument();
+    expect(screen.getByText("1 branch · 2 skills · 2 lessons")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Change the plan" })).toBeDisabled();
+    await user.type(screen.getByRole("textbox", { name: /Anything missing/ }), "add windows");
+    await user.click(screen.getByRole("button", { name: "Change the plan" }));
+    expect(await screen.findByText("Added a part on window functions.")).toBeInTheDocument();
+    await user.click(screen.getByRole("button", { name: "Build it" }));
+    await waitFor(() => expect(posted.map((p) => p.path)).toEqual(["feedback", "build"]));
+    expect(posted[0]?.body).toEqual({ text: "add windows" });
   });
 
   it("lets the learner skip the level check while the questions are written", async () => {

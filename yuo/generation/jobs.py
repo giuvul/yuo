@@ -2,8 +2,10 @@
 
 One thread works the long background jobs (lessons, videos, requests). A second thread works only the jobs
 a learner is waiting for on screen (`URGENT_KINDS`: a new path's level check and tree, a skill test bank,
-placement), so they never wait behind a lesson; their model calls go in the near lane, ahead of the
-lesson's next call (a call already running is not interrupted).
+placement, a course's plan), so they never wait behind a lesson; their model calls go in the near lane, ahead
+of the lesson's next call (a call already running is not interrupted). A third thread works the learner's own
+files (`HEAVY_KINDS`: reading, transcribing and digesting them), one at a time, so an hour of transcription
+never holds up a lesson.
 
 Handlers are registered per job kind by the composition root. A retryable failure is retried later with
 backoff (at most `MAX_ATTEMPTS`); a budget stop parks the job in `waiting_resource` until the cap allows. A job
@@ -30,7 +32,8 @@ from yuo.generation.runner import BudgetExceeded, StageFailed
 
 log = structlog.get_logger(__name__)
 MAX_ATTEMPTS = 3
-URGENT_KINDS = frozenset({"tree", "test_bank", "placement"})
+URGENT_KINDS = frozenset({"tree", "test_bank", "placement", "course", "course_links"})
+HEAVY_KINDS = frozenset({"material"})
 URGENT_PRIORITY = 20
 BACKOFF_S = (30, 120, 600)
 
@@ -75,7 +78,7 @@ class JobWorker:
         self.handlers = handlers
         self.poll_s = poll_s
         self._stop = threading.Event()
-        self._wakes = (threading.Event(), threading.Event())  # background thread, urgent thread
+        self._wakes = (threading.Event(), threading.Event(), threading.Event())  # background, urgent, heavy
         self._threads: list[threading.Thread] = []
         self.on_change: Callable[[str, str], None] | None = None  # (job id, status) for the event stream
 
@@ -108,13 +111,8 @@ class JobWorker:
         return n
 
     def start(self) -> None:
-        for urgent in (False, True):
-            t = threading.Thread(
-                target=self._loop,
-                args=(urgent,),
-                name="yuo-jobs-urgent" if urgent else "yuo-jobs",
-                daemon=True,
-            )
+        for urgent, name in ((False, "yuo-jobs"), (True, "yuo-jobs-urgent"), ("heavy", "yuo-jobs-heavy")):
+            t = threading.Thread(target=self._loop, args=(urgent,), name=name, daemon=True)
             t.start()
             self._threads.append(t)
 
@@ -128,16 +126,22 @@ class JobWorker:
         for w in self._wakes:
             w.set()
 
-    def _loop(self, urgent: bool) -> None:
-        wake = self._wakes[urgent]
+    def _loop(self, urgent: bool | str) -> None:
+        wake = self._wakes[2 if urgent == "heavy" else int(bool(urgent))]
         while not self._stop.is_set():
             if not self.run_once(urgent=urgent):
                 wake.wait(self.poll_s)
                 wake.clear()
 
-    def _claim(self, urgent: bool | None) -> Job | None:
+    def _claim(self, urgent: bool | str | None) -> Job | None:
         kinds = ", ".join(f"'{k}'" for k in sorted(URGENT_KINDS))
-        only = {None: "", True: f" AND kind IN ({kinds})", False: f" AND kind NOT IN ({kinds})"}[urgent]
+        heavy = ", ".join(f"'{k}'" for k in sorted(HEAVY_KINDS))
+        only = {
+            None: "",
+            True: f" AND kind IN ({kinds})",
+            False: f" AND kind NOT IN ({kinds}) AND kind NOT IN ({heavy})",
+            "heavy": f" AND kind IN ({heavy})",
+        }[urgent]
 
         def unit(c: sqlite3.Connection) -> Job | None:
             row = c.execute(
@@ -158,8 +162,9 @@ class JobWorker:
             self._changed(job.id, "running")
         return job
 
-    def run_once(self, *, urgent: bool | None = None) -> bool:
-        """Work one job if one is due (`urgent`: only the urgent kinds, or only the others; None: any).
+    def run_once(self, *, urgent: bool | str | None = None) -> bool:
+        """Work one job if one is due (`urgent`: True only the urgent kinds, "heavy" only the learner's files,
+        False the others; None: any).
         Returns whether a job was worked."""
         job = self._claim(urgent)
         if job is None:

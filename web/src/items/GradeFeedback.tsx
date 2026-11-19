@@ -5,6 +5,7 @@ import { grove, LeafPop } from "../components/Grove";
 import { Notice } from "../components/ui";
 import { correctLines } from "./answers";
 import styles from "./items.module.css";
+import { MathText } from "../components/MathText";
 
 export const FULL_MARKS = 0.999;
 
@@ -66,24 +67,34 @@ export function GradeFeedback({ item, graded }: { item: Item; graded: Graded }) 
               <Trans id="item.grade.right-answer">The right answer</Trans>
             </p>
             {lines.length === 1 ? (
-              <p className={styles.preWrap}>{lines[0]}</p>
+              <p className={styles.preWrap}>
+                <MathText text={lines[0] ?? ""} />
+              </p>
             ) : (
               <ul>
                 {lines.map((l, i) => (
-                  <li key={i}>{l}</li>
+                  <li key={i}>
+                    <MathText text={l} />
+                  </li>
                 ))}
               </ul>
             )}
           </div>
         ) : null}
-        {graded.rationale ? <p className={`${styles.preWrap} ${styles.detail}`}>{graded.rationale}</p> : null}
-        {graded.explanation ? <p className={styles.detail}>{graded.explanation}</p> : null}
+        {graded.rationale ? <p className={`${styles.preWrap} ${styles.detail}`}>
+            <MathText text={graded.rationale} />
+          </p> : null}
+        {graded.explanation ? <p className={styles.detail}>
+            <MathText text={graded.explanation} />
+          </p> : null}
         {graded.solution ? (
           <div className={styles.detail}>
             <p className={styles.label}>
               <Trans id="item.grade.solution">Solution</Trans>
             </p>
-            <p className={styles.preWrap}>{graded.solution}</p>
+            <p className={styles.preWrap}>
+              <MathText text={graded.solution} />
+            </p>
           </div>
         ) : null}
       </div>

@@ -13,3 +13,4 @@ class PathForm:
     content_lang: str | None = None
     custom_instructions: str = ""
     level_check: bool = False
+    preview: bool = False

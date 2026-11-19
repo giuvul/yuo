@@ -90,6 +90,10 @@ test("create a path and see the first lessons written", async ({ page }) => {
     await expect(page.getByText(`Question ${n} of 8`)).toBeVisible();
     await page.getByRole("button", { name: n % 3 === 0 ? "I don’t know yet" : `right ${n}` }).click();
   }
+  // then the plan, which the learner can change before anything is written
+  await expect(page.getByRole("heading", { name: "Your plan" })).toBeVisible({ timeout: 15_000 });
+  await expect(page.getByRole("button", { name: "Build it" })).toBeEnabled({ timeout: 15_000 });
+  await page.getByRole("button", { name: "Build it" }).click();
   // the buffer: three lessons written ahead; the page polls while jobs run
   await expect(page.locator(`li${READY}`)).toHaveCount(3, { timeout: 15_000 });
   await expect(page.getByText(/Unlocks after/).first()).toBeVisible();

@@ -38,6 +38,10 @@ class ItemContext:
     use: str  # practice | test | placement
     body: list[dict[str, Any]] | None = None
     origin_lesson_version_id: str | None = None
+    material: dict[str, Any] | None = None  # the learner's own excerpts (lesson_material), when built on them
+
+
+ITEM_MATERIAL_BUDGET = 4000  # tokens of the learner's material in each item call
 
 
 @dataclass
@@ -84,7 +88,13 @@ def make_items(
         "skill_summary": ctx.skill_summary,
         "objectives": [{"code": o["code"], "statement": o["statement"]} for o in ctx.objectives],
         "avoid": avoid or [],
-    }
+    } | ({"excerpts": ctx.material} if ctx.material else {})
+    # under "only my material" the blind solver answers with the excerpts: a question they do not answer fails
+    strict = (
+        {k: v for k, v in ctx.material.items() if k != "exam_style"}
+        if ctx.material and ctx.material["adherence"] == "only"
+        else None
+    )
     out: list[str | None] = [None] * len(wanted)
     pending = list(range(len(wanted)))
     for attempt in range(attempts):
@@ -123,7 +133,7 @@ def make_items(
         verdicts: dict[int, _Blind] = {k: _Blind() for k in drafts if k not in solvable}
         if solvable:
             try:
-                checked = _blind_check(runner, job_id, rev, [drafts[k] for k in solvable])
+                checked = _blind_check(runner, job_id, rev, [drafts[k] for k in solvable], material=strict)
                 verdicts |= dict(zip(solvable, checked, strict=True))
             except StageFailed as e:
                 if e.retryable:
@@ -142,17 +152,24 @@ def make_items(
 
 
 def _blind_check(
-    runner: StageRunner, job_id: str, rev: Binding, drafts: list[_Draft], upstream: list[str] | None = None
+    runner: StageRunner,
+    job_id: str,
+    rev: Binding,
+    drafts: list[_Draft],
+    upstream: list[str] | None = None,
+    *,
+    material: dict[str, Any] | None = None,
 ) -> list[_Blind]:
     """Every draft answered blind in one reviewer call; a miss rejects the item (no correct key was
-    disputed in 14 cases)."""
+    disputed in 14 cases). With `material`, the solver answers from those excerpts only."""
     types = [d.type for d in drafts]
     blind = runner.run(
         job_id,
         blind_batch_spec(types),
         rev,
-        {"types": [t.key for t in types], "items": [d.type.view(d.payload, seed=d.seed) for d in drafts]},
-        data_class=DataClass.CONTENT,
+        {"types": [t.key for t in types], "items": [d.type.view(d.payload, seed=d.seed) for d in drafts]}
+        | ({"excerpts": material} if material else {}),
+        data_class=DataClass.FREE_TEXT if material else DataClass.CONTENT,
         upstream=upstream or [d.seed for d in drafts],
         role="reviewer",
     )
@@ -210,6 +227,11 @@ def _write(
             int(ctx.data_class is DataClass.FREE_TEXT),
         ),
     )
+    for src in (ctx.material or {}).get("sources", []):  # the pages of the learner's material it came from
+        c.execute(
+            "INSERT OR IGNORE INTO item_version_source (item_version_id, section_id) VALUES (?, ?)",
+            (vid, src["section_id"]),
+        )
     for check in ("schema", "support_consistency", "leak"):
         _check(c, vid, check, CheckVerdict.PASS, {}, run_id)
     if t.blind_solvable:

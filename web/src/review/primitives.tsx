@@ -4,6 +4,7 @@
 import { useId, type CSSProperties, type ReactNode } from "react";
 import { CheckIcon, CloseIcon, RepeatIcon } from "../components/icons";
 import styles from "./review.module.css";
+import { MathText } from "../components/MathText";
 
 const clamp = (v: number) => Math.min(1, Math.max(0, Number.isFinite(v) ? v : 0));
 /** useId as a fragment identifier (its punctuation is not safe in `url(#...)`). */
@@ -175,7 +176,9 @@ export function OptionButton({
           {letter}
         </span>
         <span className="visually-hidden">{letter}.</span>{" "}
-        <span className={styles.optionText}>{text}</span>
+        <span className={styles.optionText}>
+          <MathText text={text} />
+        </span>
         {state === "right" || state === "wrong" || state === "tried" ? (
           <span className={styles.optionMark}>
             {state === "right" ? <CheckIcon size="1.1rem" /> : <CloseIcon size="1.1rem" />}

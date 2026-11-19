@@ -63,6 +63,8 @@ const path: PathOut = {
   difficulty: "foundational",
   content_lang: "en",
   level_check: "none",
+  preview: "none",
+  origin: "goal",
   jobs: [],
   branches: [
     {
@@ -77,7 +79,7 @@ const path: PathOut = {
           summary: "",
           requires: [],
           objectives: [],
-          lessons: [{ id: "l1", code: "l1", kind: "core", state: "ready", title: "What a join is" }],
+          lessons: [{ id: "l1", code: "l1", kind: "core", state: "ready", title: "What a join is", has_draft: false }],
         },
       ],
     },
@@ -355,6 +357,7 @@ describe("screens publish their context", () => {
           skill_title: "Joining",
           path_title: "SQL",
           practice_items: 0,
+          sources: [],
         }),
       "GET /api/lessons/L1/notes": () => json([]),
       "POST /api/events": events([]),

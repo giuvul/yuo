@@ -1,5 +1,6 @@
 """Response models: the API contract the web client's types are generated from."""
 
+from datetime import date
 from typing import Annotated, Any, Literal
 
 from pydantic import BaseModel, Field
@@ -18,10 +19,20 @@ class PathSummary(BaseModel):
     id: str
     title: str
     subject: str
+    goal: str = ""
+    target_date: str | None = None
     status: str
     difficulty: str
     content_lang: str
     created_at: str
+
+
+class PathPatch(BaseModel):
+    title: str | None = Field(default=None, min_length=1, max_length=200)
+    subject: str | None = Field(default=None, min_length=1, max_length=200)
+    goal: str | None = Field(default=None, min_length=1, max_length=2000)
+    target_date: date | None = None
+    status: Literal["active", "archived"] | None = None
 
 
 class LessonRef(BaseModel):
@@ -30,6 +41,7 @@ class LessonRef(BaseModel):
     kind: str
     state: str
     title: str | None
+    has_draft: bool = False  # failed its review, with a draft that can be accepted with the reviewer's notes
 
 
 class ObjectiveOut(BaseModel):
@@ -112,6 +124,47 @@ class PathOut(BaseModel):
     branches: list[BranchOut]
     jobs: list[JobRef]
     level_check: Literal["none", "preparing", "ready", "done", "skipped"] = "none"
+    preview: Literal["none", "drafting", "ready", "revising", "built"] = "none"
+    origin: Literal["goal", "courses"] = "goal"  # courses: built from the learner's own material
+
+
+class PlanObjective(BaseModel):
+    code: str
+    statement: str
+
+
+class PlanLesson(BaseModel):
+    code: str
+    title: str
+
+
+class PlanSkill(BaseModel):
+    code: str
+    title: str
+    summary: str
+    requires: list[str]
+    objectives: list[PlanObjective]
+    lessons: list[PlanLesson]
+
+
+class PlanBranch(BaseModel):
+    code: str
+    title: str
+    skills: list[PlanSkill]
+
+
+class PlanTree(BaseModel):
+    branches: list[PlanBranch]
+
+
+class PreviewOut(BaseModel):
+    status: Literal["none", "drafting", "ready", "revising", "built"]
+    version: int
+    tree: PlanTree | None
+    changes: list[str]  # what the last revision changed, in the learner's language
+    feedback: list[str]  # the learner's change requests so far, oldest first
+    job_id: str | None
+    failed: bool  # writing the plan failed: the learner can try again
 
 
 class LevelQuestionOut(BaseModel):
@@ -203,6 +256,24 @@ class VideoOut(BaseModel):
     assets: dict[str, str]  # role (video, subtitles, poster) -> asset hash, served at /api/assets/{hash}
 
 
+class LessonSource(BaseModel):
+    """A file of the learner's own material this lesson was written from, and where in it."""
+
+    material_id: str
+    title: str
+    kind: str
+    loc_kind: Literal["page", "slide", "time"]
+    loc_start: int  # a page or slide number from 1, or milliseconds
+    loc_end: int
+
+
+class ReviewNoteOut(BaseModel):
+    severity: Literal["major", "minor"]
+    where: str
+    claim: str
+    correction: str
+
+
 class LessonOut(BaseModel):
     id: str
     state: str
@@ -216,8 +287,10 @@ class LessonOut(BaseModel):
     skill_title: str
     path_title: str
     practice_items: int
+    sources: list[LessonSource] = []  # the learner's own material this lesson is built on
     video: VideoOut | None = None  # None: no video for this lesson (reading only, or video unavailable)
     video_unavailable: str | None = None  # why this installation makes no videos, when it makes none
+    review_notes: list[ReviewNoteOut] | None = None  # accepted without passing review: what may be wrong
 
 
 class OptionOut(BaseModel):
@@ -639,7 +712,7 @@ TutorPolicyId = Literal[
 
 
 class Chip(BaseModel):
-    kind: Literal["path", "skill", "lesson", "item", "selection", "notes", "memory"]
+    kind: Literal["path", "skill", "lesson", "item", "selection", "notes", "memory", "material"]
     label: str  # titles and selections as they are; for item, notes and memory render from the fields below
     n: int | None = None  # item: question number; notes: how many
     of: int | None = None  # item: questions in the assessment
@@ -776,3 +849,272 @@ class ErasedOut(BaseModel):
     """What an erasure removed, by table: numbers only, never content."""
 
     counts: dict[str, int]
+
+
+class MaterialOut(BaseModel):
+    id: str
+    course_id: str
+    role: str
+    kind: str
+    title: str
+    file_name: str | None
+    size_bytes: int
+    received: int
+    pages: int | None
+    duration_ms: int | None
+    state: Literal[
+        "uploading", "reading", "read", "transcribing", "digesting", "outlining", "ready", "failed"
+    ]
+    progress: float
+    error: str | None
+    chunks: int
+    tokens: int
+    sparse_pages: int
+    formula_pages: int = 0  # pages whose formulas or symbols are missing from their text
+    vision: Literal["wanted", "done", "failed"] | None = (
+        None  # pages with little text, read from their images
+    )
+    vision_pages: int = 0
+    vision_total: int = 0  # pages being read from their images now (0 when none)
+    outlined: bool
+
+
+class CourseSkillOut(BaseModel):
+    code: str
+    title: str
+    summary: str
+    unit: str
+    not_in_material: bool
+    requires: list[str]
+    topics: list[str]
+    sections: int
+    lessons: list[PlanLesson]
+
+
+class CoursePlanOut(BaseModel):
+    status: Literal["drafting", "ready", "revising"]
+    version: int
+    skills: list[CourseSkillOut]
+    skipped: list[str]
+    changes: list[str]
+    feedback: list[str]
+    can_undo: bool
+
+
+class UpdateLessonOut(BaseModel):
+    id: str
+    title: str
+
+
+class CourseUpdateOut(BaseModel):
+    """What files added to a built course bring: lessons to rewrite with them and new skills, on the learner's yes."""
+
+    id: str
+    at: str
+    materials: list[str]
+    changes: list[str]
+    lessons: list[UpdateLessonOut]
+    skills: list[str]
+    status: Literal["pending", "applied", "dismissed"]
+
+
+class CoveragePartOut(BaseModel):
+    loc_kind: Literal["page", "slide", "time"]
+    start: int
+    end: int
+    where: str
+    status: Literal["taught", "skipped", "unused"]
+    skill: str | None
+    lesson_id: str | None
+    reason: str | None
+
+
+class CoverageFileOut(BaseModel):
+    material_id: str
+    title: str
+    kind: str
+    role: str
+    ready: bool
+    parts: list[CoveragePartOut]
+
+
+class CoverageOut(BaseModel):
+    course_id: str
+    title: str
+    files: list[CoverageFileOut]
+
+
+class CourseOut(BaseModel):
+    id: str
+    code: str
+    title: str
+    term: str | None
+    exam_date: str | None
+    adherence: Literal["only", "grounded", "open"]
+    keep_order: bool
+    built: bool
+    materials: list[MaterialOut]
+    plan: CoursePlanOut | None
+    job_id: str | None
+    failed: bool
+    updates: list[CourseUpdateOut]
+
+
+class CrossRequireOut(BaseModel):
+    skill: str
+    requires: str
+    why: str
+
+
+class RelatedOut(BaseModel):
+    a: str
+    b: str
+    note: str
+
+
+class CourseLinksOut(BaseModel):
+    requires: list[CrossRequireOut]
+    related: list[RelatedOut]
+
+
+class StudiesEstimate(BaseModel):
+    tokens: int  # reading every file once
+    audio_minutes: int  # recordings still to transcribe
+
+
+class ArrangedFileOut(BaseModel):
+    id: str
+    title: str
+    kind: str
+
+
+class ArrangedCourseOut(BaseModel):
+    title: str
+    term: str | None
+    files: list[ArrangedFileOut]
+
+
+class ArrangementOut(BaseModel):
+    title: str
+    goal: str
+    message: str  # how the files were grouped, or what changed
+    courses: list[ArrangedCourseOut]
+
+
+class ArrangeRoundOut(BaseModel):
+    text: str
+    changes: str | None
+
+
+class ArrangeOut(BaseModel):
+    """A path started from the learner's files alone: its name and courses, proposed from them."""
+
+    status: Literal["collecting", "working", "ready", "failed"]
+    proposal: ArrangementOut | None
+    rounds: list[ArrangeRoundOut]
+    error: str | None
+    new_files: list[str]  # material added after the proposal: not in it yet
+
+
+class StudiesStep(BaseModel):
+    kind: Literal["file", "course", "links"]
+    title: str
+    done: int  # a file's parts summarised so far (0 for a course or the links)
+    total: int
+
+
+class StudiesWork(BaseModel):
+    """How far reading and planning has got: units done of all (see `Materials._work`)."""
+
+    done: int
+    total: int
+    step: StudiesStep | None = None
+
+
+class StudiesOut(BaseModel):
+    path_id: str
+    title: str
+    status: Literal["collecting", "drafting", "ready", "revising", "built"]
+    arrange: ArrangeOut | None = None
+    courses: list[CourseOut]
+    links: CourseLinksOut
+    estimate: StudiesEstimate | None
+    links_failed: bool
+    work: StudiesWork | None = None  # while reading and planning
+
+
+class StudiesCreated(BaseModel):
+    path_id: str
+
+
+class HomeContinue(BaseModel):
+    """The one next step: the next lesson of the path last studied."""
+
+    kind: Literal["lesson", "writing", "planned"]  # ready to read, being written, still to write
+    path_id: str
+    path_title: str
+    lesson_id: str
+    skill_id: str
+    title: str
+    place: str  # its branch (a course, on a path from the learner's material)
+    index: int  # its place in the branch, from 1
+    count: int
+    minutes: int | None
+    started: bool
+
+
+class HomeExam(BaseModel):
+    course_id: str
+    path_id: str
+    title: str
+    days: int
+    built: bool
+
+
+class HomeItem(BaseModel):
+    """Something waiting for the learner today; which fields are set depends on `kind`."""
+
+    kind: Literal[
+        "lesson_draft", "lesson_failed", "fading", "exam_soon", "arrange_ready", "plan_ready", "transcribing"
+    ]
+    path_id: str
+    lesson_id: str | None = None
+    course_id: str | None = None
+    title: str | None = None
+    skills: list[str] | None = None
+    count: int | None = None
+    percent: int | None = None
+    days: int | None = None
+
+
+class HomeProgress(BaseModel):
+    score: int  # mastery across the active paths, 0 to 100
+    delta: int  # its change over the last seven days
+    status: Literal["starting", "on_track", "slipping"]
+    mastered: int
+    skills: int
+
+
+class HomeMomentum(BaseModel):
+    streak: int
+    xp_week: int
+    achievement: AchievementOut | None
+
+
+class HomeInsight(BaseModel):
+    kind: Literal["builds_on", "time_of_day", "weakest"]
+    path_id: str | None = None
+    skill: str | None = None
+    requires: str | None = None
+    part: Literal["morning", "afternoon", "evening", "night"] | None = None
+    percent: int | None = None
+
+
+class HomeOut(BaseModel):
+    next_step: HomeContinue | None
+    lessons_ready: int
+    exam: HomeExam | None
+    today: list[HomeItem]
+    progress: HomeProgress | None
+    momentum: HomeMomentum | None  # None when the learner turned gamification down
+    insight: HomeInsight | None

@@ -9,6 +9,7 @@ import { Button, ButtonLink, Notice, ui, Waiting } from "../components/ui";
 import { fetchReviewResult, reviewKeys, useReviewHub, type ReviewResult } from "./api";
 import { MemoryRing } from "./primitives";
 import styles from "./review.module.css";
+import { MathText } from "../components/MathText";
 
 /** A flawless run of at least this many answers gets the leaf. */
 const FLAWLESS_FROM = 5;
@@ -224,7 +225,9 @@ function ResultsView({ result, footer }: { result: ReviewResult; footer?: React.
               const lesson = i.lesson_title;
               return (
                 <li key={i.item_version_id}>
-                  <p className={styles.againPrompt}>{i.prompt}</p>
+                  <p className={styles.againPrompt}>
+                    <MathText text={i.prompt} />
+                  </p>
                   {i.concept ? <p className={styles.againMeta}>{i.concept}</p> : null}
                   {revisit ? (
                     <p className={styles.againMeta}>

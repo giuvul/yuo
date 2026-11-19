@@ -2,7 +2,7 @@
 // a list of free-form objects, so the reader narrows each block here (a trust boundary: bodies
 // can come from imported packages). Anything that does not match renders nothing.
 
-type Mark = "bold" | "italic" | "code";
+type Mark = "bold" | "italic" | "code" | "math";
 export type Inline = { text: string; marks: Mark[] };
 
 export type Block =
@@ -17,7 +17,7 @@ export type Block =
 
 export type CalloutVariant = "tip" | "warning" | "example" | "definition";
 
-const MARKS = new Set<string>(["bold", "italic", "code"]);
+const MARKS = new Set<string>(["bold", "italic", "code", "math"]);
 const VARIANTS = new Set<string>(["tip", "warning", "example", "definition"]);
 
 type Raw = Record<string, unknown>;

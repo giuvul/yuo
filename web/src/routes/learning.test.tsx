@@ -19,6 +19,8 @@ const path: PathOut = {
   difficulty: "foundational",
   content_lang: "en",
   level_check: "none",
+  preview: "none",
+  origin: "goal",
   jobs: [],
   branches: [
     {
@@ -34,8 +36,8 @@ const path: PathOut = {
           requires: [],
           objectives: [],
           lessons: [
-            { id: "l1", code: "l1", kind: "core", state: "ready", title: "What a table is" },
-            { id: "l9", code: "l9", kind: "remedial", state: "queued", title: null },
+            { id: "l1", code: "l1", kind: "core", state: "ready", title: "What a table is", has_draft: false },
+            { id: "l9", code: "l9", kind: "remedial", state: "queued", title: null, has_draft: false },
           ],
         },
         {
@@ -45,7 +47,7 @@ const path: PathOut = {
           summary: "",
           requires: ["s1"],
           objectives: [],
-          lessons: [{ id: "l2", code: "l2", kind: "requested", state: "planned", title: "Self joins" }],
+          lessons: [{ id: "l2", code: "l2", kind: "requested", state: "planned", title: "Self joins", has_draft: false }],
         },
         { id: "s3", code: "basics.where", title: "Filtering", summary: "", requires: [], objectives: [], lessons: [] },
       ],
@@ -289,6 +291,37 @@ describe("skill test", () => {
   }, 10_000);
 });
 
+describe("mock exam", () => {
+  it("runs the course's questions like a test and names the skills to go back to", async () => {
+    const sent: OutboxEvent[] = [];
+    const exam = {
+      assessment_id: "as-mock",
+      purpose: "skill_test",
+      items: [{ item_version_id: "t1", type: "cloze", view: { text: "SELECT {{1}} FROM t", gaps: 1 } }],
+    };
+    mockApi({
+      ...appRoutes,
+      "GET /api/paths/p1": () => json(path),
+      "GET /api/studies/p1": () => json({ status: "built", courses: [{ id: "c1", title: "Databases", materials: [], plan: null }] }),
+      "POST /api/courses/c1/mock-exam": () => json(exam),
+      "POST /api/events": events(
+        sent,
+        () => ({ pending: true, hidden: true }),
+        () => ({ mock: { course_id: "c1", score: 0.6, pass_mark: 0.8, passed: false, skills: { s1: 1, s3: 0.2 } } }),
+      ),
+    });
+    const user = userEvent.setup();
+    renderApp("/paths/p1/courses/c1/mock-exam");
+    expect(await screen.findByRole("heading", { name: "Mock exam: Databases" })).toBeInTheDocument();
+    await user.type(await screen.findByRole("textbox", { name: "Gap 1" }), "*");
+    await user.click(screen.getByRole("button", { name: "Finish the test" }));
+    expect(await screen.findByText("Not there yet.")).toBeInTheDocument();
+    expect(screen.getByText("Your score: 60% (pass mark 80%)")).toBeInTheDocument();
+    expect(await screen.findByRole("link", { name: "Filtering" })).toHaveAttribute("href", "/paths/p1/skills/s3/test");
+    expect(screen.queryByRole("link", { name: "Selecting rows" })).toBeNull();
+  });
+});
+
 describe("reviews", () => {
   it("shows the due badge: objectives and cards due across the paths, capped by today's limit", async () => {
     mockApi({
@@ -399,6 +432,46 @@ describe("reviews", () => {
   });
 });
 
+describe("a lesson accepted with the reviewer's feedback", () => {
+  it("shows what may be wrong, renders its maths, and can be written again", async () => {
+    const { calls } = mockApi({
+      ...appRoutes,
+      "GET /api/lessons/L1": () =>
+        json({
+          id: "L1",
+          state: "ready",
+          path_id: "p1",
+          skill_id: "s1",
+          version_id: "lv1",
+          title: "Derivatives",
+          body: [
+            { type: "heading", bid: "b1", level: 1, text: "Derivatives" },
+            { type: "paragraph", bid: "b2", inlines: [{ text: "The slope is " }, { text: "f'(x) = 2x", marks: ["math"] }] },
+          ],
+          est_minutes: 5,
+          lang: "en",
+          skill_title: "Rules",
+          path_title: "Calculus",
+          practice_items: 0,
+          sources: [],
+          review_notes: [{ severity: "major", where: "b2", claim: "the slope is $x^2$", correction: "it is $2x$" }],
+        }),
+      "GET /api/lessons/L1/notes": () => json([]),
+      "POST /api/lessons/L1/generate": () => json({ job_id: "j1" }, 202),
+      "POST /api/events": events([], () => null),
+    });
+    const user = userEvent.setup();
+    renderApp("/lessons/L1");
+    expect(await screen.findByText("Accepted without passing its review.")).toBeInTheDocument();
+    const note = screen.getByRole("note");
+    expect(note.querySelectorAll("[data-math]")).toHaveLength(2); // the claim's and the correction's maths
+    expect(document.querySelector("article p [data-math]")).not.toBeNull(); // the paragraph's inline maths
+    await user.click(screen.getByRole("button", { name: "Write it again" }));
+    await waitFor(() => expect(calls.some((c) => c.path === "/api/lessons/L1/generate")).toBe(true));
+    expect(await screen.findByText(/A new version is being written/)).toBeInTheDocument();
+  });
+});
+
 describe("notes", () => {
   it("adds, edits and deletes a note on a block", async () => {
     type Note = { id: string; text: string; bid: string | null; lesson_version_id: string; created_at: string; updated_at: string };
@@ -422,6 +495,7 @@ describe("notes", () => {
           skill_title: "Joining",
           path_title: "SQL",
           practice_items: 0,
+          sources: [],
         }),
       "GET /api/lessons/L1/notes": () => json(notes),
       "POST /api/notes": (_r, body) => {

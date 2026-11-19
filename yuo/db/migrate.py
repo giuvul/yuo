@@ -80,10 +80,16 @@ def migrate(db: Path, app_version: str, directory: Path = MIGRATIONS) -> list[in
         if todo and applied:
             log.info("migration.backup", path=str(backup_before(db, conn, todo[0].version)))
         for m in todo:
+            widens = "writable_schema" in m.sql
+            if widens:  # SQLite's defensive mode forbids writing the stored schema; only for this migration
+                conn.setconfig(sqlite3.SQLITE_DBCONFIG_DEFENSIVE, False)
             conn.execute("BEGIN IMMEDIATE")
             try:
                 for statement in _statements(m.sql):
                     conn.execute(statement)
+                if widens:  # a CHECK widened in the stored schema: other connections reparse it
+                    version = conn.execute("PRAGMA schema_version").fetchone()[0]
+                    conn.execute(f"PRAGMA schema_version = {int(version) + 1}")
                 conn.execute(
                     "INSERT INTO schema_migration VALUES (?, ?, ?, ?, ?)",
                     (m.version, m.name, m.sha256, app_version, clock.now()),
@@ -95,6 +101,10 @@ def migrate(db: Path, app_version: str, directory: Path = MIGRATIONS) -> list[in
                 conn.execute("ROLLBACK")
                 raise
             conn.execute("COMMIT")
+            if widens:
+                conn.setconfig(sqlite3.SQLITE_DBCONFIG_DEFENSIVE, True)
+                if conn.execute("PRAGMA integrity_check").fetchone()[0] != "ok":
+                    raise IntegrityError(f"migration {m.version:04d} left the database damaged")
             log.info("migration.applied", version=m.version, name=m.name)
         return [m.version for m in todo]
     finally:

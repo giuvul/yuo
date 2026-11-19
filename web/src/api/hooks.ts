@@ -16,8 +16,10 @@ export const keys = {
   setup: ["setup"] as const,
   estimate: (lessons: number) => ["estimate", lessons] as const,
   paths: ["paths"] as const,
+  home: ["home"] as const,
   path: (id: string) => ["paths", id] as const,
   levelCheck: (pathId: string) => ["paths", pathId, "level-check"] as const,
+  preview: (pathId: string) => ["paths", pathId, "preview"] as const,
   next: (pathId: string) => ["paths", pathId, "next"] as const,
   lesson: (id: string) => ["lessons", id] as const,
   progress: (pathId: string) => ["paths", pathId, "progress"] as const,
@@ -54,6 +56,17 @@ export function usePaths() {
   return useQuery({
     queryKey: keys.paths,
     queryFn: () => unwrap(api.GET("/api/paths")),
+  });
+}
+
+/** The first screen: the next step, what waits today, progress, momentum and one insight, across the paths. */
+export function useHome() {
+  return useQuery({
+    queryKey: keys.home,
+    queryFn: () => unwrap(api.GET("/api/home")),
+    staleTime: 30_000,
+    refetchInterval: 60_000,
+    refetchIntervalInBackground: false,
   });
 }
 
@@ -111,6 +124,50 @@ export function useAnswerLevelCheck(pathId: string) {
       ),
     onSuccess: (data) => {
       qc.setQueryData(keys.levelCheck(pathId), data);
+      void qc.invalidateQueries({ queryKey: keys.path(pathId) });
+      void qc.invalidateQueries({ queryKey: keys.paths });
+    },
+  });
+}
+
+// --- the plan preview ----------------------------------------------------------------------------
+
+/** Poll while the plan is being written or revised. */
+const PREVIEW_POLL_MS = 2000;
+
+export function usePreview(pathId: string, enabled = true) {
+  return useQuery({
+    queryKey: keys.preview(pathId),
+    queryFn: () => unwrap(api.GET("/api/paths/{path_id}/preview", { params: { path: { path_id: pathId } } })),
+    enabled,
+    refetchInterval: (query) => {
+      const d = query.state.data;
+      return d && (d.status === "drafting" || d.status === "revising") && !d.failed ? PREVIEW_POLL_MS : false;
+    },
+    staleTime: 0,
+  });
+}
+
+type PreviewStep = "feedback" | "undo" | "retry" | "build";
+
+export function usePreviewStep(pathId: string) {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: ({ step, text = "" }: { step: PreviewStep; text?: string }) => {
+      const params = { path: { path_id: pathId } };
+      switch (step) {
+        case "feedback":
+          return unwrap(api.POST("/api/paths/{path_id}/preview/feedback", { params, body: { text } }));
+        case "undo":
+          return unwrap(api.POST("/api/paths/{path_id}/preview/undo", { params }));
+        case "retry":
+          return unwrap(api.POST("/api/paths/{path_id}/preview/retry", { params }));
+        case "build":
+          return unwrap(api.POST("/api/paths/{path_id}/preview/build", { params }));
+      }
+    },
+    onSuccess: (data) => {
+      qc.setQueryData(keys.preview(pathId), data);
       void qc.invalidateQueries({ queryKey: keys.path(pathId) });
       void qc.invalidateQueries({ queryKey: keys.paths });
     },
@@ -184,6 +241,38 @@ export function useGenerateLesson(pathId: string) {
     mutationFn: (lessonId: string) =>
       unwrap(api.POST("/api/lessons/{lesson_id}/generate", { params: { path: { lesson_id: lessonId } } })),
     onSettled: () => qc.invalidateQueries({ queryKey: keys.path(pathId) }),
+  });
+}
+
+/** Publish a lesson that failed its review as its best draft, with the reviewer's notes shown in it. */
+export function useAcceptLesson(pathId: string) {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (lessonId: string) =>
+      unwrap(api.POST("/api/lessons/{lesson_id}/accept", { params: { path: { lesson_id: lessonId } } })),
+    onSettled: () => qc.invalidateQueries({ queryKey: keys.path(pathId) }),
+  });
+}
+
+/** Rename a path, change its goal or exam date, archive it or bring it back. */
+export function useUpdatePath() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: ({ pathId, body }: { pathId: string; body: Schemas["PathPatch"] }) =>
+      unwrap(api.PATCH("/api/paths/{path_id}", { params: { path: { path_id: pathId } }, body })),
+    onSettled: () => qc.invalidateQueries(),
+  });
+}
+
+/** Delete a path with everything in it. */
+export function useDeletePath() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (pathId: string) => unwrap(api.DELETE("/api/paths/{path_id}", { params: { path: { path_id: pathId } } })),
+    onSuccess: (_, pathId) => {
+      qc.removeQueries({ queryKey: keys.path(pathId) });
+      return qc.invalidateQueries();
+    },
   });
 }
 

@@ -8,7 +8,7 @@ from fastapi.responses import JSONResponse
 
 from yuo.api import auth as auth_routes
 from yuo.api import onboarding as onboarding_routes
-from yuo.api.routes import erasure, jobs, paths, review, setup, sharing, stream, study, tutor
+from yuo.api.routes import erasure, jobs, material, paths, review, setup, sharing, stream, study, tutor
 from yuo.core.errors import AiNotReady, Conflict, InvalidInput, NotFound
 from yuo.core.logs import metrics
 
@@ -69,6 +69,7 @@ def create_app(
     # one router per feature; their relative order does not matter (no path of one shadows another's)
     app.include_router(setup.router(svc, desktop, waitlist_url))
     app.include_router(paths.router(svc))
+    app.include_router(material.router(svc))
     app.include_router(study.router(svc))
     app.include_router(jobs.router(svc))
     app.include_router(review.router(svc))

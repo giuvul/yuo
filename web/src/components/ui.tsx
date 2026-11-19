@@ -111,6 +111,7 @@ type FieldProps = {
   name?: string;
   multiline?: boolean;
   errorMessage?: string;
+  isDisabled?: boolean;
 };
 
 export function Field({ label, description, multiline, errorMessage, ...props }: FieldProps) {
@@ -132,7 +133,7 @@ export function Field({ label, description, multiline, errorMessage, ...props }:
   );
 }
 
-export type Choice<T extends string> = { value: T; label: string; description?: string };
+export type Choice<T extends string> = { value: T; label: ReactNode; description?: string };
 
 /** After an answer is checked: the right choice, and a chosen one that was not right. */
 export type ChoiceMark = "right" | "wrong";

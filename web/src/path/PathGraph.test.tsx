@@ -15,6 +15,8 @@ const path: PathOut = {
   difficulty: "foundational",
   content_lang: "en",
   level_check: "none",
+  preview: "none",
+  origin: "goal",
   jobs: [],
   branches: [
     {
@@ -29,7 +31,7 @@ const path: PathOut = {
           summary: "SELECT and WHERE",
           requires: [],
           objectives: [],
-          lessons: [{ id: "l1", code: "l1", kind: "core", state: "ready", title: "What a table is" }],
+          lessons: [{ id: "l1", code: "l1", kind: "core", state: "ready", title: "What a table is", has_draft: false }],
         },
         {
           id: "s2",
@@ -39,8 +41,8 @@ const path: PathOut = {
           requires: ["s1"],
           objectives: [],
           lessons: [
-            { id: "l2", code: "l2", kind: "core", state: "ready", title: "WHERE in practice" },
-            { id: "l3", code: "l3", kind: "core", state: "generating", title: "Combining conditions" },
+            { id: "l2", code: "l2", kind: "core", state: "ready", title: "WHERE in practice", has_draft: false },
+            { id: "l3", code: "l3", kind: "core", state: "generating", title: "Combining conditions", has_draft: false },
           ],
         },
       ],
@@ -57,7 +59,7 @@ const path: PathOut = {
           summary: "",
           requires: ["s2"],
           objectives: [],
-          lessons: [{ id: "l4", code: "l4", kind: "core", state: "planned", title: "Inner joins" }],
+          lessons: [{ id: "l4", code: "l4", kind: "core", state: "planned", title: "Inner joins", has_draft: false }],
         },
         { id: "s4", code: "joins.outer", title: "Outer joins", summary: "", requires: ["s3"], objectives: [], lessons: [] },
       ],

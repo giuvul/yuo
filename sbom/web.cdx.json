@@ -1488,6 +1488,39 @@
       "version": "4.19.3"
     },
     {
+      "bom-ref": "mp4box@2.4.1",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://registry.npmjs.org/mp4box/-/mp4box-2.4.1.tgz"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "d07197ee75e80c85fa14a2d59786b7c2d623065c2ab0ddf1b900b7197ccdb4aa7df055d43a10d2abadb76b3b33f031b9a6d77d657717a1d0e481b74c64e8d6bf"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "name": "mp4box",
+      "properties": [
+        {
+          "name": "cdx:npm:package:path",
+          "value": "node_modules/mp4box"
+        }
+      ],
+      "purl": "pkg:npm/mp4box@2.4.1",
+      "scope": "required",
+      "type": "library",
+      "version": "2.4.1"
+    },
+    {
       "bom-ref": "openapi-fetch@0.17.0",
       "externalReferences": [
         {
@@ -1831,6 +1864,7 @@
         "idb@8.0.4",
         "katex@0.19.0",
         "media-chrome@4.19.3",
+        "mp4box@2.4.1",
         "openapi-fetch@0.17.0",
         "react-aria-components@1.22.1"
       ],
@@ -2089,6 +2123,10 @@
         "ce-la-react@0.3.2"
       ],
       "ref": "media-chrome@4.19.3"
+    },
+    {
+      "dependsOn": [],
+      "ref": "mp4box@2.4.1"
     },
     {
       "dependsOn": [

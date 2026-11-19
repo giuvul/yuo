@@ -10,6 +10,7 @@ from yuo.api.bodies import (
     NextAnswersIn,
     NextChoiceIn,
     PathIn,
+    PreviewFeedbackIn,
     RequestIn,
 )
 from yuo.app.forms import PathForm
@@ -23,6 +24,12 @@ def router(svc: Any) -> APIRouter:
         path_id, job_id = svc.create_path(PathForm(**body.model_dump()))
         return {"path_id": path_id, "job_id": job_id}
 
+    @r.get("/api/home", response_model=S.HomeOut)
+    def get_home() -> dict[str, Any]:
+        """The first screen: the next step, what waits today, progress, momentum and one insight."""
+        result: dict[str, Any] = svc.home()
+        return result
+
     @r.get("/api/paths", response_model=list[S.PathSummary])
     def get_paths() -> list[dict[str, Any]]:
         result: list[dict[str, Any]] = svc.paths()
@@ -32,6 +39,18 @@ def router(svc: Any) -> APIRouter:
     def get_path(path_id: str) -> dict[str, Any]:
         result: dict[str, Any] = svc.path_view(path_id)
         return result
+
+    @r.patch("/api/paths/{path_id}", response_model=S.PathSummary)
+    def patch_path(path_id: str, body: S.PathPatch) -> dict[str, Any]:
+        """Rename the path, change its goal or exam date, archive it or bring it back."""
+        changes = body.model_dump(exclude_unset=True, mode="json")
+        result: dict[str, Any] = svc.update_path(path_id, changes)
+        return result
+
+    @r.delete("/api/paths/{path_id}", response_model=S.ErasedOut)
+    def delete_path(path_id: str) -> dict[str, Any]:
+        """Delete the path with its lessons, questions, files and everything done in it. Not undoable."""
+        return {"counts": svc.delete_path(path_id)}
 
     @r.get("/api/paths/{path_id}/level-check", response_model=S.LevelCheckOut)
     def get_level_check(path_id: str) -> dict[str, Any]:
@@ -47,6 +66,36 @@ def router(svc: Any) -> APIRouter:
     @r.post("/api/paths/{path_id}/level-check", response_model=S.LevelCheckOut)
     def post_level_check(path_id: str, body: LevelAnswersIn) -> dict[str, Any]:
         result: dict[str, Any] = svc.answer_level_check(path_id, None if body.skip else body.answers)
+        return result
+
+    @r.get("/api/paths/{path_id}/preview", response_model=S.PreviewOut)
+    def get_preview(path_id: str) -> dict[str, Any]:
+        """The plan the learner checks before it is built."""
+        result: dict[str, Any] = svc.preview_view(path_id)
+        return result
+
+    @r.post("/api/paths/{path_id}/preview/feedback", response_model=S.PreviewOut)
+    def post_preview_feedback(path_id: str, body: PreviewFeedbackIn) -> dict[str, Any]:
+        """What is missing, wrong or should go deeper: the plan is revised with it."""
+        result: dict[str, Any] = svc.preview_feedback(path_id, body.text)
+        return result
+
+    @r.post("/api/paths/{path_id}/preview/undo", response_model=S.PreviewOut)
+    def post_preview_undo(path_id: str) -> dict[str, Any]:
+        """Back to the plan before the last change."""
+        result: dict[str, Any] = svc.undo_feedback(path_id)
+        return result
+
+    @r.post("/api/paths/{path_id}/preview/retry", response_model=S.PreviewOut)
+    def post_preview_retry(path_id: str) -> dict[str, Any]:
+        """Write the plan again after that failed."""
+        result: dict[str, Any] = svc.retry_preview(path_id)
+        return result
+
+    @r.post("/api/paths/{path_id}/preview/build", response_model=S.PreviewOut)
+    def post_preview_build(path_id: str) -> dict[str, Any]:
+        """The learner accepts the plan: it is built and the first lessons are written."""
+        result: dict[str, Any] = svc.build_preview(path_id)
         return result
 
     @r.get("/api/paths/{path_id}/next", response_model=S.NextOut)

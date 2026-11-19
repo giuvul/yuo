@@ -31,6 +31,7 @@ import { OptionButton, ProgressVine, type OptionState, type Segment, type Segmen
 import { Results } from "./Results";
 import styles from "./review.module.css";
 import { ReportDialog, Resolved } from "./Resolved";
+import { MathText } from "../components/MathText";
 
 type Option = { id: string; text: string };
 const LETTERS = ["A", "B", "C", "D", "E", "F"];
@@ -462,7 +463,7 @@ export function ReviewPlayer({
           ) : null}
         </div>
         <h2 id={promptId} ref={promptRef} tabIndex={-1} className={styles.prompt}>
-          {String(item.view["prompt"] ?? "")}
+          <MathText text={String(item.view["prompt"] ?? "")} />
         </h2>
 
         <div className={styles.options} role="group" aria-labelledby={promptId}>
@@ -478,7 +479,7 @@ export function ReviewPlayer({
                 disabled={!canAnswer || state === "tried"}
                 onPress={() => select(o.id)}
                 markLabel={markLabel(state)}
-                note={why && (resolved || state === "tried") ? why : undefined}
+                note={why && (resolved || state === "tried") ? <MathText text={why} /> : undefined}
               />
             );
           })}
@@ -487,7 +488,9 @@ export function ReviewPlayer({
         {q.hints.length > 0 && !resolved ? (
           <ol className={styles.hints} aria-label={t({ id: "review.hints.label", message: "Hints" })}>
             {q.hints.map((h) => (
-              <li key={h.level}>{h.text}</li>
+              <li key={h.level}>
+                <MathText text={h.text} />
+              </li>
             ))}
           </ol>
         ) : null}

@@ -21,6 +21,11 @@ def router(svc: Any) -> APIRouter:
     def post_generate(lesson_id: str) -> dict[str, str]:
         return {"job_id": svc.request_lesson(lesson_id)}
 
+    @r.post("/api/lessons/{lesson_id}/accept", status_code=202, response_model=S.JobStarted)
+    def post_accept(lesson_id: str) -> dict[str, str]:
+        """Publish a failed lesson's best draft as it is, with the reviewer's notes shown in it."""
+        return {"job_id": svc.accept_lesson_draft(lesson_id)}
+
     @r.post("/api/lessons/{lesson_id}/video", status_code=202, response_model=S.JobStarted)
     def post_video_again(lesson_id: str) -> dict[str, str]:
         """Make a lesson's video again after it failed."""

@@ -11,6 +11,7 @@ import pytest
 from tests import fakes
 from yuo.app.forms import PathForm
 from yuo.core import clock
+from yuo.core.errors import Conflict
 from yuo.core.ids import new_id
 from yuo.core.llm import Role
 from yuo.learning.events import IncomingEvent
@@ -327,3 +328,33 @@ def test_settings_show_the_version_behind_an_alias(rt: Runtime, db_path: Path) -
     assert rt.service.resolved_models() == {
         ("openrouter", "deepseek/deepseek-v4-pro"): "deepseek-v4-pro-0612"
     }
+
+
+def test_a_failed_lesson_is_accepted_with_the_reviewers_notes(
+    rt: Runtime, llm: fakes.FakeLLM, db_path: Path
+) -> None:
+    llm.script["review"] = [fakes.review("fail")] * 500  # no lesson ever passes
+    path_id = create(rt)
+    for _ in range(4):
+        _due_now(db_path)
+        drain(rt)
+    refs = [x for b in rt.service.path_view(path_id)["branches"] for s in b["skills"] for x in s["lessons"]]
+    failed = next(x for x in refs if x["state"] == "failed")
+    assert failed["has_draft"]
+    assert rt.service.lesson_view(failed["id"])["review_notes"] is None
+
+    rt.service.accept_lesson_draft(failed["id"])
+    drain(rt)
+    lesson = rt.service.lesson_view(failed["id"])
+    assert lesson["state"] == "ready" and lesson["body"]
+    assert lesson["review_notes"] == [
+        {
+            "severity": "major",
+            "where": "b2",
+            "claim": "joins drop rows",
+            "correction": "inner joins drop unmatched rows",
+        }
+    ]
+    assert lesson["practice_items"] > 0  # its practice is written as for any published lesson
+    with pytest.raises(Conflict):
+        rt.service.accept_lesson_draft(failed["id"])  # only a failed lesson

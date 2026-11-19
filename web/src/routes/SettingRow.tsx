@@ -79,6 +79,13 @@ const EDITORS: Record<string, Editor> = {
       { value: "long", label: msg({ id: "settings.length.long", message: "Long" }) },
     ],
   },
+  "material.transcription": {
+    kind: "select",
+    options: [
+      { value: "accurate", label: msg({ id: "settings.transcription.accurate", message: "More accurate" }) },
+      { value: "faster", label: msg({ id: "settings.transcription.faster", message: "Faster" }) },
+    ],
+  },
   "practice.types": { kind: "types" },
   custom_instructions: { kind: "text", max: 1000 },
   "tutor.proactivity": {
@@ -143,6 +150,7 @@ const EDITORS: Record<string, Editor> = {
 export const LABELS: Record<string, MessageDescriptor> = {
   "review.independent": msg({ id: "settings.key.review-independent", message: "Independent reviewer" }),
   "lesson.reading_length": msg({ id: "settings.key.reading-length", message: "Lesson length" }),
+  "material.transcription": msg({ id: "settings.key.transcription", message: "Transcribing recordings" }),
   "budget.cap_usd_month": msg({ id: "settings.key.budget", message: "Monthly budget cap" }),
   custom_instructions: msg({ id: "settings.key.custom-instructions", message: "Custom instructions" }),
   "generation.buffer": msg({ id: "settings.key.buffer", message: "Lessons prepared ahead" }),

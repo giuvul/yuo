@@ -9,6 +9,7 @@ import { Button, Notice, Progress, ui, Waiting } from "../components/ui";
 import { BlockerText, blockerOf, FixInSettings, GenerationError } from "../onboarding/AiReady";
 import { useAiReady } from "../onboarding/api";
 import styles from "./levelCheck.module.css";
+import { MathText } from "../components/MathText";
 
 /** Before the path is planned: a few questions, one at a time, so the path starts where the learner is. */
 export function LevelCheck({ pathId }: { pathId: string }) {
@@ -172,7 +173,7 @@ function Questions({
       <div className={styles.question} key={n}>
         {q.topic ? <span className={ui.eyebrow}>{q.topic}</span> : null}
         <p id="level-check-prompt" className={styles.prompt}>
-          {q.prompt}
+          <MathText text={q.prompt} />
         </p>
         <div className={styles.options}>
           {q.options.map((option, i) => (
@@ -180,7 +181,9 @@ function Questions({
               <span className={styles.letter} aria-hidden="true">
                 {LETTERS[i] ?? i + 1}
               </span>
-              <span className={styles.optionText}>{option}</span>
+              <span className={styles.optionText}>
+                <MathText text={option} />
+              </span>
             </AriaButton>
           ))}
           <AriaButton className={`${styles.option} ${styles.dontKnow}`} isDisabled={busy} onPress={() => choose(null)}>

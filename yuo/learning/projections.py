@@ -481,14 +481,18 @@ def skill_state(c: sqlite3.Connection, learner: str, skill_id: str) -> str:
     return "locked"
 
 
-def mastery(c: sqlite3.Connection, learner: str, skill_id: str) -> tuple[float, int, str | None]:
+def mastery(
+    c: sqlite3.Connection, learner: str, skill_id: str, until: str | None = None
+) -> tuple[float, int, str | None]:
+    """A skill's mastery from the learner's graded answers (recent ones weigh more); `until`: as it was then."""
     rows = c.execute(
         "SELECT r.score, r.help_kind, a.purpose, r.answered_at FROM response r "
         "JOIN item_version v ON v.id = r.item_version_id JOIN item i ON i.id = v.item_id "
         "LEFT JOIN attempt t ON t.id = r.attempt_id LEFT JOIN assessment a ON a.id = t.assessment_id "
         "JOIN learning_event e ON e.id = r.response_event_id "
-        "WHERE i.skill_id = ? AND e.learner_id = ? AND r.score IS NOT NULL ORDER BY r.answered_at",
-        (skill_id, learner),
+        "WHERE i.skill_id = ? AND e.learner_id = ? AND r.score IS NOT NULL AND (? IS NULL OR r.answered_at <= ?) "
+        "ORDER BY r.answered_at",
+        (skill_id, learner, until, until),
     ).fetchall()
     if not rows:
         return 0.0, 0, None

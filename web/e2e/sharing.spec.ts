@@ -88,7 +88,7 @@ test("the dialog fits a phone screen", async ({ page }) => {
 test("import the downloaded package as a new path with the same lessons", async ({ page }) => {
   await listView(page);
   expect(packageFile).not.toBe("");
-  await page.goto("/");
+  await page.goto("/paths");
   await page.getByRole("link", { name: "Import a path" }).click();
   await expect(page).toHaveURL(/\/import$/);
   await page.locator('input[type="file"]').setInputFiles(packageFile);

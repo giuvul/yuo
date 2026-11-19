@@ -16,6 +16,8 @@ const path: PathOut = {
   difficulty: "foundational",
   content_lang: "en",
   level_check: "none",
+  preview: "none",
+  origin: "goal",
   jobs: [],
   branches: [
     {
@@ -30,7 +32,7 @@ const path: PathOut = {
           summary: "",
           requires: [],
           objectives: [],
-          lessons: [{ id: "l1", code: "l1", kind: "core", state: "ready", title: "What a table is" }],
+          lessons: [{ id: "l1", code: "l1", kind: "core", state: "ready", title: "What a table is", has_draft: false }],
         },
       ],
     },

@@ -163,6 +163,21 @@ class Media:
     media_dir: Path | None = None
 
 
+def transcriber_from_env(root: Path, ffmpeg: Any = None) -> Any:
+    """Speech to text for recorded lectures: faster-whisper on this machine, installed on first use
+    (`YUO_WHISPER_MODEL`, default small; `YUO_WHISPER_THREADS`, default 2; `YUO_WHISPER=off` turns it off)."""
+    from yuo.adapters.transcribe.local import LocalWhisper
+
+    if os.environ.get("YUO_WHISPER", "").lower() == "off":
+        return None
+    return LocalWhisper(
+        root / "whisper",
+        model=os.environ.get("YUO_WHISPER_MODEL", "small"),
+        threads=int(os.environ.get("YUO_WHISPER_THREADS", "2")),
+        decoder=ffmpeg.program() if ffmpeg is not None else None,
+    )
+
+
 def media_from_env(root: Path) -> Media:
     from yuo.adapters.renderer.remotion import RemotionRenderer
     from yuo.adapters.tools.ffmpeg import FFmpeg
@@ -405,6 +420,7 @@ def build() -> FastAPI:
     log.info("adapters", llm=sorted(ports), video=media.renderer.available() or "ok")
     runtime = start(db, ports, prices, worker=False, media=media)
     runtime.service.plan_meter = meter
+    runtime.service.ctx.transcriber = transcriber_from_env(root, media.ffmpeg)
 
     def health() -> dict[str, Any]:
         with runtime.readers.connection() as c:

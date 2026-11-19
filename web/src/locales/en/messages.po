@@ -37,30 +37,144 @@ msgstr "(the newest version, through Claude Code; the exact one shows here after
 msgid "settings.ai.model.via"
 msgstr "(through {via})"
 
+#. placeholder {0}: item.days ?? 0
+#: src/routes/index.tsx
+msgid "home.today.exam"
+msgstr "{0, plural, =0 {{title}: exam today} one {{title}: exam in # day} other {{title}: exam in # days}}"
+
+#. placeholder {0}: momentum.streak
+#: src/routes/index.tsx
+msgid "home.momentum.streak"
+msgstr "{0, plural, one {# day} other {# days}}"
+
+#. placeholder {0}: home.lessons_ready
+#: src/routes/index.tsx
+msgid "home.summary.ready"
+msgstr "{0, plural, one {# new lesson ready} other {# new lessons ready}}"
+
+#. placeholder {0}: m.formula_pages
+#: src/material/Studies.tsx
+msgid "material.formulas"
+msgstr "{0, plural, one {# page has formulas missing from its text: Yuo reads only the words around them.} other {# pages have formulas missing from their text: Yuo reads only the words around them.}}"
+
+#. placeholder {0}: m.formula_pages
+#: src/material/Studies.tsx
+msgid "material.formulas.pdf"
+msgstr "{0, plural, one {# page has formulas or symbols missing from its text (drawn as shapes, not letters): lessons from it would have gaps. Reading it from its image is recommended.} other {# pages have formulas or symbols missing from their text (drawn as shapes, not letters): lessons from them would have gaps. Reading them from their images is recommended.}}"
+
+#. placeholder {0}: m.sparse_pages
+#: src/material/Studies.tsx
+msgid "material.sparse"
+msgstr "{0, plural, one {# page has little text (a picture or a scan): Yuo cannot read it yet.} other {# pages have little text (pictures or scans): Yuo cannot read them yet.}}"
+
+#. placeholder {0}: m.sparse_pages
+#: src/material/Studies.tsx
+msgid "material.sparse.pdf"
+msgstr "{0, plural, one {# page has little text: probably formulas or a figure.} other {# pages have little text: probably formulas or figures.}}"
+
+#. placeholder {0}: m.vision_pages
+#: src/material/Studies.tsx
+msgid "material.vision.done"
+msgstr "{0, plural, one {# page was read from its image (formulas and figures).} other {# pages were read from their images (formulas and figures).}}"
+
+#. placeholder {0}: plan.skipped.length
+#: src/material/Studies.tsx
+msgid "studies.skipped"
+msgstr "{0, plural, one {# part left out} other {# parts left out}}"
+
+#. placeholder {0}: progress.delta
+#: src/routes/index.tsx
+msgid "home.progress.up"
+msgstr "{0, plural, one {+# pt this week} other {+# pts this week}}"
+
+#. placeholder {0}: -progress.delta
+#: src/routes/index.tsx
+msgid "home.progress.down"
+msgstr "{0, plural, one {−# pt this week} other {−# pts this week}}"
+
 #. placeholder {0}: fresh.length
 #: src/video/NotesBubble.tsx
 msgid "notes-bubble.ask"
 msgstr "{0, plural, one {Ask the tutor (#)} other {Ask the tutor (#)}}"
+
+#. placeholder {0}: home.exam.days
+#: src/routes/index.tsx
+msgid "home.summary.exam"
+msgstr "{0, plural, one {exam in # day} other {exam in # days}}"
 
 #. placeholder {0}: asked.length
 #: src/video/NotesBubble.tsx
 msgid "notes-bubble.asked.hide"
 msgstr "{0, plural, one {Hide # already asked} other {Hide # already asked}}"
 
+#. placeholder {0}: item.count ?? 0
+#: src/routes/index.tsx
+msgid "home.today.arrange"
+msgstr "{0, plural, one {New suggestion: your files could form # course} other {New suggestion: your files could form # courses}}"
+
 #. placeholder {0}: asked.length
 #: src/video/NotesBubble.tsx
 msgid "notes-bubble.asked.show"
 msgstr "{0, plural, one {Show # already asked} other {Show # already asked}}"
+
+#. placeholder {0}: data.feedback.length
+#. placeholder {0}: plan.feedback.length
+#: src/material/Studies.tsx
+#: src/routes/planPreview.tsx
+msgid "preview.history"
+msgstr "{0, plural, one {Your request so far} other {Your # requests so far}}"
 
 #. placeholder {0}: Math.round(stage.fraction * 100)
 #: src/routes/importPage.tsx
 msgid "import.uploading.percent"
 msgstr "{0} % sent"
 
+#. placeholder {0}: name(r.a)
+#. placeholder {1}: name(r.b)
+#: src/material/Studies.tsx
+msgid "studies.links.related"
+msgstr "{0} and {1}"
+
+#. placeholder {0}: name(r.skill)
+#. placeholder {1}: name(r.requires)
+#: src/material/Studies.tsx
+msgid "studies.links.requires"
+msgstr "{0} comes after {1}"
+
+#. placeholder {0}: Math.round(m.duration_ms / 60000)
+#: src/material/Studies.tsx
+msgid "material.minutes"
+msgstr "{0} min"
+
+#. placeholder {0}: progress.mastered
+#. placeholder {1}: progress.skills
+#: src/routes/index.tsx
+msgid "home.progress.mastered"
+msgstr "{0} of {1} skills mastered"
+
+#. placeholder {0}: m.pages
+#: src/material/Studies.tsx
+msgid "material.pages"
+msgstr "{0} pages"
+
+#. placeholder {0}: m.pages
+#: src/material/Studies.tsx
+msgid "material.slides"
+msgstr "{0} slides"
+
+#. placeholder {0}: momentum.xp_week
+#: src/routes/index.tsx
+msgid "home.momentum.xp"
+msgstr "{0} XP"
+
 #. placeholder {0}: r.label
 #: src/onboarding/PlanUsage.tsx
 msgid "plan-usage.row"
 msgstr "{0}: <0/>; <1/>"
+
+#: src/routes/planPreview.tsx
+msgid "preview.count.branches"
+msgstr "{branches, plural, one {# branch} other {# branches}}"
 
 #: src/routes/progress.tsx
 msgid "progress.branch.xp"
@@ -73,6 +187,10 @@ msgstr "{count, plural, one {# model} other {# models}}"
 #: src/tutor/Thread.tsx
 msgid "tutor.chip.notes"
 msgstr "{count, plural, one {# note} other {# notes}}"
+
+#: src/routes/index.tsx
+msgid "home.today.fading"
+msgstr "{count, plural, one {# skill fading: {skills}} other {# skills fading: {skills}}}"
 
 #: src/onboarding/ProbeSummary.tsx
 msgid "wizard.computer.disk.value"
@@ -93,6 +211,14 @@ msgstr "{due, plural, one {# flashcard from your practice is due.} other {# flas
 #: src/review/Hub.tsx
 msgid "review.hub.lead.due"
 msgstr "{due, plural, one {# idea is due for review} other {# ideas are due for review}}"
+
+#: src/routes/index.tsx
+msgid "home.summary.due"
+msgstr "{due, plural, one {# review due} other {# reviews due}}"
+
+#: src/routes/index.tsx
+msgid "home.today.due"
+msgstr "{due, plural, one {# review question due} other {# review questions due}}"
 
 #: src/review/Hub.tsx
 msgid "review.entry.counts"
@@ -134,6 +260,11 @@ msgstr "{kind}: {label}"
 msgid "devices.codes.left"
 msgstr "{left, plural, =0 {No recovery codes left.} one {# recovery code left.} other {# recovery codes left.}}"
 
+#: src/material/Studies.tsx
+#: src/routes/planPreview.tsx
+msgid "preview.count.lessons"
+msgstr "{lessons, plural, one {# lesson} other {# lessons}}"
+
 #: src/routes/pathNew.tsx
 msgid "path.new.estimate.title"
 msgstr "{lessons, plural, one {Estimated cost for # lesson} other {Estimated cost for # lessons}}"
@@ -143,12 +274,12 @@ msgstr "{lessons, plural, one {Estimated cost for # lesson} other {Estimated cos
 msgid "path.tree.branch.mastered"
 msgstr "{mastered} of {total} mastered"
 
-#: src/routes/pathView.tsx
-msgid "path.overview.progress"
+#: src/routes/paths.tsx
+msgid "home.path.progress"
 msgstr "{mastered} of {total} skills mastered"
 
-#: src/routes/index.tsx
-msgid "home.path.progress"
+#: src/routes/pathView.tsx
+msgid "path.overview.progress"
 msgstr "{mastered} of {total} skills mastered"
 
 #: src/onboarding/ProbeSummary.tsx
@@ -166,6 +297,10 @@ msgstr "{min, plural, one {about # minute left} other {about # minutes left}}"
 #: src/components/JobProgress.tsx
 msgid "job.time.typical"
 msgstr "{min, plural, one {usually takes about # minute} other {usually takes about # minutes}}"
+
+#: src/material/Studies.tsx
+msgid "studies.estimate.audio"
+msgstr "{minutes, plural, one {# minute of recordings is still being transcribed on this computer; it joins the plan when it is ready.} other {# minutes of recordings are still being transcribed on this computer; they join the plan when they are ready.}}"
 
 #: src/routes/lessonReader.tsx
 msgid "lesson.minutes"
@@ -243,9 +378,17 @@ msgstr "{name} is installed, but not signed in"
 msgid "cli.state.not-installed"
 msgstr "{name} is not installed yet"
 
+#: src/material/Arrange.tsx
+msgid "arrange.new-files"
+msgstr "{newFiles, plural, one {# file was added after this suggestion: ask again to place it.} other {# files were added after this suggestion: ask again to place them.}}"
+
 #: src/tutor/Nudges.tsx
 msgid "tutor.nudge.unsent-notes"
 msgstr "{notes, plural, one {You left # note on this lesson that you have not asked about. Ask the tutor now?} other {You left # notes on this lesson that you have not asked about. Ask the tutor now?}}"
+
+#: src/material/Studies.tsx
+msgid "material.vision.read"
+msgstr "{pages, plural, one {Read it from its image} other {Read them from their images}}"
 
 #: src/onboarding/PlanMeter.tsx
 msgid "plan-meter.week.reset"
@@ -287,9 +430,39 @@ msgstr "{revoked} was signed out."
 msgid "tutor.pending.elapsed"
 msgstr "{seconds} s"
 
+#: src/material/Coverage.tsx
+msgid "coverage.share"
+msgstr "{share}% taught"
+
+#: src/routes/index.tsx
+msgid "home.insight.builds-on"
+msgstr "{skill} builds on {requires}, which is not mastered yet. A short review first will make it easier."
+
+#: src/routes/index.tsx
+msgid "home.insight.weakest"
+msgstr "{skill} is your weakest skill so far ({percent}% right). A little practice there goes a long way."
+
+#: src/material/Studies.tsx
+#: src/routes/planPreview.tsx
+msgid "preview.count.skills"
+msgstr "{skills, plural, one {# skill} other {# skills}}"
+
 #: src/routes/progress.tsx
 msgid "progress.streak"
 msgstr "{streak, plural, one {day in a row} other {days in a row}}"
+
+#. placeholder {0}: item.percent ?? 0
+#: src/routes/index.tsx
+msgid "home.today.transcribing"
+msgstr "{title} is being transcribed ({0}%)"
+
+#: src/material/Studies.tsx
+msgid "studies.recordings.built"
+msgstr "{transcribed} of {total} recordings transcribed. Each one adds to the path when it is ready."
+
+#: src/material/Studies.tsx
+msgid "studies.recordings.plan"
+msgstr "{transcribed} of {total} recordings transcribed. Each one joins the plan when it is ready."
 
 #: src/routes/tutorMemory.tsx
 msgid "tutor.memory.intro"
@@ -339,6 +512,10 @@ msgstr "{version} (you have {installed})"
 msgid "assessment.summary.waiting"
 msgstr "{waiting, plural, one {# answer is still being graded.} other {# answers are still being graded.}}"
 
+#: src/routes/index.tsx
+msgid "home.today.draft"
+msgstr "1 lesson needs your decision: “{title}”"
+
 #: src/onboarding/CliAccess.tsx
 msgid "cli.login.browser"
 msgstr "A browser window has opened on this computer. Sign in there; Yuo waits and goes on by itself."
@@ -350,6 +527,10 @@ msgstr "A few questions per skill. Skills you already know are marked as mastere
 #: src/routes/setup.tsx
 msgid "wizard.about.intro"
 msgstr "A few things about you, so lessons fit. You can change all of this in Settings."
+
+#: src/routes/pathNew.tsx
+msgid "path.new.start.goal"
+msgstr "A goal"
 
 #: src/onboarding/vendor.tsx
 msgid "vendor.key.set"
@@ -371,13 +552,25 @@ msgstr "A key is saved on this computer. It is never shown again."
 msgid "path.tree.node.failed"
 msgstr "a lesson could not be written"
 
+#: src/routes/index.tsx
+msgid "home.today.failed"
+msgstr "A lesson could not be written: “{title}”"
+
 #: src/path/PathGraph.tsx
 msgid "path.tree.node.writing"
 msgstr "a lesson is being written"
 
+#: src/routes/index.tsx
+msgid "home.today.exam.detail"
+msgstr "A mock exam shows what to go over."
+
 #: src/onboarding/desktop.tsx
 msgid "desktop.signed-out.opened"
 msgstr "A new tab is opening. If your browser asks, allow it."
+
+#: src/routes/lessonReader.tsx
+msgid "lesson.review-notes.queued"
+msgstr "A new version is being written; this one stays until it is ready."
 
 #: src/pwa/PwaControls.tsx
 msgid "pwa.update.text"
@@ -415,6 +608,11 @@ msgstr "A test is open, so the test rules apply on every screen. Finish the test
 msgid "review.report.body"
 msgstr "A wrong or unclear question is taken out of your reviews. It does not count in this session."
 
+#. placeholder {0}: n.minutes
+#: src/routes/index.tsx
+msgid "home.next.minutes"
+msgstr "about {0} min"
+
 #: src/onboarding/PlanUsage.tsx
 msgid "plan-usage.window.lessons"
 msgstr "about {lessons} lessons per 5-hour window"
@@ -439,13 +637,32 @@ msgstr "About you"
 msgid "tutor.proposal.accept"
 msgstr "Accept"
 
+#: src/path/LessonRow.tsx
+msgid "path.lesson.accept.label"
+msgstr "Accept “{title}” with the reviewer's feedback"
+
+#: src/path/LessonRow.tsx
+#: src/routes/index.tsx
+msgid "path.lesson.accept"
+msgstr "Accept with feedback"
+
 #: src/tutor/texts.ts
 msgid "tutor.proposal.status.accepted"
 msgstr "Accepted"
 
+#: src/routes/lessonReader.tsx
+msgid "lesson.review-notes.title"
+msgstr "Accepted without passing its review."
+
 #: src/routes/progress.tsx
 msgid "progress.achievements"
 msgstr "Achievements"
+
+#. placeholder {0}: path.title
+#: src/routes/paths.tsx
+#: src/routes/paths.tsx
+msgid "paths.menu"
+msgstr "Actions for {0}"
 
 #: src/components/labels.tsx
 msgid "path.status.active"
@@ -458,6 +675,15 @@ msgstr "Active (offers more often)"
 #: src/routes/tutorMemory.tsx
 msgid "tutor.memory.add.submit"
 msgstr "Add"
+
+#: src/material/Studies.tsx
+msgid "studies.course.add.submit"
+msgstr "Add"
+
+#: src/material/Studies.tsx
+#: src/material/StudiesForm.tsx
+msgid "studies.course.add"
+msgstr "Add a course"
 
 #: src/onboarding/vendor.tsx
 msgid "settings.ai.vendor.add"
@@ -491,9 +717,29 @@ msgstr "Add a passkey"
 msgid "auth.setup.passkey.add"
 msgstr "Add a passkey"
 
+#: src/material/Studies.tsx
+msgid "arrange.step"
+msgstr "Add all your material"
+
+#: src/material/Studies.tsx
+msgid "studies.start.empty"
+msgstr "Add at least one file to start."
+
 #: src/tutor/DockPanel.tsx
 msgid "tutor.chip.add-back"
 msgstr "Add back: {kind}"
+
+#: src/material/Studies.tsx
+msgid "studies.collect.intro"
+msgstr "Add each course's files: books and notes as PDF, slides (PDF or PowerPoint), Word or text documents, and recordings. Yuo reads them on this computer first, for free; nothing is sent to your AI provider until you start."
+
+#: src/material/Studies.tsx
+msgid "studies.built.intro"
+msgstr "Add files to a course at any time. Yuo reads them, adds them to the lessons not written yet, and suggests what they change in the rest."
+
+#: src/material/Studies.tsx
+msgid "studies.update.skills"
+msgstr "Add these skills: {skills}"
 
 #: src/routes/nextSteps.tsx
 msgid "next.confirm"
@@ -503,12 +749,20 @@ msgstr "Add this to your path? New branches are added after the ones you have; y
 msgid "next.confirm.yes"
 msgstr "Add to my path"
 
+#: src/material/Arrange.tsx
+msgid "arrange.empty"
+msgstr "Add your files above to start."
+
 #: src/routes/devices.tsx
 msgid "devices.credentials.added"
 msgstr "Added {added}"
 
 #: src/tutor/texts.ts
 msgid "tutor.memory.source.system"
+msgstr "Added by Yuo"
+
+#: src/material/Studies.tsx
+msgid "studies.skill.added"
 msgstr "Added by Yuo"
 
 #: src/components/labels.tsx
@@ -555,6 +809,11 @@ msgstr "After an attempt"
 #: src/routes/levelCheck.tsx
 msgid "level-check.failed.then-retry"
 msgstr "After that, come back and try again, or skip the check: the path then starts from the basics."
+
+#: src/material/Studies.tsx
+#: src/routes/planPreview.tsx
+msgid "preview.after"
+msgstr "After: {after}"
 
 #: src/items/ItemInput.tsx
 msgid "item.flashcard.rating.again"
@@ -653,6 +912,19 @@ msgstr "Anthropic, OpenAI, Google Gemini, Mistral, DeepSeek, xAI or Qwen; billed
 msgid "settings.solution.any-time"
 msgstr "Any time"
 
+#. placeholder {0}: course.title
+#: src/material/Studies.tsx
+msgid "studies.feedback.label"
+msgstr "Anything missing, wrong, or that should go deeper in {0}?"
+
+#: src/routes/planPreview.tsx
+msgid "preview.feedback.label"
+msgstr "Anything missing, wrong, or that should go deeper?"
+
+#: src/material/Arrange.tsx
+msgid "arrange.feedback.label"
+msgstr "Anything to change?"
+
 #: src/onboarding/SettingsSections.tsx
 #: src/routes/settings.tsx
 msgid "settings.appearance.title"
@@ -661,6 +933,19 @@ msgstr "Appearance"
 #: src/review/Player.tsx
 msgid "review.kind.apply"
 msgstr "Apply"
+
+#: src/material/Studies.tsx
+msgid "studies.update.apply"
+msgstr "Apply"
+
+#: src/routes/paths.tsx
+#: src/routes/paths.tsx
+msgid "paths.archive"
+msgstr "Archive"
+
+#: src/routes/paths.tsx
+msgid "paths.archived"
+msgstr "Archived"
 
 #: src/components/labels.tsx
 msgid "path.status.archived"
@@ -757,6 +1042,11 @@ msgstr "Back to the path"
 msgid "next.back"
 msgstr "Back to the path"
 
+#: src/routes/mockExam.tsx
+#: src/routes/mockExam.tsx
+msgid "mock.back"
+msgstr "Back to the path"
+
 #: src/routes/lessonReader.tsx
 #: src/routes/lessonReader.tsx
 msgid "lesson.back-to-path"
@@ -790,6 +1080,11 @@ msgstr "Being planned"
 msgid "lesson.state.generating"
 msgstr "Being written"
 
+#. placeholder {0}: n.title
+#: src/routes/index.tsx
+msgid "home.next.writing"
+msgstr "Being written: {0}"
+
 #: src/routes/nextSteps.tsx
 msgid "next.directions.best"
 msgstr "Best match"
@@ -802,13 +1097,42 @@ msgstr "Bibliography (BibTeX)"
 msgid "share.format.csl-json"
 msgstr "Bibliography (CSL JSON)"
 
+#: src/material/labels.tsx
+msgid "material.role.textbook"
+msgstr "Book"
+
 #: src/routes/progress.tsx
 msgid "progress.branches"
 msgstr "Branches"
 
+#: src/routes/paths.tsx
+#: src/routes/paths.tsx
+msgid "paths.restore"
+msgstr "Bring back"
+
+#: src/routes/planPreview.tsx
+msgid "preview.build"
+msgstr "Build it"
+
+#: src/routes/pathNew.tsx
+msgid "path.new.start.courses.description"
+msgstr "Build on your books, slides, notes and recordings: for a degree, an exam, or anything you are reading."
+
+#: src/material/Studies.tsx
+msgid "studies.build"
+msgstr "Build the path"
+
 #: src/path/SkillPanel.tsx
 msgid "path.panel.builds-on"
 msgstr "Builds on"
+
+#: src/material/Studies.tsx
+msgid "studies.course.built"
+msgstr "Built into the path."
+
+#: src/material/labels.tsx
+msgid "adherence.grounded.description"
+msgstr "Built on your files, with short explanations or examples added where they help (marked)."
 
 #: src/tutor/Nudges.tsx
 msgid "tutor.nudge.prefill.fast-guessing"
@@ -820,6 +1144,13 @@ msgstr "Cancel"
 
 #: src/routes/tutorMemory.tsx
 msgid "tutor.memory.cancel"
+msgstr "Cancel"
+
+#: src/components/ConfirmAction.tsx
+#: src/material/Studies.tsx
+#: src/routes/paths.tsx
+#: src/routes/paths.tsx
+msgid "confirm.cancel"
 msgstr "Cancel"
 
 #: src/routes/nextSteps.tsx
@@ -841,10 +1172,6 @@ msgstr "Cancel"
 
 #: src/lesson/Notes.tsx
 msgid "notes.cancel"
-msgstr "Cancel"
-
-#: src/components/ConfirmAction.tsx
-msgid "confirm.cancel"
 msgstr "Cancel"
 
 #: src/onboarding/CliAccess.tsx
@@ -883,9 +1210,23 @@ msgstr "Change the models that write your lessons"
 msgid "tutor.proposal.kind.prerequisites"
 msgstr "Change the order of skills"
 
+#: src/material/Studies.tsx
+#: src/routes/planPreview.tsx
+msgid "preview.change"
+msgstr "Change the plan"
+
+#: src/material/Arrange.tsx
+msgid "arrange.change"
+msgstr "Change the suggestion"
+
 #: src/routes/tutorMemory.tsx
 msgid "tutor.memory.edit.label"
 msgstr "Change this entry"
+
+#: src/material/Studies.tsx
+#: src/routes/planPreview.tsx
+msgid "preview.revising"
+msgstr "Changing the plan…"
 
 #: src/routes/setup.tsx
 msgid "wizard.computer.again"
@@ -914,6 +1255,10 @@ msgstr "Check answer"
 #: src/routes/SettingRow.tsx
 msgid "settings.key.updates-check"
 msgstr "Check for updates"
+
+#: src/routes/index.tsx
+msgid "home.today.plan.detail"
+msgstr "Check it before the lessons are written."
 
 #: src/onboarding/vendor.tsx
 msgid "vendor.key.check"
@@ -1030,6 +1375,10 @@ msgstr "Choose at least one part."
 #: src/onboarding/vendorModels.tsx
 msgid "vendor.models.choose-both"
 msgstr "Choose both models to see what a typical path costs."
+
+#: src/material/Studies.tsx
+msgid "material.choose"
+msgstr "Choose files"
 
 #: src/sharing/labels.tsx
 msgid "share.profile.custom"
@@ -1173,6 +1522,11 @@ msgstr "Continue with “{lesson}”"
 msgid "review.hub.continue"
 msgstr "Continue your session ({answered} of {size})"
 
+#. placeholder {0}: n.title
+#: src/routes/index.tsx
+msgid "home.next.continue"
+msgstr "Continue: {0}"
+
 #: src/tutor/DockPanel.tsx
 msgid "tutor.threads.label"
 msgstr "Conversations"
@@ -1220,6 +1574,19 @@ msgstr "cost"
 #: src/onboarding/ProbeSummary.tsx
 msgid "wizard.computer.unknown"
 msgstr "Could not be read"
+
+#: src/material/labels.tsx
+msgid "material.state.failed"
+msgstr "Could not be read"
+
+#: src/material/Studies.tsx
+#: src/material/StudiesForm.tsx
+msgid "studies.course.name"
+msgstr "Course"
+
+#: src/material/StudiesForm.tsx
+msgid "studies.courses"
+msgstr "Courses"
 
 #: src/onboarding/access.tsx
 msgid "access.key.intro"
@@ -1289,9 +1656,18 @@ msgstr "Definition"
 msgid "tutor.memory.delete"
 msgstr "Delete"
 
+#: src/routes/paths.tsx
+#: src/routes/paths.tsx
+msgid "paths.delete"
+msgstr "Delete"
+
 #: src/lesson/Notes.tsx
 msgid "notes.delete"
 msgstr "Delete"
+
+#: src/routes/paths.tsx
+msgid "paths.delete.title"
+msgstr "Delete “{title}”?"
 
 #: src/tutor/DockPanel.tsx
 msgid "tutor.thread.erase.question"
@@ -1325,6 +1701,10 @@ msgstr "Delete the conversation"
 msgid "settings.video-history.confirm"
 msgstr "Delete the history"
 
+#: src/routes/paths.tsx
+msgid "paths.delete.confirm"
+msgstr "Delete the path"
+
 #: src/tutor/DockPanel.tsx
 msgid "tutor.thread.erase"
 msgstr "Delete this conversation"
@@ -1350,9 +1730,17 @@ msgstr "Delete: {0}"
 msgid "progress.erase.done"
 msgstr "Deleted. The path starts again from the beginning."
 
+#: src/routes/paths.tsx
+msgid "paths.delete.pending"
+msgstr "Deleting…"
+
 #: src/routes/requests.tsx
 msgid "request.open"
 msgstr "Describe the lesson you need"
+
+#: src/routes/pathNew.tsx
+msgid "path.new.start.goal.description"
+msgstr "Describe what you want to learn; Yuo plans it and writes the lessons."
 
 #: src/routes/jobs.tsx
 msgid "jobs.details"
@@ -1462,6 +1850,24 @@ msgstr "Drop a .yuo.zip file here, or"
 msgid "import.drop.label"
 msgstr "Drop a package file here"
 
+#: src/material/Studies.tsx
+#: src/material/StudiesForm.tsx
+msgid "arrange.collect.intro"
+msgstr "Drop everything you study from, for every course: books and notes as PDF, slides, Word or text documents, exercises, past exams and recordings. Yuo reads them on this computer first, for free, then suggests a name for the path and how to split it into courses."
+
+#. placeholder {0}: course.title
+#: src/material/Studies.tsx
+msgid "material.drop.label"
+msgstr "Drop files for {0} here"
+
+#: src/material/Studies.tsx
+msgid "material.drop"
+msgstr "Drop files here, or"
+
+#: src/material/StudiesForm.tsx
+msgid "studies.drop.label"
+msgstr "Drop your material here"
+
 #: src/review/Hub.tsx
 msgid "review.hub.chip.due"
 msgstr "due"
@@ -1469,6 +1875,10 @@ msgstr "due"
 #: src/review/Hub.tsx
 msgid "review.hub.objective.due"
 msgstr "Due"
+
+#: src/material/StudiesForm.tsx
+msgid "studies.courses.intro"
+msgstr "Each course becomes a branch of the path: a university course, an exam, a book or a topic. You add its books, slides, notes and recordings next."
 
 #: src/tutor/Proposals.tsx
 msgid "tutor.proposals.decided"
@@ -1493,6 +1903,10 @@ msgstr "Edit"
 #: src/lesson/Notes.tsx
 msgid "notes.edit.label"
 msgstr "Edit note"
+
+#: src/routes/paths.tsx
+msgid "paths.edit.title"
+msgstr "Edit the path"
 
 #: src/tutor/Thread.tsx
 msgid "tutor.queued.edit.label"
@@ -1523,6 +1937,10 @@ msgstr "Every browser you signed in with. Signing a device out ends its sessions
 msgid "review.hub.focus.all"
 msgstr "Everything"
 
+#: src/routes/index.tsx
+msgid "home.next.none"
+msgstr "Everything is learned for now"
+
 #: src/review/Hub.tsx
 msgid "review.hub.lead.fresh"
 msgstr "Everything you studied is still fresh"
@@ -1531,6 +1949,10 @@ msgstr "Everything you studied is still fresh"
 msgid "review.entry.fresh"
 msgstr "Everything you studied is still fresh."
 
+#: src/routes/index.tsx
+msgid "home.summary.exam-today"
+msgstr "exam today"
+
 #: src/lesson/BlockRenderer.tsx
 msgid "lesson.callout.example"
 msgstr "Example"
@@ -1538,6 +1960,10 @@ msgstr "Example"
 #: src/routes/SettingRow.tsx
 msgid "settings.more"
 msgstr "Example and suggestion"
+
+#: src/material/labels.tsx
+msgid "material.role.exercises"
+msgstr "Exercises"
 
 #: src/components/labels.tsx
 msgid "difficulty.expert"
@@ -1571,6 +1997,14 @@ msgstr "Failed"
 msgid "request.status.failed"
 msgstr "Failed"
 
+#: src/routes/index.tsx
+msgid "home.today.draft.detail"
+msgstr "Failed its quality review."
+
+#: src/routes/SettingRow.tsx
+msgid "settings.transcription.faster"
+msgstr "Faster"
+
 #: src/assessment/AssessmentRunner.tsx
 msgid "assessment.cloze.prompt"
 msgstr "Fill in the gaps"
@@ -1599,11 +2033,20 @@ msgstr "Find the mistake"
 msgid "next.writing.directions"
 msgstr "Finding directions that fit your answers…"
 
+#: src/material/Studies.tsx
+msgid "studies.work.links"
+msgstr "Finding how your courses build on each other"
+
+#: src/material/labels.tsx
+msgid "material.state.outlining"
+msgstr "Finding the topics"
+
 #: src/review/Hub.tsx
 msgid "review.hub.empty.body"
 msgstr "Finish a lesson and its ideas appear here. Yuo then brings each one back just before you would forget it, with fresh questions every time."
 
 #: src/routes/index.tsx
+#: src/routes/paths.tsx
 msgid "home.finish-setup.link"
 msgstr "Finish setting up"
 
@@ -1682,9 +2125,25 @@ msgstr "For a typical {lessons}-lesson path: no cost per use."
 msgid "wizard.estimate.plan"
 msgstr "For a typical {lessons}-lesson path: no extra cost, it uses part of your plan's limits:"
 
+#: src/routes/planPreview.tsx
+msgid "preview.feedback.description"
+msgstr "For example: “add a part on window functions”, “less theory, more exercises”, “drop the history”."
+
+#: src/material/Studies.tsx
+msgid "studies.feedback.description"
+msgstr "For example: “chapter 7 is not in the exam”, “more on Fourier series”, “split the long skills”."
+
+#: src/material/Arrange.tsx
+msgid "arrange.feedback.description"
+msgstr "For example: “the slides and the book are the same course”, “put the exercises in their own course”, “call it Calculus 1”."
+
 #: src/routes/tutorMemory.tsx
 msgid "tutor.memory.add.text.description"
 msgstr "For example: I am preparing for a job interview. At most 300 characters."
+
+#: src/material/StudiesForm.tsx
+msgid "studies.field.goal.description"
+msgstr "For example: pass my exams, or understand these books."
 
 #: src/onboarding/ProbeSummary.tsx
 msgid "wizard.computer.cli.found"
@@ -1718,6 +2177,10 @@ msgstr "from {before} to {after}"
 #: src/lesson/Notes.tsx
 msgid "notes.from-video"
 msgstr "From the video at {0}"
+
+#: src/material/LessonSources.tsx
+msgid "sources.title"
+msgstr "From your material"
 
 #: src/routes/SettingRow.tsx
 msgid "settings.gamification.full"
@@ -1768,6 +2231,15 @@ msgstr "Get a key at openrouter.ai/keys (opens in a new tab)"
 msgid "openrouter.models.loading"
 msgstr "Getting OpenRouter's list of models…"
 
+#: src/material/Studies.tsx
+#: src/routes/planPreview.tsx
+msgid "preview.undo"
+msgstr "Go back to the previous plan"
+
+#: src/routes/mockExam.tsx
+msgid "mock.weak"
+msgstr "Go back to these skills before the exam:"
+
 #: src/routes/nextSteps.tsx
 msgid "next.kind.deeper"
 msgstr "Go deeper"
@@ -1784,9 +2256,25 @@ msgstr "Go wider"
 msgid "tutor.memory.kind.goal"
 msgstr "Goal"
 
+#: src/routes/paths.tsx
+msgid "paths.edit.goal"
+msgstr "Goal"
+
 #: src/items/ItemInput.tsx
 msgid "item.flashcard.rating.good"
 msgstr "Good"
+
+#: src/routes/index.tsx
+msgid "home.greeting.afternoon"
+msgstr "Good afternoon"
+
+#: src/routes/index.tsx
+msgid "home.greeting.evening"
+msgstr "Good evening"
+
+#: src/routes/index.tsx
+msgid "home.greeting.morning"
+msgstr "Good morning"
 
 #: src/tutor/DockPanel.tsx
 msgid "tutor.memory.first-use.ok"
@@ -1844,6 +2332,10 @@ msgstr "Hints with cost"
 msgid "jobs.history"
 msgstr "History"
 
+#: src/material/labels.tsx
+msgid "studies.course.adherence"
+msgstr "How closely to follow the material"
+
 #: src/routes/settings.tsx
 msgid "settings.group.reviews.description"
 msgstr "How much and how often you go back over past lessons"
@@ -1851,6 +2343,10 @@ msgstr "How much and how often you go back over past lessons"
 #: src/items/ItemInput.tsx
 msgid "item.flashcard.rate"
 msgstr "How well did you know it?"
+
+#: src/material/Studies.tsx
+msgid "studies.links"
+msgstr "How your courses connect"
 
 #: src/onboarding/profile.tsx
 msgid "profile.name.description"
@@ -1924,8 +2420,8 @@ msgstr "If the page refuses the code, device sign-in may be switched off for you
 msgid "auth.codes.intro"
 msgstr "If you lose your passkey and password, each of these codes signs you in once. They are shown only now: keep them somewhere safe, like a password manager or on paper."
 
-#: src/routes/index.tsx
-#: src/routes/index.tsx
+#: src/routes/paths.tsx
+#: src/routes/paths.tsx
 msgid "home.import"
 msgstr "Import a path"
 
@@ -1976,6 +2472,10 @@ msgstr "In use: {writer} writes, {checker} checks. Any model on OpenRouter can b
 #: src/routes/SettingRow.tsx
 msgid "settings.key.review-independent"
 msgstr "Independent reviewer"
+
+#: src/routes/index.tsx
+msgid "home.insight"
+msgstr "Insight"
 
 #: src/onboarding/CliAccess.tsx
 msgid "cli.install.start"
@@ -2029,6 +2529,10 @@ msgstr "It was answered before the change arrived."
 msgid "path.next.none"
 msgstr "Its lessons are not written yet. Generate one below."
 
+#: src/routes/paths.tsx
+msgid "paths.delete.body"
+msgstr "Its lessons, questions, files and courses go, with everything you answered and wrote in it. This cannot be undone. To keep it out of sight instead, archive it."
+
 #: src/routes/setup.tsx
 msgid "wizard.options.not-installed"
 msgstr "Its program is not on this computer yet. Yuo will help you install it."
@@ -2041,6 +2545,10 @@ msgstr "Job"
 #: src/components/HeaderStatus.tsx
 msgid "nav.jobs"
 msgstr "Jobs"
+
+#: src/routes/index.tsx
+msgid "home.progress.starting"
+msgstr "Just starting"
 
 #: src/routes/tutorMemory.tsx
 msgid "tutor.memory.delete.keep"
@@ -2091,6 +2599,10 @@ msgstr "Last step: tell Yuo what you want to learn. It plans the skills and less
 msgid "devices.credentials.used"
 msgstr "last used {used}"
 
+#: src/routes/index.tsx
+msgid "home.momentum.achievement"
+msgstr "Latest achievement"
+
 #: src/auth/SetupFlow.tsx
 #: src/routes/signIn.tsx
 msgid "brand.tagline"
@@ -2117,6 +2629,15 @@ msgstr "Learning now"
 msgid "settings.learning.title"
 msgstr "Learning settings"
 
+#: src/material/Coverage.tsx
+msgid "coverage.key.skipped"
+msgstr "left out"
+
+#. placeholder {0}: p.reason
+#: src/material/Coverage.tsx
+msgid "coverage.skipped"
+msgstr "Left out: {0}"
+
 #: src/routes/settings.tsx
 msgid "settings.group.lessons.description"
 msgstr "Length, your own wishes, lessons prepared ahead"
@@ -2140,6 +2661,12 @@ msgstr "Lesson"
 #: src/components/labels.tsx
 msgid "lesson.kind.core"
 msgstr "Lesson"
+
+#. placeholder {0}: n.index
+#. placeholder {1}: n.count
+#: src/routes/index.tsx
+msgid "home.next.index"
+msgstr "Lesson {0} of {1}"
 
 #: src/tutor/Proposals.tsx
 msgid "tutor.proposal.detail.add-lesson"
@@ -2181,6 +2708,10 @@ msgstr "Lessons"
 #: src/path/SkillPanel.tsx
 msgid "path.panel.lessons"
 msgstr "Lessons"
+
+#: src/material/labels.tsx
+msgid "adherence.only.description"
+msgstr "Lessons and questions stay inside your files, in their words and notation. Best before an exam."
 
 #: src/routes/SettingRow.tsx
 msgid "settings.key.buffer"
@@ -2229,6 +2760,8 @@ msgstr "Links (optional)"
 msgid "path.view.list"
 msgstr "List"
 
+#: src/material/Coverage.tsx
+#: src/material/Studies.tsx
 #: src/onboarding/CliAccess.tsx
 #: src/onboarding/SettingsSections.tsx
 #: src/path/LazyPathGraph.tsx
@@ -2237,12 +2770,14 @@ msgstr "List"
 #: src/routes/jobs.tsx
 #: src/routes/lessonReader.tsx
 #: src/routes/nextSteps.tsx
+#: src/routes/paths.tsx
 #: src/routes/pathView.tsx
 #: src/routes/progress.tsx
 #: src/routes/review.tsx
 #: src/routes/review.tsx
 #: src/routes/root.tsx
 #: src/routes/settings.tsx
+#: src/routes/setup.tsx
 #: src/routes/setup.tsx
 #: src/routes/setup.tsx
 #: src/routes/setup.tsx
@@ -2295,6 +2830,10 @@ msgstr "Longest gap between reviews (days, 0 = no limit)"
 msgid "review.feedback.revisit"
 msgstr "Look again: {revisit}"
 
+#: src/material/Arrange.tsx
+msgid "arrange.working"
+msgstr "Looking at your files and suggesting the courses…"
+
 #: src/components/JobProgress.tsx
 msgid "job.step.research"
 msgstr "Looking up sources"
@@ -2302,6 +2841,10 @@ msgstr "Looking up sources"
 #: src/auth/SetupFlow.tsx
 msgid "auth.setup.code.hint"
 msgstr "Lost it? Run `yuo setup-code` on the server for a new one."
+
+#: src/routes/root.tsx
+msgid "footer.made-by"
+msgstr "Made by {name}"
 
 #: src/routes/root.tsx
 msgid "nav.main.label"
@@ -2338,6 +2881,11 @@ msgstr "Mastered"
 #: src/components/labels.tsx
 msgid "skill.state.mastered"
 msgstr "Mastered"
+
+#. placeholder {0}: progress.score
+#: src/routes/index.tsx
+msgid "home.progress.label"
+msgstr "Mastery {0} of 100"
 
 #: src/path/PathGraph.tsx
 msgid "path.tree.node.mastery"
@@ -2428,6 +2976,18 @@ msgstr "Misconception"
 msgid "request.intro"
 msgstr "Missing something? Describe it and Yuo writes a lesson for it and puts it in the right skill."
 
+#: src/routes/mockExam.tsx
+msgid "mock.title.plain"
+msgstr "Mock exam"
+
+#: src/routes/index.tsx
+msgid "home.today.exam.action"
+msgstr "Mock exam"
+
+#: src/routes/mockExam.tsx
+msgid "mock.title"
+msgstr "Mock exam: {title}"
+
 #: src/onboarding/SettingsSections.tsx
 msgid "settings.ai.local.title"
 msgstr "Model app on this computer"
@@ -2456,6 +3016,10 @@ msgstr "Model vendors"
 msgid "settings.ai.models"
 msgstr "Models in use"
 
+#: src/routes/index.tsx
+msgid "home.momentum"
+msgstr "Momentum"
+
 #: src/routes/SettingRow.tsx
 msgid "settings.key.budget"
 msgstr "Monthly budget cap"
@@ -2468,6 +3032,10 @@ msgstr "Moodle questions"
 #: src/routes/root.tsx
 msgid "nav.more"
 msgstr "More"
+
+#: src/routes/SettingRow.tsx
+msgid "settings.transcription.accurate"
+msgstr "More accurate"
 
 #: src/review/Player.tsx
 #: src/review/Player.tsx
@@ -2494,17 +3062,37 @@ msgstr "Move up: {step}"
 msgid "item-type.multi"
 msgstr "Multiple choice"
 
+#: src/material/labels.tsx
+msgid "adherence.open"
+msgstr "My material and beyond"
+
+#: src/material/labels.tsx
+msgid "adherence.grounded"
+msgstr "My material first"
+
 #: src/sharing/ExportDialog.tsx
 msgid "share.personal.list"
 msgstr "My own content in the package"
+
+#: src/routes/pathNew.tsx
+msgid "path.new.start.courses"
+msgstr "My own material"
+
+#: src/routes/paths.tsx
+msgid "paths.edit.name"
+msgstr "Name"
 
 #: src/routes/settings.tsx
 msgid "settings.profile.words"
 msgstr "name language languages session minutes interests time zone"
 
+#: src/material/Arrange.tsx
+msgid "arrange.name"
+msgstr "Name of the path"
+
 #: src/routes/pathNew.tsx
-msgid "path.new.intro.check"
-msgstr "Name what you want to learn and what you want to be able to do. A few questions then show what you already know, and Yuo plans the path from there."
+msgid "path.new.intro.preview"
+msgstr "Name what you want to learn and what you want to be able to do. A few questions then show what you already know, and Yuo plans the path from there. You see the plan and can change it before anything is written."
 
 #: src/onboarding/SettingsSections.tsx
 msgid "settings.profile.description"
@@ -2522,6 +3110,10 @@ msgstr "Needs review"
 msgid "skill.state.needs-review"
 msgstr "Needs review"
 
+#: src/routes/index.tsx
+msgid "home.today.fading.detail"
+msgstr "Needs review to keep them fresh."
+
 #: src/path/PathGraph.tsx
 msgid "path.tree.node.needs"
 msgstr "needs: {names}"
@@ -2538,6 +3130,10 @@ msgstr "New {vendor} key"
 msgid "tutor.proposal.detail.difficulty"
 msgstr "New difficulty: {level}"
 
+#: src/material/Studies.tsx
+msgid "studies.update.title"
+msgstr "New from {files}"
+
 #: src/routes/pathNew.tsx
 msgid "path.new.title"
 msgstr "New learning path"
@@ -2550,8 +3146,8 @@ msgstr "New OpenRouter key"
 msgid "auth.password.new"
 msgstr "New password"
 
-#: src/routes/index.tsx
-#: src/routes/index.tsx
+#: src/routes/paths.tsx
+#: src/routes/paths.tsx
 msgid "home.new-path"
 msgstr "New path"
 
@@ -2570,6 +3166,10 @@ msgstr "Next question"
 #: src/review/Results.tsx
 msgid "review.results.next"
 msgstr "Next review: {due}"
+
+#: src/material/StudiesForm.tsx
+msgid "studies.submit"
+msgstr "Next: add your material"
 
 #: src/onboarding/PlanUsage.tsx
 msgid "plan-usage.window.none"
@@ -2635,7 +3235,7 @@ msgstr "No more hints"
 msgid "settings.ai.key.none"
 msgstr "No OpenRouter key is saved."
 
-#: src/routes/index.tsx
+#: src/routes/paths.tsx
 msgid "home.empty"
 msgstr "No paths yet. Tell Yuo what you want to learn and it plans the lessons for you."
 
@@ -2689,6 +3289,10 @@ msgstr "Not now"
 msgid "next.close"
 msgstr "Not now"
 
+#: src/material/Studies.tsx
+msgid "studies.update.dismiss"
+msgstr "Not now"
+
 #: src/routes/skillTest.tsx
 msgid "skill-test.failed"
 msgstr "Not passed yet."
@@ -2713,9 +3317,21 @@ msgstr "Not sent: {error}"
 msgid "tutor.send.unsent"
 msgstr "Not sent: the server cannot be reached. It is sent when you are back online."
 
+#: src/routes/mockExam.tsx
+msgid "mock.failed"
+msgstr "Not there yet."
+
 #: src/routes/devices.tsx
 msgid "devices.credentials.never-used"
 msgstr "not used yet"
+
+#: src/material/Coverage.tsx
+msgid "coverage.key.unused"
+msgstr "not used yet"
+
+#: src/material/Coverage.tsx
+msgid "coverage.unused"
+msgstr "Not used yet"
 
 #: src/lesson/Notes.tsx
 msgid "notes.add.lesson.label"
@@ -2731,6 +3347,10 @@ msgstr "Noted by the tutor"
 
 #: src/tutor/texts.ts
 msgid "tutor.chip.kind.notes"
+msgstr "Notes"
+
+#: src/material/labels.tsx
+msgid "material.role.notes"
 msgstr "Notes"
 
 #: src/tutor/texts.ts
@@ -2749,6 +3369,10 @@ msgstr "Nothing else is needed for this choice."
 msgid "tutor.chips.none"
 msgstr "Nothing from this screen."
 
+#: src/material/Coverage.tsx
+msgid "coverage.empty"
+msgstr "Nothing is read yet."
+
 #: src/routes/jobs.tsx
 msgid "jobs.none"
 msgstr "Nothing is running and nothing failed recently."
@@ -2764,6 +3388,10 @@ msgstr "Nothing studied yet"
 #: src/review/Hub.tsx
 msgid "review.hub.empty.title"
 msgstr "Nothing to review yet"
+
+#: src/routes/index.tsx
+msgid "home.today.none"
+msgstr "Nothing waiting. A good day for a new lesson."
 
 #: src/routes/importPage.tsx
 msgid "import.refused.nothing"
@@ -2809,6 +3437,10 @@ msgstr "ollama.com/download (opens in a new tab)"
 msgid "settings.on"
 msgstr "On"
 
+#: src/routes/index.tsx
+msgid "home.progress.on-track"
+msgstr "On track"
+
 #: src/routes/signIn.tsx
 msgid "auth.sign-in.recovery.hint"
 msgstr "One of the ten codes you saved. Each works once; make new ones in Sign-in and devices."
@@ -2824,6 +3456,18 @@ msgstr "One-time code"
 #: src/path/NextOffer.tsx
 msgid "next.offer.low"
 msgstr "Only a few planned lessons are left. Choose where your path goes next, so it keeps growing."
+
+#: src/material/labels.tsx
+msgid "adherence.only"
+msgstr "Only my material"
+
+#: src/material/Studies.tsx
+msgid "material.vision.capped"
+msgstr "Only the {pages} pages missing the most are read; the others keep their text."
+
+#: src/routes/index.tsx
+msgid "home.today.failed.action"
+msgstr "Open"
 
 #: src/path/PathGraph.tsx
 msgid "path.tree.legend.open"
@@ -2867,9 +3511,17 @@ msgstr "Open the tutor (Ctrl+J)"
 msgid "tutor.memory.first-use.link"
 msgstr "Open tutor memory"
 
+#: src/routes/index.tsx
+msgid "home.next.none.meta"
+msgstr "Open your paths to add lessons or start a new one."
+
 #: src/onboarding/desktop.tsx
 msgid "desktop.signed-out.open"
 msgstr "Open Yuo signed in"
+
+#: src/material/StudiesForm.tsx
+msgid "studies.opening"
+msgstr "Opening the upload…"
 
 #: src/onboarding/access.tsx
 msgid "access.key.saved"
@@ -2899,6 +3551,10 @@ msgstr "or A–D: choose"
 msgid "next.where.own"
 msgstr "Or in your own words (optional)"
 
+#: src/material/labels.tsx
+msgid "material.role.other"
+msgstr "Other"
+
 #: src/routes/signIn.tsx
 msgid "auth.sign-in.other"
 msgstr "Other ways to sign in"
@@ -2911,9 +3567,22 @@ msgstr "Out of curiosity"
 msgid "path.tree.minimap.label"
 msgstr "Overview of the tree"
 
+#: src/material/LessonSources.tsx
+msgid "sources.page"
+msgstr "p. {a}"
+
+#. placeholder {0}: m.title
+#: src/material/Studies.tsx
+msgid "material.vision.progress.label"
+msgstr "Pages read from their images: {0}"
+
 #: src/items/GradeFeedback.tsx
 msgid "item.grade.partial"
 msgstr "Partly right ({percent}%)."
+
+#: src/material/Coverage.tsx
+msgid "coverage.parts"
+msgstr "Parts of {title}"
 
 #: src/sharing/labels.tsx
 msgid "import.notice.unknown-kinds"
@@ -2950,6 +3619,10 @@ msgstr "Password"
 #: src/routes/devices.tsx
 msgid "devices.credentials.password-saved"
 msgstr "Password saved."
+
+#: src/material/labels.tsx
+msgid "material.role.exams"
+msgstr "Past exams"
 
 #: src/onboarding/CliAccess.tsx
 msgid "cli.login.code.label"
@@ -3008,6 +3681,10 @@ msgstr "Placement test"
 msgid "lesson.state.planned"
 msgstr "Planned"
 
+#: src/material/Studies.tsx
+msgid "studies.work.course"
+msgstr "Planning {title}"
+
 #: src/components/labels.tsx
 msgid "job.kind.request"
 msgstr "Planning a requested lesson"
@@ -3024,7 +3701,15 @@ msgstr "Planning the skills"
 msgid "path.growing.plan"
 msgstr "Planning the skills and lessons"
 
-#: src/routes/index.tsx
+#: src/material/Studies.tsx
+msgid "studies.course.planning"
+msgstr "Planning this course…"
+
+#: src/routes/planPreview.tsx
+msgid "preview.drafting"
+msgstr "Planning your path. This takes about a minute."
+
+#: src/routes/paths.tsx
 msgid "home.empty.title"
 msgstr "Plant your first path"
 
@@ -3044,6 +3729,10 @@ msgstr "Please note"
 #: src/routes/settings.tsx
 msgid "settings.group.motivation.description"
 msgstr "Points, streaks and levels"
+
+#: src/material/LessonSources.tsx
+msgid "sources.pages"
+msgstr "pp. {a}-{b}"
 
 #: src/routes/practice.tsx
 msgid "practice.title"
@@ -3212,6 +3901,10 @@ msgstr "Questions for the tutor"
 msgid "notes-bubble.open"
 msgstr "Questions for the tutor: tap to open, drag to move or to the × to hide"
 
+#: src/routes/mockExam.tsx
+msgid "mock.intro"
+msgstr "Questions from the whole course, in the style of its past exams when you added some. No hints and no feedback until the end. It does not change your progress."
+
 #: src/review/Player.tsx
 msgid "review.vine.label"
 msgstr "Questions of this session"
@@ -3250,9 +3943,46 @@ msgstr "Qwen 3.8 27B through OpenRouter (pay per use)"
 msgid "item.grade.flashcard.saved"
 msgstr "Rating saved. The card comes back when it is due."
 
+#: src/material/labels.tsx
+msgid "material.state.read"
+msgstr "Read"
+
+#: src/material/Studies.tsx
+msgid "studies.start"
+msgstr "Read my material and plan"
+
+#: src/material/labels.tsx
+msgid "material.state.reading"
+msgstr "Reading"
+
+#: src/material/Studies.tsx
+msgid "studies.work.file"
+msgstr "Reading {title}: part {done} of {total}"
+
+#: src/material/Studies.tsx
+msgid "studies.work.label"
+msgstr "Reading and planning"
+
+#: src/material/Studies.tsx
+#: src/material/Studies.tsx
+msgid "studies.drafting"
+msgstr "Reading and planning…"
+
 #: src/routes/SettingRow.tsx
 msgid "settings.video-format.reading"
 msgstr "Reading only"
+
+#: src/material/Studies.tsx
+msgid "material.vision.progress"
+msgstr "Reading pages from their images: {done} of {total}"
+
+#: src/material/Studies.tsx
+msgid "studies.course.reading"
+msgstr "Reading the material…"
+
+#: src/material/Studies.tsx
+msgid "material.vision.wanted"
+msgstr "Reading the pages with formulas and figures from their images…"
 
 #: src/sharing/labels.tsx
 msgid "share.content.readings"
@@ -3261,6 +3991,10 @@ msgstr "Readings"
 #: src/sharing/labels.tsx
 msgid "share.format.readings"
 msgstr "Readings as web pages and Markdown"
+
+#: src/material/labels.tsx
+msgid "material.state.ready"
+msgstr "Ready"
 
 #: src/components/labels.tsx
 msgid "lesson.state.ready"
@@ -3304,6 +4038,10 @@ msgstr "Recommendation"
 msgid "wizard.options.recommended"
 msgstr "Recommended"
 
+#: src/material/labels.tsx
+msgid "material.role.lecture"
+msgstr "Recorded lecture"
+
 #: src/components/JobProgress.tsx
 #: src/components/JobProgress.tsx
 msgid "job.step.narration"
@@ -3321,6 +4059,10 @@ msgstr "Recovery codes"
 msgid "auth.codes.list"
 msgstr "Recovery codes"
 
+#: src/routes/index.tsx
+msgid "home.today.fading.action"
+msgstr "Refresh"
+
 #: src/pwa/PwaControls.tsx
 msgid "pwa.update.reload"
 msgstr "Reload to update"
@@ -3328,6 +4070,33 @@ msgstr "Reload to update"
 #: src/routes/tutorMemory.tsx
 msgid "tutor.memory.list.label"
 msgstr "Remembered entries"
+
+#: src/material/StudiesForm.tsx
+msgid "studies.course.remove"
+msgstr "Remove"
+
+#: src/material/Studies.tsx
+msgid "material.remove"
+msgstr "Remove"
+
+#: src/material/Studies.tsx
+msgid "material.remove.built"
+msgstr "Remove"
+
+#. placeholder {0}: r.title || "this course"
+#: src/material/StudiesForm.tsx
+msgid "studies.course.remove.label"
+msgstr "Remove {0}"
+
+#. placeholder {0}: m.title
+#: src/material/Studies.tsx
+msgid "material.remove.label"
+msgstr "Remove {0}"
+
+#. placeholder {0}: m.title
+#: src/material/Studies.tsx
+msgid "material.remove.built.question"
+msgstr "Remove {0}? The lessons written from it are written again without it; you can read them as they are until then."
 
 #: src/routes/devices.tsx
 msgid "devices.credentials.remove"
@@ -3345,6 +4114,10 @@ msgstr "Remove from the context: {kind}"
 msgid "settings.ai.vendor.remove.confirm-text"
 msgstr "Remove the {vendor} key? Models from {vendor} stop working until you add a key again."
 
+#: src/material/Studies.tsx
+msgid "material.remove.built.confirm"
+msgstr "Remove the file"
+
 #: src/onboarding/SettingsSections.tsx
 #: src/onboarding/vendor.tsx
 msgid "settings.ai.key.remove"
@@ -3358,9 +4131,18 @@ msgstr "Remove the key: {vendor}"
 msgid "settings.ai.key.remove.confirm-text"
 msgstr "Remove the key? Models through OpenRouter stop working until you add a key again."
 
+#: src/material/Studies.tsx
+msgid "studies.course.drop"
+msgstr "Remove this course"
+
 #: src/tutor/DockPanel.tsx
 msgid "tutor.chips.removed"
 msgstr "Removed:"
+
+#: src/routes/paths.tsx
+#: src/routes/paths.tsx
+msgid "paths.edit"
+msgstr "Rename or edit"
 
 #: src/components/JobProgress.tsx
 msgid "job.step.render"
@@ -3420,6 +4202,11 @@ msgstr "Retry"
 msgid "review.hub.title"
 msgstr "Review"
 
+#: src/routes/index.tsx
+#: src/routes/index.tsx
+msgid "home.today.review"
+msgstr "Review"
+
 #: src/review/Hub.tsx
 msgid "review.entry.title"
 msgstr "Review"
@@ -3473,6 +4260,10 @@ msgstr "Reviews"
 #: src/routes/SettingRow.tsx
 msgid "settings.key.reviews-per-day"
 msgstr "Reviews per day"
+
+#: src/material/Studies.tsx
+msgid "studies.update.lessons"
+msgstr "Rewrite these lessons with it: {lessons}"
 
 #: src/review/Player.tsx
 msgid "review.option.right"
@@ -3532,6 +4323,10 @@ msgstr "Save"
 
 #: src/routes/tutorMemory.tsx
 msgid "tutor.memory.save"
+msgstr "Save"
+
+#: src/routes/paths.tsx
+msgid "paths.edit.save"
 msgstr "Save"
 
 #: src/routes/SettingRow.tsx
@@ -3719,6 +4514,10 @@ msgstr "Settings"
 #: src/routes/devices.tsx
 #: src/routes/root.tsx
 msgid "nav.settings"
+msgstr "Settings"
+
+#: src/material/Studies.tsx
+msgid "studies.course.settings"
 msgstr "Settings"
 
 #: src/routes/root.tsx
@@ -3926,7 +4725,7 @@ msgstr "Skills mastered"
 msgid "progress.skills"
 msgstr "Skills mastered: {mastered} of {total}"
 
-#: src/routes/index.tsx
+#: src/routes/paths.tsx
 msgid "home.path.progress.label"
 msgstr "Skills mastered: {title}"
 
@@ -3938,9 +4737,25 @@ msgstr "Skills, lesson texts and questions, no videos: the recipient's models ma
 msgid "level-check.skip"
 msgstr "Skip it and start from the basics"
 
+#: src/material/LessonSources.tsx
+msgid "sources.slide"
+msgstr "slide {a}"
+
 #: src/sharing/labels.tsx
 msgid "share.content.slides"
 msgstr "Slides"
+
+#: src/material/labels.tsx
+msgid "material.role.slides"
+msgstr "Slides"
+
+#: src/material/LessonSources.tsx
+msgid "sources.slides"
+msgstr "slides {a}-{b}"
+
+#: src/routes/index.tsx
+msgid "home.progress.slipping"
+msgstr "Slipping a little"
 
 #: src/onboarding/SettingsSections.tsx
 msgid "settings.ai.role.utility"
@@ -3958,12 +4773,12 @@ msgstr "Solution"
 msgid "import.profile.custom"
 msgstr "Some parts of a path"
 
-#: src/onboarding/texts.tsx
-msgid "wizard.estimate.missing"
-msgstr "Some steps have no known price yet, so it can cost more."
-
 #: src/onboarding/vendorModels.tsx
 msgid "vendor.estimate.missing"
+msgstr "Some steps have no known price yet, so it can cost more."
+
+#: src/onboarding/texts.tsx
+msgid "wizard.estimate.missing"
 msgstr "Some steps have no known price yet, so it can cost more."
 
 #: src/routes/pathNew.tsx
@@ -4014,6 +4829,14 @@ msgstr "Start"
 msgid "wizard.answers.clear"
 msgstr "Start empty instead"
 
+#: src/routes/pathNew.tsx
+msgid "path.new.start"
+msgstr "Start from"
+
+#: src/routes/index.tsx
+msgid "home.today.due.action"
+msgstr "Start review"
+
 #: src/tutor/Proposals.tsx
 msgid "tutor.proposal.review.start.plain"
 msgstr "Start the review"
@@ -4026,7 +4849,12 @@ msgstr "Start the review of {skill}"
 msgid "progress.erase.description"
 msgstr "Start this path over: your progress, answers, reviews, notes, tutor conversations and lesson requests here are deleted for good. The path and its lessons stay; lessons written from your own material are written again when you need them."
 
+#. placeholder {0}: n.title
 #: src/routes/index.tsx
+msgid "home.next.start"
+msgstr "Start: {0}"
+
+#: src/routes/paths.tsx
 msgid "home.path.created"
 msgstr "started {created}"
 
@@ -4078,6 +4906,10 @@ msgstr "Stop Yuo when you are done"
 msgid "jobs.cancelled"
 msgstr "Stopped before it finished."
 
+#: src/routes/index.tsx
+msgid "home.momentum.streak.label"
+msgstr "streak"
+
 #: src/routes/SettingRow.tsx
 msgid "settings.key.grace-days"
 msgstr "Streak grace days"
@@ -4099,6 +4931,18 @@ msgstr "Structure and texts"
 msgid "settings.ai.apps"
 msgstr "Subscription apps"
 
+#: src/material/Arrange.tsx
+msgid "arrange.again"
+msgstr "Suggest again"
+
+#: src/material/Arrange.tsx
+msgid "arrange.ask"
+msgstr "Suggest the courses"
+
+#: src/material/Arrange.tsx
+msgid "arrange.title"
+msgstr "Suggested path"
+
 #: src/tutor/Nudges.tsx
 msgid "tutor.nudge.peek.label"
 msgstr "Suggestion from the tutor"
@@ -4119,6 +4963,10 @@ msgstr "Suggestions from the tutor"
 msgid "settings.key.tutor-muted"
 msgstr "Suggestions you turned off"
 
+#: src/material/labels.tsx
+msgid "material.state.digesting"
+msgstr "Summarising"
+
 #: src/components/SyncIndicator.tsx
 msgid "sync.synced"
 msgstr "Synced"
@@ -4130,6 +4978,14 @@ msgstr "syncing"
 #: src/onboarding/ProbeSummary.tsx
 msgid "wizard.computer.os"
 msgstr "System"
+
+#: src/material/Studies.tsx
+msgid "studies.course.mock"
+msgstr "Take a mock exam"
+
+#: src/routes/index.tsx
+msgid "home.today.exam.action.label"
+msgstr "Take a mock exam: {title}"
 
 #: src/routes/pathView.tsx
 msgid "path.placement.start"
@@ -4157,9 +5013,17 @@ msgstr "Take the skill test: {title}"
 msgid "job.time.longer"
 msgstr "taking longer than usual, still working"
 
+#: src/material/Studies.tsx
+msgid "material.audio-only"
+msgstr "Taking the sound out of the video: only that is uploaded…"
+
 #: src/routes/SettingRow.tsx
 msgid "settings.key.review-retention"
 msgstr "Target recall at review time"
+
+#: src/material/Coverage.tsx
+msgid "coverage.key.taught"
+msgstr "taught"
 
 #: src/routes/tutorMemory.tsx
 msgid "tutor.memory.add.title"
@@ -4233,9 +5097,17 @@ msgstr "The cost estimate is not available right now."
 msgid "vendor.estimate.unavailable"
 msgstr "The cost estimate is not available right now."
 
+#: src/material/Arrange.tsx
+msgid "arrange.failed"
+msgstr "The courses could not be suggested. Try again in a moment."
+
 #: src/video/unavailable.tsx
 msgid "video.unavailable.desktop"
 msgstr "The desktop app does not make videos yet, so your lessons are readings with practice and the tutor. Videos need the server version of Yuo for now."
+
+#: src/material/Studies.tsx
+msgid "material.vision.then"
+msgstr "The generation model looks at the pages, then the course is planned again with them."
 
 #: src/onboarding/CliAccess.tsx
 msgid "cli.install.failed"
@@ -4249,9 +5121,17 @@ msgstr "The lesson did not pass the quality review."
 msgid "tutor.proposal.add-lesson.done"
 msgstr "The lesson is requested. It appears under “Your requests” on the path."
 
+#: src/material/Studies.tsx
+msgid "studies.links.failed"
+msgstr "The links between your courses could not be found."
+
 #: src/tutor/texts.ts
 msgid "tutor.error.transport"
 msgstr "The model could not be reached."
+
+#: src/material/Studies.tsx
+msgid "material.vision.failed"
+msgstr "The model could not read these pages. It may not accept images; try another generation model."
 
 #: src/components/jobError.ts
 msgid "job.error.rate-limit"
@@ -4333,6 +5213,23 @@ msgstr "The path drawn as a graph: the start in the middle, one hub for each bra
 msgid "import.personal.intro"
 msgstr "The person who shared this included their own content:"
 
+#: src/material/Studies.tsx
+#: src/routes/planPreview.tsx
+msgid "preview.revise-failed"
+msgstr "The plan could not be changed. Try again in a moment."
+
+#: src/routes/planPreview.tsx
+msgid "preview.failed"
+msgstr "The plan could not be written. Try again in a moment."
+
+#: src/routes/index.tsx
+msgid "home.today.plan"
+msgstr "The plan for “{title}” is ready"
+
+#: src/material/Studies.tsx
+msgid "studies.course.recordings"
+msgstr "The plan starts when the first recordings are transcribed…"
+
 #: src/onboarding/PlanMeter.tsx
 msgid "plan-meter.limited"
 msgstr "The plan's limit is reached. Lessons wait until it resets, then Yuo continues by itself."
@@ -4352,6 +5249,10 @@ msgstr "The questions could not be written."
 #: src/routes/levelCheck.tsx
 msgid "level-check.failed.retry"
 msgstr "The questions could not be written. Try again, or skip the check: the path then starts from the basics."
+
+#: src/routes/lessonReader.tsx
+msgid "lesson.review-notes.intro"
+msgstr "The reviewer found what may be wrong in it:"
 
 #: src/items/GradeFeedback.tsx
 msgid "item.grade.right-answer"
@@ -4506,6 +5407,10 @@ msgstr "This conversation"
 msgid "error.not-found"
 msgstr "This could not be found. It may have been removed."
 
+#: src/material/Studies.tsx
+msgid "studies.course.failed"
+msgstr "This course's plan could not be written. Try again in a moment."
+
 #: src/tutor/Proposals.tsx
 msgid "tutor.proposal.error"
 msgstr "This decision was not accepted: {error}"
@@ -4526,6 +5431,10 @@ msgstr "This installation"
 msgid "video.unavailable.not-installed"
 msgstr "This installation has no video maker, so lessons are readings with practice and the tutor."
 
+#: src/material/Studies.tsx
+msgid "material.role"
+msgstr "This is"
+
 #: src/routes/SettingRow.tsx
 msgid "settings.read-only"
 msgstr "This is set for the whole installation."
@@ -4533,6 +5442,14 @@ msgstr "This is set for the whole installation."
 #: src/onboarding/SettingsSections.tsx
 msgid "update.newest"
 msgstr "This is the newest version."
+
+#: src/material/Studies.tsx
+msgid "studies.plan.intro"
+msgstr "This is what Yuo will build from your material. Nothing is written yet: for each course, tell Yuo what is missing, wrong or should go deeper. When it fits, build it."
+
+#: src/routes/planPreview.tsx
+msgid "preview.intro"
+msgstr "This is what Yuo will build. Nothing is written yet: tell Yuo what is missing, wrong or should go deeper, and it changes the plan. When it fits, build it."
 
 #: src/routes/devices.tsx
 msgid "devices.credentials.only"
@@ -4602,6 +5519,10 @@ msgstr "This thread"
 msgid "tutor.threads.this"
 msgstr "This thread ({scopeLabel})"
 
+#: src/routes/index.tsx
+msgid "home.momentum.xp.label"
+msgstr "this week"
+
 #: src/routes/SettingRow.tsx
 msgid "settings.impact.time"
 msgstr "time"
@@ -4614,6 +5535,10 @@ msgstr "Time zone"
 msgid "lesson.callout.tip"
 msgstr "Tip"
 
+#: src/material/Studies.tsx
+msgid "studies.collect.tip"
+msgstr "Tip: start with the syllabus, the book or the slides. They are read in seconds and give the plan its shape. Recordings take longer (about a quarter of their length): they are transcribed in the background and join the plan one by one, so you do not have to wait for them."
+
 #: src/routes/pathNew.tsx
 msgid "path.new.field.title"
 msgstr "Title"
@@ -4625,6 +5550,18 @@ msgstr "To make sure this install is yours, type the setup code that the Yuo ser
 #: src/onboarding/access.tsx
 msgid "access.local.no-server"
 msgstr "To run the model on this computer, Yuo uses the free Ollama app. It is not running yet."
+
+#: src/routes/index.tsx
+msgid "home.today"
+msgstr "Today"
+
+#: src/material/labels.tsx
+msgid "material.state.transcribing"
+msgstr "Transcribing"
+
+#: src/routes/SettingRow.tsx
+msgid "settings.key.transcription"
+msgstr "Transcribing recordings"
 
 #: src/components/JobProgress.tsx
 msgid "job.step.translate"
@@ -4640,6 +5577,14 @@ msgstr "Tried"
 
 #: src/routes/setup.tsx
 msgid "wizard.computer.retry"
+msgstr "Try again"
+
+#: src/material/Studies.tsx
+#: src/material/Studies.tsx
+#: src/material/Studies.tsx
+#: src/routes/planPreview.tsx
+#: src/routes/planPreview.tsx
+msgid "preview.retry"
 msgstr "Try again"
 
 #: src/routes/nextSteps.tsx
@@ -4664,6 +5609,10 @@ msgstr "Try again"
 
 #: src/path/LessonRow.tsx
 msgid "path.lesson.retry"
+msgstr "Try again"
+
+#: src/material/Studies.tsx
+msgid "material.retry"
 msgstr "Try again"
 
 #: src/auth/SetupFlow.tsx
@@ -4779,6 +5728,11 @@ msgstr "Untitled lesson"
 msgid "path.next.eyebrow"
 msgstr "Up next"
 
+#. placeholder {0}: n.title
+#: src/routes/index.tsx
+msgid "home.next.planned"
+msgstr "Up next: {0}"
+
 #: src/onboarding/SettingsSections.tsx
 msgid "update.container"
 msgstr "Update by pulling the new container image."
@@ -4796,9 +5750,23 @@ msgstr "Updates"
 msgid "import.preview.upgraded"
 msgstr "Upgraded from package format {upgraded}."
 
+#: src/material/StudiesForm.tsx
+#: src/material/StudiesForm.tsx
+msgid "studies.responsibility"
+msgstr "Upload only material you may use for your own study. Yuo keeps it on this installation and sends the parts it needs to your AI provider; what you upload is your responsibility."
+
 #: src/routes/importPage.tsx
 msgid "import.uploading.label"
 msgstr "Upload progress"
+
+#: src/material/labels.tsx
+msgid "material.state.uploading"
+msgstr "Uploading"
+
+#. placeholder {0}: p.name
+#: src/material/Studies.tsx
+msgid "material.uploading.label"
+msgstr "Uploading {0}"
 
 #. placeholder {0}: stage.name
 #: src/routes/importPage.tsx
@@ -4848,6 +5816,10 @@ msgstr "Use password"
 #: src/routes/signIn.tsx
 msgid "auth.sign-in.passkey.intro"
 msgstr "Use the passkey you made for Yuo on this or another device."
+
+#: src/material/Arrange.tsx
+msgid "arrange.accept"
+msgstr "Use these courses"
 
 #: src/onboarding/vendor.tsx
 #: src/onboarding/vendorModels.tsx
@@ -4947,6 +5919,11 @@ msgstr "View controls"
 msgid "request.status.pending"
 msgstr "Waiting"
 
+#: src/material/Arrange.tsx
+#: src/material/Studies.tsx
+msgid "studies.start.busy"
+msgstr "Waiting for the files to be read…"
+
 #: src/onboarding/CliAccess.tsx
 msgid "cli.login.device.waiting"
 msgstr "Waiting for you to finish on the sign-in page…"
@@ -4954,6 +5931,10 @@ msgstr "Waiting for you to finish on the sign-in page…"
 #: src/tutor/texts.ts
 msgid "tutor.proposal.status.pending"
 msgstr "Waiting for your decision"
+
+#: src/material/labels.tsx
+msgid "material.state.queued"
+msgstr "Waiting to be transcribed"
 
 #: src/components/labels.tsx
 msgid "job.status.queued"
@@ -4971,6 +5952,10 @@ msgstr "Watch out"
 msgid "devices.credentials.title"
 msgstr "Ways to sign in"
 
+#: src/routes/index.tsx
+msgid "home.today.arrange.detail"
+msgstr "We found natural groupings in your material."
+
 #: src/routes/setup.tsx
 msgid "wizard.recommendation.lead.short"
 msgstr "We recommend <0>{recommended}</0> for this computer."
@@ -4982,6 +5967,11 @@ msgstr "Weakens learning:"
 #: src/auth/SetupFlow.tsx
 msgid "auth.setup.title"
 msgstr "Welcome to Yuo"
+
+#: src/material/Studies.tsx
+#: src/routes/planPreview.tsx
+msgid "preview.changed"
+msgstr "What changed"
 
 #: src/routes/levelCheck.tsx
 msgid "level-check.title"
@@ -4999,12 +5989,12 @@ msgstr "What is new (opens in a new tab)"
 msgid "review.report.reason"
 msgstr "What is wrong with it? (optional)"
 
-#: src/routes/nextSteps.tsx
-msgid "next.title"
-msgstr "What next?"
-
 #: src/routes/pathView.tsx
 msgid "path.next.link"
+msgstr "What next?"
+
+#: src/routes/nextSteps.tsx
+msgid "next.title"
 msgstr "What next?"
 
 #: src/path/NextOffer.tsx
@@ -5027,6 +6017,10 @@ msgstr "What should the lesson cover?"
 msgid "share.preview.title"
 msgstr "What the package will hold"
 
+#: src/material/StudiesForm.tsx
+msgid "studies.field.title.description"
+msgstr "What the path is about, e.g. “Mechanical Engineering” or “Personal finance”: one path, so its courses can build on each other."
+
 #: src/tutor/DockPanel.tsx
 msgid "tutor.chips.summary"
 msgstr "What the tutor sees with your next message ({count})"
@@ -5040,13 +6034,25 @@ msgstr "What to share"
 msgid "review.chooser.intro"
 msgstr "What you studied, brought back just before you would forget it."
 
+#: src/material/StudiesForm.tsx
+msgid "studies.field.title"
+msgstr "What you study"
+
 #: src/routes/pathNew.tsx
 msgid "path.new.field.goal.description"
 msgstr "What you want to be able to do at the end."
 
+#: src/routes/paths.tsx
+msgid "paths.edit.goal.description"
+msgstr "What you want to be able to do. Lessons written from now on follow it."
+
 #: src/routes/pathNew.tsx
 msgid "path.new.field.title.description.topic"
 msgstr "What you want to learn, e.g. “SQL for analysts” or “Spanish for travel”."
+
+#: src/material/Coverage.tsx
+msgid "coverage.title"
+msgstr "What your material covers"
 
 #: src/routes/jobs.tsx
 msgid "jobs.intro2"
@@ -5055,6 +6061,10 @@ msgstr "What Yuo is working on now, and everything it has done."
 #: src/routes/jobs.tsx
 msgid "jobs.col.when"
 msgstr "When"
+
+#: src/material/Arrange.tsx
+msgid "arrange.intro"
+msgstr "When all your files are in, Yuo suggests a name for the path and how to split it into courses. You can change it in your own words before anything is planned."
 
 #: src/onboarding/CliAccess.tsx
 msgid "cli.manual.after.install"
@@ -5127,6 +6137,10 @@ msgstr "Would you rather not run Yuo on your own computer? A hosted version may 
 msgid "notes-bubble.hint"
 msgstr "Write a question as it comes up and keep watching. The moment of the video is saved with it; send them all to the tutor when you are done."
 
+#: src/routes/lessonReader.tsx
+msgid "lesson.review-notes.again"
+msgstr "Write it again"
+
 #: src/onboarding/SettingsSections.tsx
 msgid "settings.ai.role.generator"
 msgstr "Writes lessons"
@@ -5166,6 +6180,10 @@ msgstr "Writing the lesson"
 #: src/components/JobProgress.tsx
 msgid "job.step.level-check"
 msgstr "Writing the level questions"
+
+#: src/routes/mockExam.tsx
+msgid "mock.preparing"
+msgstr "Writing the questions for every skill of the course. The first time this can take several minutes…"
 
 #: src/components/JobProgress.tsx
 #: src/components/JobProgress.tsx
@@ -5225,6 +6243,22 @@ msgstr "You already know these skills; they are marked as mastered:"
 #: src/routes/settings.tsx
 msgid "settings.you.title"
 msgstr "You and this Yuo"
+
+#: src/routes/index.tsx
+msgid "home.insight.afternoon"
+msgstr "You answer best in the afternoon ({percent}% right)."
+
+#: src/routes/index.tsx
+msgid "home.insight.evening"
+msgstr "You answer best in the evening ({percent}% right)."
+
+#: src/routes/index.tsx
+msgid "home.insight.morning"
+msgstr "You answer best in the morning ({percent}% right)."
+
+#: src/routes/index.tsx
+msgid "home.insight.night"
+msgstr "You answer best late at night ({percent}% right)."
 
 #: src/tutor/texts.ts
 msgid "tutor.policy.review-after"
@@ -5313,6 +6347,10 @@ msgstr "You were sure: worth a closer look."
 msgid "path.panel.objectives"
 msgstr "You will learn to"
 
+#: src/routes/mockExam.tsx
+msgid "mock.passed"
+msgstr "You would pass."
+
 #: src/review/Player.tsx
 msgid "review.option.yours"
 msgstr "Your answer"
@@ -5353,6 +6391,10 @@ msgstr "Your answers are saved. The results appear here when you are back online
 msgid "wizard.step.computer"
 msgstr "Your computer"
 
+#: src/material/Studies.tsx
+msgid "studies.step.collect"
+msgstr "Your courses and material"
+
 #: src/routes/devices.tsx
 msgid "devices.codes.confirm-text"
 msgstr "Your current codes will stop working. Make ten new ones?"
@@ -5361,6 +6403,14 @@ msgstr "Your current codes will stop working. Make ten new ones?"
 msgid "progress.erase.title"
 msgstr "Your data in this path"
 
+#: src/material/Studies.tsx
+msgid "arrange.files"
+msgstr "Your files"
+
+#: src/material/labels.tsx
+msgid "adherence.open.description"
+msgstr "Your files set the topics; Yuo also teaches what they leave out."
+
 #: src/routes/setup.tsx
 msgid "wizard.step.path"
 msgstr "Your first path"
@@ -5368,6 +6418,10 @@ msgstr "Your first path"
 #: src/routes/pathNew.tsx
 msgid "path.new.field.goal"
 msgstr "Your goal"
+
+#: src/material/StudiesForm.tsx
+msgid "studies.field.goal"
+msgstr "Your goal (optional)"
 
 #: src/onboarding/texts.tsx
 msgid "wizard.reason.gpu-memory-short"
@@ -5393,6 +6447,14 @@ msgstr "Your Mac has {gb} GB of memory shared with its graphics. The model needs
 msgid "wizard.reason.unified-memory-short"
 msgstr "Your Mac has {gb} GB of memory. Running the model on this computer needs {min} GB."
 
+#: src/tutor/texts.ts
+msgid "tutor.chip.kind.material"
+msgstr "Your material"
+
+#: src/routes/pathView.tsx
+msgid "path.material"
+msgstr "Your material"
+
 #: src/onboarding/profile.tsx
 msgid "profile.name"
 msgstr "Your name"
@@ -5417,14 +6479,26 @@ msgstr "Your own settings apply to all your paths unless a path sets its own."
 msgid "path.growing.title"
 msgstr "Your path is growing"
 
-#: src/routes/index.tsx
+#: src/routes/paths.tsx
 msgid "home.title"
 msgstr "Your paths"
+
+#: src/routes/planPreview.tsx
+msgid "preview.title"
+msgstr "Your plan"
+
+#: src/material/Studies.tsx
+msgid "studies.step.plan"
+msgstr "Your plan, course by course"
 
 #: src/onboarding/SettingsSections.tsx
 #: src/routes/settings.tsx
 msgid "settings.profile.title"
 msgstr "Your profile"
+
+#: src/routes/index.tsx
+msgid "home.progress"
+msgstr "Your progress"
 
 #: src/auth/RecoveryCodes.tsx
 msgid "auth.codes.title"
@@ -5438,8 +6512,16 @@ msgstr "Your requests"
 msgid "skill-test.score.bar"
 msgstr "Your score"
 
+#: src/routes/mockExam.tsx
+msgid "mock.score.bar"
+msgstr "Your score"
+
 #: src/routes/skillTest.tsx
 msgid "skill-test.score"
+msgstr "Your score: {score}% (pass mark {mark}%)"
+
+#: src/routes/mockExam.tsx
+msgid "mock.score"
 msgstr "Your score: {score}% (pass mark {mark}%)"
 
 #: src/routes/SettingRow.tsx
@@ -5516,8 +6598,13 @@ msgid "desktop.stopped.title"
 msgstr "Yuo has stopped"
 
 #: src/routes/index.tsx
+#: src/routes/paths.tsx
 msgid "home.finish-setup"
 msgstr "Yuo is not fully set up yet."
+
+#: src/material/Studies.tsx
+msgid "studies.drafting.intro"
+msgstr "Yuo is reading your material and planning each course. This page updates by itself; you can leave and come back."
 
 #: src/components/ErrorNotice.tsx
 msgid "error.restarting"
@@ -5598,7 +6685,3 @@ msgstr "Zoom in"
 #: src/path/PathGraph.tsx
 msgid "path.tree.controls.zoom-out"
 msgstr "Zoom out"
-
-#: src/routes/root.tsx
-msgid "footer.made-by"
-msgstr "Made by {name}"

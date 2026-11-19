@@ -4,6 +4,66 @@ All notable changes are listed here. The format follows Keep a Changelog; versio
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-11-19
+
+- A new Home shows, at a glance, what to do next and how it goes across all your paths: the lesson to continue,
+  what waits today (reviews due, skills fading, a lesson waiting for your decision, files being transcribed, a
+  suggestion for your material, an exam coming up), your mastery and how it moved this week, your streak and
+  XP, and one observation from your own answers. The list of paths moved to Paths.
+- Paths can be renamed, have their goal changed, be archived (out of sight, brought back at any time) or be
+  deleted with everything in them, from the menu on each path in Paths.
+- Reading pages from their images shows how many pages are done of how many, and reading and planning your
+  material shows a progress bar with the file or course it is working on.
+- A path from your own material starts from the files alone: add everything for every course at once, and Yuo
+  suggests the path's name and how the files split into courses, with a note on why. Change it in your own
+  words, choose how closely each course keeps to its files, and take it. Your files are dropped right on the
+  new-path form, and nothing is made until you add them.
+- Long recordings no longer run out of memory while they are transcribed: the speech is transcribed a few
+  minutes at a time, with flat memory whatever the length, and when the transcription is still stopped it goes
+  on from where it was instead of starting over. A file that failed can be tried again without uploading it.
+- A lecture video in MP4 or MOV is uploaded as its sound only: the audio track is taken out in the browser,
+  unchanged, so a 70 MB video sends a few MB. The video was never kept anyway.
+- PDF pages whose formulas or symbols are missing from the text (drawn as shapes, or left as gaps) are
+  flagged, and reading them from their images is recommended for them: what the model reads replaces the
+  page's text, formulas in LaTeX. Up to 300 pages per file, those missing the most first.
+- Maths is written in LaTeX and shown as formulas everywhere: inside lesson text (not only in formula blocks),
+  in practice, test, review and level check questions, their options, hints, solutions and feedback, and in
+  the tutor's replies. What a learner types as an answer stays plain.
+- A lesson that keeps failing its review can be accepted with feedback: its best draft is published with the
+  reviewer's notes on what may be wrong shown at the top, and it can be written again from there.
+- **See the plan before it is built**: a new path shows its branches, skills and lessons first. Say in your
+  own words what is missing, wrong or should go deeper, and Yuo changes the plan; go back to an earlier
+  version, or build it when it fits.
+- **Learn from your own material**: start a path from your books, slides, notes and recordings instead of
+  a goal. One path per subject (for example "Mechanical Engineering"), one branch per course, exam, book or
+  topic. Add your files (PDF, PowerPoint, Word, text, audio and video); Yuo reads them on your computer
+  first, and transcribes recordings there too. Then it plans each course on its material, finds where
+  courses build on each other, and shows the plan per course for your feedback. For each course choose how
+  closely to follow the material: only your material, your material first, or your material and beyond.
+  Lessons are written from the matching pages and link back to them, and the tutor sees those pages too.
+  Practice, test and review questions are written from the same pages; with "only my material" each
+  question must be answerable from them, and the automatic answer check uses only those pages.
+- Each course of your own material shows what it covers: a bar per file, with the parts that are taught (one
+  click opens the lesson), left out (and why) or not used yet.
+- Past exams and exercise sheets you add are never turned into lessons: their matching tasks show the style and
+  difficulty for that course's questions. A built course offers a mock exam: two questions per skill, no hints
+  or feedback until the end, the skills to go back to, and no change to your progress.
+- PDF pages that are mostly formulas or figures can be read from their images: one click on the file, and
+  the generation model writes out the formulas (LaTeX) and describes the figures.
+- The tutor also searches all of your material for your question, past exams and exercises included, and
+  shows where each passage comes from.
+- Recorded lectures are matched to the course's slides: a lesson written from a part of a lecture also points
+  to the slides shown during it.
+- A file can be removed from a course that is already built: the lessons written from it are written again
+  without it, and stay readable until then.
+- Uploads resume after a dropped connection.
+- **Recordings no longer hold up the plan**: they are transcribed as soon as they are uploaded, books and
+  slides are read first, and a course is planned once its documents are read. Each recording then joins the
+  plan when it is ready, and the plan says what changed. After the path is built, add files to a course at
+  any time: their passages go into the lessons not written yet, and Yuo suggests rewriting the lessons they
+  touch and adding new skills, for a yes or a "not now". Settings > Transcribing recordings: "Faster" uses
+  a smaller speech model, about three times quicker.
+
 ## [1.0.1] - 2026-11-16
 
 - **A second copy on the same machine** no longer touches the first: `YUO_PROJECT` and `YUO_HOST_PORT` in

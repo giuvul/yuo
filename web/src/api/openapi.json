@@ -201,6 +201,226 @@
         "title": "AnswersProfileOut",
         "type": "object"
       },
+      "ArrangeAcceptIn": {
+        "properties": {
+          "adherence": {
+            "items": {
+              "enum": [
+                "only",
+                "grounded",
+                "open"
+              ],
+              "type": "string"
+            },
+            "maxItems": 60,
+            "title": "Adherence",
+            "type": "array"
+          },
+          "title": {
+            "anyOf": [
+              {
+                "maxLength": 120,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Title"
+          }
+        },
+        "title": "ArrangeAcceptIn",
+        "type": "object"
+      },
+      "ArrangeIn": {
+        "properties": {
+          "feedback": {
+            "anyOf": [
+              {
+                "maxLength": 2000,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Feedback"
+          }
+        },
+        "title": "ArrangeIn",
+        "type": "object"
+      },
+      "ArrangeOut": {
+        "description": "A path started from the learner's files alone: its name and courses, proposed from them.",
+        "properties": {
+          "error": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Error"
+          },
+          "new_files": {
+            "items": {
+              "type": "string"
+            },
+            "title": "New Files",
+            "type": "array"
+          },
+          "proposal": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ArrangementOut"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "rounds": {
+            "items": {
+              "$ref": "#/components/schemas/ArrangeRoundOut"
+            },
+            "title": "Rounds",
+            "type": "array"
+          },
+          "status": {
+            "enum": [
+              "collecting",
+              "working",
+              "ready",
+              "failed"
+            ],
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "status",
+          "proposal",
+          "rounds",
+          "error",
+          "new_files"
+        ],
+        "title": "ArrangeOut",
+        "type": "object"
+      },
+      "ArrangeRoundOut": {
+        "properties": {
+          "changes": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Changes"
+          },
+          "text": {
+            "title": "Text",
+            "type": "string"
+          }
+        },
+        "required": [
+          "text",
+          "changes"
+        ],
+        "title": "ArrangeRoundOut",
+        "type": "object"
+      },
+      "ArrangedCourseOut": {
+        "properties": {
+          "files": {
+            "items": {
+              "$ref": "#/components/schemas/ArrangedFileOut"
+            },
+            "title": "Files",
+            "type": "array"
+          },
+          "term": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Term"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "required": [
+          "title",
+          "term",
+          "files"
+        ],
+        "title": "ArrangedCourseOut",
+        "type": "object"
+      },
+      "ArrangedFileOut": {
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "kind": {
+            "title": "Kind",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "kind"
+        ],
+        "title": "ArrangedFileOut",
+        "type": "object"
+      },
+      "ArrangementOut": {
+        "properties": {
+          "courses": {
+            "items": {
+              "$ref": "#/components/schemas/ArrangedCourseOut"
+            },
+            "title": "Courses",
+            "type": "array"
+          },
+          "goal": {
+            "title": "Goal",
+            "type": "string"
+          },
+          "message": {
+            "title": "Message",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "required": [
+          "title",
+          "goal",
+          "message",
+          "courses"
+        ],
+        "title": "ArrangementOut",
+        "type": "object"
+      },
       "AssessmentOut": {
         "properties": {
           "assessment_id": {
@@ -434,7 +654,8 @@
               "item",
               "selection",
               "notes",
-              "memory"
+              "memory",
+              "material"
             ],
             "title": "Kind",
             "type": "string"
@@ -857,6 +1078,594 @@
         "title": "ConversationOut",
         "type": "object"
       },
+      "CourseChangeIn": {
+        "properties": {
+          "adherence": {
+            "anyOf": [
+              {
+                "enum": [
+                  "only",
+                  "grounded",
+                  "open"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Adherence"
+          },
+          "exam_date": {
+            "anyOf": [
+              {
+                "format": "date",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Exam Date"
+          },
+          "keep_order": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Keep Order"
+          },
+          "term": {
+            "anyOf": [
+              {
+                "maxLength": 60,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Term"
+          },
+          "title": {
+            "anyOf": [
+              {
+                "maxLength": 120,
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Title"
+          }
+        },
+        "title": "CourseChangeIn",
+        "type": "object"
+      },
+      "CourseIn": {
+        "properties": {
+          "adherence": {
+            "default": "grounded",
+            "enum": [
+              "only",
+              "grounded",
+              "open"
+            ],
+            "title": "Adherence",
+            "type": "string"
+          },
+          "exam_date": {
+            "anyOf": [
+              {
+                "format": "date",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Exam Date"
+          },
+          "keep_order": {
+            "default": true,
+            "title": "Keep Order",
+            "type": "boolean"
+          },
+          "term": {
+            "anyOf": [
+              {
+                "maxLength": 60,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Term"
+          },
+          "title": {
+            "maxLength": 120,
+            "minLength": 1,
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "required": [
+          "title"
+        ],
+        "title": "CourseIn",
+        "type": "object"
+      },
+      "CourseLinksOut": {
+        "properties": {
+          "related": {
+            "items": {
+              "$ref": "#/components/schemas/RelatedOut"
+            },
+            "title": "Related",
+            "type": "array"
+          },
+          "requires": {
+            "items": {
+              "$ref": "#/components/schemas/CrossRequireOut"
+            },
+            "title": "Requires",
+            "type": "array"
+          }
+        },
+        "required": [
+          "requires",
+          "related"
+        ],
+        "title": "CourseLinksOut",
+        "type": "object"
+      },
+      "CourseOut": {
+        "properties": {
+          "adherence": {
+            "enum": [
+              "only",
+              "grounded",
+              "open"
+            ],
+            "title": "Adherence",
+            "type": "string"
+          },
+          "built": {
+            "title": "Built",
+            "type": "boolean"
+          },
+          "code": {
+            "title": "Code",
+            "type": "string"
+          },
+          "exam_date": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Exam Date"
+          },
+          "failed": {
+            "title": "Failed",
+            "type": "boolean"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "job_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Job Id"
+          },
+          "keep_order": {
+            "title": "Keep Order",
+            "type": "boolean"
+          },
+          "materials": {
+            "items": {
+              "$ref": "#/components/schemas/MaterialOut"
+            },
+            "title": "Materials",
+            "type": "array"
+          },
+          "plan": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CoursePlanOut"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "term": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Term"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "updates": {
+            "items": {
+              "$ref": "#/components/schemas/CourseUpdateOut"
+            },
+            "title": "Updates",
+            "type": "array"
+          }
+        },
+        "required": [
+          "id",
+          "code",
+          "title",
+          "term",
+          "exam_date",
+          "adherence",
+          "keep_order",
+          "built",
+          "materials",
+          "plan",
+          "job_id",
+          "failed",
+          "updates"
+        ],
+        "title": "CourseOut",
+        "type": "object"
+      },
+      "CoursePlanOut": {
+        "properties": {
+          "can_undo": {
+            "title": "Can Undo",
+            "type": "boolean"
+          },
+          "changes": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Changes",
+            "type": "array"
+          },
+          "feedback": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Feedback",
+            "type": "array"
+          },
+          "skills": {
+            "items": {
+              "$ref": "#/components/schemas/CourseSkillOut"
+            },
+            "title": "Skills",
+            "type": "array"
+          },
+          "skipped": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Skipped",
+            "type": "array"
+          },
+          "status": {
+            "enum": [
+              "drafting",
+              "ready",
+              "revising"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "version": {
+            "title": "Version",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "status",
+          "version",
+          "skills",
+          "skipped",
+          "changes",
+          "feedback",
+          "can_undo"
+        ],
+        "title": "CoursePlanOut",
+        "type": "object"
+      },
+      "CourseSkillOut": {
+        "properties": {
+          "code": {
+            "title": "Code",
+            "type": "string"
+          },
+          "lessons": {
+            "items": {
+              "$ref": "#/components/schemas/PlanLesson"
+            },
+            "title": "Lessons",
+            "type": "array"
+          },
+          "not_in_material": {
+            "title": "Not In Material",
+            "type": "boolean"
+          },
+          "requires": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Requires",
+            "type": "array"
+          },
+          "sections": {
+            "title": "Sections",
+            "type": "integer"
+          },
+          "summary": {
+            "title": "Summary",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "topics": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Topics",
+            "type": "array"
+          },
+          "unit": {
+            "title": "Unit",
+            "type": "string"
+          }
+        },
+        "required": [
+          "code",
+          "title",
+          "summary",
+          "unit",
+          "not_in_material",
+          "requires",
+          "topics",
+          "sections",
+          "lessons"
+        ],
+        "title": "CourseSkillOut",
+        "type": "object"
+      },
+      "CourseUpdateOut": {
+        "description": "What files added to a built course bring: lessons to rewrite with them and new skills, on the learner's yes.",
+        "properties": {
+          "at": {
+            "title": "At",
+            "type": "string"
+          },
+          "changes": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Changes",
+            "type": "array"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "lessons": {
+            "items": {
+              "$ref": "#/components/schemas/UpdateLessonOut"
+            },
+            "title": "Lessons",
+            "type": "array"
+          },
+          "materials": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Materials",
+            "type": "array"
+          },
+          "skills": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Skills",
+            "type": "array"
+          },
+          "status": {
+            "enum": [
+              "pending",
+              "applied",
+              "dismissed"
+            ],
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "at",
+          "materials",
+          "changes",
+          "lessons",
+          "skills",
+          "status"
+        ],
+        "title": "CourseUpdateOut",
+        "type": "object"
+      },
+      "CoverageFileOut": {
+        "properties": {
+          "kind": {
+            "title": "Kind",
+            "type": "string"
+          },
+          "material_id": {
+            "title": "Material Id",
+            "type": "string"
+          },
+          "parts": {
+            "items": {
+              "$ref": "#/components/schemas/CoveragePartOut"
+            },
+            "title": "Parts",
+            "type": "array"
+          },
+          "ready": {
+            "title": "Ready",
+            "type": "boolean"
+          },
+          "role": {
+            "title": "Role",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "required": [
+          "material_id",
+          "title",
+          "kind",
+          "role",
+          "ready",
+          "parts"
+        ],
+        "title": "CoverageFileOut",
+        "type": "object"
+      },
+      "CoverageOut": {
+        "properties": {
+          "course_id": {
+            "title": "Course Id",
+            "type": "string"
+          },
+          "files": {
+            "items": {
+              "$ref": "#/components/schemas/CoverageFileOut"
+            },
+            "title": "Files",
+            "type": "array"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "required": [
+          "course_id",
+          "title",
+          "files"
+        ],
+        "title": "CoverageOut",
+        "type": "object"
+      },
+      "CoveragePartOut": {
+        "properties": {
+          "end": {
+            "title": "End",
+            "type": "integer"
+          },
+          "lesson_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Lesson Id"
+          },
+          "loc_kind": {
+            "enum": [
+              "page",
+              "slide",
+              "time"
+            ],
+            "title": "Loc Kind",
+            "type": "string"
+          },
+          "reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reason"
+          },
+          "skill": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Skill"
+          },
+          "start": {
+            "title": "Start",
+            "type": "integer"
+          },
+          "status": {
+            "enum": [
+              "taught",
+              "skipped",
+              "unused"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "where": {
+            "title": "Where",
+            "type": "string"
+          }
+        },
+        "required": [
+          "loc_kind",
+          "start",
+          "end",
+          "where",
+          "status",
+          "skill",
+          "lesson_id",
+          "reason"
+        ],
+        "title": "CoveragePartOut",
+        "type": "object"
+      },
       "CredentialOut": {
         "properties": {
           "created_at": {
@@ -895,6 +1704,29 @@
           "last_used_at"
         ],
         "title": "CredentialOut",
+        "type": "object"
+      },
+      "CrossRequireOut": {
+        "properties": {
+          "requires": {
+            "title": "Requires",
+            "type": "string"
+          },
+          "skill": {
+            "title": "Skill",
+            "type": "string"
+          },
+          "why": {
+            "title": "Why",
+            "type": "string"
+          }
+        },
+        "required": [
+          "skill",
+          "requires",
+          "why"
+        ],
+        "title": "CrossRequireOut",
         "type": "object"
       },
       "DayOut": {
@@ -1605,6 +2437,445 @@
         "title": "HintOut",
         "type": "object"
       },
+      "HomeContinue": {
+        "description": "The one next step: the next lesson of the path last studied.",
+        "properties": {
+          "count": {
+            "title": "Count",
+            "type": "integer"
+          },
+          "index": {
+            "title": "Index",
+            "type": "integer"
+          },
+          "kind": {
+            "enum": [
+              "lesson",
+              "writing",
+              "planned"
+            ],
+            "title": "Kind",
+            "type": "string"
+          },
+          "lesson_id": {
+            "title": "Lesson Id",
+            "type": "string"
+          },
+          "minutes": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Minutes"
+          },
+          "path_id": {
+            "title": "Path Id",
+            "type": "string"
+          },
+          "path_title": {
+            "title": "Path Title",
+            "type": "string"
+          },
+          "place": {
+            "title": "Place",
+            "type": "string"
+          },
+          "skill_id": {
+            "title": "Skill Id",
+            "type": "string"
+          },
+          "started": {
+            "title": "Started",
+            "type": "boolean"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "required": [
+          "kind",
+          "path_id",
+          "path_title",
+          "lesson_id",
+          "skill_id",
+          "title",
+          "place",
+          "index",
+          "count",
+          "minutes",
+          "started"
+        ],
+        "title": "HomeContinue",
+        "type": "object"
+      },
+      "HomeExam": {
+        "properties": {
+          "built": {
+            "title": "Built",
+            "type": "boolean"
+          },
+          "course_id": {
+            "title": "Course Id",
+            "type": "string"
+          },
+          "days": {
+            "title": "Days",
+            "type": "integer"
+          },
+          "path_id": {
+            "title": "Path Id",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "required": [
+          "course_id",
+          "path_id",
+          "title",
+          "days",
+          "built"
+        ],
+        "title": "HomeExam",
+        "type": "object"
+      },
+      "HomeInsight": {
+        "properties": {
+          "kind": {
+            "enum": [
+              "builds_on",
+              "time_of_day",
+              "weakest"
+            ],
+            "title": "Kind",
+            "type": "string"
+          },
+          "part": {
+            "anyOf": [
+              {
+                "enum": [
+                  "morning",
+                  "afternoon",
+                  "evening",
+                  "night"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Part"
+          },
+          "path_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Path Id"
+          },
+          "percent": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Percent"
+          },
+          "requires": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Requires"
+          },
+          "skill": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Skill"
+          }
+        },
+        "required": [
+          "kind"
+        ],
+        "title": "HomeInsight",
+        "type": "object"
+      },
+      "HomeItem": {
+        "description": "Something waiting for the learner today; which fields are set depends on `kind`.",
+        "properties": {
+          "count": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Count"
+          },
+          "course_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Course Id"
+          },
+          "days": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Days"
+          },
+          "kind": {
+            "enum": [
+              "lesson_draft",
+              "lesson_failed",
+              "fading",
+              "exam_soon",
+              "arrange_ready",
+              "plan_ready",
+              "transcribing"
+            ],
+            "title": "Kind",
+            "type": "string"
+          },
+          "lesson_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Lesson Id"
+          },
+          "path_id": {
+            "title": "Path Id",
+            "type": "string"
+          },
+          "percent": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Percent"
+          },
+          "skills": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Skills"
+          },
+          "title": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Title"
+          }
+        },
+        "required": [
+          "kind",
+          "path_id"
+        ],
+        "title": "HomeItem",
+        "type": "object"
+      },
+      "HomeMomentum": {
+        "properties": {
+          "achievement": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AchievementOut"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "streak": {
+            "title": "Streak",
+            "type": "integer"
+          },
+          "xp_week": {
+            "title": "Xp Week",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "streak",
+          "xp_week",
+          "achievement"
+        ],
+        "title": "HomeMomentum",
+        "type": "object"
+      },
+      "HomeOut": {
+        "properties": {
+          "exam": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/HomeExam"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "insight": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/HomeInsight"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "lessons_ready": {
+            "title": "Lessons Ready",
+            "type": "integer"
+          },
+          "momentum": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/HomeMomentum"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "next_step": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/HomeContinue"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "progress": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/HomeProgress"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "today": {
+            "items": {
+              "$ref": "#/components/schemas/HomeItem"
+            },
+            "title": "Today",
+            "type": "array"
+          }
+        },
+        "required": [
+          "next_step",
+          "lessons_ready",
+          "exam",
+          "today",
+          "progress",
+          "momentum",
+          "insight"
+        ],
+        "title": "HomeOut",
+        "type": "object"
+      },
+      "HomeProgress": {
+        "properties": {
+          "delta": {
+            "title": "Delta",
+            "type": "integer"
+          },
+          "mastered": {
+            "title": "Mastered",
+            "type": "integer"
+          },
+          "score": {
+            "title": "Score",
+            "type": "integer"
+          },
+          "skills": {
+            "title": "Skills",
+            "type": "integer"
+          },
+          "status": {
+            "enum": [
+              "starting",
+              "on_track",
+              "slipping"
+            ],
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "score",
+          "delta",
+          "status",
+          "mastered",
+          "skills"
+        ],
+        "title": "HomeProgress",
+        "type": "object"
+      },
       "ImportIn": {
         "properties": {
           "mode": {
@@ -2265,6 +3536,20 @@
             "title": "Practice Items",
             "type": "integer"
           },
+          "review_notes": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/ReviewNoteOut"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Review Notes"
+          },
           "skill_id": {
             "title": "Skill Id",
             "type": "string"
@@ -2272,6 +3557,14 @@
           "skill_title": {
             "title": "Skill Title",
             "type": "string"
+          },
+          "sources": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/LessonSource"
+            },
+            "title": "Sources",
+            "type": "array"
           },
           "state": {
             "title": "State",
@@ -2344,6 +3637,11 @@
             "title": "Code",
             "type": "string"
           },
+          "has_draft": {
+            "default": false,
+            "title": "Has Draft",
+            "type": "boolean"
+          },
           "id": {
             "title": "Id",
             "type": "string"
@@ -2376,6 +3674,50 @@
           "title"
         ],
         "title": "LessonRef",
+        "type": "object"
+      },
+      "LessonSource": {
+        "description": "A file of the learner's own material this lesson was written from, and where in it.",
+        "properties": {
+          "kind": {
+            "title": "Kind",
+            "type": "string"
+          },
+          "loc_end": {
+            "title": "Loc End",
+            "type": "integer"
+          },
+          "loc_kind": {
+            "enum": [
+              "page",
+              "slide",
+              "time"
+            ],
+            "title": "Loc Kind",
+            "type": "string"
+          },
+          "loc_start": {
+            "title": "Loc Start",
+            "type": "integer"
+          },
+          "material_id": {
+            "title": "Material Id",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "required": [
+          "material_id",
+          "title",
+          "kind",
+          "loc_kind",
+          "loc_start",
+          "loc_end"
+        ],
+        "title": "LessonSource",
         "type": "object"
       },
       "LevelAnswersIn": {
@@ -2649,6 +3991,260 @@
           "right"
         ],
         "title": "MatchingView",
+        "type": "object"
+      },
+      "MaterialChangeIn": {
+        "properties": {
+          "role": {
+            "anyOf": [
+              {
+                "enum": [
+                  "textbook",
+                  "slides",
+                  "lecture",
+                  "notes",
+                  "exercises",
+                  "exams",
+                  "other"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Role"
+          },
+          "title": {
+            "anyOf": [
+              {
+                "maxLength": 200,
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Title"
+          }
+        },
+        "title": "MaterialChangeIn",
+        "type": "object"
+      },
+      "MaterialIn": {
+        "properties": {
+          "file_name": {
+            "maxLength": 255,
+            "minLength": 1,
+            "title": "File Name",
+            "type": "string"
+          },
+          "role": {
+            "anyOf": [
+              {
+                "enum": [
+                  "textbook",
+                  "slides",
+                  "lecture",
+                  "notes",
+                  "exercises",
+                  "exams",
+                  "other"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Role"
+          },
+          "size": {
+            "exclusiveMinimum": 0.0,
+            "title": "Size",
+            "type": "integer"
+          },
+          "title": {
+            "anyOf": [
+              {
+                "maxLength": 200,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Title"
+          }
+        },
+        "required": [
+          "file_name",
+          "size"
+        ],
+        "title": "MaterialIn",
+        "type": "object"
+      },
+      "MaterialOut": {
+        "properties": {
+          "chunks": {
+            "title": "Chunks",
+            "type": "integer"
+          },
+          "course_id": {
+            "title": "Course Id",
+            "type": "string"
+          },
+          "duration_ms": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Duration Ms"
+          },
+          "error": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Error"
+          },
+          "file_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "File Name"
+          },
+          "formula_pages": {
+            "default": 0,
+            "title": "Formula Pages",
+            "type": "integer"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "kind": {
+            "title": "Kind",
+            "type": "string"
+          },
+          "outlined": {
+            "title": "Outlined",
+            "type": "boolean"
+          },
+          "pages": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pages"
+          },
+          "progress": {
+            "title": "Progress",
+            "type": "number"
+          },
+          "received": {
+            "title": "Received",
+            "type": "integer"
+          },
+          "role": {
+            "title": "Role",
+            "type": "string"
+          },
+          "size_bytes": {
+            "title": "Size Bytes",
+            "type": "integer"
+          },
+          "sparse_pages": {
+            "title": "Sparse Pages",
+            "type": "integer"
+          },
+          "state": {
+            "enum": [
+              "uploading",
+              "reading",
+              "read",
+              "transcribing",
+              "digesting",
+              "outlining",
+              "ready",
+              "failed"
+            ],
+            "title": "State",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "tokens": {
+            "title": "Tokens",
+            "type": "integer"
+          },
+          "vision": {
+            "anyOf": [
+              {
+                "enum": [
+                  "wanted",
+                  "done",
+                  "failed"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Vision"
+          },
+          "vision_pages": {
+            "default": 0,
+            "title": "Vision Pages",
+            "type": "integer"
+          },
+          "vision_total": {
+            "default": 0,
+            "title": "Vision Total",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "id",
+          "course_id",
+          "role",
+          "kind",
+          "title",
+          "file_name",
+          "size_bytes",
+          "received",
+          "pages",
+          "duration_ms",
+          "state",
+          "progress",
+          "error",
+          "chunks",
+          "tokens",
+          "sparse_pages",
+          "outlined"
+        ],
+        "title": "MaterialOut",
         "type": "object"
       },
       "McqItem": {
@@ -4177,6 +5773,11 @@
             "title": "Level Check",
             "type": "boolean"
           },
+          "preview": {
+            "default": false,
+            "title": "Preview",
+            "type": "boolean"
+          },
           "subject": {
             "default": "",
             "maxLength": 300,
@@ -4241,6 +5842,27 @@
             "title": "Level Check",
             "type": "string"
           },
+          "origin": {
+            "default": "goal",
+            "enum": [
+              "goal",
+              "courses"
+            ],
+            "title": "Origin",
+            "type": "string"
+          },
+          "preview": {
+            "default": "none",
+            "enum": [
+              "none",
+              "drafting",
+              "ready",
+              "revising",
+              "built"
+            ],
+            "title": "Preview",
+            "type": "string"
+          },
           "status": {
             "title": "Status",
             "type": "string"
@@ -4268,6 +5890,78 @@
         "title": "PathOut",
         "type": "object"
       },
+      "PathPatch": {
+        "properties": {
+          "goal": {
+            "anyOf": [
+              {
+                "maxLength": 2000,
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Goal"
+          },
+          "status": {
+            "anyOf": [
+              {
+                "enum": [
+                  "active",
+                  "archived"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Status"
+          },
+          "subject": {
+            "anyOf": [
+              {
+                "maxLength": 200,
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Subject"
+          },
+          "target_date": {
+            "anyOf": [
+              {
+                "format": "date",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Target Date"
+          },
+          "title": {
+            "anyOf": [
+              {
+                "maxLength": 200,
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Title"
+          }
+        },
+        "title": "PathPatch",
+        "type": "object"
+      },
       "PathSummary": {
         "properties": {
           "content_lang": {
@@ -4282,6 +5976,11 @@
             "title": "Difficulty",
             "type": "string"
           },
+          "goal": {
+            "default": "",
+            "title": "Goal",
+            "type": "string"
+          },
           "id": {
             "title": "Id",
             "type": "string"
@@ -4293,6 +5992,17 @@
           "subject": {
             "title": "Subject",
             "type": "string"
+          },
+          "target_date": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Target Date"
           },
           "title": {
             "title": "Title",
@@ -4309,6 +6019,50 @@
           "created_at"
         ],
         "title": "PathSummary",
+        "type": "object"
+      },
+      "PlanBranch": {
+        "properties": {
+          "code": {
+            "title": "Code",
+            "type": "string"
+          },
+          "skills": {
+            "items": {
+              "$ref": "#/components/schemas/PlanSkill"
+            },
+            "title": "Skills",
+            "type": "array"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "required": [
+          "code",
+          "title",
+          "skills"
+        ],
+        "title": "PlanBranch",
+        "type": "object"
+      },
+      "PlanLesson": {
+        "properties": {
+          "code": {
+            "title": "Code",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "required": [
+          "code",
+          "title"
+        ],
+        "title": "PlanLesson",
         "type": "object"
       },
       "PlanMeterOut": {
@@ -4339,6 +6093,87 @@
           "codex"
         ],
         "title": "PlanMeterOut",
+        "type": "object"
+      },
+      "PlanObjective": {
+        "properties": {
+          "code": {
+            "title": "Code",
+            "type": "string"
+          },
+          "statement": {
+            "title": "Statement",
+            "type": "string"
+          }
+        },
+        "required": [
+          "code",
+          "statement"
+        ],
+        "title": "PlanObjective",
+        "type": "object"
+      },
+      "PlanSkill": {
+        "properties": {
+          "code": {
+            "title": "Code",
+            "type": "string"
+          },
+          "lessons": {
+            "items": {
+              "$ref": "#/components/schemas/PlanLesson"
+            },
+            "title": "Lessons",
+            "type": "array"
+          },
+          "objectives": {
+            "items": {
+              "$ref": "#/components/schemas/PlanObjective"
+            },
+            "title": "Objectives",
+            "type": "array"
+          },
+          "requires": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Requires",
+            "type": "array"
+          },
+          "summary": {
+            "title": "Summary",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "required": [
+          "code",
+          "title",
+          "summary",
+          "requires",
+          "objectives",
+          "lessons"
+        ],
+        "title": "PlanSkill",
+        "type": "object"
+      },
+      "PlanTree": {
+        "properties": {
+          "branches": {
+            "items": {
+              "$ref": "#/components/schemas/PlanBranch"
+            },
+            "title": "Branches",
+            "type": "array"
+          }
+        },
+        "required": [
+          "branches"
+        ],
+        "title": "PlanTree",
         "type": "object"
       },
       "PlanUsageOut": {
@@ -4489,6 +6324,90 @@
           "preset"
         ],
         "title": "PresetIn",
+        "type": "object"
+      },
+      "PreviewFeedbackIn": {
+        "properties": {
+          "text": {
+            "maxLength": 2000,
+            "minLength": 1,
+            "title": "Text",
+            "type": "string"
+          }
+        },
+        "required": [
+          "text"
+        ],
+        "title": "PreviewFeedbackIn",
+        "type": "object"
+      },
+      "PreviewOut": {
+        "properties": {
+          "changes": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Changes",
+            "type": "array"
+          },
+          "failed": {
+            "title": "Failed",
+            "type": "boolean"
+          },
+          "feedback": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Feedback",
+            "type": "array"
+          },
+          "job_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Job Id"
+          },
+          "status": {
+            "enum": [
+              "none",
+              "drafting",
+              "ready",
+              "revising",
+              "built"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "tree": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PlanTree"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "version": {
+            "title": "Version",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "status",
+          "version",
+          "tree",
+          "changes",
+          "feedback",
+          "job_id",
+          "failed"
+        ],
+        "title": "PreviewOut",
         "type": "object"
       },
       "ProbeOut": {
@@ -4961,6 +6880,29 @@
         "title": "RecoveryIn",
         "type": "object"
       },
+      "RelatedOut": {
+        "properties": {
+          "a": {
+            "title": "A",
+            "type": "string"
+          },
+          "b": {
+            "title": "B",
+            "type": "string"
+          },
+          "note": {
+            "title": "Note",
+            "type": "string"
+          }
+        },
+        "required": [
+          "a",
+          "b",
+          "note"
+        ],
+        "title": "RelatedOut",
+        "type": "object"
+      },
       "ReportIn": {
         "properties": {
           "reason": {
@@ -5314,6 +7256,38 @@
           "state"
         ],
         "title": "ReviewItem",
+        "type": "object"
+      },
+      "ReviewNoteOut": {
+        "properties": {
+          "claim": {
+            "title": "Claim",
+            "type": "string"
+          },
+          "correction": {
+            "title": "Correction",
+            "type": "string"
+          },
+          "severity": {
+            "enum": [
+              "major",
+              "minor"
+            ],
+            "title": "Severity",
+            "type": "string"
+          },
+          "where": {
+            "title": "Where",
+            "type": "string"
+          }
+        },
+        "required": [
+          "severity",
+          "where",
+          "claim",
+          "correction"
+        ],
+        "title": "ReviewNoteOut",
         "type": "object"
       },
       "ReviewObjective": {
@@ -6301,6 +8275,216 @@
         "title": "StageOut",
         "type": "object"
       },
+      "StudiesCreated": {
+        "properties": {
+          "path_id": {
+            "title": "Path Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "path_id"
+        ],
+        "title": "StudiesCreated",
+        "type": "object"
+      },
+      "StudiesEstimate": {
+        "properties": {
+          "audio_minutes": {
+            "title": "Audio Minutes",
+            "type": "integer"
+          },
+          "tokens": {
+            "title": "Tokens",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "tokens",
+          "audio_minutes"
+        ],
+        "title": "StudiesEstimate",
+        "type": "object"
+      },
+      "StudiesIn": {
+        "properties": {
+          "content_lang": {
+            "anyOf": [
+              {
+                "maxLength": 35,
+                "minLength": 2,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Content Lang"
+          },
+          "courses": {
+            "items": {
+              "$ref": "#/components/schemas/CourseIn"
+            },
+            "maxItems": 60,
+            "title": "Courses",
+            "type": "array"
+          },
+          "goal": {
+            "default": "",
+            "maxLength": 600,
+            "title": "Goal",
+            "type": "string"
+          },
+          "title": {
+            "default": "",
+            "maxLength": 120,
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "title": "StudiesIn",
+        "type": "object"
+      },
+      "StudiesOut": {
+        "properties": {
+          "arrange": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ArrangeOut"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "courses": {
+            "items": {
+              "$ref": "#/components/schemas/CourseOut"
+            },
+            "title": "Courses",
+            "type": "array"
+          },
+          "estimate": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/StudiesEstimate"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "links": {
+            "$ref": "#/components/schemas/CourseLinksOut"
+          },
+          "links_failed": {
+            "title": "Links Failed",
+            "type": "boolean"
+          },
+          "path_id": {
+            "title": "Path Id",
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "collecting",
+              "drafting",
+              "ready",
+              "revising",
+              "built"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "work": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/StudiesWork"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "path_id",
+          "title",
+          "status",
+          "courses",
+          "links",
+          "estimate",
+          "links_failed"
+        ],
+        "title": "StudiesOut",
+        "type": "object"
+      },
+      "StudiesStep": {
+        "properties": {
+          "done": {
+            "title": "Done",
+            "type": "integer"
+          },
+          "kind": {
+            "enum": [
+              "file",
+              "course",
+              "links"
+            ],
+            "title": "Kind",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "total": {
+            "title": "Total",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "kind",
+          "title",
+          "done",
+          "total"
+        ],
+        "title": "StudiesStep",
+        "type": "object"
+      },
+      "StudiesWork": {
+        "description": "How far reading and planning has got: units done of all (see `Materials._work`).",
+        "properties": {
+          "done": {
+            "title": "Done",
+            "type": "integer"
+          },
+          "step": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/StudiesStep"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "total": {
+            "title": "Total",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "done",
+          "total"
+        ],
+        "title": "StudiesWork",
+        "type": "object"
+      },
       "TutorContextIn": {
         "description": "What the screen shows, as references; the server resolves content and policy.",
         "properties": {
@@ -6323,7 +8507,8 @@
                 "lesson",
                 "selection",
                 "notes",
-                "memory"
+                "memory",
+                "material"
               ],
               "type": "string"
             },
@@ -6876,6 +9061,24 @@
           }
         },
         "title": "TutorSelection",
+        "type": "object"
+      },
+      "UpdateLessonOut": {
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "title"
+        ],
+        "title": "UpdateLessonOut",
         "type": "object"
       },
       "UpdateOut": {
@@ -7661,6 +9864,448 @@
         "summary": "Get State"
       }
     },
+    "/api/courses/{course_id}": {
+      "delete": {
+        "operationId": "delete_course_api_courses__course_id__delete",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "course_id",
+            "required": true,
+            "schema": {
+              "title": "Course Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Delete Course"
+      },
+      "patch": {
+        "operationId": "patch_course_api_courses__course_id__patch",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "course_id",
+            "required": true,
+            "schema": {
+              "title": "Course Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CourseChangeIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CourseOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Patch Course"
+      }
+    },
+    "/api/courses/{course_id}/coverage": {
+      "get": {
+        "description": "Which parts of each file the path teaches, which it leaves out (and why), which it does not use yet.",
+        "operationId": "get_coverage_api_courses__course_id__coverage_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "course_id",
+            "required": true,
+            "schema": {
+              "title": "Course Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CoverageOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Coverage"
+      }
+    },
+    "/api/courses/{course_id}/feedback": {
+      "post": {
+        "description": "What is missing, wrong or should go deeper in this course's plan: it is revised with it.",
+        "operationId": "post_course_feedback_api_courses__course_id__feedback_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "course_id",
+            "required": true,
+            "schema": {
+              "title": "Course Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PreviewFeedbackIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CourseOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Post Course Feedback"
+      }
+    },
+    "/api/courses/{course_id}/materials": {
+      "post": {
+        "description": "Start an upload; the file follows in parts (`PUT /api/materials/{id}/upload`).",
+        "operationId": "post_material_api_courses__course_id__materials_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "course_id",
+            "required": true,
+            "schema": {
+              "title": "Course Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MaterialIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MaterialOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Post Material"
+      }
+    },
+    "/api/courses/{course_id}/mock-exam": {
+      "post": {
+        "description": "A mock exam over the whole course; a job id while some skills' questions are still being written.",
+        "operationId": "post_mock_exam_api_courses__course_id__mock_exam_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "course_id",
+            "required": true,
+            "schema": {
+              "title": "Course Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/AssessmentOut"
+                    },
+                    {
+                      "$ref": "#/components/schemas/JobStarted"
+                    }
+                  ],
+                  "title": "Response Post Mock Exam Api Courses  Course Id  Mock Exam Post"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Post Mock Exam"
+      }
+    },
+    "/api/courses/{course_id}/retry": {
+      "post": {
+        "operationId": "post_course_retry_api_courses__course_id__retry_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "course_id",
+            "required": true,
+            "schema": {
+              "title": "Course Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CourseOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Post Course Retry"
+      }
+    },
+    "/api/courses/{course_id}/undo": {
+      "post": {
+        "operationId": "post_course_undo_api_courses__course_id__undo_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "course_id",
+            "required": true,
+            "schema": {
+              "title": "Course Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CourseOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Post Course Undo"
+      }
+    },
+    "/api/courses/{course_id}/updates/{update_id}/apply": {
+      "post": {
+        "description": "Yes to what new files add to a built course: those lessons are rewritten with them, new skills added.",
+        "operationId": "post_course_update_apply_api_courses__course_id__updates__update_id__apply_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "course_id",
+            "required": true,
+            "schema": {
+              "title": "Course Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "update_id",
+            "required": true,
+            "schema": {
+              "title": "Update Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CourseOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Post Course Update Apply"
+      }
+    },
+    "/api/courses/{course_id}/updates/{update_id}/dismiss": {
+      "post": {
+        "operationId": "post_course_update_dismiss_api_courses__course_id__updates__update_id__dismiss_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "course_id",
+            "required": true,
+            "schema": {
+              "title": "Course Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "update_id",
+            "required": true,
+            "schema": {
+              "title": "Update Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CourseOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Post Course Update Dismiss"
+      }
+    },
     "/api/desktop/link": {
       "post": {
         "description": "A second start of Yuo while it runs: the launcher asks this one for a new sign-in link. Public\nroute, guarded by the control token from the data folder (readable by this user only).",
@@ -7871,6 +10516,25 @@
           }
         },
         "summary": "Get Health"
+      }
+    },
+    "/api/home": {
+      "get": {
+        "description": "The first screen: the next step, what waits today, progress, momentum and one insight.",
+        "operationId": "get_home_api_home_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HomeOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Get Home"
       }
     },
     "/api/items/{item_id}/report": {
@@ -8220,6 +10884,46 @@
         "summary": "Get Lesson"
       }
     },
+    "/api/lessons/{lesson_id}/accept": {
+      "post": {
+        "description": "Publish a failed lesson's best draft as it is, with the reviewer's notes shown in it.",
+        "operationId": "post_accept_api_lessons__lesson_id__accept_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "lesson_id",
+            "required": true,
+            "schema": {
+              "title": "Lesson Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobStarted"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Post Accept"
+      }
+    },
     "/api/lessons/{lesson_id}/generate": {
       "post": {
         "operationId": "post_generate_api_lessons__lesson_id__generate_post",
@@ -8379,6 +11083,285 @@
           }
         },
         "summary": "Post Video Again"
+      }
+    },
+    "/api/materials/{material_id}": {
+      "delete": {
+        "operationId": "delete_material_api_materials__material_id__delete",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "material_id",
+            "required": true,
+            "schema": {
+              "title": "Material Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Delete Material"
+      },
+      "get": {
+        "operationId": "get_material_api_materials__material_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "material_id",
+            "required": true,
+            "schema": {
+              "title": "Material Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MaterialOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Material"
+      },
+      "patch": {
+        "description": "Correct a file's role (textbook, slides, ...) or name.",
+        "operationId": "patch_material_api_materials__material_id__patch",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "material_id",
+            "required": true,
+            "schema": {
+              "title": "Material Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MaterialChangeIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MaterialOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Patch Material"
+      }
+    },
+    "/api/materials/{material_id}/file": {
+      "get": {
+        "description": "The learner's own file (a recording as its audio), opened at a page or minute by the client.",
+        "operationId": "get_material_file_api_materials__material_id__file_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "material_id",
+            "required": true,
+            "schema": {
+              "title": "Material Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Material File"
+      }
+    },
+    "/api/materials/{material_id}/read-pages": {
+      "post": {
+        "description": "Read a PDF's pages with little text (formulas, figures) from their images, with the generation model.",
+        "operationId": "post_read_pages_api_materials__material_id__read_pages_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "material_id",
+            "required": true,
+            "schema": {
+              "title": "Material Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MaterialOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Post Read Pages"
+      }
+    },
+    "/api/materials/{material_id}/retry": {
+      "post": {
+        "description": "Read or transcribe a file that failed again, from what was uploaded.",
+        "operationId": "post_retry_material_api_materials__material_id__retry_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "material_id",
+            "required": true,
+            "schema": {
+              "title": "Material Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MaterialOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Post Retry Material"
+      }
+    },
+    "/api/materials/{material_id}/upload": {
+      "put": {
+        "description": "One part of the file as the raw body, at `offset` (the bytes the server has); 409 says where to resume.",
+        "operationId": "put_upload_api_materials__material_id__upload_put",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "material_id",
+            "required": true,
+            "schema": {
+              "title": "Material Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "required": true,
+            "schema": {
+              "title": "Offset",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MaterialOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Put Upload"
       }
     },
     "/api/me": {
@@ -8827,6 +11810,44 @@
       }
     },
     "/api/paths/{path_id}": {
+      "delete": {
+        "description": "Delete the path with its lessons, questions, files and everything done in it. Not undoable.",
+        "operationId": "delete_path_api_paths__path_id__delete",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "path_id",
+            "required": true,
+            "schema": {
+              "title": "Path Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErasedOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Delete Path"
+      },
       "get": {
         "operationId": "get_path_api_paths__path_id__get",
         "parameters": [
@@ -8863,6 +11884,54 @@
           }
         },
         "summary": "Get Path"
+      },
+      "patch": {
+        "description": "Rename the path, change its goal or exam date, archive it or bring it back.",
+        "operationId": "patch_path_api_paths__path_id__patch",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "path_id",
+            "required": true,
+            "schema": {
+              "title": "Path Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PathPatch"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PathSummary"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Patch Path"
       }
     },
     "/api/paths/{path_id}/export": {
@@ -9466,6 +12535,216 @@
           }
         },
         "summary": "Post Placement"
+      }
+    },
+    "/api/paths/{path_id}/preview": {
+      "get": {
+        "description": "The plan the learner checks before it is built.",
+        "operationId": "get_preview_api_paths__path_id__preview_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "path_id",
+            "required": true,
+            "schema": {
+              "title": "Path Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PreviewOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Preview"
+      }
+    },
+    "/api/paths/{path_id}/preview/build": {
+      "post": {
+        "description": "The learner accepts the plan: it is built and the first lessons are written.",
+        "operationId": "post_preview_build_api_paths__path_id__preview_build_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "path_id",
+            "required": true,
+            "schema": {
+              "title": "Path Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PreviewOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Post Preview Build"
+      }
+    },
+    "/api/paths/{path_id}/preview/feedback": {
+      "post": {
+        "description": "What is missing, wrong or should go deeper: the plan is revised with it.",
+        "operationId": "post_preview_feedback_api_paths__path_id__preview_feedback_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "path_id",
+            "required": true,
+            "schema": {
+              "title": "Path Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PreviewFeedbackIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PreviewOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Post Preview Feedback"
+      }
+    },
+    "/api/paths/{path_id}/preview/retry": {
+      "post": {
+        "description": "Write the plan again after that failed.",
+        "operationId": "post_preview_retry_api_paths__path_id__preview_retry_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "path_id",
+            "required": true,
+            "schema": {
+              "title": "Path Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PreviewOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Post Preview Retry"
+      }
+    },
+    "/api/paths/{path_id}/preview/undo": {
+      "post": {
+        "description": "Back to the plan before the last change.",
+        "operationId": "post_preview_undo_api_paths__path_id__preview_undo_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "path_id",
+            "required": true,
+            "schema": {
+              "title": "Path Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PreviewOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Post Preview Undo"
       }
     },
     "/api/paths/{path_id}/progress": {
@@ -11103,6 +14382,352 @@
           }
         },
         "summary": "Get Stream"
+      }
+    },
+    "/api/studies": {
+      "post": {
+        "description": "A path for the learner's studies, with its courses; the material is added next.",
+        "operationId": "post_studies_api_studies_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StudiesIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StudiesCreated"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Post Studies"
+      }
+    },
+    "/api/studies/{path_id}": {
+      "get": {
+        "operationId": "get_studies_api_studies__path_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "path_id",
+            "required": true,
+            "schema": {
+              "title": "Path Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StudiesOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Studies"
+      }
+    },
+    "/api/studies/{path_id}/arrange": {
+      "post": {
+        "description": "Propose the path's name and courses from the files added so far, or change the proposal.",
+        "operationId": "post_arrange_api_studies__path_id__arrange_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "path_id",
+            "required": true,
+            "schema": {
+              "title": "Path Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ArrangeIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StudiesOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Post Arrange"
+      }
+    },
+    "/api/studies/{path_id}/arrange/accept": {
+      "post": {
+        "description": "Take the proposal: the courses are made and the files move into them.",
+        "operationId": "post_arrange_accept_api_studies__path_id__arrange_accept_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "path_id",
+            "required": true,
+            "schema": {
+              "title": "Path Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ArrangeAcceptIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StudiesOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Post Arrange Accept"
+      }
+    },
+    "/api/studies/{path_id}/build": {
+      "post": {
+        "description": "The learner accepts the plan: one branch per course, and the first lessons are written.",
+        "operationId": "post_build_api_studies__path_id__build_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "path_id",
+            "required": true,
+            "schema": {
+              "title": "Path Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StudiesOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Post Build"
+      }
+    },
+    "/api/studies/{path_id}/courses": {
+      "post": {
+        "operationId": "post_course_api_studies__path_id__courses_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "path_id",
+            "required": true,
+            "schema": {
+              "title": "Path Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CourseIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CourseOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Post Course"
+      }
+    },
+    "/api/studies/{path_id}/links/retry": {
+      "post": {
+        "operationId": "post_links_retry_api_studies__path_id__links_retry_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "path_id",
+            "required": true,
+            "schema": {
+              "title": "Path Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StudiesOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Post Links Retry"
+      }
+    },
+    "/api/studies/{path_id}/start": {
+      "post": {
+        "description": "The learner confirms: the material is read once and each course planned.",
+        "operationId": "post_start_api_studies__path_id__start_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "path_id",
+            "required": true,
+            "schema": {
+              "title": "Path Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StudiesOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Post Start"
       }
     },
     "/api/tutor/context": {

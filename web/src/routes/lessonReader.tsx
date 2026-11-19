@@ -2,7 +2,8 @@ import { Plural, Trans, useLingui } from "@lingui/react/macro";
 import { createRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import type { LessonOut } from "../api/client";
-import { useLesson, useNoteMutations, useNotes } from "../api/hooks";
+import { useGenerateLesson, useLesson, useNoteMutations, useNotes } from "../api/hooks";
+import { MathText } from "../components/MathText";
 import { ErrorNotice } from "../components/ErrorNotice";
 import { LessonStateLabel } from "../components/labels";
 import { ArrowRightIcon, CheckIcon, ChevronRightIcon, ClockIcon, PencilIcon, SparkleIcon } from "../components/icons";
@@ -16,6 +17,7 @@ import styles from "./lessonReader.module.css";
 import { useTutorActions, useTutorRefs, useTutorState } from "../tutor/context";
 import { SelectionAsk } from "../tutor/SelectionAsk";
 import { LessonVideo } from "../video/LessonVideo";
+import { LessonSources } from "../material/LessonSources";
 
 export const lessonRoute = createRoute({
   getParentRoute: () => rootRoute,
@@ -75,6 +77,8 @@ function Reader({ lesson }: { lesson: LessonOut & { version_id: string } }) {
         }
       />
 
+      {lesson.review_notes?.length ? <ReviewNotes lesson={lesson} /> : null}
+
       <LessonVideo lesson={lesson} />
 
       <div ref={bodyRef} className={styles.body}>
@@ -84,6 +88,7 @@ function Reader({ lesson }: { lesson: LessonOut & { version_id: string } }) {
         />
       </div>
       <SelectionAsk root={bodyRef} />
+      <LessonSources sources={lesson.sources ?? []} />
 
       <VineDivider />
 
@@ -185,4 +190,46 @@ function LessonPage() {
     );
   }
   return <Reader lesson={{ ...l, version_id: versionId }} />;
+}
+
+/**
+ * A lesson accepted without passing its review: what the reviewer found that may be wrong, each with its
+ * correction, so the learner reads it with care; it can be written again.
+ */
+function ReviewNotes({ lesson }: { lesson: LessonOut }) {
+  const again = useGenerateLesson(lesson.path_id);
+  const notes = lesson.review_notes ?? [];
+  return (
+    <Notice tone="warning" icon={true} role="note">
+      <p>
+        <strong>
+          <Trans id="lesson.review-notes.title">Accepted without passing its review.</Trans>
+        </strong>{" "}
+        <Trans id="lesson.review-notes.intro">The reviewer found what may be wrong in it:</Trans>
+      </p>
+      <ul>
+        {notes.map((n, i) => (
+          <li key={i}>
+            “<MathText text={n.claim} />”: <MathText text={n.correction} />
+          </li>
+        ))}
+      </ul>
+      <div className={ui.row}>
+        <Button
+          small
+          variant="secondary"
+          isDisabled={again.isPending || again.isSuccess}
+          onPress={() => again.mutate(lesson.id)}
+        >
+          <Trans id="lesson.review-notes.again">Write it again</Trans>
+        </Button>
+      </div>
+      {again.isSuccess ? (
+        <p>
+          <Trans id="lesson.review-notes.queued">A new version is being written; this one stays until it is ready.</Trans>
+        </p>
+      ) : null}
+      {again.isError ? <ErrorNotice error={again.error} /> : null}
+    </Notice>
+  );
 }

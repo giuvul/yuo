@@ -291,3 +291,26 @@ def path_personal(path_id: str) -> Plan:
         ],
         {"p": path_id},
     )
+
+
+def path_whole(path_id: str) -> Plan:
+    """The whole path: its plan, lessons, questions, files and courses, and everything the learner did in it.
+    The personal seeds reach rows that only name the path in a payload or a scope; the rest follows the
+    foreign keys from the path row. Its jobs go too (they name their target without a foreign key)."""
+    personal = path_personal(path_id)
+    targets = " UNION ".join(["SELECT :p", _SKILLS, _LESSONS, _ITEMS, _LVS, _IVS, _RVS])
+    courses = "SELECT id FROM course WHERE path_id = :p UNION SELECT id FROM material WHERE path_id = :p"
+    return Plan(
+        "other",
+        [
+            *personal.seeds,
+            (
+                "stage_run",
+                f"job_id IN (SELECT id FROM generation_job WHERE target_id IN ({targets}) "
+                f"OR target_id IN ({courses}))",
+            ),
+            ("generation_job", f"target_id IN ({targets}) OR target_id IN ({courses})"),
+            ("path", "id = :p"),
+        ],
+        {"p": path_id},
+    )

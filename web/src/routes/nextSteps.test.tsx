@@ -15,6 +15,8 @@ const path: PathOut = {
   difficulty: "foundational",
   content_lang: "en",
   level_check: "none",
+  preview: "none",
+  origin: "goal",
   jobs: [],
   branches: [
     {
@@ -29,7 +31,7 @@ const path: PathOut = {
           summary: "Build them",
           requires: [],
           objectives: [],
-          lessons: [{ id: "l1", code: "l1", kind: "core", state: "ready", title: "Seventh chords" }],
+          lessons: [{ id: "l1", code: "l1", kind: "core", state: "ready", title: "Seventh chords", has_draft: false }],
         },
       ],
     },

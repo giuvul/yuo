@@ -960,7 +960,7 @@ class GenerationJob(Row):
         str,
         Col(
             check="{c} IN ('tree','lesson','rendition','items','translation','remedial','test_bank','placement',"
-            "'grade','request')"
+            "'grade','request','material','course','course_links')"
         ),
     ]
     target_kind: EntityKind
@@ -1152,3 +1152,137 @@ class MergeConflict(Row):
     status: Annotated[str, Col(check="{c} IN ('open','kept_local','took_incoming')")]
     created_at: Timestamp
     resolved_at: Timestamp | None
+
+
+# --- learning from the learner's own material (migration 0005) ----------------------------------
+
+
+class Course(Row):
+    """A course or exam of a path built from material; once the plan is built it is one branch."""
+
+    table: ClassVar[Table] = Table("course", "entity", DC.FREE_TEXT, unique=(("path_id", "code"),), since=5)
+    id: Uuid7
+    path_id: Annotated[Uuid7, ref("path")]
+    code: str
+    title: str
+    term: str | None  # "Year 1, autumn": groups and orders the courses
+    exam_date: Date | None
+    adherence: Annotated[str, Col(check="{c} IN ('only','grounded','open')")]
+    keep_order: bool
+    position: Annotated[int, NonNeg]
+    branch_id: Annotated[Uuid7 | None, ref("branch")]
+    outline: Json | None  # the course's plan before it is built (skills with their anchors)
+    extensions: ExtJson
+    created_at: Timestamp
+    archived_at: Timestamp | None
+
+
+class Material(Row):
+    """One file or link the learner brought; its text lives in `material_section`."""
+
+    table: ClassVar[Table] = Table("material", "entity", DC.FREE_TEXT, since=5)
+    id: Uuid7
+    path_id: Annotated[Uuid7, ref("path")]
+    course_id: Annotated[Uuid7, ref("course")]
+    source_id: Annotated[Uuid7, ref("source")]
+    role: Annotated[
+        str, Col(check="{c} IN ('textbook','slides','lecture','notes','exercises','exams','other')")
+    ]
+    kind: Annotated[str, Col(check="{c} IN ('pdf','pptx','docx','text','audio','video','link')")]
+    title: str
+    file_name: str | None
+    asset_hash: Hash | None  # the original file, or only its audio for a video
+    size_bytes: Annotated[int, NonNeg]
+    pages: Annotated[int | None, NonNeg]  # pages or slides
+    duration_ms: Annotated[int | None, NonNeg]
+    keep_original: bool
+    state: Annotated[
+        str,
+        Col(
+            check="{c} IN ('uploading','reading','read','transcribing','digesting','outlining','ready','failed')"
+        ),
+    ]
+    progress: Annotated[float, Unit]
+    error: str | None
+    outline: Json | None  # the material's topics with the chunks they cover
+    position: Annotated[int, NonNeg]
+    extensions: ExtJson
+    created_at: Timestamp
+    updated_at: Timestamp
+
+
+class MaterialSection(Row):
+    """The material's tree: parts, chapters, sections, and the chunks that hold the text."""
+
+    table: ClassVar[Table] = Table(
+        "material_section", "entity", DC.FREE_TEXT, unique=(("material_id", "position"),), since=5
+    )
+    id: Uuid7
+    material_id: Annotated[Uuid7, ref("material")]
+    parent_id: Annotated[Uuid7 | None, ref("material_section")]
+    position: Annotated[int, NonNeg]  # reading order over the whole material
+    level: Annotated[str, Col(check="{c} IN ('part','chapter','section','chunk')")]
+    title: str
+    loc_kind: Annotated[str, Col(check="{c} IN ('page','slide','time')")]
+    loc_start: Annotated[int, NonNeg]  # page or slide number from 1, or milliseconds
+    loc_end: Annotated[int, NonNeg]
+    text: str | None  # chunks only
+    tokens: Annotated[int, NonNeg]
+    digest: Json | None  # summary, concepts, definitions, formulas, notation
+    content_hash: Hash | None
+
+
+class SkillAnchor(Row):
+    """A skill is built on these chunks of the learner's material."""
+
+    table: ClassVar[Table] = Table(
+        "skill_anchor",
+        "link",
+        DC.FREE_TEXT,
+        pk=("skill_id", "section_id"),
+        without_rowid=True,
+        fks=(FK(("skill_id", "path_id"), "skill", ("id", "path_id")),),
+        since=5,
+    )
+    skill_id: Uuid7
+    section_id: Annotated[Uuid7, ref("material_section")]
+    path_id: Annotated[Uuid7, ref("path")]
+    role: Annotated[str, Col(check="{c} IN ('primary','supporting')")]
+
+
+class SkillLink(Row):
+    """Two skills, usually in different courses, that use the same idea without one needing the other."""
+
+    table: ClassVar[Table] = Table(
+        "skill_link",
+        "link",
+        DC.CONTENT,
+        pk=("skill_id", "other_skill_id"),
+        without_rowid=True,
+        fks=(
+            FK(("skill_id", "path_id"), "skill", ("id", "path_id")),
+            FK(("other_skill_id", "path_id"), "skill", ("id", "path_id")),
+        ),
+        checks=("skill_id <> other_skill_id",),
+        since=5,
+    )
+    skill_id: Uuid7
+    other_skill_id: Uuid7
+    path_id: Annotated[Uuid7, ref("path")]
+    kind: Annotated[str, Col(check="{c} IN ('related')")]
+    note: str | None
+
+
+class ItemVersionSource(Row):
+    """The chunks of the learner's material an item was written from."""
+
+    table: ClassVar[Table] = Table(
+        "item_version_source",
+        "link",
+        DC.FREE_TEXT,
+        pk=("item_version_id", "section_id"),
+        without_rowid=True,
+        since=5,
+    )
+    item_version_id: Annotated[Uuid7, ref("item_version")]
+    section_id: Annotated[Uuid7, ref("material_section")]

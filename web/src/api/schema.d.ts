@@ -309,6 +309,175 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/courses/{course_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        /** Delete Course */
+        delete: operations["delete_course_api_courses__course_id__delete"];
+        options?: never;
+        head?: never;
+        /** Patch Course */
+        patch: operations["patch_course_api_courses__course_id__patch"];
+        trace?: never;
+    };
+    "/api/courses/{course_id}/coverage": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get Coverage
+         * @description Which parts of each file the path teaches, which it leaves out (and why), which it does not use yet.
+         */
+        get: operations["get_coverage_api_courses__course_id__coverage_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/courses/{course_id}/feedback": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Post Course Feedback
+         * @description What is missing, wrong or should go deeper in this course's plan: it is revised with it.
+         */
+        post: operations["post_course_feedback_api_courses__course_id__feedback_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/courses/{course_id}/materials": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Post Material
+         * @description Start an upload; the file follows in parts (`PUT /api/materials/{id}/upload`).
+         */
+        post: operations["post_material_api_courses__course_id__materials_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/courses/{course_id}/mock-exam": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Post Mock Exam
+         * @description A mock exam over the whole course; a job id while some skills' questions are still being written.
+         */
+        post: operations["post_mock_exam_api_courses__course_id__mock_exam_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/courses/{course_id}/retry": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Post Course Retry */
+        post: operations["post_course_retry_api_courses__course_id__retry_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/courses/{course_id}/undo": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Post Course Undo */
+        post: operations["post_course_undo_api_courses__course_id__undo_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/courses/{course_id}/updates/{update_id}/apply": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Post Course Update Apply
+         * @description Yes to what new files add to a built course: those lessons are rewritten with them, new skills added.
+         */
+        post: operations["post_course_update_apply_api_courses__course_id__updates__update_id__apply_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/courses/{course_id}/updates/{update_id}/dismiss": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Post Course Update Dismiss */
+        post: operations["post_course_update_dismiss_api_courses__course_id__updates__update_id__dismiss_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/desktop/link": {
         parameters: {
             query?: never;
@@ -431,6 +600,26 @@ export interface paths {
         };
         /** Get Health */
         get: operations["get_health_api_health_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/home": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get Home
+         * @description The first screen: the next step, what waits today, progress, momentum and one insight.
+         */
+        get: operations["get_home_api_home_get"];
         put?: never;
         post?: never;
         delete?: never;
@@ -601,6 +790,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/lessons/{lesson_id}/accept": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Post Accept
+         * @description Publish a failed lesson's best draft as it is, with the reviewer's notes shown in it.
+         */
+        post: operations["post_accept_api_lessons__lesson_id__accept_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/lessons/{lesson_id}/generate": {
         parameters: {
             query?: never;
@@ -666,6 +875,108 @@ export interface paths {
          * @description Make a lesson's video again after it failed.
          */
         post: operations["post_video_again_api_lessons__lesson_id__video_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/materials/{material_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Material */
+        get: operations["get_material_api_materials__material_id__get"];
+        put?: never;
+        post?: never;
+        /** Delete Material */
+        delete: operations["delete_material_api_materials__material_id__delete"];
+        options?: never;
+        head?: never;
+        /**
+         * Patch Material
+         * @description Correct a file's role (textbook, slides, ...) or name.
+         */
+        patch: operations["patch_material_api_materials__material_id__patch"];
+        trace?: never;
+    };
+    "/api/materials/{material_id}/file": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get Material File
+         * @description The learner's own file (a recording as its audio), opened at a page or minute by the client.
+         */
+        get: operations["get_material_file_api_materials__material_id__file_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/materials/{material_id}/read-pages": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Post Read Pages
+         * @description Read a PDF's pages with little text (formulas, figures) from their images, with the generation model.
+         */
+        post: operations["post_read_pages_api_materials__material_id__read_pages_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/materials/{material_id}/retry": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Post Retry Material
+         * @description Read or transcribe a file that failed again, from what was uploaded.
+         */
+        post: operations["post_retry_material_api_materials__material_id__retry_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/materials/{material_id}/upload": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /**
+         * Put Upload
+         * @description One part of the file as the raw body, at `offset` (the bytes the server has); 409 says where to resume.
+         */
+        put: operations["put_upload_api_materials__material_id__upload_put"];
+        post?: never;
         delete?: never;
         options?: never;
         head?: never;
@@ -897,10 +1208,18 @@ export interface paths {
         get: operations["get_path_api_paths__path_id__get"];
         put?: never;
         post?: never;
-        delete?: never;
+        /**
+         * Delete Path
+         * @description Delete the path with its lessons, questions, files and everything done in it. Not undoable.
+         */
+        delete: operations["delete_path_api_paths__path_id__delete"];
         options?: never;
         head?: never;
-        patch?: never;
+        /**
+         * Patch Path
+         * @description Rename the path, change its goal or exam date, archive it or bring it back.
+         */
+        patch: operations["patch_path_api_paths__path_id__patch"];
         trace?: never;
     };
     "/api/paths/{path_id}/export": {
@@ -1135,6 +1454,106 @@ export interface paths {
         put?: never;
         /** Post Placement */
         post: operations["post_placement_api_paths__path_id__placement_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/paths/{path_id}/preview": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get Preview
+         * @description The plan the learner checks before it is built.
+         */
+        get: operations["get_preview_api_paths__path_id__preview_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/paths/{path_id}/preview/build": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Post Preview Build
+         * @description The learner accepts the plan: it is built and the first lessons are written.
+         */
+        post: operations["post_preview_build_api_paths__path_id__preview_build_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/paths/{path_id}/preview/feedback": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Post Preview Feedback
+         * @description What is missing, wrong or should go deeper: the plan is revised with it.
+         */
+        post: operations["post_preview_feedback_api_paths__path_id__preview_feedback_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/paths/{path_id}/preview/retry": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Post Preview Retry
+         * @description Write the plan again after that failed.
+         */
+        post: operations["post_preview_retry_api_paths__path_id__preview_retry_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/paths/{path_id}/preview/undo": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Post Preview Undo
+         * @description Back to the plan before the last change.
+         */
+        post: operations["post_preview_undo_api_paths__path_id__preview_undo_post"];
         delete?: never;
         options?: never;
         head?: never;
@@ -1823,6 +2242,157 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/studies": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Post Studies
+         * @description A path for the learner's studies, with its courses; the material is added next.
+         */
+        post: operations["post_studies_api_studies_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/studies/{path_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Studies */
+        get: operations["get_studies_api_studies__path_id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/studies/{path_id}/arrange": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Post Arrange
+         * @description Propose the path's name and courses from the files added so far, or change the proposal.
+         */
+        post: operations["post_arrange_api_studies__path_id__arrange_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/studies/{path_id}/arrange/accept": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Post Arrange Accept
+         * @description Take the proposal: the courses are made and the files move into them.
+         */
+        post: operations["post_arrange_accept_api_studies__path_id__arrange_accept_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/studies/{path_id}/build": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Post Build
+         * @description The learner accepts the plan: one branch per course, and the first lessons are written.
+         */
+        post: operations["post_build_api_studies__path_id__build_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/studies/{path_id}/courses": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Post Course */
+        post: operations["post_course_api_studies__path_id__courses_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/studies/{path_id}/links/retry": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Post Links Retry */
+        post: operations["post_links_retry_api_studies__path_id__links_retry_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/studies/{path_id}/start": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Post Start
+         * @description The learner confirms: the material is read once and each course planned.
+         */
+        post: operations["post_start_api_studies__path_id__start_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/tutor/context": {
         parameters: {
             query?: never;
@@ -2113,6 +2683,72 @@ export interface components {
             /** Ui Lang */
             ui_lang?: string | null;
         };
+        /** ArrangeAcceptIn */
+        ArrangeAcceptIn: {
+            /** Adherence */
+            adherence?: ("only" | "grounded" | "open")[];
+            /** Title */
+            title?: string | null;
+        };
+        /** ArrangeIn */
+        ArrangeIn: {
+            /** Feedback */
+            feedback?: string | null;
+        };
+        /**
+         * ArrangeOut
+         * @description A path started from the learner's files alone: its name and courses, proposed from them.
+         */
+        ArrangeOut: {
+            /** Error */
+            error: string | null;
+            /** New Files */
+            new_files: string[];
+            proposal: components["schemas"]["ArrangementOut"] | null;
+            /** Rounds */
+            rounds: components["schemas"]["ArrangeRoundOut"][];
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "collecting" | "working" | "ready" | "failed";
+        };
+        /** ArrangeRoundOut */
+        ArrangeRoundOut: {
+            /** Changes */
+            changes: string | null;
+            /** Text */
+            text: string;
+        };
+        /** ArrangedCourseOut */
+        ArrangedCourseOut: {
+            /** Files */
+            files: components["schemas"]["ArrangedFileOut"][];
+            /** Term */
+            term: string | null;
+            /** Title */
+            title: string;
+        };
+        /** ArrangedFileOut */
+        ArrangedFileOut: {
+            /** Id */
+            id: string;
+            /** Kind */
+            kind: string;
+            /** Title */
+            title: string;
+        };
+        /** ArrangementOut */
+        ArrangementOut: {
+            /** Courses */
+            courses: components["schemas"]["ArrangedCourseOut"][];
+            /** Goal */
+            goal: string;
+            /** Message */
+            message: string;
+            /** Title */
+            title: string;
+        };
         /** AssessmentOut */
         AssessmentOut: {
             /** Assessment Id */
@@ -2177,7 +2813,7 @@ export interface components {
              * Kind
              * @enum {string}
              */
-            kind: "path" | "skill" | "lesson" | "item" | "selection" | "notes" | "memory";
+            kind: "path" | "skill" | "lesson" | "item" | "selection" | "notes" | "memory" | "material";
             /** Label */
             label: string;
             /** N */
@@ -2308,6 +2944,190 @@ export interface components {
             /** Title */
             title: string | null;
         };
+        /** CourseChangeIn */
+        CourseChangeIn: {
+            /** Adherence */
+            adherence?: ("only" | "grounded" | "open") | null;
+            /** Exam Date */
+            exam_date?: string | null;
+            /** Keep Order */
+            keep_order?: boolean | null;
+            /** Term */
+            term?: string | null;
+            /** Title */
+            title?: string | null;
+        };
+        /** CourseIn */
+        CourseIn: {
+            /**
+             * Adherence
+             * @default grounded
+             * @enum {string}
+             */
+            adherence: "only" | "grounded" | "open";
+            /** Exam Date */
+            exam_date?: string | null;
+            /**
+             * Keep Order
+             * @default true
+             */
+            keep_order: boolean;
+            /** Term */
+            term?: string | null;
+            /** Title */
+            title: string;
+        };
+        /** CourseLinksOut */
+        CourseLinksOut: {
+            /** Related */
+            related: components["schemas"]["RelatedOut"][];
+            /** Requires */
+            requires: components["schemas"]["CrossRequireOut"][];
+        };
+        /** CourseOut */
+        CourseOut: {
+            /**
+             * Adherence
+             * @enum {string}
+             */
+            adherence: "only" | "grounded" | "open";
+            /** Built */
+            built: boolean;
+            /** Code */
+            code: string;
+            /** Exam Date */
+            exam_date: string | null;
+            /** Failed */
+            failed: boolean;
+            /** Id */
+            id: string;
+            /** Job Id */
+            job_id: string | null;
+            /** Keep Order */
+            keep_order: boolean;
+            /** Materials */
+            materials: components["schemas"]["MaterialOut"][];
+            plan: components["schemas"]["CoursePlanOut"] | null;
+            /** Term */
+            term: string | null;
+            /** Title */
+            title: string;
+            /** Updates */
+            updates: components["schemas"]["CourseUpdateOut"][];
+        };
+        /** CoursePlanOut */
+        CoursePlanOut: {
+            /** Can Undo */
+            can_undo: boolean;
+            /** Changes */
+            changes: string[];
+            /** Feedback */
+            feedback: string[];
+            /** Skills */
+            skills: components["schemas"]["CourseSkillOut"][];
+            /** Skipped */
+            skipped: string[];
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "drafting" | "ready" | "revising";
+            /** Version */
+            version: number;
+        };
+        /** CourseSkillOut */
+        CourseSkillOut: {
+            /** Code */
+            code: string;
+            /** Lessons */
+            lessons: components["schemas"]["PlanLesson"][];
+            /** Not In Material */
+            not_in_material: boolean;
+            /** Requires */
+            requires: string[];
+            /** Sections */
+            sections: number;
+            /** Summary */
+            summary: string;
+            /** Title */
+            title: string;
+            /** Topics */
+            topics: string[];
+            /** Unit */
+            unit: string;
+        };
+        /**
+         * CourseUpdateOut
+         * @description What files added to a built course bring: lessons to rewrite with them and new skills, on the learner's yes.
+         */
+        CourseUpdateOut: {
+            /** At */
+            at: string;
+            /** Changes */
+            changes: string[];
+            /** Id */
+            id: string;
+            /** Lessons */
+            lessons: components["schemas"]["UpdateLessonOut"][];
+            /** Materials */
+            materials: string[];
+            /** Skills */
+            skills: string[];
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "pending" | "applied" | "dismissed";
+        };
+        /** CoverageFileOut */
+        CoverageFileOut: {
+            /** Kind */
+            kind: string;
+            /** Material Id */
+            material_id: string;
+            /** Parts */
+            parts: components["schemas"]["CoveragePartOut"][];
+            /** Ready */
+            ready: boolean;
+            /** Role */
+            role: string;
+            /** Title */
+            title: string;
+        };
+        /** CoverageOut */
+        CoverageOut: {
+            /** Course Id */
+            course_id: string;
+            /** Files */
+            files: components["schemas"]["CoverageFileOut"][];
+            /** Title */
+            title: string;
+        };
+        /** CoveragePartOut */
+        CoveragePartOut: {
+            /** End */
+            end: number;
+            /** Lesson Id */
+            lesson_id: string | null;
+            /**
+             * Loc Kind
+             * @enum {string}
+             */
+            loc_kind: "page" | "slide" | "time";
+            /** Reason */
+            reason: string | null;
+            /** Skill */
+            skill: string | null;
+            /** Start */
+            start: number;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "taught" | "skipped" | "unused";
+            /** Where */
+            where: string;
+        };
         /** CredentialOut */
         CredentialOut: {
             /** Created At */
@@ -2320,6 +3140,15 @@ export interface components {
             label: string;
             /** Last Used At */
             last_used_at: string | null;
+        };
+        /** CrossRequireOut */
+        CrossRequireOut: {
+            /** Requires */
+            requires: string;
+            /** Skill */
+            skill: string;
+            /** Why */
+            why: string;
         };
         /** DayOut */
         DayOut: {
@@ -2566,6 +3395,131 @@ export interface components {
             level: number;
             /** Text */
             text: string;
+        };
+        /**
+         * HomeContinue
+         * @description The one next step: the next lesson of the path last studied.
+         */
+        HomeContinue: {
+            /** Count */
+            count: number;
+            /** Index */
+            index: number;
+            /**
+             * Kind
+             * @enum {string}
+             */
+            kind: "lesson" | "writing" | "planned";
+            /** Lesson Id */
+            lesson_id: string;
+            /** Minutes */
+            minutes: number | null;
+            /** Path Id */
+            path_id: string;
+            /** Path Title */
+            path_title: string;
+            /** Place */
+            place: string;
+            /** Skill Id */
+            skill_id: string;
+            /** Started */
+            started: boolean;
+            /** Title */
+            title: string;
+        };
+        /** HomeExam */
+        HomeExam: {
+            /** Built */
+            built: boolean;
+            /** Course Id */
+            course_id: string;
+            /** Days */
+            days: number;
+            /** Path Id */
+            path_id: string;
+            /** Title */
+            title: string;
+        };
+        /** HomeInsight */
+        HomeInsight: {
+            /**
+             * Kind
+             * @enum {string}
+             */
+            kind: "builds_on" | "time_of_day" | "weakest";
+            /** Part */
+            part?: ("morning" | "afternoon" | "evening" | "night") | null;
+            /** Path Id */
+            path_id?: string | null;
+            /** Percent */
+            percent?: number | null;
+            /** Requires */
+            requires?: string | null;
+            /** Skill */
+            skill?: string | null;
+        };
+        /**
+         * HomeItem
+         * @description Something waiting for the learner today; which fields are set depends on `kind`.
+         */
+        HomeItem: {
+            /** Count */
+            count?: number | null;
+            /** Course Id */
+            course_id?: string | null;
+            /** Days */
+            days?: number | null;
+            /**
+             * Kind
+             * @enum {string}
+             */
+            kind: "lesson_draft" | "lesson_failed" | "fading" | "exam_soon" | "arrange_ready" | "plan_ready" | "transcribing";
+            /** Lesson Id */
+            lesson_id?: string | null;
+            /** Path Id */
+            path_id: string;
+            /** Percent */
+            percent?: number | null;
+            /** Skills */
+            skills?: string[] | null;
+            /** Title */
+            title?: string | null;
+        };
+        /** HomeMomentum */
+        HomeMomentum: {
+            achievement: components["schemas"]["AchievementOut"] | null;
+            /** Streak */
+            streak: number;
+            /** Xp Week */
+            xp_week: number;
+        };
+        /** HomeOut */
+        HomeOut: {
+            exam: components["schemas"]["HomeExam"] | null;
+            insight: components["schemas"]["HomeInsight"] | null;
+            /** Lessons Ready */
+            lessons_ready: number;
+            momentum: components["schemas"]["HomeMomentum"] | null;
+            next_step: components["schemas"]["HomeContinue"] | null;
+            progress: components["schemas"]["HomeProgress"] | null;
+            /** Today */
+            today: components["schemas"]["HomeItem"][];
+        };
+        /** HomeProgress */
+        HomeProgress: {
+            /** Delta */
+            delta: number;
+            /** Mastered */
+            mastered: number;
+            /** Score */
+            score: number;
+            /** Skills */
+            skills: number;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "starting" | "on_track" | "slipping";
         };
         /** ImportIn */
         ImportIn: {
@@ -2825,10 +3779,17 @@ export interface components {
             path_title: string;
             /** Practice Items */
             practice_items: number;
+            /** Review Notes */
+            review_notes?: components["schemas"]["ReviewNoteOut"][] | null;
             /** Skill Id */
             skill_id: string;
             /** Skill Title */
             skill_title: string;
+            /**
+             * Sources
+             * @default []
+             */
+            sources: components["schemas"]["LessonSource"][];
             /** State */
             state: string;
             /** Title */
@@ -2843,6 +3804,11 @@ export interface components {
         LessonRef: {
             /** Code */
             code: string;
+            /**
+             * Has Draft
+             * @default false
+             */
+            has_draft: boolean;
             /** Id */
             id: string;
             /** Kind */
@@ -2851,6 +3817,27 @@ export interface components {
             state: string;
             /** Title */
             title: string | null;
+        };
+        /**
+         * LessonSource
+         * @description A file of the learner's own material this lesson was written from, and where in it.
+         */
+        LessonSource: {
+            /** Kind */
+            kind: string;
+            /** Loc End */
+            loc_end: number;
+            /**
+             * Loc Kind
+             * @enum {string}
+             */
+            loc_kind: "page" | "slide" | "time";
+            /** Loc Start */
+            loc_start: number;
+            /** Material Id */
+            material_id: string;
+            /** Title */
+            title: string;
         };
         /** LevelAnswersIn */
         LevelAnswersIn: {
@@ -2944,6 +3931,81 @@ export interface components {
             prompt: string;
             /** Right */
             right: string[];
+        };
+        /** MaterialChangeIn */
+        MaterialChangeIn: {
+            /** Role */
+            role?: ("textbook" | "slides" | "lecture" | "notes" | "exercises" | "exams" | "other") | null;
+            /** Title */
+            title?: string | null;
+        };
+        /** MaterialIn */
+        MaterialIn: {
+            /** File Name */
+            file_name: string;
+            /** Role */
+            role?: ("textbook" | "slides" | "lecture" | "notes" | "exercises" | "exams" | "other") | null;
+            /** Size */
+            size: number;
+            /** Title */
+            title?: string | null;
+        };
+        /** MaterialOut */
+        MaterialOut: {
+            /** Chunks */
+            chunks: number;
+            /** Course Id */
+            course_id: string;
+            /** Duration Ms */
+            duration_ms: number | null;
+            /** Error */
+            error: string | null;
+            /** File Name */
+            file_name: string | null;
+            /**
+             * Formula Pages
+             * @default 0
+             */
+            formula_pages: number;
+            /** Id */
+            id: string;
+            /** Kind */
+            kind: string;
+            /** Outlined */
+            outlined: boolean;
+            /** Pages */
+            pages: number | null;
+            /** Progress */
+            progress: number;
+            /** Received */
+            received: number;
+            /** Role */
+            role: string;
+            /** Size Bytes */
+            size_bytes: number;
+            /** Sparse Pages */
+            sparse_pages: number;
+            /**
+             * State
+             * @enum {string}
+             */
+            state: "uploading" | "reading" | "read" | "transcribing" | "digesting" | "outlining" | "ready" | "failed";
+            /** Title */
+            title: string;
+            /** Tokens */
+            tokens: number;
+            /** Vision */
+            vision?: ("wanted" | "done" | "failed") | null;
+            /**
+             * Vision Pages
+             * @default 0
+             */
+            vision_pages: number;
+            /**
+             * Vision Total
+             * @default 0
+             */
+            vision_total: number;
         };
         /** McqItem */
         McqItem: {
@@ -3481,6 +4543,11 @@ export interface components {
              */
             level_check: boolean;
             /**
+             * Preview
+             * @default false
+             */
+            preview: boolean;
+            /**
              * Subject
              * @default
              */
@@ -3508,12 +4575,37 @@ export interface components {
              * @enum {string}
              */
             level_check: "none" | "preparing" | "ready" | "done" | "skipped";
+            /**
+             * Origin
+             * @default goal
+             * @enum {string}
+             */
+            origin: "goal" | "courses";
+            /**
+             * Preview
+             * @default none
+             * @enum {string}
+             */
+            preview: "none" | "drafting" | "ready" | "revising" | "built";
             /** Status */
             status: string;
             /** Subject */
             subject: string;
             /** Title */
             title: string;
+        };
+        /** PathPatch */
+        PathPatch: {
+            /** Goal */
+            goal?: string | null;
+            /** Status */
+            status?: ("active" | "archived") | null;
+            /** Subject */
+            subject?: string | null;
+            /** Target Date */
+            target_date?: string | null;
+            /** Title */
+            title?: string | null;
         };
         /** PathSummary */
         PathSummary: {
@@ -3523,12 +4615,35 @@ export interface components {
             created_at: string;
             /** Difficulty */
             difficulty: string;
+            /**
+             * Goal
+             * @default
+             */
+            goal: string;
             /** Id */
             id: string;
             /** Status */
             status: string;
             /** Subject */
             subject: string;
+            /** Target Date */
+            target_date?: string | null;
+            /** Title */
+            title: string;
+        };
+        /** PlanBranch */
+        PlanBranch: {
+            /** Code */
+            code: string;
+            /** Skills */
+            skills: components["schemas"]["PlanSkill"][];
+            /** Title */
+            title: string;
+        };
+        /** PlanLesson */
+        PlanLesson: {
+            /** Code */
+            code: string;
             /** Title */
             title: string;
         };
@@ -3536,6 +4651,33 @@ export interface components {
         PlanMeterOut: {
             claude: components["schemas"]["MeterOut"] | null;
             codex: components["schemas"]["MeterOut"] | null;
+        };
+        /** PlanObjective */
+        PlanObjective: {
+            /** Code */
+            code: string;
+            /** Statement */
+            statement: string;
+        };
+        /** PlanSkill */
+        PlanSkill: {
+            /** Code */
+            code: string;
+            /** Lessons */
+            lessons: components["schemas"]["PlanLesson"][];
+            /** Objectives */
+            objectives: components["schemas"]["PlanObjective"][];
+            /** Requires */
+            requires: string[];
+            /** Summary */
+            summary: string;
+            /** Title */
+            title: string;
+        };
+        /** PlanTree */
+        PlanTree: {
+            /** Branches */
+            branches: components["schemas"]["PlanBranch"][];
         };
         /**
          * PlanUsageOut
@@ -3593,6 +4735,30 @@ export interface components {
              * @enum {string}
              */
             preset: "claude" | "codex" | "local" | "open";
+        };
+        /** PreviewFeedbackIn */
+        PreviewFeedbackIn: {
+            /** Text */
+            text: string;
+        };
+        /** PreviewOut */
+        PreviewOut: {
+            /** Changes */
+            changes: string[];
+            /** Failed */
+            failed: boolean;
+            /** Feedback */
+            feedback: string[];
+            /** Job Id */
+            job_id: string | null;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "none" | "drafting" | "ready" | "revising" | "built";
+            tree: components["schemas"]["PlanTree"] | null;
+            /** Version */
+            version: number;
         };
         /** ProbeOut */
         ProbeOut: {
@@ -3740,6 +4906,15 @@ export interface components {
              */
             device_label: string;
         };
+        /** RelatedOut */
+        RelatedOut: {
+            /** A */
+            a: string;
+            /** B */
+            b: string;
+            /** Note */
+            note: string;
+        };
         /** ReportIn */
         ReportIn: {
             /**
@@ -3857,6 +5032,20 @@ export interface components {
             view: {
                 [key: string]: unknown;
             };
+        };
+        /** ReviewNoteOut */
+        ReviewNoteOut: {
+            /** Claim */
+            claim: string;
+            /** Correction */
+            correction: string;
+            /**
+             * Severity
+             * @enum {string}
+             */
+            severity: "major" | "minor";
+            /** Where */
+            where: string;
         };
         /** ReviewObjective */
         ReviewObjective: {
@@ -4173,6 +5362,80 @@ export interface components {
             /** Status */
             status: string;
         };
+        /** StudiesCreated */
+        StudiesCreated: {
+            /** Path Id */
+            path_id: string;
+        };
+        /** StudiesEstimate */
+        StudiesEstimate: {
+            /** Audio Minutes */
+            audio_minutes: number;
+            /** Tokens */
+            tokens: number;
+        };
+        /** StudiesIn */
+        StudiesIn: {
+            /** Content Lang */
+            content_lang?: string | null;
+            /** Courses */
+            courses?: components["schemas"]["CourseIn"][];
+            /**
+             * Goal
+             * @default
+             */
+            goal: string;
+            /**
+             * Title
+             * @default
+             */
+            title: string;
+        };
+        /** StudiesOut */
+        StudiesOut: {
+            arrange?: components["schemas"]["ArrangeOut"] | null;
+            /** Courses */
+            courses: components["schemas"]["CourseOut"][];
+            estimate: components["schemas"]["StudiesEstimate"] | null;
+            links: components["schemas"]["CourseLinksOut"];
+            /** Links Failed */
+            links_failed: boolean;
+            /** Path Id */
+            path_id: string;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "collecting" | "drafting" | "ready" | "revising" | "built";
+            /** Title */
+            title: string;
+            work?: components["schemas"]["StudiesWork"] | null;
+        };
+        /** StudiesStep */
+        StudiesStep: {
+            /** Done */
+            done: number;
+            /**
+             * Kind
+             * @enum {string}
+             */
+            kind: "file" | "course" | "links";
+            /** Title */
+            title: string;
+            /** Total */
+            total: number;
+        };
+        /**
+         * StudiesWork
+         * @description How far reading and planning has got: units done of all (see `Materials._work`).
+         */
+        StudiesWork: {
+            /** Done */
+            done: number;
+            step?: components["schemas"]["StudiesStep"] | null;
+            /** Total */
+            total: number;
+        };
         /**
          * TutorContextIn
          * @description What the screen shows, as references; the server resolves content and policy.
@@ -4181,7 +5444,7 @@ export interface components {
             /** Attempt Id */
             attempt_id?: string | null;
             /** Excluded */
-            excluded?: ("path" | "skill" | "lesson" | "selection" | "notes" | "memory")[];
+            excluded?: ("path" | "skill" | "lesson" | "selection" | "notes" | "memory" | "material")[];
             /** Item Version Id */
             item_version_id?: string | null;
             /** Lesson Id */
@@ -4331,6 +5594,13 @@ export interface components {
              * @default
              */
             text: string;
+        };
+        /** UpdateLessonOut */
+        UpdateLessonOut: {
+            /** Id */
+            id: string;
+            /** Title */
+            title: string;
         };
         /** UpdateOut */
         UpdateOut: {
@@ -4883,6 +6153,328 @@ export interface operations {
             };
         };
     };
+    delete_course_api_courses__course_id__delete: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                course_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    patch_course_api_courses__course_id__patch: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                course_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CourseChangeIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CourseOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_coverage_api_courses__course_id__coverage_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                course_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CoverageOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    post_course_feedback_api_courses__course_id__feedback_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                course_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PreviewFeedbackIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CourseOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    post_material_api_courses__course_id__materials_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                course_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["MaterialIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MaterialOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    post_mock_exam_api_courses__course_id__mock_exam_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                course_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AssessmentOut"] | components["schemas"]["JobStarted"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    post_course_retry_api_courses__course_id__retry_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                course_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CourseOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    post_course_undo_api_courses__course_id__undo_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                course_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CourseOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    post_course_update_apply_api_courses__course_id__updates__update_id__apply_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                course_id: string;
+                update_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CourseOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    post_course_update_dismiss_api_courses__course_id__updates__update_id__dismiss_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                course_id: string;
+                update_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CourseOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     post_link_api_desktop_link_post: {
         parameters: {
             query?: never;
@@ -5078,6 +6670,26 @@ export interface operations {
                     "application/json": {
                         [key: string]: unknown;
                     };
+                };
+            };
+        };
+    };
+    get_home_api_home_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HomeOut"];
                 };
             };
         };
@@ -5345,6 +6957,37 @@ export interface operations {
             };
         };
     };
+    post_accept_api_lessons__lesson_id__accept_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                lesson_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            202: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["JobStarted"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     post_generate_api_lessons__lesson_id__generate_post: {
         parameters: {
             query?: never;
@@ -5456,6 +7099,225 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["JobStarted"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_material_api_materials__material_id__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                material_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MaterialOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    delete_material_api_materials__material_id__delete: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                material_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    patch_material_api_materials__material_id__patch: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                material_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["MaterialChangeIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MaterialOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_material_file_api_materials__material_id__file_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                material_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    post_read_pages_api_materials__material_id__read_pages_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                material_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MaterialOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    post_retry_material_api_materials__material_id__retry_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                material_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MaterialOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    put_upload_api_materials__material_id__upload_put: {
+        parameters: {
+            query: {
+                offset: number;
+            };
+            header?: never;
+            path: {
+                material_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MaterialOut"];
                 };
             };
             /** @description Validation Error */
@@ -5882,6 +7744,72 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["PathOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    delete_path_api_paths__path_id__delete: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                path_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErasedOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    patch_path_api_paths__path_id__patch: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                path_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PathPatch"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PathSummary"];
                 };
             };
             /** @description Validation Error */
@@ -6334,6 +8262,165 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["AssessmentOut"] | components["schemas"]["JobStarted"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_preview_api_paths__path_id__preview_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                path_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PreviewOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    post_preview_build_api_paths__path_id__preview_build_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                path_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PreviewOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    post_preview_feedback_api_paths__path_id__preview_feedback_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                path_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PreviewFeedbackIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PreviewOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    post_preview_retry_api_paths__path_id__preview_retry_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                path_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PreviewOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    post_preview_undo_api_paths__path_id__preview_undo_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                path_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PreviewOut"];
                 };
             };
             /** @description Validation Error */
@@ -7552,6 +9639,268 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    post_studies_api_studies_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["StudiesIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StudiesCreated"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_studies_api_studies__path_id__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                path_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StudiesOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    post_arrange_api_studies__path_id__arrange_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                path_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ArrangeIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StudiesOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    post_arrange_accept_api_studies__path_id__arrange_accept_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                path_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ArrangeAcceptIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StudiesOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    post_build_api_studies__path_id__build_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                path_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StudiesOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    post_course_api_studies__path_id__courses_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                path_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CourseIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CourseOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    post_links_retry_api_studies__path_id__links_retry_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                path_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StudiesOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    post_start_api_studies__path_id__start_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                path_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StudiesOut"];
+                };
             };
             /** @description Validation Error */
             422: {

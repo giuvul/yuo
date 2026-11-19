@@ -236,7 +236,19 @@ def _quote(name: str) -> str:
     return f'"{name}"' if name in {"check", "key", "order", "by", "at", "role", "text"} else name
 
 
-def create_table(model: type[Row]) -> str:
+# A column CHECK that a later migration widened (only ever more allowed values): the migration it changed in, and
+# the CHECK as an older migration created it, so migration 0001's text never changes.
+WIDENED: dict[tuple[str, str], tuple[int, str]] = {
+    ("generation_job", "kind"): (
+        5,
+        "kind IN ('tree','lesson','rendition','items','translation','remedial','test_bank','placement','grade',"
+        "'request')",
+    ),
+}
+
+
+def create_table(model: type[Row], as_of: int | None = None) -> str:
+    """The table's CREATE statement as the row model says today, or as migration `as_of` created it."""
     t = model.table
     cols = columns(model)
     lines: list[str] = []
@@ -254,7 +266,11 @@ def create_table(model: type[Row]) -> str:
             parts.append("UNIQUE")
         if c.col.default is not None:
             parts.append(f"DEFAULT {c.col.default}")
-        for chk in c.checks():
+        checks = c.checks()
+        widened = WIDENED.get((t.name, c.name))
+        if widened is not None and as_of is not None and as_of < widened[0]:
+            checks = [widened[1] if chk.startswith(f"{_quote(c.name)} IN (") else chk for chk in checks]
+        for chk in checks:
             parts.append(f"CHECK ({chk})")
         ref = c.references()
         if ref:
@@ -330,7 +346,25 @@ def triggers(model: type[Row]) -> list[str]:
 # Lookup values added after 0001 was applied somewhere: a later migration seeds them, so 0001 stays the
 # same text (an applied migration that changes is refused).
 SEEDED_LATER: dict[str, dict[str, int]] = {
-    "stage_kind": {"level_check": 2, "review_bank": 3, "next_check": 4, "next_directions": 4, "next_grow": 4}
+    "stage_kind": {
+        "level_check": 2,
+        "review_bank": 3,
+        "next_check": 4,
+        "next_directions": 4,
+        "next_grow": 4,
+        "tree_revise": 5,
+        "material_digest": 5,
+        "material_outline": 5,
+        "course_outline": 5,
+        "course_revise": 5,
+        "course_links": 5,
+        "material_vision": 6,
+        "studies_arrange": 7,
+    },
+    "entity_kind_ref": {
+        "material": 5,
+        "course": 5,
+    },
 }
 
 
@@ -341,7 +375,7 @@ def _objects(since: int | None) -> list[str]:
     names = [n for n in sorted(Row.registry) if since is None or Row.registry[n].table.since == since]
     parts: list[str] = []
     for name in names:
-        parts.append(create_table(Row.registry[name]))
+        parts.append(create_table(Row.registry[name], as_of=since))
         parts.append("")
     for name in names:
         for trg in triggers(Row.registry[name]):

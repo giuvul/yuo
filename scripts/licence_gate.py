@@ -109,6 +109,9 @@ def _pypi(name: str, version: str) -> tuple[str | None, list[str], str | None]:
 # Yuo shows the notice at onboarding and the responsibility stays with the installing user.
 EXCEPTIONS = {
     re.compile(r"^(remotion|@remotion/[a-z0-9-]+)$"): "Remotion licence, notice at onboarding",
+    # pypdfium2: BSD-3-Clause or Apache-2.0; the PDFium library it bundles is BSD-3-Clause, and PDFium's own
+    # third-party code (FreeType under its FTL option, libjpeg-turbo, OpenJPEG, lcms2, zlib, ICU) is permissive
+    re.compile(r"^pypdfium2$"): "BSD-3-Clause / Apache-2.0, bundled PDFium and its parts permissive",
 }
 # Fonts are bundled assets, not code: the SIL Open Font License allows bundling them with software.
 FONT_LICENCES = {"OFL-1.1"}

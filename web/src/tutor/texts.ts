@@ -140,6 +140,7 @@ export const CHIP_KINDS: Record<ChipKind, MessageDescriptor> = {
   selection: msg({ id: "tutor.chip.kind.selection", message: "Selected text" }),
   notes: msg({ id: "tutor.chip.kind.notes", message: "Notes" }),
   memory: msg({ id: "tutor.chip.kind.memory", message: "Tutor memory" }),
+  material: msg({ id: "tutor.chip.kind.material", message: "Your material" }),
 };
 
 export const SCOPES: Record<ConversationOut["scope"], MessageDescriptor> = {

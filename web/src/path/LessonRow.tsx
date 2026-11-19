@@ -4,7 +4,7 @@ import { Trans, useLingui } from "@lingui/react/macro";
 import { useLingui as useLinguiRuntime } from "@lingui/react";
 import { Link } from "@tanstack/react-router";
 import type { JobRef, LessonRef } from "../api/client";
-import { useGenerateLesson } from "../api/hooks";
+import { useAcceptLesson, useGenerateLesson } from "../api/hooks";
 import { GenerationError } from "../onboarding/AiReady";
 import { jobErrorMessage } from "../components/jobError";
 import { JobKindLabel, LessonKindLabel, LessonStateLabel } from "../components/labels";
@@ -26,6 +26,7 @@ function LessonIcon({ state }: { state: string }) {
 export function LessonRow({ lesson, pathId, job }: { lesson: LessonRef; pathId: string; job: JobRef | undefined }) {
   const { t } = useLingui();
   const generate = useGenerateLesson(pathId);
+  const accept = useAcceptLesson(pathId);
   const title = lesson.title ?? t({ id: "path.lesson.untitled", message: "Untitled lesson" });
 
   return (
@@ -63,6 +64,17 @@ export function LessonRow({ lesson, pathId, job }: { lesson: LessonRef; pathId: 
           )}
         </Button>
       ) : null}
+      {lesson.state === "failed" && lesson.has_draft ? (
+        <Button
+          small
+          variant="secondary"
+          isDisabled={accept.isPending || generate.isPending}
+          onPress={() => accept.mutate(lesson.id)}
+          aria-label={t({ id: "path.lesson.accept.label", message: `Accept “${title}” with the reviewer's feedback` })}
+        >
+          <Trans id="path.lesson.accept">Accept with feedback</Trans>
+        </Button>
+      ) : null}
       {lesson.state === "failed" && job?.status === "failed" ? (
         <div className={styles.lessonError}>
           <FailedJob job={job} />
@@ -71,6 +83,11 @@ export function LessonRow({ lesson, pathId, job }: { lesson: LessonRef; pathId: 
       {generate.isError ? (
         <div className={styles.lessonError}>
           <GenerationError error={generate.error} />
+        </div>
+      ) : null}
+      {accept.isError ? (
+        <div className={styles.lessonError}>
+          <GenerationError error={accept.error} />
         </div>
       ) : null}
     </li>

@@ -48,6 +48,7 @@ const lesson = (video: Video | null, unavailable: string | null = null): LessonO
   skill_title: "Joining",
   path_title: "SQL",
   practice_items: 0,
+  sources: [],
   video,
   video_unavailable: unavailable,
 });

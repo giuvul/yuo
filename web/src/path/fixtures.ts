@@ -42,6 +42,7 @@ export function samplePath(id: string, title: string, spec: BranchSpec[]): Sampl
           code: `B${bi + 1}.S${si + 1}.L${li + 1}`,
           kind: "core",
           state,
+          has_draft: false,
           title: li === 0 ? `${s.title}: the idea` : `${s.title}: in practice`,
         })),
       };
@@ -57,6 +58,8 @@ export function samplePath(id: string, title: string, spec: BranchSpec[]): Sampl
       difficulty: "standard",
       content_lang: "en",
       level_check: "done",
+      preview: "none",
+      origin: "goal",
       branches,
       jobs: [],
     },

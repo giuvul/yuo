@@ -141,7 +141,7 @@ function RootLayout() {
             <SetupGate />
             <ProfileEffects />
             <nav className={styles.primary} aria-label={t({ id: "nav.main.label", message: "Main" })}>
-              <Link to="/" className={styles.navLink} activeOptions={{ exact: true }}>
+              <Link to="/paths" className={styles.navLink}>
                 <PathIcon className={styles.navIcon} />
                 <Trans id="nav.paths">Paths</Trans>
               </Link>

@@ -13,12 +13,12 @@ from yuo.db.schema import SEEDED_LATER, Row, columns, ddl, ddl_for, full_ddl
 pytestmark = pytest.mark.fitness
 
 # created by the migration runner, SQLite or FTS5 rather than by row models
-INFRA = {"schema_migration", "sqlite_sequence", "lesson_fts"}
+INFRA = {"schema_migration", "sqlite_sequence", "lesson_fts", "material_fts"}
 
 
 def _tables(conn: sqlite3.Connection) -> set[str]:
     names = {r[0] for r in conn.execute("SELECT name FROM sqlite_schema WHERE type = 'table'")}
-    return {n for n in names if not n.startswith("lesson_fts_")} - INFRA
+    return {n for n in names if not n.startswith(("lesson_fts_", "material_fts_"))} - INFRA
 
 
 def test_migration_0001_is_generated_from_the_row_models() -> None:
@@ -53,7 +53,7 @@ def test_every_later_table_and_seed_names_an_existing_migration() -> None:
 
 
 def test_an_install_on_0002_upgrades_in_place(tmp_path: Path) -> None:
-    """An existing database has 0001 and 0002 applied and data in it: 0003 and 0004 must apply on top."""
+    """An existing database has 0001 and 0002 applied and data in it: the later migrations apply on top."""
     import shutil
 
     old = tmp_path / "migrations"
@@ -69,12 +69,13 @@ def test_an_install_on_0002_upgrades_in_place(tmp_path: Path) -> None:
     )
     c.commit()
     c.close()
-    assert migrate(db, "0.7.5") == [3, 4]
+    assert migrate(db, "0.7.5") == [3, 4, 5, 6, 7]
     c = sqlite3.connect(db)
     assert c.execute("SELECT value FROM setting_value WHERE key = 'probe'").fetchone() == ("1",)
     assert c.execute("SELECT count(*) FROM objective_review_state").fetchone() == (0,)
     assert c.execute("SELECT 1 FROM stage_kind WHERE key = 'review_bank'").fetchone() == (1,)
     assert c.execute("SELECT count(*) FROM stage_kind WHERE key LIKE 'next_%'").fetchone() == (3,)
+    assert c.execute("SELECT count(*) FROM material").fetchone() == (0,)
     c.close()
 
 

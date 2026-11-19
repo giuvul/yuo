@@ -206,6 +206,14 @@ class Stage(StrEnum):
     NEXT_CHECK = "next_check"  # "What next?": direction questions and a quiz beyond the frontier (0004)
     NEXT_DIRECTIONS = "next_directions"  # "What next?": 2 or 3 directions with reasons (0004)
     NEXT_GROW = "next_grow"  # "What next?": the chosen direction's new branches (0004)
+    TREE_REVISE = "tree_revise"  # the plan preview, revised with the learner's feedback (0005)
+    MATERIAL_DIGEST = "material_digest"  # a batch of the learner's material chunks, summarised (0005)
+    MATERIAL_OUTLINE = "material_outline"  # one material's topics, from its chunk digests (0005)
+    COURSE_OUTLINE = "course_outline"  # a course's skills, anchored in its materials (0005)
+    COURSE_REVISE = "course_revise"  # a course's plan, revised with the learner's feedback (0005)
+    COURSE_LINKS = "course_links"  # prerequisites and related skills across courses (0005)
+    MATERIAL_VISION = "material_vision"  # pages with formulas or figures, read from their images (0006)
+    STUDIES_ARRANGE = "studies_arrange"  # a path's name and courses, proposed from the learner's files (0007)
 
 
 class Check(StrEnum):
@@ -238,6 +246,8 @@ class EntityKind(StrEnum):
     LESSON_REQUEST = "lesson_request"
     CONVERSATION = "conversation"
     RESPONSE = "response"  # a learner answer (its response_given event id), target of grading jobs
+    MATERIAL = "material"  # a file of the learner's own material (0005)
+    COURSE = "course"  # a course of a path built from material (0005)
 
 
 class EventType(StrEnum):
