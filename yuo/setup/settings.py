@@ -8,7 +8,7 @@ import json
 import re
 import sqlite3
 from dataclasses import dataclass
-from typing import Any, Literal
+from typing import Any, Literal, TypedDict
 
 from pydantic import TypeAdapter
 
@@ -595,6 +595,27 @@ define(
         example="http://127.0.0.1:11434/v1 for Ollama.",
         suggestion="found by the setup wizard when one is running",
         impact=("cost", "privacy"),
+    )
+)
+
+
+class GenerationPause(TypedDict):
+    scope: Literal["all", "videos"]
+    until: str | None  # an ISO timestamp, or None: until resumed
+
+
+define(
+    SettingDef(
+        "generation.pause",
+        "CFG-86",
+        ("installation",),
+        None,
+        GenerationPause | None,
+        explanation="Stops Yuo writing ahead for a while, to save your subscription or credit: lessons, review "
+        "questions and videos (or only videos) wait, and go on from where they stopped when you resume.",
+        example="Videos only, until tomorrow: lessons keep coming, videos wait.",
+        suggestion="off; pause when you need your subscription for something else",
+        impact=("cost", "time"),
     )
 )
 define(

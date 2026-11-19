@@ -411,6 +411,11 @@ Tell them, in a few lines:
   the path.
 - **Other devices** (server version): open the same address, sign in with the passkey, and install it from the
   browser menu ("Install app"; on iPhone and iPad, Safari's Share menu, "Add to Home Screen").
+- **After a restart** (server version on their own computer): Yuo starts by itself once Docker Desktop is
+  running; there is nothing else to start. Check that "Start Docker Desktop when you sign in" is on in Docker
+  Desktop's settings (General), then open the same address (bookmark it, or More > Save app shortcut in Yuo).
+  If the page does not load a minute after signing in to the computer, open Docker Desktop: if Yuo's
+  containers show as stopped, start them there, or run `docker compose up -d` in `packaging/container`.
 
 ## 7. Afterwards
 
@@ -419,7 +424,7 @@ Tell the person where things are, and leave them a short note with this if they 
 | | Desktop app | Server version |
 |---|---|---|
 | Data folder | Windows `%LOCALAPPDATA%\Yuo\data`, macOS `~/Library/Application Support/Yuo/data`, Linux `~/.local/share/yuo-desktop/data` | the Docker volume `yuo_data` (`<YUO_PROJECT>_data` for a second copy; `/data` inside) |
-| Start and stop | the start file or its shortcut; closing the window stops it | Docker Desktop (or the Docker service on Linux) must be running; `docker compose up -d`, `docker compose stop` |
+| Start and stop | the start file or its shortcut; closing the window stops it | starts by itself whenever Docker runs (Docker Desktop with "Start Docker Desktop when you sign in" on, or the Docker service on Linux); by hand `docker compose up -d`, `docker compose stop` in `packaging/container` |
 | Backups | one a day, in `backups` in the data folder | one a day in `/data/backups`; `docker compose exec yuo yuo backup` for one now; copy them off the machine together with `yuo_key` |
 | Locked out | the start file opens Yuo signed in | `docker compose exec yuo yuo setup-code` prints a new one-time code |
 | Update | automatic, on restart, with rollback | set the new version in `YUO_IMAGE`, then `docker compose pull && docker compose up -d` |

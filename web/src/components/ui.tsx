@@ -4,6 +4,8 @@ import { createLink } from "@tanstack/react-router";
 import { forwardRef, type AnchorHTMLAttributes, type ReactNode } from "react";
 import {
   Button as AriaButton,
+  Checkbox,
+  CheckboxGroup,
   Disclosure,
   DisclosurePanel,
   FieldError,
@@ -381,6 +383,63 @@ export function ChoiceCards<T extends string>({
         ))}
       </div>
     </RadioGroup>
+  );
+}
+
+/** The same cards for a choice where several may apply (a checkbox group): a square mark with a tick. At least
+ * one stays chosen when `required`. */
+export function ChoiceCardsMulti<T extends string>({
+  label,
+  description,
+  choices,
+  value,
+  onChange,
+  required,
+  isDisabled,
+}: {
+  label: ReactNode;
+  description?: ReactNode;
+  choices: CardChoice<T>[];
+  value: T[];
+  onChange: (value: T[]) => void;
+  required?: boolean;
+  isDisabled?: boolean;
+}) {
+  return (
+    <CheckboxGroup
+      className={styles.radioGroup}
+      value={value}
+      onChange={(v) => {
+        if (required && v.length === 0) return; // the last one stays: something must be chosen
+        onChange(v as T[]);
+      }}
+      isDisabled={isDisabled}
+    >
+      <Label className={styles.label}>{label}</Label>
+      {description ? <span className={styles.description}>{description}</span> : null}
+      <div className={styles.choiceGrid}>
+        {choices.map((c) => (
+          <Checkbox
+            key={c.value}
+            value={c.value}
+            className={`${styles.choiceCard} ${styles.choiceCardCompact}`}
+            aria-describedby={c.describedBy}
+          >
+            {c.icon ? <span className={styles.choiceIcon}>{c.icon}</span> : null}
+            <span className={styles.choiceBody}>
+              <span className={styles.choiceName}>
+                {c.label}
+                {c.badge}
+              </span>
+              {c.description ? <span className={styles.choiceDescription}>{c.description}</span> : null}
+            </span>
+            <span className={styles.choiceCheck} aria-hidden="true">
+              <CheckIcon size="0.85rem" />
+            </span>
+          </Checkbox>
+        ))}
+      </div>
+    </CheckboxGroup>
   );
 }
 

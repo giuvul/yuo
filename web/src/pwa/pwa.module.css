@@ -1,0 +1,51 @@
+@layer components {
+  .overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    display: grid;
+    place-items: center;
+    padding: var(--yuo-space-2);
+    background: color-mix(in oklch, var(--yuo-color-scrim) 55%, transparent);
+    backdrop-filter: blur(2px);
+  }
+
+  .modal {
+    inline-size: min(32rem, 100%);
+    max-block-size: calc(100dvh - 2 * var(--yuo-space-2));
+    overflow: auto;
+    border: 1px solid var(--yuo-color-border);
+    border-radius: var(--yuo-radius-3);
+    background: var(--yuo-color-bg);
+    color: var(--yuo-color-fg);
+    box-shadow: var(--yuo-shadow-2);
+  }
+
+  .dialog {
+    display: grid;
+    gap: var(--yuo-space-3);
+    padding: var(--yuo-space-4);
+    outline: none;
+
+    @media (max-width: 40rem) {
+      padding: var(--yuo-space-3);
+    }
+  }
+
+  .title {
+    margin: 0;
+    font-size: var(--yuo-text-xl);
+  }
+
+  .steps {
+    display: grid;
+    gap: var(--yuo-space-2);
+    margin: 0;
+    padding-inline-start: var(--yuo-space-4);
+  }
+
+  .actions {
+    display: flex;
+    justify-content: flex-end;
+  }
+}

@@ -43,7 +43,7 @@ from yuo.core.ids import new_id
 from yuo.core.media import VIDEO_THEMES, MediaError, Narration, TTSPort, VideoTheme
 from yuo.generation import progress
 from yuo.generation.jobs import MAX_ATTEMPTS, Job, enqueue
-from yuo.generation.runner import BudgetExceeded, StageFailed, StageSpec
+from yuo.generation.runner import BudgetExceeded, Paused, StageFailed, StageSpec
 from yuo.setup import settings
 
 if TYPE_CHECKING:
@@ -165,6 +165,10 @@ class Video(Part):
         rid = job.target_id
         try:
             self._video(job, rid)
+        except Paused:
+            # generation is paused: the video waits and goes on from its stored stages on resume
+            self._set_rendition(rid, "queued")
+            raise
         except (BudgetExceeded, MediaError) as e:
             retry = isinstance(e, BudgetExceeded) or e.retryable
             # a budget stop waits without using an attempt; anything else on the last attempt is final

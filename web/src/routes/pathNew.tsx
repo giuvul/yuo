@@ -8,7 +8,8 @@ import { useCreatePath, useEstimate } from "../api/hooks";
 import { ErrorNotice } from "../components/ErrorNotice";
 import { GOAL_TYPE } from "../components/labels";
 import { ArrowRightIcon, BookIcon, CheckIcon, CoinsIcon, SparkleIcon, SproutIcon } from "../components/icons";
-import { Button, ChoiceCards, Field, MoreOptions, Notice, ui, Waiting } from "../components/ui";
+import { Button, ChoiceCards, ChoiceCardsMulti, Field, MoreOptions, Notice, ui, Waiting } from "../components/ui";
+import { DepthField, type Depth } from "../components/DepthField";
 import { rootRoute } from "./root";
 import { useTutorRefs } from "../tutor/context";
 import { AiReadyCards } from "../onboarding/AiReady";
@@ -190,7 +191,8 @@ function GoalPathForm({
   const refusedCli = refused?.cli === "claude" || refused?.cli === "codex" ? refused.cli : null;
   const [title, setTitle] = useState(prefill?.title ?? "");
   const [goal, setGoal] = useState(prefill?.goal ?? "");
-  const [goalType, setGoalType] = useState<GoalType>(prefill?.goal_type ?? "understanding");
+  const [goalTypes, setGoalTypes] = useState<GoalType[]>([prefill?.goal_type ?? "understanding"]);
+  const [depth, setDepth] = useState<Depth>("standard");
   const [instructions, setInstructions] = useState(prefill?.custom_instructions ?? "");
 
   const goalChoices = (Object.keys(GOAL_TYPE) as GoalType[]).map((value) => ({
@@ -213,7 +215,9 @@ function GoalPathForm({
             subject: "", // the server uses the title; the level check sets the level
             difficulty: "foundational",
             goal: goal.trim(),
-            goal_type: goalType,
+            goal_type: goalTypes[0] ?? "understanding",
+            goal_types: goalTypes,
+            depth,
             custom_instructions: instructions.trim(),
             level_check: true,
             preview: true,
@@ -250,13 +254,15 @@ function GoalPathForm({
         multiline
         name="goal"
       />
-      <ChoiceCards
+      <ChoiceCardsMulti
         label={t({ id: "path.new.field.goal-type", message: "Why are you learning this?" })}
+        description={t({ id: "path.new.field.goal-type.description", message: "Choose all that apply." })}
         choices={goalChoices}
-        value={goalType}
-        onChange={setGoalType}
-        compact
+        value={goalTypes}
+        onChange={setGoalTypes}
+        required
       />
+      <DepthField value={depth} onChange={setDepth} />
       <MoreOptions
         title={t({ id: "path.new.more-options", message: "More options" })}
         defaultExpanded={Boolean(prefill?.custom_instructions)}

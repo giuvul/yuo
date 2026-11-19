@@ -367,6 +367,25 @@
     }
   }
 
+  /* a choice where several may apply: a square that fills with a tick */
+  .choiceCheck {
+    display: inline-grid;
+    flex: none;
+    place-items: center;
+    inline-size: 1.25rem;
+    block-size: 1.25rem;
+    border: 2px solid var(--yuo-color-border-strong);
+    border-radius: var(--yuo-radius-1);
+    background: var(--yuo-color-surface);
+    color: transparent;
+
+    .choiceCard[data-selected] & {
+      border-color: var(--yuo-color-accent);
+      background: var(--yuo-color-accent);
+      color: var(--yuo-color-accent-fg);
+    }
+  }
+
   /* --- stepper: numbered steps joined by a line ------------------------------------------------------ */
   .stepper {
     display: grid;

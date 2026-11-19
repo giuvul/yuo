@@ -6,6 +6,7 @@ before the repair round, and are recorded), then the independent reviewer; a fai
 round with the findings, then the lesson fails. Items: deterministic checks, then blind solve.
 """
 
+import dataclasses
 import json
 import sqlite3
 from dataclasses import dataclass, field
@@ -23,11 +24,12 @@ from yuo.app.job_status import JOB_COLUMNS, JobStatus
 from yuo.app.material import Materials
 from yuo.app.next_steps import NextSteps
 from yuo.app.onboarding import Onboarding
+from yuo.app.pausing import Pausing
 from yuo.app.plan_preview import PlanPreview
 from yuo.app.repo import find_path, get_path, get_skill, path_state, save_path_state
 from yuo.app.review import Review
 from yuo.app.sharing import Sharing
-from yuo.app.stages import LEVEL_CHECK, REVIEW, TREE, lesson_spec
+from yuo.app.stages import LEVEL_CHECK, REVIEW, TREE_MAX_TOKENS, lesson_spec, tree_spec
 from yuo.app.study import Study
 from yuo.app.tutor import Tutor
 from yuo.app.video import Video
@@ -42,6 +44,7 @@ from yuo.core.ids import new_id
 from yuo.core.llm import Binding, Role
 from yuo.core.media import RendererPort, TTSPort
 from yuo.curriculum import level_check as lc
+from yuo.curriculum.depth import depth_of
 from yuo.curriculum.tree import apply_tree
 from yuo.db.blobs import BlobStore
 from yuo.db.connection import ReadPool, Writer
@@ -57,6 +60,10 @@ log = structlog.get_logger(__name__)
 
 def _rows(c: sqlite3.Connection, sql: str, *args: Any) -> list[dict[str, Any]]:
     return [dict(r) for r in c.execute(sql, args).fetchall()]
+
+
+# a lesson the learner asked for goes ahead of the lessons written ahead of them (and of videos)
+ASKED_PRIORITY = 5
 
 
 @dataclass
@@ -109,9 +116,10 @@ class Service(Part):
         self.materials = Materials(self.ctx, learners=self, models=self, paths=self, buffer=self.study)
         self.jobs = JobStatus(self.ctx, lessons=self, videos=self.videos)
         self.dashboard = Home(self.ctx, learners=self, reviews=self.reviews)
+        self.pausing = Pausing(self.ctx)
         self._parts: tuple[Part, ...] = (
             self.study, self.reviews, self.tutor, self.videos, self.sharing, self.next_steps, self.wizard, self.jobs,
-            self.preview, self.materials, self.dashboard,
+            self.preview, self.materials, self.dashboard, self.pausing,
         )  # fmt: skip
         self.erasure = Erasure(writer, readers, blobs, self.scheduler, self.ensure_learner)
 
@@ -273,6 +281,8 @@ class Service(Part):
         learner = self.ensure_learner()
         path_id = new_id()
 
+        reasons = list(dict.fromkeys(form.goal_types)) or [form.goal_type]
+
         def unit(c: sqlite3.Connection) -> str:
             lang = (
                 form.content_lang
@@ -295,13 +305,15 @@ class Service(Part):
                     form.title,
                     form.subject.strip() or form.title,
                     form.goal,
-                    form.goal_type,
+                    reasons[0],
                     form.difficulty,
                     lang,
                     now,
                     now,
                 ),
             )
+            # how big a plan, and every reason for learning (the column keeps the first, for packages)
+            save_path_state(c, path_id, "plan", {"depth": depth_of(form.depth), "goal_types": reasons})
             if form.custom_instructions:
                 settings.put(c, "custom_instructions", form.custom_instructions, "path", path_id)
             if form.preview:  # the plan is shown to the learner before it is built (yuo/app/plan_preview.py)
@@ -340,6 +352,12 @@ class Service(Part):
         }
         if interests:  # only when set, so inputs (and stage cache keys) without them stay as they were
             inputs["interests"] = interests
+        plan = path_state(p, "plan")
+        if plan:  # same: paths planned before the choice keep their inputs
+            reasons = plan.get("goal_types") or []
+            if len(reasons) > 1:
+                inputs["goal_type"] = " + ".join(reasons)
+            inputs["depth"] = depth_of(plan.get("depth"))
         result = (path_state(p, "level_check") or {}).get("result")
         if result:  # same: only when the learner took the level check
             inputs["level"] = lc.summary(result)
@@ -363,10 +381,13 @@ class Service(Part):
         if preview == "revising":
             self.preview.revise(job)
             return
+        depth = depth_of(inputs.get("depth"))
         gen = self.binding("generator")
+        if gen.max_tokens < TREE_MAX_TOKENS[depth]:  # a long plan is a long reply
+            gen = dataclasses.replace(gen, max_tokens=TREE_MAX_TOKENS[depth])
         out = self.runner.run(
             job.id,
-            TREE,
+            tree_spec(depth),
             gen,
             {
                 k: inputs[k]
@@ -379,6 +400,7 @@ class Service(Part):
                     "custom_instructions",
                     "interests",
                     "level",
+                    "depth",
                 )
                 if k in inputs
             },
@@ -525,10 +547,14 @@ class Service(Part):
                 "('queued','running','waiting_resource')",
                 (lesson_id,),
             ).fetchone()
-            if busy:
+            if busy:  # already on its way: the learner waits for it now, so it goes to the front
+                c.execute(
+                    "UPDATE generation_job SET priority = max(priority, ?) WHERE id = ? AND kind = 'lesson'",
+                    (ASKED_PRIORITY, busy[0]),
+                )
                 return str(busy[0])
             c.execute("UPDATE lesson SET state = 'queued' WHERE id = ?", (lesson_id,))
-            return enqueue(c, "lesson", EntityKind.LESSON, lesson_id)
+            return enqueue(c, "lesson", EntityKind.LESSON, lesson_id, priority=ASKED_PRIORITY)
 
         job = self.writer.run(unit)
         if self.worker:

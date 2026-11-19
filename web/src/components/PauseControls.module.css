@@ -1,0 +1,16 @@
+@layer components {
+  .card {
+    display: grid;
+    gap: var(--yuo-space-3);
+    padding: var(--yuo-space-3) var(--yuo-space-4);
+    border: 1px solid var(--yuo-color-border);
+    border-radius: var(--yuo-radius-3);
+    background: var(--yuo-color-surface);
+    box-shadow: var(--yuo-shadow-1);
+  }
+
+  .title {
+    margin: 0;
+    font-size: var(--yuo-text-lg);
+  }
+}

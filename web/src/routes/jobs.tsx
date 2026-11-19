@@ -1,11 +1,12 @@
 import { Plural, Trans } from "@lingui/react/macro";
 import { useLingui } from "@lingui/react";
 import { createRoute, Link } from "@tanstack/react-router";
-import { ACTIVE_JOB_STATUSES, useJobHistory, useJobs, useRetryJob } from "../api/hooks";
+import { ACTIVE_JOB_STATUSES, useJobHistory, useJobs, useRetryJob, useSettings } from "../api/hooks";
 import { Button } from "../components/ui";
 import { ErrorNotice } from "../components/ErrorNotice";
 import { jobErrorMessage } from "../components/jobError";
 import { JobProgressLine } from "../components/JobProgress";
+import { PauseCard } from "../components/PauseControls";
 import { JobKindLabel, JobStatusLabel, JobTargetLabel } from "../components/labels";
 import { PageHeader, ui } from "../components/ui";
 import type { JobDone } from "../api/client";
@@ -38,9 +39,11 @@ function JobsPage() {
           </p>
         }
       />
+      <PauseCard />
       <h2 className={styles.sectionTitle}>
         <Trans id="jobs.now">Now</Trans>
       </h2>
+      <LineRule />
       {jobs.isPending ? (
         <p className={ui.muted}>
           <Trans id="common.loading">Loading…</Trans>
@@ -81,6 +84,15 @@ function JobsPage() {
                       <JobStatusLabel value={j.status} />
                     </span>
                     <JobProgressLine job={j} className={styles.progress} />
+                    {j.turn != null ? (
+                      <span className={styles.progress} data-turn={j.turn}>
+                        {j.turn === 1 ? (
+                          <Trans id="jobs.turn.next">Next in line</Trans>
+                        ) : (
+                          <Trans id="jobs.turn.n">Number {j.turn} in line</Trans>
+                        )}
+                      </span>
+                    ) : null}
                   </td>
                   <td>
                     {j.title && j.lesson_id ? (
@@ -96,7 +108,9 @@ function JobsPage() {
                     )}
                   </td>
                   <td>
-                    {j.status === "failed" || (j.error && ACTIVE_JOB_STATUSES.has(j.status)) ? (
+                    {j.error === "paused" && j.status === "queued" ? (
+                      <Trans id="jobs.paused">Paused: it goes on from where it stopped when you resume.</Trans>
+                    ) : j.status === "failed" || (j.error && ACTIVE_JOB_STATUSES.has(j.status)) ? (
                       <>
                         {j.status !== "queued" ? (
                           i18n._(jobErrorMessage(j.error))
@@ -139,6 +153,23 @@ function JobsPage() {
       )}
       <JobHistory />
     </section>
+  );
+}
+
+/** The rule behind the order of the list: what Yuo writes ahead, and what comes first. */
+function LineRule() {
+  const settings = useSettings();
+  const value = settings.data?.find((d) => d.key === "generation.buffer")?.value;
+  const ahead = typeof value === "number" ? value : 3;
+  return (
+    <p className={ui.muted}>
+      <Plural
+        id="jobs.rule"
+        value={ahead}
+        one="Yuo keeps the next lesson of each path written ahead of you, in path order, and works on one thing at a time: a lesson you ask for first, then the lessons ahead, then videos, then review questions. New plans and tests never wait behind them."
+        other="Yuo keeps the next # lessons of each path written ahead of you, in path order, and works on one thing at a time: a lesson you ask for first, then the lessons ahead, then videos, then review questions. New plans and tests never wait behind them."
+      />
+    </p>
   );
 }
 

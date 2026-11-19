@@ -34,6 +34,12 @@
       background: var(--yuo-color-surface-muted);
       color: var(--yuo-color-fg);
     }
+
+    /* writing ahead is paused: a quiet outline, so it reads as a state rather than work going on */
+    &[data-paused] {
+      border: 1px dashed var(--yuo-color-border-strong);
+      color: var(--yuo-color-fg);
+    }
   }
 
   /* a phone: the sprout (or the mark) is enough; the words stay for screen readers */

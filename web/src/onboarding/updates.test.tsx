@@ -62,7 +62,8 @@ describe("updates in Settings", () => {
     expect(s.getByText("Yuo has not checked for a newer version yet.")).toBeInTheDocument();
     await u.click(s.getByRole("button", { name: "Check now" }));
     expect(await s.findByText("Version 1.1.0 is available.")).toBeInTheDocument();
-    expect(s.getByText("Update by pulling the new container image.")).toBeInTheDocument();
+    expect(s.getByText(/set YUO_IMAGE in .env to the new version/)).toBeInTheDocument();
+    expect(s.getByText(/starts by itself whenever Docker runs/)).toBeInTheDocument();
     expect(s.getByRole("link", { name: /What is new/ })).toHaveAttribute("target", "_blank");
     expect(s.queryByRole("button", { name: "Download" })).not.toBeInTheDocument();
     expect(calls.some((c) => c.method === "POST" && c.path === "/api/update/check")).toBe(true);

@@ -105,6 +105,21 @@ def test_a_good_answer_is_cached_and_a_bad_one_asked_again(monkeypatch: pytest.M
     assert cache.get("claude", fresh=True).ready and len(asked) == 3
 
 
+def test_an_unclear_sign_in_is_asked_again_soon(monkeypatch: pytest.MonkeyPatch) -> None:
+    # the first run right after installing may not say: the card must reach the real answer by itself
+    answers = [ca.Status("claude", True, logged_in=None), ca.Status("claude", True, logged_in=False)]
+    asked: list[str] = []
+
+    def ask(cli: str) -> ca.Status:
+        asked.append(cli)
+        return answers[min(len(asked), 2) - 1]
+
+    cache = ca.StatusCache(ask)
+    monkeypatch.setattr(ca, "BAD_TTL_S", 0.0)
+    assert cache.get("claude").logged_in is None
+    assert cache.get("claude").logged_in is False and len(asked) == 2
+
+
 def test_an_install_runs_the_vendors_script_in_the_cli_home(
     home: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:

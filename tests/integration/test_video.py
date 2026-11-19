@@ -410,3 +410,25 @@ def test_notes_from_the_video_reach_the_tutor_with_their_moment(rt: Runtime, llm
         "(at 1:05 in the video) why is B next to C?"
     )
     assert {n["sent_message_id"] for n in rt.service.notes(lesson_id)} == {sent["id"]}
+
+
+def test_a_video_paused_after_its_first_review_goes_on_from_there(
+    rt: Runtime, llm: fakes.FakeLLM, renderer: FakeRenderer
+) -> None:
+    def review_then_pause(request: Any) -> Any:
+        rt.service.set_generation_pause("videos", None)  # paused while the call runs: it still finishes
+        return major()
+
+    llm.script["video_visual"] = [review_then_pause]
+    lesson_id, video = first_video(rt)
+    assert video is not None and video["state"] == "queued" and renderer.renders == 0
+    assert rt.service.lesson_view(lesson_id)["state"] == "ready"  # lessons keep coming: only videos wait
+    assert llm.stages().count("video_author") == 1
+    assert rt.service.generation_pause()["waiting"] == 1
+
+    rt.service.set_generation_pause(None, None)
+    drain(rt)
+    video = rt.service.video_of(lesson_id)
+    assert video is not None and video["state"] == "ready" and renderer.renders == 1
+    # the same calls as a video that was never paused: the first draft and its review came from the store
+    assert llm.stages().count("video_author") == 2 and llm.stages().count("video_visual") == 2

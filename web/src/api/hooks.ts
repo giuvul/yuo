@@ -6,6 +6,7 @@ import {
   type AssessmentOut,
   type JobRef,
   type JobStarted,
+  type PauseIn,
   type PathIn,
   type PathOut,
   type RequestIn,
@@ -26,6 +27,7 @@ export const keys = {
   requests: (pathId: string) => ["paths", pathId, "requests"] as const,
   notes: (lessonId: string) => ["lessons", lessonId, "notes"] as const,
   jobs: ["jobs"] as const,
+  pause: ["generation-pause"] as const,
   job: (id: string) => ["jobs", id] as const,
   settings: ["settings"] as const,
 };
@@ -240,7 +242,10 @@ export function useGenerateLesson(pathId: string) {
   return useMutation({
     mutationFn: (lessonId: string) =>
       unwrap(api.POST("/api/lessons/{lesson_id}/generate", { params: { path: { lesson_id: lessonId } } })),
-    onSettled: () => qc.invalidateQueries({ queryKey: keys.path(pathId) }),
+    onSettled: () => {
+      void qc.invalidateQueries({ queryKey: keys.jobs }); // its place in line
+      return qc.invalidateQueries({ queryKey: keys.path(pathId) });
+    },
   });
 }
 
@@ -380,6 +385,40 @@ export function useJobs() {
     queryFn: () => unwrap(api.GET("/api/jobs")),
     staleTime: 0,
     refetchInterval: (q) => (hasActiveJob(q.state.data) ? PATH_POLL_MS : 30_000),
+  });
+}
+
+/** Each waiting lesson's place in line (lesson id to turn), read from the list the header keeps fresh: a lesson
+ * row mounting does not fetch it again. */
+export function useLessonTurns() {
+  return useQuery({
+    queryKey: keys.jobs,
+    queryFn: () => unwrap(api.GET("/api/jobs")),
+    refetchOnMount: false,
+    select: (jobs) =>
+      new Map(jobs.filter((j) => j.kind === "lesson" && j.turn != null).map((j) => [j.target_id, j.turn as number])),
+  });
+}
+
+// --- pausing generation ---------------------------------------------------------------------------
+
+/** Whether writing ahead is paused; asked often while a paused job is still finishing its step. */
+export function usePause() {
+  return useQuery({
+    queryKey: keys.pause,
+    queryFn: () => unwrap(api.GET("/api/generation/pause")),
+    staleTime: 0,
+    refetchInterval: (q) => (q.state.data?.finishing.length ? 5_000 : 60_000),
+  });
+}
+
+/** Pause (scope "all" or "videos", until an ISO time or null) or resume (scope null). */
+export function useSetPause() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (body: PauseIn) => unwrap(api.PUT("/api/generation/pause", { body })),
+    onSuccess: (data) => qc.setQueryData(keys.pause, data),
+    onSettled: () => void qc.invalidateQueries({ queryKey: keys.jobs }),
   });
 }
 

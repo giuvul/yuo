@@ -120,6 +120,15 @@ describe("path view", () => {
         generated = true;
         return json({ job_id: "j2" }, 202);
       },
+      "GET /api/jobs": () =>
+        json(
+          generated
+            ? [
+                { id: "j0", kind: "lesson", status: "running", error: null, attempt: 1, target_kind: "lesson", target_id: "l9", turn: null },
+                { id: "j2", kind: "lesson", status: "queued", error: null, attempt: 0, target_kind: "lesson", target_id: "l2", turn: 1 },
+              ]
+            : [],
+        ),
     });
     const user = userEvent.setup();
     renderApp("/paths/p1");
@@ -134,7 +143,8 @@ describe("path view", () => {
 
     await user.click(screen.getByRole("button", { name: "Generate “Filtering”" }));
     expect(calls.some((c) => c.method === "POST" && c.path === "/api/lessons/l2/generate")).toBe(true);
-    expect(await screen.findByText("Queued")).toBeInTheDocument();
+    expect(await screen.findByText(/^Queued/)).toBeInTheDocument();
+    await waitFor(() => expect(screen.getByText(/^Queued/)).toHaveTextContent("Queued · next in line"));
     expect(screen.getByText(/Writing a lesson/).closest("li")).toHaveTextContent("waiting to start");
   });
 });
@@ -279,7 +289,11 @@ describe("new path", () => {
     await user.type(screen.getByRole("textbox", { name: "Title" }), "Statistics");
     expect(screen.queryByRole("textbox", { name: "Subject" })).toBeNull();
     await user.type(screen.getByRole("textbox", { name: "Your goal" }), "Read a report");
-    await user.click(screen.getByRole("radio", { name: "Pass an exam" }));
+    // several reasons may apply; the first one chosen is the path's main reason
+    await user.click(screen.getByRole("checkbox", { name: "Pass an exam" }));
+    await user.click(screen.getByRole("checkbox", { name: "Understand it well" }));
+    await user.click(screen.getByRole("checkbox", { name: "Use it in practice" }));
+    await user.click(screen.getByRole("radio", { name: /Deep/ }));
     expect(screen.queryByRole("radio", { name: "Introductory" })).toBeNull(); // the level check sets it
     await user.click(screen.getByRole("button", { name: "More options" })); // custom instructions are tucked away
     await user.type(screen.getByRole("textbox", { name: /Custom instructions/ }), "Use R");
@@ -293,6 +307,8 @@ describe("new path", () => {
       difficulty: "foundational",
       goal: "Read a report",
       goal_type: "exam",
+      goal_types: ["exam", "practical"],
+      depth: "deep",
       custom_instructions: "Use R",
       level_check: true,
       preview: true,

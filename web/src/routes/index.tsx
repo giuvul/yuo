@@ -5,6 +5,7 @@ import type { ReactNode } from "react";
 import type { Schemas } from "../api/client";
 import { keys, useAcceptLesson, useHome, usePaths } from "../api/hooks";
 import { ErrorNotice } from "../components/ErrorNotice";
+import { PauseBanner } from "../components/PauseControls";
 import { GrowingSprout } from "../components/Grove";
 import {
   AlertIcon,
@@ -62,6 +63,7 @@ function Dashboard() {
         {home.data ? <Summary home={home.data} due={due} /> : null}
       </header>
 
+      <PauseBanner />
       {unfinished ? (
         <Notice>
           <Trans id="home.finish-setup">Yuo is not fully set up yet.</Trans>{" "}

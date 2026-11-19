@@ -189,10 +189,12 @@ describe("studies from the learner's material", () => {
     expect(calls.some((c) => c.path === "/api/studies")).toBe(false); // nothing is made until files are added
     await user.click(screen.getByText("A goal")); // and the choice can still change
     await user.click(screen.getByText("My own material"));
+    expect(screen.getByText("As much as your material holds.")).toBeInTheDocument(); // the size follows the files
+    await user.click(screen.getByRole("radio", { name: /Shorter/ }));
     const input = document.querySelector<HTMLInputElement>('input[type="file"]')!;
     await user.upload(input, new File([], "Analisi.pdf", { type: "application/pdf" }));
     await waitFor(() => expect(calls.some((c) => c.path === "/api/studies")).toBe(true));
-    expect(calls.find((c) => c.path === "/api/studies")?.body).toMatchObject({ title: "", courses: [] });
+    expect(calls.find((c) => c.path === "/api/studies")?.body).toMatchObject({ title: "", courses: [], depth: "short" });
 
     expect(await screen.findByRole("heading", { name: "Add all your material" })).toBeInTheDocument();
     await waitFor(() => // the file chosen on the form is sent to the path's upload

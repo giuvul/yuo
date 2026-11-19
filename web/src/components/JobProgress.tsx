@@ -29,6 +29,12 @@ const STEP: Record<string, MessageDescriptor> = {
   next_grow: msg({ id: "job.step.next-grow", message: "Adding the new skills" }),
 };
 
+/** The words for a step code, or null when the web app has none. */
+export function stepLabel(code: string | null | undefined, i18n: ReturnType<typeof useLingui>["i18n"]): string | null {
+  const d = code ? STEP[code] : undefined;
+  return d ? i18n._(d) : null;
+}
+
 /** "Rendering the video · draft 2 of at most 4", or null when the job reports no step. */
 function jobStep(job: JobRef, i18n: ReturnType<typeof useLingui>["i18n"]): string | null {
   if (job.status !== "running" || !job.step) return null;

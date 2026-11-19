@@ -66,6 +66,27 @@ class BranchOut(BaseModel):
     skills: list[SkillOut]
 
 
+class PauseFinishing(BaseModel):
+    job_id: str
+    kind: str
+    step: str | None
+    step_s: int | None  # seconds in its current step
+    typical_s: int | None  # how long that step usually takes
+
+
+class GenerationPause(BaseModel):
+    paused: bool
+    scope: Literal["all", "videos"] | None
+    until: str | None
+    waiting: int  # jobs of the paused kinds waiting for the resume
+    finishing: list[PauseFinishing]  # still in a model call: they stop once it ends
+
+
+class PauseIn(BaseModel):
+    scope: Literal["all", "videos"] | None  # None resumes
+    until: str | None = None  # an ISO timestamp (YYYY-MM-DDTHH:MM:SS.sssZ); None: until resumed
+
+
 class JobRef(BaseModel):
     id: str
     kind: str
@@ -84,6 +105,10 @@ class JobRef(BaseModel):
     typical_s: int | None = Field(None, description="How long a job of this kind usually takes, in seconds")
     retry_at: str | None = Field(None, description="When a job that failed for now is tried again")
     lesson_id: str | None = Field(None, description="The lesson a lesson or video job is for")
+    turn: int | None = Field(
+        None,
+        description="A waiting lesson, video or question job's place in line (1 is next), in the jobs list",
+    )
 
 
 class JobDone(JobRef):

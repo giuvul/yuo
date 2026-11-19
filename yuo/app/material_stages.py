@@ -195,7 +195,9 @@ Rules:
 - `requires` lists only skills of this course that must come directly before (no cycles).
 - Codes: lowercase dotted, every skill code starts with `{code}.`; objective and lesson codes start with
   their skill's code; all unique.
-- At most {max_lessons} lessons in total."""
+- Size: {min_lessons} to {max_lessons} lessons in total, from how much the material holds. One recorded
+  lecture or a short handout is one or two skills with a lesson or two each: do not split a small file into
+  many small skills."""
 
 ORDER = {
     True: "Keep the course's order: skills follow the order of the lectures (or of the book when there are no "
@@ -227,6 +229,7 @@ def _course_text(i: dict[str, Any]) -> str:
         order=ORDER[bool(i["keep_order"])],
         materials=_materials(i),
         max_lessons=i["max_lessons"],
+        min_lessons=i.get("min_lessons", 1),
     )
 
 

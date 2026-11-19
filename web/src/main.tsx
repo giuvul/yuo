@@ -6,9 +6,13 @@ import { createRoot } from "react-dom/client";
 import { App } from "./App";
 import { activateLocale, browserLocale } from "./i18n";
 import { Outbox } from "./outbox/outbox";
-import { registerServiceWorker } from "./pwa/pwa";
+import { listenForInstall, registerServiceWorker } from "./pwa/pwa";
 import { createQueryClient } from "./queryClient";
 import { createAppRouter } from "./router";
+
+// before anything is awaited: Chromium may offer installing as soon as the page loads, and a missed offer
+// does not come again until the next load
+listenForInstall();
 
 const rootElement = document.getElementById("root");
 if (!rootElement) throw new Error("#root element missing");

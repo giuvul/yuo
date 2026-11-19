@@ -43,6 +43,7 @@ from yuo.core.errors import Conflict, InvalidInput, NotFound
 from yuo.core.hashing import bytes_hash
 from yuo.core.ids import new_id
 from yuo.curriculum.courses import CourseOutline
+from yuo.curriculum.depth import MaterialAmount, depth_of, material_lessons
 from yuo.curriculum.tree import (
     CODE,
     BranchDraft,
@@ -127,7 +128,13 @@ class Materials(Part):
     # --- courses -------------------------------------------------------------------------------------
 
     def create_studies(
-        self, title: str, courses: list[dict[str, Any]], *, goal: str = "", content_lang: str | None = None
+        self,
+        title: str,
+        courses: list[dict[str, Any]],
+        *,
+        goal: str = "",
+        content_lang: str | None = None,
+        depth: str = "standard",
     ) -> str:
         """A path for the learner's studies, with its courses; the material is added next. Without courses, the
         learner adds all of it first, to one holding course, and the path's name and courses are proposed from
@@ -148,7 +155,9 @@ class Materials(Part):
                     (learner,),
                 ).fetchone()
             if row is not None:
-                return str(row[0])
+                reused = str(row[0])
+                self.writer.run(lambda c: save_path_state(c, reused, "plan", {"depth": depth_of(depth)}))
+                return reused
         path_id = new_id()
 
         def unit(c: sqlite3.Connection) -> None:
@@ -178,6 +187,9 @@ class Materials(Part):
                     now,
                 ),
             )
+            save_path_state(
+                c, path_id, "plan", {"depth": depth_of(depth)}
+            )  # how much of the material to plan
             for course in courses:
                 self._insert_course(c, path_id, course)
             if not courses:
@@ -1426,12 +1438,18 @@ class Materials(Part):
         used: list[str] = []
         topic_map: dict[str, list[str]] = {}
         teaching: set[str] = set()
+        amounts: list[MaterialAmount] = []
         for m in c.execute(
-            "SELECT id, title, role, outline, position FROM material WHERE course_id = ? AND state = 'ready' "
-            "ORDER BY position",
+            "SELECT m.id, m.title, m.role, m.kind, m.pages, m.duration_ms, m.outline, m.position, "
+            "(SELECT coalesce(sum(tokens), 0) FROM material_section s WHERE s.material_id = m.id "
+            "AND s.level = 'chunk') AS tokens FROM material m WHERE m.course_id = ? AND m.state = 'ready' "
+            "ORDER BY m.position",
             (course["id"],),
         ).fetchall():
             used.append(m["id"])
+            amounts.append(
+                MaterialAmount(m["role"], m["kind"], m["pages"], m["duration_ms"], int(m["tokens"]))
+            )
             outline = json.loads(m["outline"])
             topics = []
             k = m["position"] + 1  # stable: a file read later does not renumber the others' topics
@@ -1442,7 +1460,12 @@ class Materials(Part):
                     teaching.add(code)
                 topics.append({"code": code, "loc": t["loc"], "title": t["title"], "summary": t["summary"]})
             materials.append({"title": m["title"], "role": m["role"], "topics": topics})
-        lessons_cap = max(10, min(150, len(teaching) * 2 + 4))
+        # as many lessons as the material holds (one lecture is a lesson or two, a book dozens), at the depth
+        # the learner chose
+        min_lessons, max_lessons = material_lessons(amounts, depth_of(inputs.get("depth")))
+        # the prompt asks for that range; the rule only stops a runaway plan (a model may see more topics in a
+        # short file than the size suggests)
+        lessons_cap = min(150, max(2 * max_lessons, len(teaching) + 2))
         return (
             {
                 k: inputs[k]
@@ -1465,7 +1488,9 @@ class Materials(Part):
                 "adherence": course["adherence"],
                 "keep_order": bool(course["keep_order"]),
                 "materials": materials,
-                "max_lessons": lessons_cap,
+                "max_lessons": max_lessons,
+                "min_lessons": min_lessons,
+                "lessons_cap": lessons_cap,
             },
             topic_map,
             teaching,
@@ -1540,7 +1565,7 @@ class Materials(Part):
         if not topic_map:
             raise StageFailed("none of this course's files could be read")
         gen = self.models.binding("generator")
-        args = (course["code"], set(topic_map), teaching, course["adherence"], inputs["max_lessons"])
+        args = (course["code"], set(topic_map), teaching, course["adherence"], inputs["lessons_cap"])
         if outline["status"] == "revising":
             feedback = [r["text"] for r in outline.get("rounds", [])]
             revised = self.runner.run(

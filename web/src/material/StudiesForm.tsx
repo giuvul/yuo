@@ -6,6 +6,7 @@ import { ArrowRightIcon, CloseIcon, PlusIcon } from "../components/icons";
 import { Button, Field, Notice, ui, Waiting } from "../components/ui";
 import { useCreateStudies, type Adherence } from "./api";
 import { handOver } from "./handover";
+import { DepthField, type Depth } from "../components/DepthField";
 import { AdherenceField } from "./labels";
 import { FileDrop } from "./Studies";
 import styles from "./material.module.css";
@@ -22,9 +23,10 @@ const MAX_COURSES = 60;
 export function MaterialStart({ onCreated, secondary }: { onCreated: (pathId: string) => void; secondary?: ReactNode }) {
   const { t } = useLingui();
   const create = useCreateStudies();
+  const [depth, setDepth] = useState<Depth>("standard");
   const start = (files: File[]) =>
     create.mutate(
-      { title: "", goal: "", courses: [] },
+      { title: "", goal: "", courses: [], depth },
       {
         onSuccess: (r) => {
           handOver(r.path_id, files);
@@ -41,6 +43,7 @@ export function MaterialStart({ onCreated, secondary }: { onCreated: (pathId: st
           then suggests a name for the path and how to split it into courses.
         </Trans>
       </p>
+      <DepthField value={depth} onChange={setDepth} material isDisabled={create.isPending} />
       <FileDrop
         label={t({ id: "studies.drop.label", message: "Drop your material here" })}
         onFiles={start}
@@ -89,6 +92,7 @@ export function StudiesForm({ onCreated, secondary }: { onCreated: (pathId: stri
           {
             title: title.trim(),
             goal: goal.trim(),
+            depth: "standard",
             courses: filled.map((r) => ({
               title: r.title.trim(),
               adherence: r.adherence,

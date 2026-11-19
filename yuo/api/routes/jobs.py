@@ -37,4 +37,17 @@ def router(svc: Any) -> APIRouter:
         result: list[dict[str, Any]] = svc.active_jobs()
         return result
 
+    @r.get("/api/generation/pause", response_model=S.GenerationPause)
+    def get_pause() -> dict[str, Any]:
+        """Whether background generation is paused, what waits, and what is still finishing its step."""
+        result: dict[str, Any] = svc.generation_pause()
+        return result
+
+    @r.put("/api/generation/pause", response_model=S.GenerationPause)
+    def put_pause(body: S.PauseIn) -> dict[str, Any]:
+        """Pause lessons and videos written ahead (or only videos), until a time or until resumed; scope null
+        resumes."""
+        result: dict[str, Any] = svc.set_generation_pause(body.scope, body.until)
+        return result
+
     return r

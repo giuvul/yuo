@@ -556,7 +556,7 @@ describe("answers an AI assistant collected (SETUP.md)", () => {
     expect(await screen.findByRole("heading", { level: 2, name: "Your first path" })).toBeInTheDocument();
     expect(await screen.findByRole("textbox", { name: /Title/ })).toHaveValue("Statistics for A/B tests");
     expect(screen.getByRole("textbox", { name: /Your goal/ })).toHaveValue("Read and design A/B tests at work");
-    expect(screen.getByRole("radio", { name: /practical|Use it|apply/i })).toBeChecked();
+    expect(screen.getByRole("checkbox", { name: /practical|Use it|apply/i })).toBeChecked();
     expect(screen.getByRole("textbox", { name: /Custom instructions/ })).toHaveValue("I know basic SQL.");
   });
 });

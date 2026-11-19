@@ -7863,12 +7863,12 @@
         "uvicorn-92@0.54.0",
         "webauthn-95@3.0.1"
       ],
-      "ref": "yuo-1@1.1.0"
+      "ref": "yuo-1@1.2.0"
     }
   ],
   "metadata": {
     "component": {
-      "bom-ref": "yuo-1@1.1.0",
+      "bom-ref": "yuo-1@1.2.0",
       "name": "yuo",
       "properties": [
         {
@@ -7877,7 +7877,7 @@
         }
       ],
       "type": "library",
-      "version": "1.1.0"
+      "version": "1.2.0"
     }
   },
   "specVersion": "1.5",

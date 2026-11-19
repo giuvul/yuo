@@ -4,6 +4,32 @@ All notable changes are listed here. The format follows Keep a Changelog; versio
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-11-19
+
+- Generation can be paused: everything written ahead (lessons, videos, review questions, lessons you asked for)
+  or only videos, for an hour, until tomorrow morning or until you resume, from the jobs page. Nothing done so
+  far is lost: a job stops before its next model call and goes on from the steps it already finished when you
+  resume. A step already running finishes first; the jobs page says which and how long it usually takes (a
+  video step can take several minutes). Plans and tests for a new path are never paused.
+- New paths can be Shorter, Standard or Deep. A path from a goal is now planned much bigger (40 to 70 lessons
+  for Standard, 80 to 120 for Deep); lessons are still written only as you get close to them, so a longer path
+  costs nothing until then.
+- A course from your own material is planned as big as the material: one recorded lecture is a lesson or two,
+  a book dozens of lessons, with Shorter or Deep covering less or more of it.
+- "Why are you learning this?" takes several answers.
+- The jobs page shows each waiting job's place in line and the rule behind the order, and a queued lesson on
+  the path shows its place too. A lesson you ask for now goes ahead of the lessons written ahead of you.
+- "Save app shortcut" is in the menu on every browser: where the browser has no install button (Firefox,
+  Safari), it shows the steps for that browser.
+- After an update, the page reloads by itself and then says which version is running, instead of a reload
+  button that seemed to do nothing.
+- Signing in to Claude Code or Codex: the setup no longer says "Done" before you are signed in, and when the
+  sign-in state is unclear it shows the sign-in button and checks again by itself.
+- The container setup explains how to start Yuo again after a restart of the computer, and the update
+  commands are shown in Settings.
+- A path's own state (its level check, plan choices, preview, next steps) is no longer written into packages
+  you share.
+
 ## [1.1.0] - 2026-11-19
 
 - A new Home shows, at a glance, what to do next and how it goes across all your paths: the lesson to continue,

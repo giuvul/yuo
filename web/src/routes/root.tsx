@@ -1,7 +1,7 @@
 import { Trans, useLingui } from "@lingui/react/macro";
 import { useQueryClient } from "@tanstack/react-query";
 import { createRootRoute, Link, Outlet, useNavigate, useRouter, useRouterState } from "@tanstack/react-router";
-import { useEffect, useSyncExternalStore } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { Button as AriaButton, Menu, MenuItem, MenuTrigger, Popover, Separator } from "react-aria-components";
 import { usePutSetting, useSetup } from "../api/hooks";
 import { authKeys, useAuthState, useSignOut } from "../auth/api";
@@ -16,8 +16,8 @@ import { Ambient } from "../components/Grove";
 import { Logo } from "../components/Logo";
 import { ui } from "../components/ui";
 import { useOutbox } from "../outbox/context";
-import { InstallButton, UpdateNotice } from "../pwa/PwaControls";
-import { install, listenForInstall, useInstallPrompt } from "../pwa/pwa";
+import { InstallButton, ShortcutGuide, UpdateNotice } from "../pwa/PwaControls";
+import { install, runningInstalled, useInstallPrompt } from "../pwa/pwa";
 import { GearIcon, MoreIcon, PathIcon, RepeatIcon, SignOutIcon } from "../components/icons";
 import { JobsIndicator, ReviewsBadge } from "../components/HeaderStatus";
 import { SyncIndicator } from "../components/SyncIndicator";
@@ -126,7 +126,6 @@ function RootLayout() {
   const stopped = useAppStopped();
   // the reading screen keeps the background quieter (a lesson, not its practice)
   const reading = useRouterState({ select: (s) => /^\/lessons\/[^/]+\/?$/.test(s.location.pathname) });
-  useEffect(() => listenForInstall(), []);
   if (stopped) return <StoppedScreen />;
   return (
     <div className={styles.layout} data-dock={tutor.open && shell ? "open" : "closed"}>
@@ -209,41 +208,47 @@ function MoreMenu() {
   const signOut = useSignOut();
   const navigate = useNavigate();
   const canInstall = useInstallPrompt() !== null;
+  const [guide, setGuide] = useState(false);
   const onboarding = useOnboarding();
   const setupDone = onboarding.data !== undefined && (onboarding.data.done || onboarding.data.has_path);
   return (
-    <MenuTrigger>
-      <AriaButton className={styles.menuButton} aria-label={t({ id: "nav.more", message: "More" })}>
-        <MoreIcon />
-      </AriaButton>
-      <Popover className={styles.menuPopover} placement="bottom end">
-        <Menu
-          className={styles.menu}
-          aria-label={t({ id: "nav.more", message: "More" })}
-          disabledKeys={signOut.isPending ? ["sign-out"] : []}
-          onAction={(key) => {
-            if (key === "setup") void navigate({ to: "/setup" });
-            else if (key === "install") void install();
-            else if (key === "sign-out") signOut.mutate();
-          }}
-        >
-          {setupDone ? null : (
-            <MenuItem id="setup" className={styles.menuItem}>
-              <Trans id="nav.setup">Setup</Trans>
+    <>
+      <MenuTrigger>
+        <AriaButton className={styles.menuButton} aria-label={t({ id: "nav.more", message: "More" })}>
+          <MoreIcon />
+        </AriaButton>
+        <Popover className={styles.menuPopover} placement="bottom end">
+          <Menu
+            className={styles.menu}
+            aria-label={t({ id: "nav.more", message: "More" })}
+            disabledKeys={signOut.isPending ? ["sign-out"] : []}
+            onAction={(key) => {
+              if (key === "setup") void navigate({ to: "/setup" });
+              else if (key === "install") {
+                if (canInstall) void install();
+                else setGuide(true);
+              } else if (key === "sign-out") signOut.mutate();
+            }}
+          >
+            {setupDone ? null : (
+              <MenuItem id="setup" className={styles.menuItem}>
+                <Trans id="nav.setup">Setup</Trans>
+              </MenuItem>
+            )}
+            {runningInstalled() ? null : (
+              <MenuItem id="install" className={styles.menuItem}>
+                <Trans id="pwa.install">Save app shortcut</Trans>
+              </MenuItem>
+            )}
+            <Separator className={styles.menuSeparator} />
+            <MenuItem id="sign-out" className={styles.menuItem} textValue={t({ id: "nav.sign-out", message: "Sign out" })}>
+              <SignOutIcon />
+              <Trans id="nav.sign-out">Sign out</Trans>
             </MenuItem>
-          )}
-          {canInstall ? (
-            <MenuItem id="install" className={styles.menuItem}>
-              <Trans id="pwa.install">Save app shortcut</Trans>
-            </MenuItem>
-          ) : null}
-          <Separator className={styles.menuSeparator} />
-          <MenuItem id="sign-out" className={styles.menuItem} textValue={t({ id: "nav.sign-out", message: "Sign out" })}>
-            <SignOutIcon />
-            <Trans id="nav.sign-out">Sign out</Trans>
-          </MenuItem>
-        </Menu>
-      </Popover>
-    </MenuTrigger>
+          </Menu>
+        </Popover>
+      </MenuTrigger>
+      <ShortcutGuide isOpen={guide} onOpenChange={setGuide} />
+    </>
   );
 }

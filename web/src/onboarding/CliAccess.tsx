@@ -95,6 +95,11 @@ export function CliAccessView({ cli: c, ...h }: { cli: CliOut } & CliHandlers) {
     tone = "todo";
     title = <Trans id="cli.state.signed-out">{name} is installed, but not signed in</Trans>;
     body = <SignedOut c={c} h={h} />;
+  } else if (c.can_login) {
+    // installed, and it did not say whether it is signed in: offer the sign-in rather than a quiet note
+    tone = "todo";
+    title = <Trans id="cli.state.sign-in-next">{name} is installed: sign in next</Trans>;
+    body = <SignedOut c={c} h={h} unsure />;
   } else {
     tone = "unknown";
     title = <Trans id="cli.state.installed">{name} is installed</Trans>;
@@ -208,12 +213,20 @@ function NotInstalled({ c, h }: { c: CliOut; h: CliHandlers }) {
   );
 }
 
-function SignedOut({ c, h }: { c: CliOut; h: CliHandlers }) {
+function SignedOut({ c, h, unsure }: { c: CliOut; h: CliHandlers; unsure?: boolean }) {
   const { t } = useLingui();
   const name = c.name;
   const failed = c.login.state === "failed";
   return (
     <>
+      {unsure ? (
+        <p className={ui.muted}>
+          <Trans id="cli.login.unsure">
+            Yuo could not tell yet whether {name} is signed in. If you have not signed in, do it now; if you
+            already have, go on.
+          </Trans>
+        </p>
+      ) : null}
       <p>
         <Trans id="cli.login.why">
           Sign in to {name} with the account that has your subscription. Yuo never sees your password.

@@ -486,10 +486,14 @@ function AccessFor({
       {cli && needs.includes("consent") ? <ConsentBox cli={cli} agreed={agreed} onChange={setAgreed} /> : null}
       {access.isError ? <ErrorNotice error={access.error} /> : null}
 
-      {applied ? (
+      {applied && programReady && program.data?.logged_in !== null ? (
         <Notice tone="success" role="status">
           <Trans id="wizard.access.applied">Done. Yuo uses {name} from now on.</Trans>
         </Notice>
+      ) : applied ? (
+        <p role="status" className={ui.muted}>
+          <Trans id="wizard.access.applied.pending">Saved: Yuo will use {name}. Finish the steps below to go on.</Trans>
+        </p>
       ) : null}
       {applied ? <SetupWarnings setup={applied} /> : null}
       {applied && cli ? <CliAccess cli={cli} /> : null}

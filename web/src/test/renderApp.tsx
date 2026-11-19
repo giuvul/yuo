@@ -61,6 +61,7 @@ export const appRoutes: Record<string, Handler> = {
   "GET /api/auth/state": () => json(signedInState),
   "GET /api/setup": () => json(configuredSetup),
   "GET /api/jobs": () => json([]),
+  "GET /api/generation/pause": () => json({ paused: false, scope: null, until: null, waiting: 0, finishing: [] }),
   "GET /api/jobs/history": () => json({ jobs: [], next: null }),
   "GET /api/reviews": () => json({ due: 0, allowed_today: 50, item_version_ids: [] }),
   "POST /api/devices": () => json({ device_id: "0190f000-0000-7000-8000-0000000000d1" }),

@@ -2174,6 +2174,60 @@
         "title": "FlashcardView",
         "type": "object"
       },
+      "GenerationPause": {
+        "properties": {
+          "finishing": {
+            "items": {
+              "$ref": "#/components/schemas/PauseFinishing"
+            },
+            "title": "Finishing",
+            "type": "array"
+          },
+          "paused": {
+            "title": "Paused",
+            "type": "boolean"
+          },
+          "scope": {
+            "anyOf": [
+              {
+                "enum": [
+                  "all",
+                  "videos"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Scope"
+          },
+          "until": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Until"
+          },
+          "waiting": {
+            "title": "Waiting",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "paused",
+          "scope",
+          "until",
+          "waiting",
+          "finishing"
+        ],
+        "title": "GenerationPause",
+        "type": "object"
+      },
       "Gpu": {
         "properties": {
           "kind": {
@@ -3154,6 +3208,18 @@
             "description": "The lesson, skill or path the job is for, by name",
             "title": "Title"
           },
+          "turn": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "A waiting lesson, video or question job's place in line (1 is next), in the jobs list",
+            "title": "Turn"
+          },
           "typical_s": {
             "anyOf": [
               {
@@ -3387,6 +3453,18 @@
             ],
             "description": "The lesson, skill or path the job is for, by name",
             "title": "Title"
+          },
+          "turn": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "A waiting lesson, video or question job's place in line (1 is next), in the jobs list",
+            "title": "Turn"
           },
           "typical_s": {
             "anyOf": [
@@ -5739,6 +5817,16 @@
             "title": "Custom Instructions",
             "type": "string"
           },
+          "depth": {
+            "default": "standard",
+            "enum": [
+              "short",
+              "standard",
+              "deep"
+            ],
+            "title": "Depth",
+            "type": "string"
+          },
           "difficulty": {
             "default": "foundational",
             "enum": [
@@ -5767,6 +5855,20 @@
             ],
             "title": "Goal Type",
             "type": "string"
+          },
+          "goal_types": {
+            "items": {
+              "enum": [
+                "exam",
+                "practical",
+                "understanding",
+                "curiosity"
+              ],
+              "type": "string"
+            },
+            "maxItems": 4,
+            "title": "Goal Types",
+            "type": "array"
           },
           "level_check": {
             "default": false,
@@ -6019,6 +6121,95 @@
           "created_at"
         ],
         "title": "PathSummary",
+        "type": "object"
+      },
+      "PauseFinishing": {
+        "properties": {
+          "job_id": {
+            "title": "Job Id",
+            "type": "string"
+          },
+          "kind": {
+            "title": "Kind",
+            "type": "string"
+          },
+          "step": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Step"
+          },
+          "step_s": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Step S"
+          },
+          "typical_s": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Typical S"
+          }
+        },
+        "required": [
+          "job_id",
+          "kind",
+          "step",
+          "step_s",
+          "typical_s"
+        ],
+        "title": "PauseFinishing",
+        "type": "object"
+      },
+      "PauseIn": {
+        "properties": {
+          "scope": {
+            "anyOf": [
+              {
+                "enum": [
+                  "all",
+                  "videos"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Scope"
+          },
+          "until": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Until"
+          }
+        },
+        "required": [
+          "scope"
+        ],
+        "title": "PauseIn",
         "type": "object"
       },
       "PlanBranch": {
@@ -8329,6 +8520,16 @@
             "title": "Courses",
             "type": "array"
           },
+          "depth": {
+            "default": "standard",
+            "enum": [
+              "short",
+              "standard",
+              "deep"
+            ],
+            "title": "Depth",
+            "type": "string"
+          },
           "goal": {
             "default": "",
             "maxLength": 600,
@@ -10496,6 +10697,62 @@
           }
         },
         "summary": "Post Events"
+      }
+    },
+    "/api/generation/pause": {
+      "get": {
+        "description": "Whether background generation is paused, what waits, and what is still finishing its step.",
+        "operationId": "get_pause_api_generation_pause_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenerationPause"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Get Pause"
+      },
+      "put": {
+        "description": "Pause lessons and videos written ahead (or only videos), until a time or until resumed; scope null\nresumes.",
+        "operationId": "put_pause_api_generation_pause_put",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PauseIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenerationPause"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Put Pause"
       }
     },
     "/api/health": {

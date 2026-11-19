@@ -82,6 +82,19 @@ describe("a subscription program's card", () => {
     expect(onCheck).toHaveBeenCalledTimes(1);
   });
 
+  it("after installing, when the program has not said whether it is signed in, offers the sign-in", async () => {
+    const onLogin = vi.fn();
+    const user = userEvent.setup();
+    view(
+      cliStatus({ installed: true, version: "2.1.0", logged_in: null, ready: true, reason: null, can_login: true }),
+      { onLogin },
+    );
+    expect(screen.getByRole("heading", { name: "Claude Code is installed: sign in next" })).toBeInTheDocument();
+    expect(screen.getByText(/could not tell yet whether Claude Code is signed in/)).toBeInTheDocument();
+    await user.click(screen.getByRole("button", { name: "Sign in to Claude Code" }));
+    expect(onLogin).toHaveBeenCalledTimes(1);
+  });
+
   it("says that the installer runs, and after a failure shows the error and the manual way in a container", () => {
     const running = view(cliStatus({ install: { state: "running", url: null, code: null, error: null } }));
     expect(screen.getByRole("heading", { name: "Installing Claude Code" })).toBeInTheDocument();

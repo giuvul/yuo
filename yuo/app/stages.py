@@ -16,6 +16,7 @@ from yuo.content.lesson_body import LENGTH_WORDS, LessonDraft, lesson_rules
 from yuo.content.review import ReviewReport, review_rules
 from yuo.core.enums import Stage
 from yuo.core.llm import Message
+from yuo.curriculum.depth import TREE_SIZES, Depth, depth_of
 from yuo.curriculum.level_check import LevelCheckDraft, level_check_rules
 from yuo.curriculum.next_steps import (
     DirectionsDraft,
@@ -53,7 +54,8 @@ TREE_TEMPLATE = """Plan a learning path as a skill tree.
 Level: {difficulty}. Goal type: {goal_type}. Write every title and statement in language `{lang}`.
 
 Rules:
-- 2 to 5 branches; each branch 2 to 5 skills; 12 to 30 lessons in total.
+- {branches} branches; each branch {skills} skills; {lessons} lessons in total. Cover the goal fully at
+  this size: lessons are written only as the learner gets close to them, so plan the whole way.
 - Each skill: 1 to 3 objectives (a verb first, observable: "write", "explain", "choose"), 1 to 3 lessons.
 - `requires` lists only skills of this path that must come directly before (no cycles).
 - Codes: lowercase dotted and stable, built from the path topic, e.g. `sql.joins.inner`; every code unique.
@@ -63,22 +65,40 @@ Rules:
   out."""
 
 
+def _span(r: tuple[int, int]) -> str:
+    return f"{r[0]} to {r[1]}"
+
+
 def _tree_messages(i: dict[str, Any]) -> list[Message]:
+    size = TREE_SIZES[depth_of(i.get("depth"))]
     text = TREE_TEMPLATE.format(
-        learner=_learner(i), difficulty=i["difficulty"], goal_type=i["goal_type"], lang=i["lang"]
+        learner=_learner(i),
+        difficulty=i["difficulty"],
+        goal_type=i["goal_type"],
+        lang=i["lang"],
+        branches=_span(size.branches),
+        skills=_span(size.skills),
+        lessons=_span(size.lessons),
     )
     return [Message("system", SYSTEM), Message("user", text)]
 
 
-TREE = StageSpec(
-    Stage.TREE_OUTLINE,
-    TreeDraft,
-    "tree_outline",
-    2,
-    TREE_TEMPLATE,
-    _tree_messages,
-    rules=lambda t: tree_rules(t, max_lessons=40),
-)
+def tree_spec(depth: Depth = "standard") -> StageSpec[TreeDraft]:
+    """The plan of a goal path, as big as the learner chose (`yuo.curriculum.depth`)."""
+    size = TREE_SIZES[depth]
+    return StageSpec(
+        Stage.TREE_OUTLINE,
+        TreeDraft,
+        "tree_outline",
+        3,
+        TREE_TEMPLATE,
+        _tree_messages,
+        rules=lambda t: tree_rules(t, max_lessons=size.max_lessons),
+    )
+
+
+# a long plan is a long reply: the plan's output cap, raised above the binding's usual one when it is lower
+TREE_MAX_TOKENS: dict[Depth, int] = {"short": 8000, "standard": 12000, "deep": 20000}
 
 
 # --- tree_revise: the preview, changed with the learner's feedback -------------------------------

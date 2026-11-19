@@ -545,7 +545,18 @@ export function UpdatesSection() {
 
           {s.available && !s.can_install ? (
             <p>
-              <Trans id="update.container">Update by pulling the new container image.</Trans>
+              <Trans id="update.container.how">
+                To update, in the folder packaging/container set YUO_IMAGE in .env to the new version, then run
+                docker compose pull and docker compose up -d.
+              </Trans>
+            </p>
+          ) : null}
+          {!s.can_install ? (
+            <p className={ui.muted}>
+              <Trans id="update.container.restart">
+                Yuo runs in Docker here and starts by itself whenever Docker runs. On a computer, turn on “Start
+                Docker Desktop when you sign in” in Docker Desktop's settings, so Yuo is there after a restart.
+              </Trans>
             </p>
           ) : null}
           {s.available && s.can_install && staged ? (

@@ -222,7 +222,13 @@ class StatusCache:
     def get(self, cli: str, *, fresh: bool = False) -> Status:
         with self._lock:
             hit = self._seen.get(cli)
-            if hit and not fresh and time.monotonic() - hit[0] < (OK_TTL_S if hit[1].ready else BAD_TTL_S):
+            # only a confirmed sign-in is kept long: an unclear answer (a first run right after installing can
+            # be slow) is asked again soon, so the card moves on to the sign-in by itself
+            if (
+                hit
+                and not fresh
+                and time.monotonic() - hit[0] < (OK_TTL_S if hit[1].logged_in is True else BAD_TTL_S)
+            ):
                 return hit[1]
         s = self._ask(cli)
         with self._lock:

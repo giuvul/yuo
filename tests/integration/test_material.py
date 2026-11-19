@@ -338,6 +338,9 @@ def test_a_recorded_lecture_is_kept_as_audio_transcribed_and_planned(rt: Runtime
     assert rt.service.studies_view(path_id)["status"] == "ready"
     plan = rt.service.course_view(ids["Physics 1"])["plan"]
     assert plan is not None and plan["skills"]
+    # one 30-minute lecture is a lesson or two, not a course of many small skills
+    course_prompt = next(r for st, r in llm.calls if st == "course_outline").messages[-1].content
+    assert "Size: 1 to 2 lessons in total" in course_prompt
 
 
 def test_a_path_from_files_alone_gets_its_name_and_courses_proposed(rt: Runtime, llm: fakes.FakeLLM) -> None:

@@ -17,6 +17,7 @@ from yuo.app.stages import tree_revise_spec
 from yuo.core import clock
 from yuo.core.enums import DataClass, EntityKind
 from yuo.core.errors import InvalidInput
+from yuo.curriculum.depth import TREE_SIZES, depth_of
 from yuo.curriculum.tree import TreeDraft, apply_tree
 from yuo.generation.jobs import URGENT_PRIORITY, Job, enqueue
 from yuo.generation.runner import StageFailed
@@ -184,7 +185,7 @@ class PlanPreview(Part):
         feedback = [r["text"] for r in state.get("rounds", [])]
         out = self.ctx.runner.run(
             job.id,
-            tree_revise_spec(),
+            tree_revise_spec(TREE_SIZES[depth_of(inputs.get("depth"))].max_lessons),
             self.models.binding("generator"),
             {
                 k: inputs[k]

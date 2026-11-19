@@ -10,7 +10,9 @@ from yuo.app.context import AppContext, Part
 from yuo.app.ports import LessonRequests, VideoRetry
 from yuo.core import clock
 from yuo.core.errors import InvalidInput, NotFound
-from yuo.generation import progress
+from yuo.generation import pause, progress
+from yuo.generation.jobs import HEAVY_KINDS, URGENT_KINDS
+from yuo.setup import settings
 
 
 def _rows(c: sqlite3.Connection, sql: str, *args: Any) -> list[dict[str, Any]]:
@@ -88,10 +90,29 @@ class JobStatus(Part):
                 c,
                 f"SELECT {JOB_COLUMNS} FROM generation_job j "
                 "WHERE j.status IN ('queued','running','waiting_resource') OR (j.status = 'failed' AND "
-                f"j.finished_at > ? AND NOT {_RESOLVED}) ORDER BY j.created_at",
+                f"j.finished_at > ? AND NOT {_RESOLVED}) "
+                # the order the worker takes them in: what runs, then what waits by priority and age
+                "ORDER BY CASE j.status WHEN 'running' THEN 0 WHEN 'failed' THEN 2 ELSE 1 END, j.priority DESC, "
+                "j.created_at",
                 _day_ago(),
             )
+            self._number_the_line(c, rows)
             return self._with_progress(c, rows)
+
+    def _number_the_line(self, c: sqlite3.Connection, rows: list[dict[str, Any]]) -> None:
+        """`turn`: a waiting lesson, video or question job's place in the background line (1 is next). Plans,
+        tests and files have lines of their own and start at once; a paused or later-retried job has no place."""
+        now = clock.now()
+        paused = pause.kinds(settings.effective(c, "generation.pause", {})[0], now)
+        n = 0
+        for r in rows:
+            r["turn"] = None
+            if r["status"] not in ("queued", "waiting_resource") or r["kind"] in URGENT_KINDS | HEAVY_KINDS:
+                continue
+            if r["kind"] in paused or (r["retry_at"] is not None and r["retry_at"] > now):
+                continue
+            n += 1
+            r["turn"] = n
 
     def job_history(self, before: str | None = None, limit: int = 50) -> dict[str, Any]:
         """Finished jobs, newest first (keep the executed ones in a history). `before` is

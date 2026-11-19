@@ -26,7 +26,7 @@ from yuo.core.ids import new_id
 from yuo.core.llm import Binding, Completion, LLMError, LLMPort, Message
 from yuo.core.logs import metrics
 from yuo.db.connection import ReadPool, Writer
-from yuo.generation import progress
+from yuo.generation import pause, progress
 from yuo.generation.structured import Parse, Rules, StructuredFailure, generate_structured
 
 log = structlog.get_logger(__name__)
@@ -34,6 +34,10 @@ log = structlog.get_logger(__name__)
 
 class BudgetExceeded(YuoError):
     pass
+
+
+class Paused(BudgetExceeded):
+    """Background generation is paused: the job stops before this call and goes on from here on resume."""
 
 
 class StageFailed(YuoError):
@@ -92,6 +96,18 @@ class BudgetGuard:
             raise BudgetExceeded(f"monthly budget cap reached ({cap / 1e6:.2f} USD): generation is paused")
 
 
+class PauseGuard:
+    """Stops a paused kind of job before its next model call (a call already running always finishes)."""
+
+    def __init__(self, paused_kinds: Callable[[], frozenset[str]]) -> None:
+        self._paused = paused_kinds
+
+    def check(self) -> None:
+        kind = pause.current_kind()
+        if kind is not None and kind in self._paused():
+            raise Paused("generation is paused")
+
+
 def manifest(
     spec: StageSpec[Any],
     binding: Binding,
@@ -134,12 +150,18 @@ _REJECTED = " OR ".join(
 
 class StageRunner:
     def __init__(
-        self, writer: Writer, readers: ReadPool, ports: dict[str, LLMPort], budget: BudgetGuard
+        self,
+        writer: Writer,
+        readers: ReadPool,
+        ports: dict[str, LLMPort],
+        budget: BudgetGuard,
+        pause: PauseGuard | None = None,
     ) -> None:
         self.writer = writer
         self.readers = readers
         self.ports = ports
         self.budget = budget
+        self.pause = pause
 
     def port(self, binding: Binding) -> LLMPort:
         try:
@@ -215,6 +237,8 @@ class StageRunner:
             metrics.inc("stage.cache_hit")
             return StageOutcome(spec.output.model_validate(parsed), run_id, output_hash, cached=True)
 
+        if self.pause is not None:
+            self.pause.check()
         self.budget.check()
         started = clock.now()
         try:

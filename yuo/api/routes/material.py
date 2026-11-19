@@ -29,7 +29,9 @@ def router(svc: Any) -> APIRouter:
     def post_studies(body: StudiesIn) -> dict[str, str]:
         """A path for the learner's studies, with its courses; the material is added next."""
         courses = [c.model_dump(mode="json") for c in body.courses]
-        path_id = svc.create_studies(body.title, courses, goal=body.goal, content_lang=body.content_lang)
+        path_id = svc.create_studies(
+            body.title, courses, goal=body.goal, content_lang=body.content_lang, depth=body.depth
+        )
         return {"path_id": path_id}
 
     @r.get("/api/studies/{path_id}", response_model=S.StudiesOut)

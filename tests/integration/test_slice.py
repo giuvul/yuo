@@ -358,3 +358,19 @@ def test_a_failed_lesson_is_accepted_with_the_reviewers_notes(
     assert lesson["practice_items"] > 0  # its practice is written as for any published lesson
     with pytest.raises(Conflict):
         rt.service.accept_lesson_draft(failed["id"])  # only a failed lesson
+
+
+def test_a_deep_path_for_several_reasons_is_planned_long(rt: Runtime, llm: fakes.FakeLLM) -> None:
+    path_id = create(rt, goal_types=["exam", "practical"], depth="deep")
+    prompt = next(r for s, r in llm.calls if s == "tree").messages[-1].content
+    assert "80 to 120 lessons in total" in prompt and "Goal type: exam + practical" in prompt
+    with rt.readers.connection() as c:
+        row = c.execute("SELECT goal_type, extensions FROM path WHERE id = ?", (path_id,)).fetchone()
+    assert row[0] == "exam"  # the first reason, for packages and older versions
+    assert json.loads(row[1])["yuo"]["plan"] == {"depth": "deep", "goal_types": ["exam", "practical"]}
+
+
+def test_a_standard_path_aims_for_dozens_of_lessons(rt: Runtime, llm: fakes.FakeLLM) -> None:
+    create(rt)
+    prompt = next(r for s, r in llm.calls if s == "tree").messages[-1].content
+    assert "40 to 70 lessons in total" in prompt and "Goal type: understanding." in prompt

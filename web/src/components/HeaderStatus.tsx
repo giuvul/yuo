@@ -1,7 +1,7 @@
 import { Plural, Trans } from "@lingui/react/macro";
 import { Link } from "@tanstack/react-router";
 import type { ReactNode } from "react";
-import { hasActiveJob, useJobs } from "../api/hooks";
+import { hasActiveJob, useJobs, usePause } from "../api/hooks";
 import { useDueTotal } from "../review/api";
 import { GrowingSprout } from "./Grove";
 import styles from "./HeaderStatus.module.css";
@@ -42,6 +42,17 @@ export function JobsIndicator() {
   const jobs = useJobs();
   const active = hasActiveJob(jobs.data);
   const failed = jobs.data?.some((j) => j.status === "failed") ?? false;
+  const paused = usePause().data?.paused ?? false;
+  const running = jobs.data?.some((j) => j.status === "running") ?? false;
+  if (paused && !running) {
+    return (
+      <Link to="/jobs" className={styles.status} data-paused>
+        <span className={styles.statusText}>
+          <Trans id="nav.jobs.paused">Paused</Trans>
+        </span>
+      </Link>
+    );
+  }
   return (
     <Link to="/jobs" className={styles.status} data-active={active || undefined} data-failed={(failed && !active) || undefined}>
       {active ? <GrowingSprout /> : null}

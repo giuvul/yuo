@@ -591,6 +591,31 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/generation/pause": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get Pause
+         * @description Whether background generation is paused, what waits, and what is still finishing its step.
+         */
+        get: operations["get_pause_api_generation_pause_get"];
+        /**
+         * Put Pause
+         * @description Pause lessons and videos written ahead (or only videos), until a time or until resumed; scope null
+         *     resumes.
+         */
+        put: operations["put_pause_api_generation_pause_put"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/health": {
         parameters: {
             query?: never;
@@ -3326,6 +3351,19 @@ export interface components {
             /** Front */
             front: string;
         };
+        /** GenerationPause */
+        GenerationPause: {
+            /** Finishing */
+            finishing: components["schemas"]["PauseFinishing"][];
+            /** Paused */
+            paused: boolean;
+            /** Scope */
+            scope: ("all" | "videos") | null;
+            /** Until */
+            until: string | null;
+            /** Waiting */
+            waiting: number;
+        };
         /** Gpu */
         Gpu: {
             /** Kind */
@@ -3648,6 +3686,11 @@ export interface components {
              */
             title?: string | null;
             /**
+             * Turn
+             * @description A waiting lesson, video or question job's place in line (1 is next), in the jobs list
+             */
+            turn?: number | null;
+            /**
              * Typical S
              * @description How long a job of this kind usually takes, in seconds
              */
@@ -3733,6 +3776,11 @@ export interface components {
              * @description The lesson, skill or path the job is for, by name
              */
             title?: string | null;
+            /**
+             * Turn
+             * @description A waiting lesson, video or question job's place in line (1 is next), in the jobs list
+             */
+            turn?: number | null;
             /**
              * Typical S
              * @description How long a job of this kind usually takes, in seconds
@@ -4524,6 +4572,12 @@ export interface components {
              */
             custom_instructions: string;
             /**
+             * Depth
+             * @default standard
+             * @enum {string}
+             */
+            depth: "short" | "standard" | "deep";
+            /**
              * Difficulty
              * @default foundational
              * @enum {string}
@@ -4537,6 +4591,8 @@ export interface components {
              * @enum {string}
              */
             goal_type: "exam" | "practical" | "understanding" | "curiosity";
+            /** Goal Types */
+            goal_types?: ("exam" | "practical" | "understanding" | "curiosity")[];
             /**
              * Level Check
              * @default false
@@ -4630,6 +4686,26 @@ export interface components {
             target_date?: string | null;
             /** Title */
             title: string;
+        };
+        /** PauseFinishing */
+        PauseFinishing: {
+            /** Job Id */
+            job_id: string;
+            /** Kind */
+            kind: string;
+            /** Step */
+            step: string | null;
+            /** Step S */
+            step_s: number | null;
+            /** Typical S */
+            typical_s: number | null;
+        };
+        /** PauseIn */
+        PauseIn: {
+            /** Scope */
+            scope: ("all" | "videos") | null;
+            /** Until */
+            until?: string | null;
         };
         /** PlanBranch */
         PlanBranch: {
@@ -5380,6 +5456,12 @@ export interface components {
             content_lang?: string | null;
             /** Courses */
             courses?: components["schemas"]["CourseIn"][];
+            /**
+             * Depth
+             * @default standard
+             * @enum {string}
+             */
+            depth: "short" | "standard" | "deep";
             /**
              * Goal
              * @default
@@ -6639,6 +6721,59 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["IngestOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_pause_api_generation_pause_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GenerationPause"];
+                };
+            };
+        };
+    };
+    put_pause_api_generation_pause_put: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PauseIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GenerationPause"];
                 };
             };
             /** @description Validation Error */

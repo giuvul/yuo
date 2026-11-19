@@ -48,6 +48,23 @@ describe("the jobs page", () => {
     expect(screen.getByText("Self joins").closest("tr")).toHaveTextContent("Checking the lesson for mistakes · taking longer than usual, still working");
   });
 
+  it("shows each waiting job's place in line and the rule behind the order", async () => {
+    mockApi({
+      ...appRoutes,
+      "GET /api/settings": () => json([{ key: "generation.buffer", value: 5 }]),
+      "GET /api/jobs": () =>
+        json([
+          { ...job, id: "j1", kind: "lesson", status: "queued", target_kind: "lesson", target_id: "l1", title: "Inner joins", turn: 1 },
+          { ...job, id: "j2", kind: "rendition", status: "queued", target_kind: "rendition", target_id: "r1", title: "Outer joins", turn: 2 },
+        ]),
+    });
+    renderApp("/jobs");
+    const first = (await screen.findByText("Inner joins")).closest("tr")!;
+    expect(within(first).getByText("Next in line")).toBeInTheDocument();
+    expect(within(screen.getByText("Outer joins").closest("tr")!).getByText("Number 2 in line")).toBeInTheDocument();
+    expect(await screen.findByText(/keeps the next 5 lessons of each path written ahead of you/)).toBeInTheDocument();
+  });
+
   it("starts a failed video again from the list, and links its lesson", async () => {
     const api = mockApi({
       ...appRoutes,
@@ -93,5 +110,63 @@ describe("the jobs page", () => {
     await userEvent.setup().click(screen.getByRole("button", { name: "Show older" }));
     expect(await screen.findByRole("link", { name: "Rests" })).toBeInTheDocument();
     expect(screen.queryByRole("button", { name: "Show older" })).not.toBeInTheDocument();
+  });
+
+  it("pauses only the videos until tomorrow morning", async () => {
+    const puts: unknown[] = [];
+    mockApi({
+      ...appRoutes,
+      "PUT /api/generation/pause": (_request, body) => {
+        puts.push(body);
+        return json({ paused: true, scope: "videos", until: (body as { until: string }).until, waiting: 2, finishing: [] });
+      },
+    });
+    const u = userEvent.setup();
+    renderApp("/jobs");
+    expect(await screen.findByRole("heading", { name: "Pause writing ahead" })).toBeInTheDocument();
+    await u.click(screen.getByRole("radio", { name: "Only videos" }));
+    await u.click(screen.getByRole("radio", { name: "Until tomorrow morning" }));
+    await u.click(screen.getByRole("button", { name: "Pause" }));
+    expect(await screen.findByRole("heading", { name: "Writing ahead is paused" })).toBeInTheDocument();
+    const body = puts[0] as { scope: string; until: string };
+    expect(body.scope).toBe("videos");
+    const until = new Date(body.until);
+    expect(until.getHours()).toBe(7);
+    expect(until.getTime()).toBeGreaterThan(Date.now());
+    expect(screen.getByText(/Videos wait; lessons and questions keep coming/)).toHaveTextContent("2 jobs wait.");
+    expect(screen.getByRole("link", { name: /Paused/ })).toHaveAttribute("href", "/jobs"); // the header says so too
+  });
+
+  it("says what is still finishing and resumes", async () => {
+    let paused = true;
+    mockApi({
+      ...appRoutes,
+      "GET /api/jobs": () =>
+        json([{ ...job, id: "j1", kind: "lesson", status: "queued", target_kind: "lesson", target_id: "l1", title: "Inner joins", error: "paused" }]),
+      "GET /api/generation/pause": () =>
+        json(
+          paused
+            ? {
+                paused: true,
+                scope: "all",
+                until: null,
+                waiting: 3,
+                finishing: [{ job_id: "j9", kind: "rendition", step: "video_scene", step_s: 130, typical_s: 330 }],
+              }
+            : { paused: false, scope: null, until: null, waiting: 0, finishing: [] },
+        ),
+      "PUT /api/generation/pause": () => {
+        paused = false;
+        return json({ paused: false, scope: null, until: null, waiting: 0, finishing: [] });
+      },
+    });
+    const u = userEvent.setup();
+    renderApp("/jobs");
+    const finishing = await screen.findByText(/Still finishing one step: Writing the script and the scenes/);
+    expect(finishing).toHaveTextContent("It usually takes about 6 minutes (2 so far).");
+    expect(finishing).toHaveTextContent("what it wrote is kept");
+    expect(screen.getByText("Inner joins").closest("tr")).toHaveTextContent("Paused: it goes on from where it stopped");
+    await u.click(screen.getByRole("button", { name: "Resume now" }));
+    expect(await screen.findByRole("heading", { name: "Pause writing ahead" })).toBeInTheDocument();
   });
 });

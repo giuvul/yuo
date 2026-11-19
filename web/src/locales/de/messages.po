@@ -172,6 +172,10 @@ msgstr "{0} XP"
 msgid "plan-usage.row"
 msgstr "{0}: <0/>; <1/>"
 
+#: src/routes/jobs.tsx
+msgid "jobs.rule"
+msgstr "{ahead, plural, one {Yuo hält die nächste Lektion jedes Lernpfads im Voraus bereit, in der Reihenfolge des Pfads, und arbeitet an einer Sache nach der anderen: zuerst eine Lektion, die du anforderst, dann die vorbereiteten Lektionen, dann Videos, dann Wiederholungsfragen. Neue Pläne und Tests warten nie dahinter.} other {Yuo hält die nächsten # Lektionen jedes Lernpfads im Voraus bereit, in der Reihenfolge des Pfads, und arbeitet an einer Sache nach der anderen: zuerst eine Lektion, die du anforderst, dann die vorbereiteten Lektionen, dann Videos, dann Wiederholungsfragen. Neue Pläne und Tests warten nie dahinter.}}"
+
 #: src/routes/planPreview.tsx
 msgid "preview.count.branches"
 msgstr "{branches, plural, one {# Zweig} other {# Zweige}}"
@@ -318,6 +322,10 @@ msgstr "{n, plural, one {# Zweig} other {# Zweige}}"
 msgid "nav.reviews.due"
 msgstr "{n, plural, one {# fällig} other {# fällig}}"
 
+#: src/components/PauseControls.tsx
+msgid "pause.state.waiting"
+msgstr "{n, plural, one {# Auftrag wartet.} other {# Aufträge warten.}}"
+
 #: src/sharing/labels.tsx
 msgid "share.count.objective"
 msgstr "{n, plural, one {# Lernziel} other {# Lernziele}}"
@@ -373,6 +381,10 @@ msgstr "{name} ist installiert und angemeldet"
 #: src/onboarding/CliAccess.tsx
 msgid "cli.state.signed-out"
 msgstr "{name} ist installiert, aber nicht angemeldet"
+
+#: src/onboarding/CliAccess.tsx
+msgid "cli.state.sign-in-next"
+msgstr "{name} ist installiert: jetzt anmelden"
 
 #: src/onboarding/CliAccess.tsx
 msgid "cli.state.not-installed"
@@ -447,6 +459,10 @@ msgstr "{skill} ist bisher deine schwächste Fähigkeit ({percent}% richtig). Ei
 msgid "preview.count.skills"
 msgstr "{skills, plural, one {# Fähigkeit} other {# Fähigkeiten}}"
 
+#: src/components/PauseControls.tsx
+msgid "pause.finishing.so-far"
+msgstr "{so_far, plural, one {(# bisher)} other {(# bisher)}}"
+
 #: src/routes/progress.tsx
 msgid "progress.streak"
 msgstr "{streak, plural, one {Tag in Folge} other {Tage in Folge}}"
@@ -467,6 +483,10 @@ msgstr "{transcribed} von {total} Aufnahmen transkribiert. Jede kommt in den Pla
 #: src/routes/tutorMemory.tsx
 msgid "tutor.memory.intro"
 msgstr "{tutorName} merkt sich Dauerhaftes über dich, etwa deine Ziele, wie du gern lernst und Fehler, die aufgefallen sind, damit spätere Antworten zu dir passen. Sonst wird hier nichts aus deinen Gesprächen gespeichert. Du kannst jeden Eintrag ändern oder löschen; gelöschte Einträge sind endgültig weg."
+
+#: src/components/PauseControls.tsx
+msgid "pause.finishing.typical"
+msgstr "{typical, plural, one {Das dauert meist etwa # Minute} other {Das dauert meist etwa # Minuten}}"
 
 #: src/tutor/Dock.tsx
 msgid "tutor.fab.unread"
@@ -624,6 +644,18 @@ msgstr "etwa {low}–{high} berechnet"
 #: src/onboarding/ProbeSummary.tsx
 msgid "wizard.computer.speed.value"
 msgstr "Etwa {speed} Milliarden Rechenschritte pro Sekunde"
+
+#: src/components/DepthField.tsx
+msgid "depth.goal.short"
+msgstr "Etwa 12 bis 24 Lektionen: das Wesentliche."
+
+#: src/components/DepthField.tsx
+msgid "depth.goal.standard"
+msgstr "Etwa 40 bis 70 Lektionen."
+
+#: src/components/DepthField.tsx
+msgid "depth.goal.deep"
+msgstr "Etwa 80 bis 120 Lektionen, bis in jeden Winkel."
 
 #: src/components/JobProgress.tsx
 msgid "job.time.almost"
@@ -819,13 +851,13 @@ msgstr "Nach: {after}"
 msgid "item.flashcard.rating.again"
 msgstr "Nochmal"
 
+#: src/routes/setup.tsx
+msgid "wizard.step.access"
+msgstr "KI-Zugang"
+
 #: src/onboarding/SettingsSections.tsx
 #: src/routes/settings.tsx
 msgid "settings.ai.title"
-msgstr "KI-Zugang"
-
-#: src/routes/setup.tsx
-msgid "wizard.step.access"
 msgstr "KI-Zugang"
 
 #: src/onboarding/ProbeSummary.tsx
@@ -950,6 +982,10 @@ msgstr "Archiviert"
 #: src/components/labels.tsx
 msgid "path.status.archived"
 msgstr "Archiviert"
+
+#: src/components/DepthField.tsx
+msgid "depth.material.standard"
+msgstr "So viel, wie dein Material enthält."
 
 #: src/tutor/Thread.tsx
 msgid "tutor.composer.placeholder"
@@ -1100,6 +1136,14 @@ msgstr "Literaturliste (CSL JSON)"
 #: src/material/labels.tsx
 msgid "material.role.textbook"
 msgstr "Buch"
+
+#: src/pwa/PwaControls.tsx
+msgid "pwa.guide.firefox.bookmark"
+msgstr "Setze ein Lesezeichen mit Strg+D (⌘D auf dem Mac) und wähle die Lesezeichen-Symbolleiste als Ordner."
+
+#: src/pwa/PwaControls.tsx
+msgid "pwa.guide.other"
+msgstr "Setze ein Lesezeichen für diese Seite, oder lege sie über das Browsermenü auf den Startbildschirm oder den Desktop."
 
 #: src/routes/progress.tsx
 msgid "progress.branches"
@@ -1368,6 +1412,18 @@ msgstr "Passwort festlegen"
 msgid "profile.tz.invalid"
 msgstr "Wähl eine Zeitzone aus der Liste, zum Beispiel Europe/Berlin."
 
+#: src/pwa/PwaControls.tsx
+msgid "pwa.guide.ios.add"
+msgstr "Wähle Zum Home-Bildschirm und dann Hinzufügen."
+
+#: src/pwa/PwaControls.tsx
+msgid "pwa.guide.firefox-android.add"
+msgstr "Wähle Zum Startbildschirm hinzufügen."
+
+#: src/routes/pathNew.tsx
+msgid "path.new.field.goal-type.description"
+msgstr "Wähle alles, was zutrifft."
+
 #: src/sharing/ExportDialog.tsx
 msgid "share.components.none"
 msgstr "Wähl mindestens einen Teil aus."
@@ -1418,6 +1474,10 @@ msgstr "Claude-Tarif gerade (alle deine Geräte):"
 
 #: src/sharing/ExportDialog.tsx
 msgid "share.close"
+msgstr "Schließen"
+
+#: src/pwa/PwaControls.tsx
+msgid "pwa.guide.close"
 msgstr "Schließen"
 
 #: src/onboarding/SettingsSections.tsx
@@ -1644,6 +1704,11 @@ msgstr "Abgelehnt"
 msgid "review.size.deep"
 msgstr "Gründlich"
 
+#: src/components/DepthField.tsx
+#: src/components/DepthField.tsx
+msgid "depth.deep"
+msgstr "Ausführlich"
+
 #: src/routes/SettingRow.tsx
 msgid "settings.default"
 msgstr "Standard: {fallback}"
@@ -1744,6 +1809,10 @@ msgstr "Beschreibe, was du lernen willst; Yuo plant es und schreibt die Lektione
 
 #: src/routes/jobs.tsx
 msgid "jobs.details"
+msgstr "Details"
+
+#: src/components/PauseControls.tsx
+msgid "pause.banner.details"
 msgstr "Details"
 
 #: src/path/LessonRow.tsx
@@ -1933,6 +2002,10 @@ msgstr "Alles richtig, beim ersten Versuch"
 msgid "devices.list.intro"
 msgstr "Jeder Browser, mit dem du dich angemeldet hast. Wenn du ein Gerät abmeldest, enden seine Sitzungen; es muss sich neu anmelden."
 
+#: src/components/DepthField.tsx
+msgid "depth.material.deep"
+msgstr "Jedes Detail, mit mehr Lektionen und Übung."
+
 #: src/review/Hub.tsx
 msgid "review.hub.focus.all"
 msgstr "Alles"
@@ -2063,6 +2136,10 @@ msgstr "Ohne neuen Lernpfad abschließen"
 msgid "next.fact.finished"
 msgstr "Abgeschlossen: {0}"
 
+#: src/pwa/PwaControls.tsx
+msgid "pwa.guide.firefox.intro"
+msgstr "Firefox kann auf dem Computer keine Website als App speichern. So öffnest du Yuo mit einem Klick:"
+
 #: src/review/Results.tsx
 msgid "review.results.ring.caption"
 msgstr "erster Versuch"
@@ -2125,6 +2202,10 @@ msgstr "Für einen typischen Lernpfad mit {lessons} Lektionen: keine Kosten pro 
 msgid "wizard.estimate.plan"
 msgstr "Für einen typischen Lernpfad mit {lessons} Lektionen: keine Zusatzkosten, er nutzt einen Teil der Limits deines Tarifs:"
 
+#: src/pwa/PwaControls.tsx
+msgid "pwa.guide.firefox.other"
+msgstr "Für eine App mit eigenem Fenster und Symbol öffne dieselbe Adresse in Chrome oder Edge und wähle dort App-Verknüpfung speichern."
+
 #: src/routes/planPreview.tsx
 msgid "preview.feedback.description"
 msgstr "Zum Beispiel: „einen Teil über Fensterfunktionen ergänzen“, „weniger Theorie, mehr Übungen“, „die Geschichte weglassen“."
@@ -2144,6 +2225,10 @@ msgstr "Zum Beispiel: Ich bereite mich auf ein Vorstellungsgespräch vor. Höchs
 #: src/material/StudiesForm.tsx
 msgid "studies.field.goal.description"
 msgstr "Zum Beispiel: meine Prüfungen bestehen oder diese Bücher verstehen."
+
+#: src/components/PauseControls.tsx
+msgid "pause.length"
+msgstr "Wie lange"
 
 #: src/onboarding/ProbeSummary.tsx
 msgid "wizard.computer.cli.found"
@@ -2336,6 +2421,10 @@ msgstr "Verlauf"
 msgid "studies.course.adherence"
 msgstr "Wie eng dem Material folgen"
 
+#: src/components/DepthField.tsx
+msgid "depth.label"
+msgstr "Wie ausführlich"
+
 #: src/routes/settings.tsx
 msgid "settings.group.reviews.description"
 msgstr "Wie viel und wie oft du frühere Lektionen wiederholst"
@@ -2460,6 +2549,10 @@ msgstr "In Arbeit"
 #: src/components/labels.tsx
 msgid "lesson.state.in-review"
 msgstr "Wird geprüft"
+
+#: src/pwa/PwaControls.tsx
+msgid "pwa.guide.safari.dock"
+msgstr "Wähle in der Menüleiste Ablage und dann Zum Dock hinzufügen."
 
 #: src/onboarding/access.tsx
 msgid "access.local.step.model"
@@ -2713,6 +2806,10 @@ msgstr "Lektionen"
 msgid "adherence.only.description"
 msgstr "Lektionen und Fragen bleiben in deinen Dateien, in ihren Worten und ihrer Notation. Ideal vor einer Prüfung."
 
+#: src/components/DepthField.tsx
+msgid "depth.note"
+msgstr "Lektionen werden geschrieben, wenn du dich ihnen näherst: Ein längerer Lernpfad kostet nichts, bis du dort ankommst."
+
 #: src/routes/SettingRow.tsx
 msgid "settings.key.buffer"
 msgstr "Vorbereitete Lektionen"
@@ -2720,6 +2817,14 @@ msgstr "Vorbereitete Lektionen"
 #: src/sharing/labels.tsx
 msgid "share.profile.full.description"
 msgstr "Lektionen, Fragen und die fertigen Videos."
+
+#: src/components/PauseControls.tsx
+msgid "pause.scope.all"
+msgstr "Lektionen, Fragen und Videos"
+
+#: src/components/PauseControls.tsx
+msgid "pause.state.all"
+msgstr "Lektionen, Wiederholungsfragen und Videos warten."
 
 #: src/tutor/texts.ts
 msgid "tutor.blocked"
@@ -2829,6 +2934,10 @@ msgstr "Längster Abstand zwischen Wiederholungen (Tage, 0 = unbegrenzt)"
 #: src/review/Results.tsx
 msgid "review.feedback.revisit"
 msgstr "Schau dir das nochmal an: {revisit}"
+
+#: src/pwa/PwaControls.tsx
+msgid "pwa.guide.chromium.icon"
+msgstr "Suche das Installieren-Symbol rechts in der Adressleiste, oder öffne das Browsermenü und wähle Yuo installieren (in Chrome: Streamen, speichern und teilen, dann Seite als App installieren)."
 
 #: src/material/Arrange.tsx
 msgid "arrange.working"
@@ -3159,6 +3268,14 @@ msgstr "Weiter"
 msgid "review.next"
 msgstr "Weiter"
 
+#: src/path/LessonRow.tsx
+msgid "path.lesson.turn.next"
+msgstr "als Nächstes"
+
+#: src/routes/jobs.tsx
+msgid "jobs.turn.next"
+msgstr "Als Nächstes"
+
 #: src/assessment/AssessmentRunner.tsx
 msgid "assessment.next"
 msgstr "Nächste Frage"
@@ -3174,6 +3291,10 @@ msgstr "Weiter: Unterlagen hinzufügen"
 #: src/onboarding/PlanUsage.tsx
 msgid "plan-usage.window.none"
 msgstr "kein 5-Stunden-Limit"
+
+#: src/pwa/PwaControls.tsx
+msgid "pwa.guide.safari.old"
+msgstr "Kein Zum Dock hinzufügen? Safari vor Version 17 kann das nicht: Setze stattdessen mit ⌘D ein Lesezeichen."
 
 #: src/tutor/Thread.tsx
 msgid "tutor.failed.title"
@@ -3413,6 +3534,15 @@ msgstr "Aktuell: {current} ({source})"
 msgid "settings.current.default"
 msgstr "Aktuell: {current} (Standard)"
 
+#. placeholder {0}: j.turn
+#: src/routes/jobs.tsx
+msgid "jobs.turn.n"
+msgstr "Nummer {0} in der Warteschlange"
+
+#: src/path/LessonRow.tsx
+msgid "path.lesson.turn.n"
+msgstr "Nummer {turn} in der Warteschlange"
+
 #: src/routes/SettingRow.tsx
 msgid "settings.gamification.off"
 msgstr "Aus"
@@ -3429,6 +3559,10 @@ msgstr "Aus (antwortet nur dir)"
 msgid "sync.offline"
 msgstr "offline"
 
+#: src/pwa/PwaControls.tsx
+msgid "pwa.update.done.close"
+msgstr "OK"
+
 #: src/onboarding/access.tsx
 msgid "access.local.step.install.link"
 msgstr "ollama.com/download (öffnet in neuem Tab)"
@@ -3440,6 +3574,10 @@ msgstr "An"
 #: src/routes/index.tsx
 msgid "home.progress.on-track"
 msgstr "Auf Kurs"
+
+#: src/components/PauseControls.tsx
+msgid "pause.length.hour"
+msgstr "Eine Stunde"
 
 #: src/routes/signIn.tsx
 msgid "auth.sign-in.recovery.hint"
@@ -3465,6 +3603,10 @@ msgstr "Nur meine Unterlagen"
 msgid "material.vision.capped"
 msgstr "Nur die {pages} Seiten, denen am meisten fehlt, werden gelesen; die anderen behalten ihren Text."
 
+#: src/components/PauseControls.tsx
+msgid "pause.scope.videos"
+msgstr "Nur Videos"
+
 #: src/routes/index.tsx
 msgid "home.today.failed.action"
 msgstr "Öffnen"
@@ -3484,6 +3626,10 @@ msgstr "Wiederholung öffnen"
 #: src/onboarding/CliAccess.tsx
 msgid "cli.login.open.claude"
 msgstr "Claude-Anmeldeseite öffnen (öffnet in neuem Tab)"
+
+#: src/pwa/PwaControls.tsx
+msgid "pwa.guide.firefox-android.menu"
+msgstr "Öffne das Firefox-Menü (⋮)."
 
 #: src/review/Resolved.tsx
 #: src/review/Results.tsx
@@ -3551,6 +3697,10 @@ msgstr "oder A–D: auswählen"
 msgid "next.where.own"
 msgstr "Oder in deinen eigenen Worten (optional)"
 
+#: src/pwa/PwaControls.tsx
+msgid "pwa.guide.firefox.pin"
+msgstr "Oder klicke mit der rechten Maustaste auf diesen Tab und wähle Tab anheften: Er öffnet sich dann jedes Mal mit Firefox."
+
 #: src/material/labels.tsx
 msgid "material.role.other"
 msgstr "Sonstiges"
@@ -3558,6 +3708,10 @@ msgstr "Sonstiges"
 #: src/routes/signIn.tsx
 msgid "auth.sign-in.other"
 msgstr "Andere Anmeldemöglichkeiten"
+
+#: src/pwa/PwaControls.tsx
+msgid "pwa.guide.chromium.bookmark"
+msgstr "Sonst setze mit Strg+D (⌘D auf dem Mac) ein Lesezeichen."
 
 #: src/components/labels.tsx
 msgid "goal-type.curiosity"
@@ -3653,13 +3807,29 @@ msgstr "Lernpfad abgeschlossen"
 msgid "nav.paths"
 msgstr "Lernpfade"
 
+#: src/components/PauseControls.tsx
+msgid "pause.start"
+msgstr "Pausieren"
+
+#: src/components/PauseControls.tsx
+msgid "pause.title"
+msgstr "Vorausschreiben pausieren"
+
 #: src/components/labels.tsx
 msgid "path.status.paused"
+msgstr "Pausiert"
+
+#: src/components/HeaderStatus.tsx
+msgid "nav.jobs.paused"
 msgstr "Pausiert"
 
 #: src/components/labels.tsx
 msgid "job.status.waiting-resource"
 msgstr "pausiert, bis das Budget es zulässt"
+
+#: src/routes/jobs.tsx
+msgid "jobs.paused"
+msgstr "Pausiert: Es macht dort weiter, wo es aufgehört hat, sobald du fortsetzt."
 
 #: src/routes/importPage.tsx
 msgid "import.personal.badge"
@@ -4193,6 +4363,11 @@ msgstr "Neu starten zum Installieren"
 msgid "jobs.col.result"
 msgstr "Ergebnis"
 
+#: src/components/PauseControls.tsx
+#: src/components/PauseControls.tsx
+msgid "pause.resume"
+msgstr "Jetzt fortsetzen"
+
 #: src/tutor/Thread.tsx
 msgid "tutor.failed.retry"
 msgstr "Erneut versuchen"
@@ -4370,6 +4545,11 @@ msgstr "Passwort speichern"
 msgid "settings.profile.save"
 msgstr "Profil speichern"
 
+#: src/pwa/PwaControls.tsx
+#: src/pwa/PwaControls.tsx
+msgid "pwa.guide.title"
+msgstr "Yuo als Verknüpfung speichern"
+
 #: src/onboarding/SettingsSections.tsx
 msgid "settings.ai.local.saved"
 msgstr "Gespeicherte Adresse: {url}. Seit dem Start von Yuo kam von dort keine Antwort."
@@ -4378,6 +4558,10 @@ msgstr "Gespeicherte Adresse: {url}. Seit dem Start von Yuo kam von dort keine A
 #: src/sharing/ExportDialog.tsx
 msgid "share.download.done"
 msgstr "Als {0} gespeichert. Schau in deine Downloads."
+
+#: src/routes/setup.tsx
+msgid "wizard.access.applied.pending"
+msgstr "Gespeichert: Yuo verwendet {name}. Erledige die Schritte unten, um weiterzumachen."
 
 #: src/routes/SettingRow.tsx
 msgid "settings.saved"
@@ -4507,13 +4691,13 @@ msgstr "für diese Installation festgelegt"
 msgid "wizard.title"
 msgstr "Yuo einrichten"
 
-#: src/routes/settings.tsx
-msgid "settings.title"
-msgstr "Einstellungen"
-
 #: src/routes/devices.tsx
 #: src/routes/root.tsx
 msgid "nav.settings"
+msgstr "Einstellungen"
+
+#: src/routes/settings.tsx
+msgid "settings.title"
 msgstr "Einstellungen"
 
 #: src/material/Studies.tsx
@@ -4551,6 +4735,11 @@ msgstr "Kurz"
 #: src/routes/SettingRow.tsx
 msgid "item-type.short-answer"
 msgstr "Kurzantwort"
+
+#: src/components/DepthField.tsx
+#: src/components/DepthField.tsx
+msgid "depth.short"
+msgstr "Kürzer"
 
 #: src/assessment/AssessmentRunner.tsx
 msgid "assessment.hint"
@@ -4813,6 +5002,11 @@ msgstr "Tabelle (CSV)"
 msgid "review.size.standard"
 msgstr "Standard"
 
+#: src/components/DepthField.tsx
+#: src/components/DepthField.tsx
+msgid "depth.standard"
+msgstr "Standard"
+
 #: src/sharing/labels.tsx
 msgid "share.content.standard"
 msgstr "Standarddateien ({list})"
@@ -4881,6 +5075,14 @@ msgstr "Schritt {number} von 3"
 #: src/routes/pathView.tsx
 msgid "path.growing.steps"
 msgstr "Schritte"
+
+#: src/components/PauseControls.tsx
+msgid "pause.finishing.step"
+msgstr "Ein Schritt wird noch fertig: {step}."
+
+#: src/components/PauseControls.tsx
+msgid "pause.finishing"
+msgstr "Der laufende Schritt wird noch fertig."
 
 #: src/tutor/Thread.tsx
 msgid "tutor.pending.cancel"
@@ -5017,6 +5219,10 @@ msgstr "dauert länger als sonst, läuft noch"
 msgid "material.audio-only"
 msgstr "Der Ton wird aus dem Video geholt: nur er wird hochgeladen…"
 
+#: src/pwa/PwaControls.tsx
+msgid "pwa.guide.ios.share"
+msgstr "Tippe auf die Teilen-Taste (das Quadrat mit dem Pfeil)."
+
 #: src/routes/SettingRow.tsx
 msgid "settings.key.review-retention"
 msgstr "Angestrebte Erinnerung bei der Wiederholung"
@@ -5085,9 +5291,17 @@ msgstr "Die {app}-App ist auf diesem Computer, also kann Yuo dein Abo nutzen, st
 msgid "cli.manual.docs"
 msgstr "Die Anleitung zu {name} (öffnet in neuem Tab)"
 
+#: src/pwa/PwaControls.tsx
+msgid "pwa.guide.chromium.intro"
+msgstr "Der Browser hat keine Installation angeboten: Yuo ist vielleicht schon installiert, oder die Adresse ist nicht sicher (eine Adresse wie localhost oder https funktioniert)."
+
 #: src/onboarding/texts.tsx
 msgid "wizard.reason.no-subscription"
 msgstr "Die Apps Claude Code und Codex sind nicht auf diesem Computer, also kann Yuo kein Abo nutzen, das du schon bezahlst."
+
+#: src/components/DepthField.tsx
+msgid "depth.material.short"
+msgstr "Der Kern deines Materials, weniger Lektionen."
 
 #: src/routes/pathNew.tsx
 msgid "path.new.estimate.unavailable"
@@ -5343,6 +5557,10 @@ msgstr "der ganze Lernpfad braucht <0/> der Woche"
 msgid "settings.appearance.words"
 msgstr "Design dunkel hell Farben Darstellung Thema"
 
+#: src/components/PauseControls.tsx
+msgid "pause.finishing.kept"
+msgstr "Dann hält es an, und was geschrieben wurde, bleibt für das Fortsetzen erhalten."
+
 #: src/assessment/StartGate.tsx
 msgid "assessment.empty"
 msgstr "Hier gibt es noch keine Fragen."
@@ -5551,6 +5769,10 @@ msgstr "Damit sicher ist, dass diese Installation dir gehört, gib den Einrichtu
 msgid "access.local.no-server"
 msgstr "Um das Modell auf diesem Computer auszuführen, nutzt Yuo die kostenlose Ollama-App. Sie läuft noch nicht."
 
+#: src/onboarding/SettingsSections.tsx
+msgid "update.container.how"
+msgstr "Zum Aktualisieren setze im Ordner packaging/container YUO_IMAGE in .env auf die neue Version und führe dann docker compose pull und docker compose up -d aus."
+
 #: src/routes/index.tsx
 msgid "home.today"
 msgstr "Heute"
@@ -5718,6 +5940,23 @@ msgstr "Schaltet frei"
 msgid "path.skill.locked"
 msgstr "Wird freigeschaltet nach: {names}"
 
+#: src/components/PauseControls.tsx
+#: src/components/PauseControls.tsx
+msgid "pause.state.until"
+msgstr "Bis {until}."
+
+#: src/components/PauseControls.tsx
+msgid "pause.length.resume"
+msgstr "Bis ich fortsetze"
+
+#: src/components/PauseControls.tsx
+msgid "pause.length.morning"
+msgstr "Bis morgen früh"
+
+#: src/components/PauseControls.tsx
+msgid "pause.state.resume"
+msgstr "Bis du fortsetzt."
+
 #: src/path/LessonRow.tsx
 #: src/path/SkillPanel.tsx
 #: src/routes/pathView.tsx
@@ -5733,10 +5972,6 @@ msgstr "Als Nächstes"
 msgid "home.next.planned"
 msgstr "Als Nächstes: {0}"
 
-#: src/onboarding/SettingsSections.tsx
-msgid "update.container"
-msgstr "Aktualisier, indem du das neue Container-Image ziehst."
-
 #: src/routes/importPage.tsx
 msgid "import.update"
 msgstr "Diesen Lernpfad aktualisieren"
@@ -5745,6 +5980,10 @@ msgstr "Diesen Lernpfad aktualisieren"
 #: src/routes/settings.tsx
 msgid "update.title"
 msgstr "Updates"
+
+#: src/pwa/PwaControls.tsx
+msgid "pwa.update.running"
+msgstr "Yuo wird aktualisiert… die Seite lädt gleich von selbst neu."
 
 #: src/routes/importPage.tsx
 msgid "import.preview.upgraded"
@@ -5903,9 +6142,17 @@ msgstr "Videos"
 msgid "share.preview.size"
 msgstr "Videos und Medien"
 
+#: src/components/PauseControls.tsx
+msgid "pause.banner.videos"
+msgstr "Videos sind pausiert."
+
 #: src/sharing/ExportDialog.tsx
 msgid "share.video-note"
 msgstr "Videos werden als fertige Videos geteilt. Der Code, mit dem Yuo sie erstellt hat, wird nie geteilt."
+
+#: src/components/PauseControls.tsx
+msgid "pause.state.videos"
+msgstr "Videos warten; Lektionen und Fragen kommen weiter."
 
 #: src/sharing/labels.tsx
 msgid "share.format.video"
@@ -6024,6 +6271,10 @@ msgstr "Worum es im Pfad geht, z. B. „Maschinenbau“ oder „Persönliche Fin
 #: src/tutor/DockPanel.tsx
 msgid "tutor.chips.summary"
 msgstr "Was der Tutor mit deiner nächsten Nachricht sieht ({count})"
+
+#: src/components/PauseControls.tsx
+msgid "pause.scope"
+msgstr "Was pausieren"
 
 #: src/sharing/ExportDialog.tsx
 msgid "share.profile.label"
@@ -6152,6 +6403,14 @@ msgstr "Ein paar Fragen werden geschrieben, um zu sehen, wo dein Lernpfad beginn
 #: src/components/labels.tsx
 msgid "job.kind.lesson"
 msgstr "Lektion wird geschrieben"
+
+#: src/components/PauseControls.tsx
+msgid "pause.title.paused"
+msgstr "Vorausschreiben ist pausiert"
+
+#: src/components/PauseControls.tsx
+msgid "pause.banner.all"
+msgstr "Vorausschreiben ist pausiert."
 
 #: src/components/JobProgress.tsx
 msgid "job.step.items-support"
@@ -6585,6 +6844,10 @@ msgstr "Yuo konnte OpenRouter nicht erreichen, um die Modelle abzurufen. Prüf d
 msgid "path.new.not-ready"
 msgstr "Yuo konnte deinen Lernpfad nicht starten: Das Programm deines Abos ist nicht bereit. Behebe das hier und wähl dann erneut Lernpfad erstellen."
 
+#: src/onboarding/CliAccess.tsx
+msgid "cli.login.unsure"
+msgstr "Yuo kann noch nicht erkennen, ob du bei {name} angemeldet bist. Wenn nicht, melde dich jetzt an; wenn schon, mach weiter."
+
 #: src/onboarding/vendorModels.tsx
 msgid "vendor.estimate.unknown"
 msgstr "Yuo kennt die Preise dieser Modelle noch nicht und kann daher keinen typischen Lernpfad schätzen. {vendor} rechnet ab, was du nutzt."
@@ -6613,6 +6876,14 @@ msgstr "Yuo startet gerade neu oder ist im Moment nicht erreichbar. Versuch es g
 #: src/onboarding/SettingsSections.tsx
 msgid "update.restarting"
 msgstr "Yuo startet neu… Diese Seite lädt sich von selbst neu, sobald die neue Version bereit ist."
+
+#: src/pwa/PwaControls.tsx
+msgid "pwa.update.done.version"
+msgstr "Yuo ist auf dem neuesten Stand: Version {updated}."
+
+#: src/pwa/PwaControls.tsx
+msgid "pwa.update.done"
+msgstr "Yuo ist auf dem neuesten Stand."
 
 #: src/routes/pathView.tsx
 msgid "path.working"
@@ -6646,6 +6917,10 @@ msgstr "Yuo öffnet sich angemeldet in einem neuen Tab dieses Browsers. Dieser T
 msgid "profile.minutes.description"
 msgstr "Yuo plant Lektionen und Wiederholungen passend zu dieser Zeit, von 5 bis 120 Minuten."
 
+#: src/onboarding/SettingsSections.tsx
+msgid "update.container.restart"
+msgstr "Yuo läuft hier in Docker und startet von selbst, sobald Docker läuft. Schalte auf dem Computer in den Einstellungen von Docker Desktop „Start Docker Desktop when you sign in“ ein, damit Yuo nach einem Neustart bereitsteht."
+
 #: src/onboarding/PlanMeter.tsx
 msgid "plan-meter.none.claude"
 msgstr "Yuo zeigt nach der ersten Lektion mit Claude Code, wie viel von deinem Tarif verbraucht ist."
@@ -6669,6 +6944,10 @@ msgstr "Yuo führt die auf diesem Computer installierte Claude Code-App aus, ang
 #: src/onboarding/texts.tsx
 msgid "wizard.consent.codex"
 msgstr "Yuo führt die auf diesem Computer installierte Codex-App aus, angemeldet mit deinem eigenen Konto, um Lektionen zu schreiben und als dein Tutor zu antworten. Yuo liest oder speichert deine ChatGPT-Anmeldung nie. Diese Nutzung wird auf die Limits deines Tarifs angerechnet. Du kannst jederzeit in den Einstellungen zu einem anderen Modell wechseln."
+
+#: src/components/PauseControls.tsx
+msgid "pause.intro"
+msgstr "Yuo schreibt Lektionen, Wiederholungsfragen und Videos ein Stück vor dir voraus. Pausiere es, um dein Abo oder Guthaben eine Weile zu schonen: Nichts bereits Geschriebenes geht verloren, und es macht dort weiter, wo es aufgehört hat. Tutor, Bewertung und alles, was du selbst startest, laufen weiter."
 
 #: src/onboarding/profile.tsx
 msgid "profile.content-lang.description"

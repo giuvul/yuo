@@ -28,15 +28,16 @@ from yuo.app.plan_meter import PlanMeter
 from yuo.app.service import Service
 from yuo.app.tutor import TutorWorker
 from yuo.assessment import types as xt
-from yuo.core import logs
+from yuo.core import clock, logs
 from yuo.core.errors import StartupError
 from yuo.core.llm import LLMPort
 from yuo.db.backup import InstallLock
 from yuo.db.connection import ReadPool, Writer, check_sqlite_version
 from yuo.db.migrate import migrate
+from yuo.generation import pause
 from yuo.generation.jobs import JobWorker
 from yuo.generation.lanes import with_lanes
-from yuo.generation.runner import BudgetGuard, StageRunner
+from yuo.generation.runner import BudgetGuard, PauseGuard, StageRunner
 from yuo.setup import settings
 
 VERSION = dist_version("yuo")
@@ -211,7 +212,13 @@ def start(
             usd = settings.effective(c, "budget.cap_usd_month", {})[0]
         return None if usd is None else round(float(usd) * 1_000_000)
 
-    runner = StageRunner(writer, readers, with_lanes(ports), BudgetGuard(readers, cap))
+    def paused_kinds() -> frozenset[str]:
+        with readers.connection() as c:
+            return pause.kinds(settings.effective(c, "generation.pause", {})[0], clock.now())
+
+    runner = StageRunner(
+        writer, readers, with_lanes(ports), BudgetGuard(readers, cap), PauseGuard(paused_kinds)
+    )
     m = media or Media()
     service = Service(
         writer,
@@ -224,7 +231,7 @@ def start(
         blobs=m.blobs,
         media_dir=m.media_dir,
     )
-    jobs = JobWorker(writer, readers, service.handlers())
+    jobs = JobWorker(writer, readers, service.handlers(), paused_kinds=paused_kinds)
     jobs.recover()  # a crash or reboot mid-generation
 
     def job_changed(job_id: str, status: str) -> None:

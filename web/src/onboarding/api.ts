@@ -257,6 +257,12 @@ function notManaged(error: unknown): boolean {
   return error instanceof ApiError && error.status === 404;
 }
 
+const UNCLEAR_POLLS = 15;
+
+function unclear(c: CliOut | null | undefined): boolean {
+  return !!c && c.installed && c.logged_in === null;
+}
+
 /** A program's install or sign-in is under way: its status changes on its own, so it is polled. */
 function cliBusy(c: CliOut | null | undefined): boolean {
   if (!c) return false;
@@ -316,7 +322,12 @@ export function useCli(cli: CliId | null, initial?: CliOut) {
     initialData: initial,
     retry: false,
     staleTime: 0,
-    refetchInterval: (query) => (cliBusy(query.state.data) ? CLI_POLL_MS : false),
+    // also while an installed program has not said whether it is signed in (its first run after installing
+    // can be slow), for about half a minute: the card then moves on to the sign-in by itself
+    refetchInterval: (query) =>
+      cliBusy(query.state.data) || (unclear(query.state.data) && query.state.dataUpdateCount < UNCLEAR_POLLS)
+        ? CLI_POLL_MS
+        : false,
   });
 }
 

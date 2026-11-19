@@ -18,13 +18,13 @@ import hashlib
 import json
 import sqlite3
 from pathlib import Path
-from typing import Any
+from typing import Any, get_args
 
 import structlog
 
 from yuo.app.context import AppContext, Part
 from yuo.app.ports import Buffer, Learners
-from yuo.app.repo import get_path
+from yuo.app.repo import PathState, get_path
 from yuo.assessment import types as xt
 from yuo.content.lesson_body import check_body
 from yuo.core import clock
@@ -470,10 +470,11 @@ class _Exporter:
         return self.out
 
     def _curriculum(self) -> None:
-        self.out["path"].append(_with_ext({
+        rec = _with_ext({
             "code": self.p["code"], "title": self.p["title"], "subject": self.p["subject"], "goal": self.p["goal"], "goal_type": self.p["goal_type"],
             "difficulty": self.p["difficulty"], "content_lang": self.p["content_lang"], "licence": self.p["licence"], "authors": _j(self.p["authors"]),
-        }, self.p))  # fmt: skip
+        }, self.p)  # fmt: skip
+        self.out["path"].append(_without_learner_state(rec))
         self.out["branch"] = [
             _with_ext({"code": b["code"], "title": b["title"], "position": b["position"]}, b)
             for b in self.branches.values()
@@ -601,6 +602,17 @@ class _Exporter:
             self.out["asset"].append(
                 {"sha256": sha, "media_type": media, "kind": kind, "bytes": size, "present": True}
             )
+
+
+def _without_learner_state(rec: dict[str, Any]) -> dict[str, Any]:
+    """A path's own state on this machine (its level check, plan choices, preview, next steps) is the learner's,
+    not part of what they share."""
+    ours = rec.get("extensions", {}).get("yuo")
+    if isinstance(ours, dict):
+        kept = {k: v for k, v in ours.items() if k not in get_args(PathState)}
+        rest = {k: v for k, v in rec["extensions"].items() if k != "yuo"} | ({"yuo": kept} if kept else {})
+        rec = {k: v for k, v in rec.items() if k != "extensions"} | ({"extensions": rest} if rest else {})
+    return rec
 
 
 def _with_ext(rec: dict[str, Any], row: sqlite3.Row) -> dict[str, Any]:

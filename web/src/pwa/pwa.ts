@@ -94,3 +94,20 @@ export async function install(): Promise<void> {
   await event.prompt();
   await event.userChoice;
 }
+
+/** Running as the installed app (its own window), so there is nothing to install. */
+export function runningInstalled(win: Window = window): boolean {
+  const standalone = (win.navigator as Navigator & { standalone?: boolean }).standalone === true; // iOS Safari
+  return standalone || (typeof win.matchMedia === "function" && win.matchMedia("(display-mode: standalone)").matches);
+}
+
+/** Which browser's steps to show when it does not offer installing by itself. */
+export type ShortcutBrowser = "firefox" | "firefox-android" | "ios" | "safari" | "chromium" | "other";
+
+export function shortcutBrowser(ua: string = navigator.userAgent): ShortcutBrowser {
+  if (/iPhone|iPad|iPod/.test(ua)) return "ios";
+  if (/Firefox\//.test(ua)) return /Android/.test(ua) ? "firefox-android" : "firefox";
+  if (/Edg\/|Chrome\/|Chromium\//.test(ua)) return "chromium";
+  if (/Safari\//.test(ua) && /Macintosh/.test(ua)) return "safari";
+  return "other";
+}

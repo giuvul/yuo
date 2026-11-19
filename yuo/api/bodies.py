@@ -13,6 +13,13 @@ class PathIn(BaseModel):
     subject: str = Field(default="", max_length=300)  # optional: the title and goal say what the path covers
     goal: str = Field(min_length=1, max_length=600)
     goal_type: Literal["exam", "practical", "understanding", "curiosity"] = "understanding"
+    # every reason the learner gave (several may apply); when present, goal_type is taken as the first
+    goal_types: list[Literal["exam", "practical", "understanding", "curiosity"]] = Field(
+        default_factory=list, max_length=4
+    )
+    depth: Literal["short", "standard", "deep"] = (
+        "standard"  # how big a plan: a few dozen to over a hundred lessons
+    )
     difficulty: Literal["introductory", "foundational", "intermediate", "advanced", "expert"] = "foundational"
     content_lang: str | None = Field(default=None, min_length=2, max_length=35)
     custom_instructions: str = Field(default="", max_length=1000)
@@ -171,6 +178,7 @@ class StudiesIn(BaseModel):
     goal: str = Field(default="", max_length=600)
     content_lang: str | None = Field(default=None, min_length=2, max_length=35)
     courses: list[CourseIn] = Field(default_factory=list, max_length=60)
+    depth: Literal["short", "standard", "deep"] = "standard"  # how much of the material the plan covers
 
 
 class ArrangeIn(BaseModel):

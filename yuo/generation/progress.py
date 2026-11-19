@@ -25,6 +25,7 @@ class Progress:
     step: str | None = None  # a step code the web app has a label for
     n: int | None = None  # this is round n of `of` (a video's repair rounds), when it has rounds
     of: int | None = None
+    step_at: float | None = None  # time.time() when the step began
 
 
 @contextmanager
@@ -45,7 +46,7 @@ def step(code: str) -> None:
     if (jid := _current.get()) is not None:
         with _lock:
             if (p := _jobs.get(jid)) is not None:
-                p.step = code
+                p.step, p.step_at = code, time.time()
 
 
 def rounds(n: int, of: int) -> None:
@@ -59,4 +60,4 @@ def rounds(n: int, of: int) -> None:
 def of(job_id: str) -> Progress | None:
     with _lock:
         p = _jobs.get(job_id)
-        return None if p is None else Progress(p.started, p.step, p.n, p.of)
+        return None if p is None else Progress(p.started, p.step, p.n, p.of, p.step_at)

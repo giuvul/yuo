@@ -8,7 +8,9 @@ files (`HEAVY_KINDS`: reading, transcribing and digesting them), one at a time, 
 never holds up a lesson.
 
 Handlers are registered per job kind by the composition root. A retryable failure is retried later with
-backoff (at most `MAX_ATTEMPTS`); a budget stop parks the job in `waiting_resource` until the cap allows. A job
+backoff (at most `MAX_ATTEMPTS`); a budget stop parks the job in `waiting_resource` until the cap allows. While
+generation is paused (`yuo.generation.pause`) the paused kinds are not started, and a running one stops before
+its next model call and waits, queued, without using an attempt. A job
 left `running` by a crash or reboot is queued again at startup and resumes from its stored stages.
 """
 
@@ -26,9 +28,9 @@ from yuo.core.enums import EntityKind
 from yuo.core.ids import new_id
 from yuo.core.logs import metrics
 from yuo.db.connection import ReadPool, Writer
-from yuo.generation import progress
+from yuo.generation import pause, progress
 from yuo.generation.lanes import Lane, lane
-from yuo.generation.runner import BudgetExceeded, StageFailed
+from yuo.generation.runner import BudgetExceeded, Paused, StageFailed
 
 log = structlog.get_logger(__name__)
 MAX_ATTEMPTS = 3
@@ -71,8 +73,15 @@ def enqueue(
 
 class JobWorker:
     def __init__(
-        self, writer: Writer, readers: ReadPool, handlers: dict[str, Handler], *, poll_s: float = 1.0
+        self,
+        writer: Writer,
+        readers: ReadPool,
+        handlers: dict[str, Handler],
+        *,
+        poll_s: float = 1.0,
+        paused_kinds: Callable[[], frozenset[str]] = lambda: pause.NOTHING,
     ) -> None:
+        self.paused_kinds = paused_kinds
         self.writer = writer
         self.readers = readers
         self.handlers = handlers
@@ -143,6 +152,10 @@ class JobWorker:
             "heavy": f" AND kind IN ({heavy})",
         }[urgent]
 
+        paused = self.paused_kinds()
+        if paused:  # job kinds are our own constants, never input
+            only += " AND kind NOT IN (" + ", ".join(f"'{k}'" for k in sorted(paused)) + ")"
+
         def unit(c: sqlite3.Connection) -> Job | None:
             row = c.execute(
                 "SELECT id, kind, target_kind, target_id, attempt FROM generation_job "
@@ -174,8 +187,14 @@ class JobWorker:
         try:
             if handler is None:
                 raise StageFailed(f"no handler for job kind {job.kind!r}")
-            with lane(Lane.NEAR if job.kind in URGENT_KINDS else Lane.BACKGROUND), progress.tracking(job.id):
+            with (
+                lane(Lane.NEAR if job.kind in URGENT_KINDS else Lane.BACKGROUND),
+                progress.tracking(job.id),
+                pause.working(job.kind),
+            ):
                 handler(job)
+        except Paused:
+            self._park(job)
         except BudgetExceeded as e:
             self._finish(job, "waiting_resource", str(e), retry_in=3600)
         except StageFailed as e:
@@ -190,6 +209,17 @@ class JobWorker:
             self._finish(job, "succeeded", None)
         metrics.observe(f"job.{job.kind}", time.monotonic() - started)  # read by /api/health and `yuo doctor`
         return True
+
+    def _park(self, job: Job) -> None:
+        """Paused before a model call: queued again as it was, the attempt it just took given back."""
+        self.writer.run(
+            lambda c: c.execute(
+                "UPDATE generation_job SET status = 'queued', error = 'paused', next_attempt_at = NULL, "
+                "finished_at = NULL, attempt = max(attempt - 1, 0) WHERE id = ?",
+                (job.id,),
+            )
+        )
+        self._changed(job.id, "queued")
 
     def _finish(self, job: Job, status: str, error: str | None, retry_in: float | None = None) -> None:
         now = clock.parse_timestamp(clock.now())

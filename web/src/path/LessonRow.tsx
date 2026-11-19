@@ -4,7 +4,7 @@ import { Trans, useLingui } from "@lingui/react/macro";
 import { useLingui as useLinguiRuntime } from "@lingui/react";
 import { Link } from "@tanstack/react-router";
 import type { JobRef, LessonRef } from "../api/client";
-import { useAcceptLesson, useGenerateLesson } from "../api/hooks";
+import { useAcceptLesson, useGenerateLesson, useLessonTurns } from "../api/hooks";
 import { GenerationError } from "../onboarding/AiReady";
 import { jobErrorMessage } from "../components/jobError";
 import { JobKindLabel, LessonKindLabel, LessonStateLabel } from "../components/labels";
@@ -28,6 +28,9 @@ export function LessonRow({ lesson, pathId, job }: { lesson: LessonRef; pathId: 
   const generate = useGenerateLesson(pathId);
   const accept = useAcceptLesson(pathId);
   const title = lesson.title ?? t({ id: "path.lesson.untitled", message: "Untitled lesson" });
+  // its place in the line of what Yuo writes next (the header keeps that list fresh)
+  const turns = useLessonTurns();
+  const turn = lesson.state === "queued" ? turns.data?.get(lesson.id) : undefined;
 
   return (
     <li className={styles.lesson} data-state={lesson.state}>
@@ -48,6 +51,17 @@ export function LessonRow({ lesson, pathId, job }: { lesson: LessonRef; pathId: 
       ) : null}
       <span className={styles.state} data-state={lesson.state}>
         <LessonStateLabel value={lesson.state} />
+        {turn === 1 ? (
+          <>
+            {" · "}
+            <Trans id="path.lesson.turn.next">next in line</Trans>
+          </>
+        ) : turn ? (
+          <>
+            {" · "}
+            <Trans id="path.lesson.turn.n">number {turn} in line</Trans>
+          </>
+        ) : null}
       </span>
       {GENERATABLE.has(lesson.state) ? (
         <Button

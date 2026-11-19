@@ -22,7 +22,7 @@ from yuo.core.errors import Conflict, InvalidInput, NotFound
 from yuo.core.ids import new_id
 from yuo.generation.jobs import Job, enqueue
 from yuo.generation.lanes import Lane, lane
-from yuo.generation.runner import StageFailed
+from yuo.generation.runner import Paused, StageFailed
 from yuo.learning import events as ev
 from yuo.learning import projections as pj
 from yuo.setup import models, settings
@@ -855,6 +855,15 @@ class Study(Part):
                 enqueue(c, "lesson", EntityKind.LESSON, lid, priority=5)
 
             self.writer.run(unit)
+        except Paused:
+            # generation is paused: the request waits, it did not fail
+            self.writer.run(
+                lambda c: c.execute(
+                    "UPDATE lesson_request SET status = 'pending', updated_at = ? WHERE id = ?",
+                    (clock.now(), job.target_id),
+                )
+            )
+            raise
         except Exception as e:
             msg = str(e)[:500]
             self.writer.run(
