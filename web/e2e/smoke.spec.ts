@@ -7,7 +7,7 @@ test("header shows the app name", async ({ page }) => {
 
 test("links styled as buttons keep readable text", async ({ page }) => {
   // the cascade layer order once put component styles below the base `a` colour (accent on accent)
-  await page.goto("/");
+  await page.goto("/paths");
   const [color, background] = await page
     .getByRole("link", { name: "New path" })
     .evaluate((e) => [getComputedStyle(e).color, getComputedStyle(e).backgroundColor]);

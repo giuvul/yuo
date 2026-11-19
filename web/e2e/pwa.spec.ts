@@ -3,7 +3,7 @@
 import { expect, test } from "./fixtures";
 
 test("the manifest and the service worker register; the shell is precached, /api is not", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/paths");
   await expect(page.getByRole("heading", { level: 1, name: "Your paths" })).toBeVisible();
 
   const href = await page.locator('link[rel="manifest"]').getAttribute("href");
