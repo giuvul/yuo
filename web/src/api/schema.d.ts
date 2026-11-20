@@ -564,7 +564,10 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** Get Estimate */
+        /**
+         * Get Estimate
+         * @description `videos`: the kind chosen on the New path form; none: the learner's settings.
+         */
         get: operations["get_estimate_api_estimate_get"];
         put?: never;
         post?: never;
@@ -900,6 +903,27 @@ export interface paths {
          * @description Make a lesson's video again after it failed.
          */
         post: operations["post_video_again_api_lessons__lesson_id__video_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/lessons/{lesson_id}/youtube/another": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Post Another Video
+         * @description Turn down the lesson's YouTube video (or look again when none was found): the next one found, and
+         *     the lesson written again for it.
+         */
+        post: operations["post_another_video_api_lessons__lesson_id__youtube_another_post"];
         delete?: never;
         options?: never;
         head?: never;
@@ -1950,6 +1974,27 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/setup/access/youtube": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /**
+         * Put Youtube
+         * @description A YouTube Data API key for searches (checked with one request); without one, searches use yt-dlp.
+         */
+        put: operations["put_youtube_api_setup_access_youtube_put"];
+        post?: never;
+        /** Delete Youtube */
+        delete: operations["delete_youtube_api_setup_access_youtube_delete"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/setup/ai-ready": {
         parameters: {
             query?: never;
@@ -2664,6 +2709,12 @@ export interface components {
              * @description Vendors with a direct key connected (the keys are never returned)
              */
             vendors: string[];
+            /**
+             * Youtube
+             * @description A YouTube Data API key is set (never returned)
+             * @default false
+             */
+            youtube: boolean;
         };
         /** AchievementOut */
         AchievementOut: {
@@ -3847,6 +3898,7 @@ export interface components {
             video?: components["schemas"]["VideoOut"] | null;
             /** Video Unavailable */
             video_unavailable?: string | null;
+            youtube?: components["schemas"]["YouTubeOut"] | null;
         };
         /** LessonRef */
         LessonRef: {
@@ -4610,6 +4662,8 @@ export interface components {
             subject: string;
             /** Title */
             title: string;
+            /** Videos */
+            videos?: ("youtube" | "generated" | "reading") | null;
         };
         /** PathOut */
         PathOut: {
@@ -5756,6 +5810,26 @@ export interface components {
             /** Version Id */
             version_id: string | null;
         };
+        /**
+         * YouTubeOut
+         * @description The YouTube video a lesson was written from, or why a path that uses them has none for this lesson.
+         */
+        YouTubeOut: {
+            /** Channel */
+            channel: string | null;
+            /** End S */
+            end_s: number | null;
+            /** Gone */
+            gone: boolean;
+            /** Note */
+            note: ("none" | "blocked" | "quota" | "bad_key" | "network" | "unavailable" | "no_transcript") | null;
+            /** Start S */
+            start_s: number;
+            /** Title */
+            title: string | null;
+            /** Video Id */
+            video_id: string | null;
+        };
         /** OptionOut */
         yuo__api__onboarding__OptionOut: {
             estimate: components["schemas"]["PresetEstimateOut"];
@@ -6674,6 +6748,7 @@ export interface operations {
         parameters: {
             query?: {
                 lessons?: number;
+                videos?: ("youtube" | "generated" | "reading") | null;
             };
             header?: never;
             path?: never;
@@ -7217,6 +7292,37 @@ export interface operations {
         };
     };
     post_video_again_api_lessons__lesson_id__video_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                lesson_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            202: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["JobStarted"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    post_another_video_api_lessons__lesson_id__youtube_another_post: {
         parameters: {
             query?: never;
             header?: never;
@@ -9249,6 +9355,55 @@ export interface operations {
                 content: {
                     "application/json": components["schemas"]["HTTPValidationError"];
                 };
+            };
+        };
+    };
+    put_youtube_api_setup_access_youtube_put: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["KeyIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    delete_youtube_api_setup_access_youtube_delete: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
             };
         };
     };

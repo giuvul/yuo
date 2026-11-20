@@ -120,6 +120,20 @@ const EDITORS: Record<string, Editor> = {
       { value: "always", label: msg({ id: "settings.video-format.always", message: "Always a video" }) },
     ],
   },
+  "video.source": {
+    kind: "select",
+    options: [
+      { value: "generated", label: msg({ id: "settings.video-source.generated", message: "Made by Yuo" }) },
+      { value: "youtube", label: msg({ id: "settings.video-source.youtube", message: "From YouTube" }) },
+    ],
+  },
+  "video.youtube_languages": {
+    kind: "select",
+    options: [
+      { value: "mine", label: msg({ id: "settings.youtube-languages.mine", message: "Only in the path's language" }) },
+      { value: "also_english", label: msg({ id: "settings.youtube-languages.also-english", message: "Also in English" }) },
+    ],
+  },
   "video.length": {
     kind: "select",
     options: [
@@ -168,6 +182,8 @@ export const LABELS: Record<string, MessageDescriptor> = {
   "streak.grace_days": msg({ id: "settings.key.grace-days", message: "Streak grace days" }),
   "practice.types": msg({ id: "settings.key.practice-types", message: "Question types" }),
   "video.format": msg({ id: "settings.key.video-format", message: "Lesson videos" }),
+  "video.source": msg({ id: "settings.key.video-source", message: "Where videos come from" }),
+  "video.youtube_languages": msg({ id: "settings.key.youtube-languages", message: "YouTube video languages" }),
   "video.length": msg({ id: "settings.key.video-length", message: "Video length" }),
   "video.theme": msg({ id: "settings.key.video-theme", message: "Video colours" }),
   "video.captions": msg({ id: "settings.key.video-captions", message: "Video captions" }),

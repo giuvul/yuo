@@ -10,6 +10,8 @@ from typing import Any
 
 from pydantic import BaseModel, Field
 
+from yuo.core.choices import longest_is_right, shuffled
+
 LEVELS = range(1, 6)
 MIN_QUESTIONS, MAX_QUESTIONS = 6, 10
 # the level reached -> the path's difficulty (05 path.difficulty)
@@ -47,6 +49,10 @@ def level_check_rules(draft: LevelCheckDraft) -> list[str]:
             problems.append(f"question {n}: give 3 or 4 options")
         elif not 0 <= q.answer < len(q.options):
             problems.append(f"question {n}: answer must be the index of one of its options")
+        elif longest_is_right([q.options[q.answer]], [o for i, o in enumerate(q.options) if i != q.answer]):
+            problems.append(
+                f"question {n}: the right option is clearly the longest; make the options similar in length"
+            )
         if len({o.strip().lower() for o in q.options}) != len(q.options):
             problems.append(f"question {n}: options must differ")
         if not q.prompt.strip():
@@ -54,6 +60,15 @@ def level_check_rules(draft: LevelCheckDraft) -> list[str]:
     if len({q.level for q in qs}) < 3:
         problems.append("spread the questions over at least 3 levels, from the basics to advanced")
     return problems
+
+
+def stored(draft: LevelCheckDraft, seed: str) -> list[dict[str, Any]]:
+    """The questions as kept in path state, each with its options shuffled (models put the right one first)."""
+    out = []
+    for n, q in enumerate(draft.questions):
+        options, answer = shuffled(q.options, q.answer, f"{seed}:{n}")
+        out.append(q.model_dump() | {"options": options, "answer": answer})
+    return out
 
 
 def public(questions: list[dict[str, Any]]) -> list[dict[str, Any]]:

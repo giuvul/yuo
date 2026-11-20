@@ -234,7 +234,7 @@ class NextSteps(Part):
             new = state | {
                 "status": "ready",
                 "questions": [q.model_dump() for q in check.questions],
-                "quiz": [q.model_dump() for q in check.quiz],
+                "quiz": ns.stored_quiz(check, f"{job.target_id}:{job.id}"),
             }
         elif step == "proposing":
             qr = state.get("quiz_result") or {"right": 0, "total": 0, "ready": [], "not_yet": []}

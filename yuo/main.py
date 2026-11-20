@@ -258,11 +258,16 @@ def wire_setup(service: Service, root: Path, secrets: SecretStore) -> None:
     from yuo.adapters import cli_access, machine, release_feed
     from yuo.adapters.llm.openai_compat import check_openrouter_key, list_models
     from yuo.adapters.llm.vendor import vendor_models, vendor_port
+    from yuo.adapters.youtube import YouTube
     from yuo.app import setup_answers
     from yuo.app.access import Access
     from yuo.app.updates import Updates
 
     service.prober = lambda: machine.probe(root)
+    youtube = YouTube(
+        lambda: secrets.get("youtube")
+    )  # lessons built on a YouTube video (yuo.app.video_links)
+    service.online_videos = youtube
     service.answers_file = root / setup_answers.FILE_NAME
     service.access = Access(
         service.writer,
@@ -275,6 +280,7 @@ def wire_setup(service: Service, root: Path, secrets: SecretStore) -> None:
         list_models=list_models,
         vendor=lambda p, key: vendor_port(p, key, vendor_price(service.prices, p.adapter)),
         vendor_models=vendor_models,
+        youtube_check=youtube.check_key,
     )
     service.cli = cli_access.CliAccess()
     service.access.cli_found = service.cli.found
@@ -454,7 +460,7 @@ def build() -> FastAPI:
         waitlist_url=waitlist_url(),
     )
     web.mount(app, web_dir())
-    upkeep = Maintenance(db, runtime.writer, root / "backups")
+    upkeep = Maintenance(db, runtime.writer, root / "backups", check_videos=runtime.service.check_videos)
 
     @asynccontextmanager
     async def lifespan(_: FastAPI) -> AsyncIterator[None]:

@@ -43,6 +43,12 @@
             },
             "title": "Vendors",
             "type": "array"
+          },
+          "youtube": {
+            "default": false,
+            "description": "A YouTube Data API key is set (never returned)",
+            "title": "Youtube",
+            "type": "boolean"
           }
         },
         "required": [
@@ -3690,6 +3696,16 @@
               }
             ],
             "title": "Video Unavailable"
+          },
+          "youtube": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/YouTubeOut"
+              },
+              {
+                "type": "null"
+              }
+            ]
           }
         },
         "required": [
@@ -5891,6 +5907,22 @@
             "minLength": 1,
             "title": "Title",
             "type": "string"
+          },
+          "videos": {
+            "anyOf": [
+              {
+                "enum": [
+                  "youtube",
+                  "generated",
+                  "reading"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Videos"
           }
         },
         "required": [
@@ -9529,6 +9561,94 @@
         "title": "VideoOut",
         "type": "object"
       },
+      "YouTubeOut": {
+        "description": "The YouTube video a lesson was written from, or why a path that uses them has none for this lesson.",
+        "properties": {
+          "channel": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Channel"
+          },
+          "end_s": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "End S"
+          },
+          "gone": {
+            "title": "Gone",
+            "type": "boolean"
+          },
+          "note": {
+            "anyOf": [
+              {
+                "enum": [
+                  "none",
+                  "blocked",
+                  "quota",
+                  "bad_key",
+                  "network",
+                  "unavailable",
+                  "no_transcript"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Note"
+          },
+          "start_s": {
+            "title": "Start S",
+            "type": "integer"
+          },
+          "title": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Title"
+          },
+          "video_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Video Id"
+          }
+        },
+        "required": [
+          "video_id",
+          "title",
+          "channel",
+          "start_s",
+          "end_s",
+          "gone",
+          "note"
+        ],
+        "title": "YouTubeOut",
+        "type": "object"
+      },
       "yuo__api__onboarding__OptionOut": {
         "properties": {
           "estimate": {
@@ -10623,6 +10743,7 @@
     },
     "/api/estimate": {
       "get": {
+        "description": "`videos`: the kind chosen on the New path form; none: the learner's settings.",
         "operationId": "get_estimate_api_estimate_get",
         "parameters": [
           {
@@ -10633,6 +10754,27 @@
               "default": 20,
               "title": "Lessons",
               "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "videos",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "youtube",
+                    "generated",
+                    "reading"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Videos"
             }
           }
         ],
@@ -11340,6 +11482,46 @@
           }
         },
         "summary": "Post Video Again"
+      }
+    },
+    "/api/lessons/{lesson_id}/youtube/another": {
+      "post": {
+        "description": "Turn down the lesson's YouTube video (or look again when none was found): the next one found, and\nthe lesson written again for it.",
+        "operationId": "post_another_video_api_lessons__lesson_id__youtube_another_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "lesson_id",
+            "required": true,
+            "schema": {
+              "title": "Lesson Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobStarted"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Post Another Video"
       }
     },
     "/api/materials/{material_id}": {
@@ -13911,6 +14093,47 @@
           }
         },
         "summary": "Get Vendor Models"
+      }
+    },
+    "/api/setup/access/youtube": {
+      "delete": {
+        "operationId": "delete_youtube_api_setup_access_youtube_delete",
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Delete Youtube"
+      },
+      "put": {
+        "description": "A YouTube Data API key for searches (checked with one request); without one, searches use yt-dlp.",
+        "operationId": "put_youtube_api_setup_access_youtube_put",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/KeyIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Put Youtube"
       }
     },
     "/api/setup/ai-ready": {

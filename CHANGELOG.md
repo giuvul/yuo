@@ -4,6 +4,37 @@ All notable changes are listed here. The format follows Keep a Changelog; versio
 
 ## [Unreleased]
 
+## [1.3.0] - 2026-11-20
+
+- Lesson videos can come from YouTube (Settings > Videos > Where videos come from). Yuo searches YouTube for
+  each lesson, reads the captions of the best few videos, and a model picks the video and the part of it that
+  teaches the lesson; the lesson is then written from what that part of the video says, so the reading and
+  the video go together. It costs about 10 to 25% more than a reading lesson, where a video made by Yuo costs about ten
+  times the lesson, and it needs no video renderer, so the desktop app gets videos too.
+- Setup has a new Videos step before the first path: videos from YouTube (recommended, and the only kind
+  the desktop app can have), made by Yuo, or no videos, with what each costs.
+- New path offers the same video choice for that one path, starting on your general choice, and its cost
+  estimate follows the choice (YouTube adds a line for the video pick and the transcripts).
+- Choice questions no longer give the answer away by its shape: in practice questions, skill tests, the
+  level check and the "What next?" quiz, the right option may not be clearly the longest (the model is told
+  and the question is sent back otherwise), and the level check and quiz options are shuffled.
+- The video plays in YouTube's own player, from the right minute to the right minute, and nothing loads from
+  YouTube until you press play. While it plays, a line under it shows the minutes to watch, where the video is,
+  how long is left of the lesson's part (with a bar), and a button back to the part's start. "Another video" turns a video down: the next one found is used, the lesson
+  is written again for it, and that channel comes last in the path's later searches.
+- When YouTube refuses the captions (it does from most cloud servers), Yuo downloads the video's sound
+  instead and transcribes it on the computer, with the speech recognition used for recordings (installed on
+  first use). Fewer videos are compared then, none longer than 40 minutes; what was heard is kept, so "Another
+  video" does not transcribe it again, and the captions are not asked again for 6 hours.
+- When no video can be used (none teaches the lesson, YouTube refuses even the sound, the search limit of the
+  day), the lesson says why and is a reading lesson; "Look for a video again" tries once more.
+- Searches need no key; a free YouTube Data API key can be set in Settings > Videos. Videos that were removed
+  or made private are found by a daily check and marked on their lessons.
+- Shared paths carry their lessons' YouTube videos (the video and its minutes, never the transcript), so the
+  person importing one gets the same videos with no searching.
+- Reading YouTube's captions or downloading its videos is against YouTube's terms: Settings says so where it is turned on, and turning it
+  on is at your own risk.
+
 ## [1.2.0] - 2026-11-19
 
 - Generation can be paused: everything written ahead (lessons, videos, review questions, lessons you asked for)

@@ -1,6 +1,6 @@
 """Setup, devices, the estimate and settings."""
 
-from typing import Any
+from typing import Any, Literal
 
 from fastapi import APIRouter, HTTPException, Request
 
@@ -60,10 +60,13 @@ def router(svc: Any, desktop: Any, waitlist_url: str | None) -> APIRouter:
         return {"device_id": did or svc.register_device(body.label, request.headers.get("user-agent", ""))}
 
     @r.get("/api/estimate", response_model=S.EstimateOut)
-    def get_estimate(lessons: int = 20) -> dict[str, Any]:
+    def get_estimate(
+        lessons: int = 20, videos: Literal["youtube", "generated", "reading"] | None = None
+    ) -> dict[str, Any]:
+        """`videos`: the kind chosen on the New path form; none: the learner's settings."""
         if not 1 <= lessons <= 200:
             raise HTTPException(422, "lessons must be 1 to 200")
-        result: dict[str, Any] = svc.estimate(lessons).as_dict()
+        result: dict[str, Any] = svc.estimate(lessons, videos=videos).as_dict()
         return result
 
     @r.get("/api/settings", response_model=list[S.SettingOut])

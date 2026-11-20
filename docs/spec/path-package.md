@@ -167,6 +167,11 @@ Per-kind fields (beyond the common ones):
 | `rendition` | `code` = `<lesson code>.<kind>` (one rendition per kind per lesson), `lesson` (code), `kind` (`reading`, `video`, `slides`, `audio`), versions. Version fields: `spec_kind` = `rendered` (the only value in 1.0), `narration` (timeline and segments), `voice`, `duration_s`, `assets` (role, lang, `recipe_hash`, `sha256`). |
 | `item` | `skill` (code), `type_key`, versions. Version fields: `type_version`, `difficulty`, `payload`, `support`, `objectives` (codes), `resets_review`, `origin_lesson` (code, optional). |
 | `source` | `key` (its identity, instead of `code`), `kind`, `title`, `url?`, `accessed_at?`, `published_at?`, `citation` (CSL-JSON) |
+
+A lesson written from a YouTube video has the video as a source: key `youtube:<video id>`, kind `video`, the
+watch URL, and `citation.video_id` and `citation.channel`. The lesson version's locator for it is
+`t=<start>-<end>`, in whole seconds: the stretch of the video the lesson goes with. The transcript is never
+in a package.
 | `asset` | `sha256`, `media_type`, `kind`, `bytes`, `present` (false when the bytes were left out, e.g. profile `structure`) |
 | `theme` | `kind` = `video`, `name`, `tokens` (W3C design tokens) |
 

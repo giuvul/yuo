@@ -292,6 +292,18 @@ class LessonSource(BaseModel):
     loc_end: int
 
 
+class YouTubeOut(BaseModel):
+    """The YouTube video a lesson was written from, or why a path that uses them has none for this lesson."""
+
+    video_id: str | None  # None: no video this time, `note` says why
+    title: str | None
+    channel: str | None
+    start_s: int  # the stretch that teaches the lesson
+    end_s: int | None
+    gone: bool  # removed or made private since (checked about once a month)
+    note: Literal["none", "blocked", "quota", "bad_key", "network", "unavailable", "no_transcript"] | None
+
+
 class ReviewNoteOut(BaseModel):
     severity: Literal["major", "minor"]
     where: str
@@ -315,6 +327,7 @@ class LessonOut(BaseModel):
     sources: list[LessonSource] = []  # the learner's own material this lesson is built on
     video: VideoOut | None = None  # None: no video for this lesson (reading only, or video unavailable)
     video_unavailable: str | None = None  # why this installation makes no videos, when it makes none
+    youtube: YouTubeOut | None = None  # the YouTube video it was written from (setting video.source)
     review_notes: list[ReviewNoteOut] | None = None  # accepted without passing review: what may be wrong
 
 

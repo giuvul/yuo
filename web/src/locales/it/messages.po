@@ -628,6 +628,10 @@ msgstr "C'è un test aperto, quindi le regole del test valgono su ogni schermata
 msgid "review.report.body"
 msgstr "Una domanda sbagliata o poco chiara viene tolta dai tuoi ripassi. Non conta in questa sessione."
 
+#: src/video/YouTubeSettings.tsx
+msgid "youtube.key.set"
+msgstr "È impostata una chiave YouTube: le ricerche usano l'API di YouTube, circa 100 lezioni al giorno."
+
 #. placeholder {0}: n.minutes
 #: src/routes/index.tsx
 msgid "home.next.minutes"
@@ -851,13 +855,13 @@ msgstr "Dopo: {after}"
 msgid "item.flashcard.rating.again"
 msgstr "Di nuovo"
 
-#: src/routes/setup.tsx
-msgid "wizard.step.access"
-msgstr "Accesso all'IA"
-
 #: src/onboarding/SettingsSections.tsx
 #: src/routes/settings.tsx
 msgid "settings.ai.title"
+msgstr "Accesso all'IA"
+
+#: src/routes/setup.tsx
+msgid "wizard.step.access"
 msgstr "Accesso all'IA"
 
 #: src/onboarding/ProbeSummary.tsx
@@ -879,6 +883,10 @@ msgstr "Tutto fatto"
 #: src/routes/review.tsx
 msgid "review.chooser.fresh"
 msgstr "Tutto fresco"
+
+#: src/routes/SettingRow.tsx
+msgid "settings.youtube-languages.also-english"
+msgstr "Anche in inglese"
 
 #: src/sharing/ExportDialog.tsx
 msgid "share.formats.label"
@@ -907,6 +915,10 @@ msgstr "Un altro suggerimento"
 #: src/assessment/AssessmentRunner.tsx
 msgid "assessment.hint.next"
 msgstr "Un altro suggerimento"
+
+#: src/video/YouTubeVideo.tsx
+msgid "youtube.another"
+msgstr "Un altro video"
 
 #: src/components/labels.tsx
 msgid "job.target.response"
@@ -1043,6 +1055,14 @@ msgstr "Chiesto con: {context}"
 msgid "vendor.models.loading"
 msgstr "Sto chiedendo a {vendor} quali modelli può usare la tua chiave…"
 
+#: src/video/YouTubeVideo.tsx
+msgid "youtube.stretch.left"
+msgstr "Al minuto {atText}: mancano {leftText}, fino a {endText}."
+
+#: src/video/YouTubeVideo.tsx
+msgid "youtube.stretch.before"
+msgstr "Al minuto {atText}: la parte della lezione inizia a {startText}."
+
 #: src/auth/PasswordForm.tsx
 msgid "auth.password.hint"
 msgstr "Almeno 10 caratteri. Una frase lunga è la più facile da ricordare."
@@ -1059,6 +1079,10 @@ msgstr "Disponibile"
 msgid "wizard.back"
 msgstr "Indietro"
 
+#: src/video/YouTubeVideo.tsx
+msgid "youtube.stretch.back"
+msgstr "Torna a {startText}"
+
 #: src/routes/practice.tsx
 #: src/routes/practice.tsx
 msgid "practice.back-to-lesson"
@@ -1074,13 +1098,13 @@ msgstr "Torna al percorso"
 msgid "placement.back"
 msgstr "Torna al percorso"
 
-#: src/routes/nextSteps.tsx
-msgid "next.back"
-msgstr "Torna al percorso"
-
 #: src/routes/mockExam.tsx
 #: src/routes/mockExam.tsx
 msgid "mock.back"
+msgstr "Torna al percorso"
+
+#: src/routes/nextSteps.tsx
+msgid "next.back"
 msgstr "Torna al percorso"
 
 #: src/routes/lessonReader.tsx
@@ -1284,6 +1308,10 @@ msgstr "Controlla di nuovo"
 msgid "cli.check.again"
 msgstr "Controlla di nuovo"
 
+#: src/video/YouTubeSettings.tsx
+msgid "youtube.key.save"
+msgstr "Verifica e salva la chiave"
+
 #: src/onboarding/access.tsx
 msgid "access.key.save"
 msgstr "Verifica e salva la chiave"
@@ -1340,6 +1368,10 @@ msgstr "Controllo delle risposte"
 msgid "cli.login.checking-code"
 msgstr "Sto verificando il codice…"
 
+#: src/video/YouTubeSettings.tsx
+msgid "youtube.key.checking"
+msgstr "Verifica della chiave…"
+
 #: src/onboarding/vendor.tsx
 msgid "vendor.key.checking"
 msgstr "Sto verificando la chiave…"
@@ -1372,13 +1404,13 @@ msgstr "Verifica in corso…"
 msgid "access.local.checking"
 msgstr "Verifica in corso…"
 
-#: src/onboarding/SettingsSections.tsx
-msgid "update.checking"
-msgstr "Controllo in corso…"
-
 #: src/onboarding/CliAccess.tsx
 msgid "cli.check.checking"
 msgstr "Verifica in corso…"
+
+#: src/onboarding/SettingsSections.tsx
+msgid "update.checking"
+msgstr "Controllo in corso…"
 
 #: src/assessment/AssessmentRunner.tsx
 msgid "assessment.checking"
@@ -2206,6 +2238,10 @@ msgstr "Per un percorso tipico di {lessons} lezioni: nessun costo extra, usa par
 msgid "pwa.guide.firefox.other"
 msgstr "Per un'app con la sua finestra e la sua icona, apri questo stesso indirizzo in Chrome o Edge e scegli lì Salva il collegamento all'app."
 
+#: src/onboarding/videos.tsx
+msgid "wizard.videos.youtube.description"
+msgstr "Per ogni lezione Yuo trova un video di YouTube che la spiega, sceglie i minuti giusti e scrive la lezione a partire da ciò che dice il video. Una lezione costa circa il 10-25% in più che senza video."
+
 #: src/routes/planPreview.tsx
 msgid "preview.feedback.description"
 msgstr "Per esempio: “aggiungi una parte sulle funzioni finestra”, “meno teoria, più esercizi”, “togli la storia”."
@@ -2268,6 +2304,10 @@ msgid "sources.title"
 msgstr "Dal tuo materiale"
 
 #: src/routes/SettingRow.tsx
+msgid "settings.video-source.youtube"
+msgstr "Da YouTube"
+
+#: src/routes/SettingRow.tsx
 msgid "settings.gamification.full"
 msgstr "Completi (XP, serie, livelli)"
 
@@ -2311,6 +2351,10 @@ msgstr "Attività di generazione"
 #: src/onboarding/access.tsx
 msgid "access.key.link"
 msgstr "Ottieni una chiave su openrouter.ai/keys (si apre in una nuova scheda)"
+
+#: src/video/YouTubeSettings.tsx
+msgid "youtube.key.link"
+msgstr "Ottieni una chiave in Google Cloud (si apre in una nuova scheda)"
 
 #: src/onboarding/vendorModels.tsx
 msgid "openrouter.models.loading"
@@ -2606,6 +2650,10 @@ msgstr "Introduttivo"
 msgid "vendor.key.hint"
 msgstr "Inizia con {prefix}."
 
+#: src/video/YouTubeSettings.tsx
+msgid "youtube.key.hint"
+msgstr "Inizia con AIza."
+
 #: src/onboarding/access.tsx
 msgid "access.key.hint"
 msgstr "Inizia con sk-or-."
@@ -2810,9 +2858,18 @@ msgstr "Lezioni e domande restano dentro i tuoi file, con le loro parole e notaz
 msgid "depth.note"
 msgstr "Le lezioni vengono scritte man mano che ti avvicini, quindi un percorso più lungo non costa nulla finché non ci arrivi."
 
+#: src/routes/setup.tsx
+msgid "wizard.videos.intro"
+msgstr "Le lezioni sono scritte per essere lette. Possono avere anche un video: uno esistente da YouTube, o uno creato da Yuo."
+
 #: src/routes/SettingRow.tsx
 msgid "settings.key.buffer"
 msgstr "Lezioni preparate in anticipo"
+
+#: src/onboarding/videos.tsx
+#: src/video/YouTubeSettings.tsx
+msgid "youtube.disclaimer"
+msgstr "Le lezioni usano video pubblici di YouTube: Yuo ne legge i sottotitoli (oppure, quando YouTube li rifiuta, scarica l'audio e lo trascrive su questo computer) per scrivere la lezione, e mostra il video nel player di YouTube. I termini di YouTube non consentono di leggerne le pagine né di scaricarne i video con mezzi automatici. Usi questa funzione a tuo rischio e sei responsabile dell'uso che ne fai."
 
 #: src/sharing/labels.tsx
 msgid "share.profile.full.description"
@@ -2869,6 +2926,7 @@ msgstr "Elenco"
 #: src/material/Studies.tsx
 #: src/onboarding/CliAccess.tsx
 #: src/onboarding/SettingsSections.tsx
+#: src/onboarding/videos.tsx
 #: src/path/LazyPathGraph.tsx
 #: src/routes/index.tsx
 #: src/routes/jobs.tsx
@@ -2935,6 +2993,10 @@ msgstr "Intervallo massimo tra i ripassi (giorni, 0 = nessun limite)"
 msgid "review.feedback.revisit"
 msgstr "Riguarda: {revisit}"
 
+#: src/video/YouTubeVideo.tsx
+msgid "youtube.look-again"
+msgstr "Cerca di nuovo un video"
+
 #: src/pwa/PwaControls.tsx
 msgid "pwa.guide.chromium.icon"
 msgstr "Cerca l'icona di installazione in fondo a destra nella barra degli indirizzi, oppure apri il menu del browser e scegli Installa Yuo (in Chrome: Trasmetti, salva e condividi, poi Installa pagina come app)."
@@ -2954,6 +3016,10 @@ msgstr "L'hai perso? Esegui `yuo setup-code` sul server per averne uno nuovo."
 #: src/routes/root.tsx
 msgid "footer.made-by"
 msgstr "Creato da {name}"
+
+#: src/routes/SettingRow.tsx
+msgid "settings.video-source.generated"
+msgstr "Creati da Yuo"
 
 #: src/routes/root.tsx
 msgid "nav.main.label"
@@ -3260,6 +3326,10 @@ msgstr "Nuova password"
 msgid "home.new-path"
 msgstr "Nuovo percorso"
 
+#: src/video/YouTubeSettings.tsx
+msgid "youtube.key.label.replace"
+msgstr "Nuova chiave YouTube"
+
 #: src/routes/setup.tsx
 msgid "wizard.next"
 msgstr "Avanti"
@@ -3375,6 +3445,14 @@ msgstr "Niente spoiler"
 #: src/tutor/texts.ts
 msgid "tutor.policy.review-coach"
 msgstr "Niente spoiler: finché questa domanda non è risolta, il tutor ti aiuta a ricordare e spiega le opzioni che hai già provato, mai la risposta."
+
+#: src/onboarding/videos.tsx
+msgid "wizard.videos.reading"
+msgstr "Nessun video"
+
+#: src/video/YouTubeVideo.tsx
+msgid "youtube.note.none"
+msgstr "Nessun video di YouTube spiegava bene questa lezione, quindi è una lezione da leggere."
 
 #: src/routes/SettingRow.tsx
 msgid "settings.muted.none"
@@ -3595,6 +3673,10 @@ msgstr "Codice monouso"
 msgid "next.offer.low"
 msgstr "Restano solo poche lezioni in programma. Scegli dove va ora il tuo percorso, così continua a crescere."
 
+#: src/routes/SettingRow.tsx
+msgid "settings.youtube-languages.mine"
+msgstr "Solo nella lingua del percorso"
+
 #: src/material/labels.tsx
 msgid "adherence.only"
 msgstr "Solo il mio materiale"
@@ -3618,6 +3700,10 @@ msgstr "Aperta"
 #: src/routes/importPage.tsx
 msgid "import.intro"
 msgstr "Apri un pacchetto di percorso (.yuo.zip) che qualcuno ha condiviso con te o che hai esportato. Vedi cosa contiene prima che venga importato qualcosa."
+
+#: src/video/YouTubeVideo.tsx
+msgid "youtube.open"
+msgstr "Apri su YouTube"
 
 #: src/review/Hub.tsx
 msgid "review.entry.open"
@@ -3688,6 +3774,10 @@ msgstr "Chiave OpenRouter"
 #: src/onboarding/SettingsSections.tsx
 msgid "settings.ai.own-keys.description"
 msgstr "OpenRouter, un fornitore di modelli o un'app di modelli su questo computer, al posto di un abbonamento"
+
+#: src/video/YouTubeSettings.tsx
+msgid "youtube.key.none"
+msgstr "Facoltativo: con una chiave YouTube Data API le ricerche passano dall'API di YouTube (gratuita, circa 100 lezioni al giorno). Senza chiave, Yuo cerca direttamente sul sito di YouTube."
 
 #: src/review/Player.tsx
 msgid "review.keys.choose"
@@ -3887,6 +3977,10 @@ msgstr "Pianta il tuo primo percorso"
 #: src/video/NotesBubble.tsx
 msgid "notes-bubble.seek"
 msgstr "Riproduci il video da {0}"
+
+#: src/video/YouTubeVideo.tsx
+msgid "youtube.loads"
+msgstr "Viene riprodotto da YouTube: nulla si carica da YouTube finché non premi play."
 
 #: src/routes/requests.tsx
 msgid "request.links.too-many"
@@ -4138,6 +4232,14 @@ msgstr "Lettura e pianificazione"
 msgid "studies.drafting"
 msgstr "Lettura e pianificazione…"
 
+#: src/onboarding/videos.tsx
+msgid "wizard.videos.reading.description"
+msgstr "Solo lezioni da leggere: il consumo più basso."
+
+#: src/routes/pathNew.tsx
+msgid "path.new.estimate.reading"
+msgstr "Lezioni da leggere, senza video."
+
 #: src/routes/SettingRow.tsx
 msgid "settings.video-format.reading"
 msgstr "Solo lettura"
@@ -4204,6 +4306,7 @@ msgstr "Sessioni recenti"
 msgid "wizard.step.recommendation"
 msgstr "Consiglio"
 
+#: src/onboarding/videos.tsx
 #: src/routes/setup.tsx
 msgid "wizard.options.recommended"
 msgstr "Consigliato"
@@ -4287,6 +4390,10 @@ msgstr "Rimuovere la chiave {vendor}? I modelli di {vendor} smettono di funziona
 #: src/material/Studies.tsx
 msgid "material.remove.built.confirm"
 msgstr "Rimuovi il file"
+
+#: src/video/YouTubeSettings.tsx
+msgid "youtube.key.remove"
+msgstr "Rimuovi la chiave"
 
 #: src/onboarding/SettingsSections.tsx
 #: src/onboarding/vendor.tsx
@@ -4514,6 +4621,10 @@ msgstr "Salva {label}"
 
 #: src/routes/setup.tsx
 msgid "wizard.about.save"
+msgstr "Salva e continua"
+
+#: src/routes/setup.tsx
+msgid "wizard.videos.save"
 msgstr "Salva e continua"
 
 #: src/assessment/AssessmentRunner.tsx
@@ -5263,6 +5374,10 @@ msgstr "Quel codice non ha funzionato. Copialo di nuovo dalla pagina di accesso.
 msgid "auth.error.refused"
 msgstr "Non ha funzionato: {detail}"
 
+#: src/video/YouTubeSettings.tsx
+msgid "youtube.key.format"
+msgstr "Non sembra una chiave API di Google. Inizia con AIza."
+
 #: src/onboarding/vendor.tsx
 msgid "vendor.key.format.any"
 msgstr "Non sembra una chiave di {vendor}."
@@ -5327,6 +5442,10 @@ msgstr "Il modello di generazione guarda le pagine, poi il corso viene ripianifi
 msgid "cli.install.failed"
 msgstr "L'installazione non è terminata. Puoi installare {name} da te, vedi sotto."
 
+#: src/video/YouTubeSettings.tsx
+msgid "youtube.key.saved"
+msgstr "La chiave funziona ed è salvata."
+
 #: src/components/jobError.ts
 msgid "job.error.review"
 msgstr "La lezione non ha superato il controllo di qualità."
@@ -5334,6 +5453,10 @@ msgstr "La lezione non ha superato il controllo di qualità."
 #: src/tutor/Proposals.tsx
 msgid "tutor.proposal.add-lesson.done"
 msgstr "La lezione è stata richiesta. Comparirà sotto “Le tue richieste” nel percorso."
+
+#: src/video/YouTubeVideo.tsx
+msgid "youtube.stretch.after"
+msgstr "La parte della lezione è finita a {endText}. Se vuoi continua a guardare, oppure prosegui con la lezione."
 
 #: src/material/Studies.tsx
 msgid "studies.links.failed"
@@ -5484,6 +5607,11 @@ msgstr "Ripeti la password"
 msgid "job.error.busy"
 msgstr "Lo stesso passaggio era già in corso. Yuo riproverà."
 
+#: src/onboarding/videos.tsx
+#: src/video/YouTubeSettings.tsx
+msgid "youtube.privacy"
+msgstr "Le ricerche inviano a YouTube l'argomento di ogni lezione, e un video si carica da YouTube quando premi play."
+
 #: src/components/ErrorNotice.tsx
 msgid "error.server"
 msgstr "Il server non è riuscito a farlo: {detail}"
@@ -5552,6 +5680,10 @@ msgstr "il limite settimanale non è pubblicato"
 #: src/onboarding/PlanUsage.tsx
 msgid "plan-usage.week.share"
 msgstr "l'intero percorso usa <0/> della settimana"
+
+#: src/video/YouTubeVideo.tsx
+msgid "youtube.note.quota"
+msgstr "Le ricerche di oggi della chiave YouTube sono esaurite, quindi questa lezione è stata scritta senza video. Riprova domani."
 
 #: src/routes/settings.tsx
 msgid "settings.appearance.words"
@@ -5737,9 +5869,17 @@ msgstr "Questa conversazione"
 msgid "tutor.threads.this"
 msgstr "Questa conversazione ({scopeLabel})"
 
+#: src/video/YouTubeVideo.tsx
+msgid "youtube.gone"
+msgstr "Questo video non è più su YouTube, o non può più essere mostrato su altri siti."
+
 #: src/routes/index.tsx
 msgid "home.momentum.xp.label"
 msgstr "questa settimana"
+
+#: src/video/YouTubeVideo.tsx
+msgid "youtube.stretch.progress"
+msgstr "Avanzamento nella parte del video per la lezione"
 
 #: src/routes/SettingRow.tsx
 msgid "settings.impact.time"
@@ -6110,6 +6250,10 @@ msgstr "Sottotitoli dei video"
 msgid "settings.key.video-theme"
 msgstr "Colori dei video"
 
+#: src/video/YouTubeVideo.tsx
+msgid "youtube.label"
+msgstr "Video per questa lezione"
+
 #: src/routes/SettingRow.tsx
 msgid "settings.key.video-length"
 msgstr "Durata dei video"
@@ -6138,6 +6282,10 @@ msgstr "Video"
 msgid "settings.group.videos"
 msgstr "Video"
 
+#: src/routes/setup.tsx
+msgid "wizard.step.videos"
+msgstr "Video"
+
 #: src/sharing/ExportDialog.tsx
 msgid "share.preview.size"
 msgstr "Video e file multimediali"
@@ -6150,6 +6298,18 @@ msgstr "I video sono in pausa."
 msgid "share.video-note"
 msgstr "I video vengono condivisi come video finiti. Il codice che Yuo ha scritto per crearli non viene mai condiviso."
 
+#: src/onboarding/videos.tsx
+msgid "wizard.videos.youtube"
+msgstr "Video da YouTube"
+
+#: src/onboarding/videos.tsx
+msgid "wizard.videos.youtube-works"
+msgstr "I video da YouTube funzionano comunque anche qui."
+
+#: src/onboarding/videos.tsx
+msgid "wizard.videos.generated"
+msgstr "Video creati da Yuo"
+
 #: src/components/PauseControls.tsx
 msgid "pause.state.videos"
 msgstr "I video aspettano; lezioni e domande continuano ad arrivare."
@@ -6157,6 +6317,14 @@ msgstr "I video aspettano; lezioni e domande continuano ad arrivare."
 #: src/sharing/labels.tsx
 msgid "share.format.video"
 msgstr "Video con sottotitoli"
+
+#: src/routes/pathNew.tsx
+msgid "path.new.field.videos"
+msgstr "Video con le lezioni di questo percorso"
+
+#: src/onboarding/videos.tsx
+msgid "wizard.videos.label"
+msgstr "Video con le tue lezioni"
 
 #: src/path/PathGraph.tsx
 msgid "path.tree.controls.label"
@@ -6190,6 +6358,17 @@ msgstr "in attesa di partire"
 #: src/routes/SettingRow.tsx
 msgid "settings.tone.warm"
 msgstr "Caloroso"
+
+#. placeholder {0}: mmss(youtube.start_s)
+#. placeholder {1}: mmss(youtube.end_s)
+#: src/video/YouTubeVideo.tsx
+msgid "youtube.span"
+msgstr "Guarda da {0} a {1}"
+
+#. placeholder {0}: mmss(youtube.start_s)
+#: src/video/YouTubeVideo.tsx
+msgid "youtube.from"
+msgstr "Guarda da {0}"
 
 #: src/lesson/BlockRenderer.tsx
 msgid "lesson.callout.warning"
@@ -6236,12 +6415,12 @@ msgstr "Novità (si apre in una nuova scheda)"
 msgid "review.report.reason"
 msgstr "Cosa non va? (facoltativo)"
 
-#: src/routes/pathView.tsx
-msgid "path.next.link"
-msgstr "E adesso?"
-
 #: src/routes/nextSteps.tsx
 msgid "next.title"
+msgstr "E adesso?"
+
+#: src/routes/pathView.tsx
+msgid "path.next.link"
 msgstr "E adesso?"
 
 #: src/path/NextOffer.tsx
@@ -6337,6 +6516,10 @@ msgstr "Quando hai fatto l'accesso, scegli Controlla di nuovo."
 msgid "next.where.title"
 msgstr "Dove vuoi andare?"
 
+#: src/routes/SettingRow.tsx
+msgid "settings.key.video-source"
+msgstr "Da dove arrivano i video"
+
 #: src/routes/settings.tsx
 msgid "settings.group.videos.description3"
 msgstr "Se le lezioni arrivano come video, la loro durata, i colori e i sottotitoli"
@@ -6348,6 +6531,14 @@ msgstr "Perché lo stai imparando?"
 #: src/routes/setup.tsx
 msgid "wizard.recommendation.why"
 msgstr "Perché questa?"
+
+#: src/routes/pathNew.tsx
+msgid "path.new.estimate.with-youtube"
+msgstr "Con video da YouTube."
+
+#: src/routes/pathNew.tsx
+msgid "path.new.estimate.with-made"
+msgstr "Con video creati da Yuo."
 
 #: src/lesson/BlockRenderer.tsx
 msgid "lesson.worked-example.label"
@@ -6534,6 +6725,10 @@ msgstr "Sei offline. La tua risposta è salvata e verrà valutata quando torni o
 #: src/tutor/Proposals.tsx
 msgid "tutor.proposal.offline"
 msgstr "Sei offline. La tua decisione è salvata e verrà applicata quando torni online."
+
+#: src/onboarding/videos.tsx
+msgid "wizard.videos.later"
+msgstr "Puoi cambiarlo quando vuoi nelle Impostazioni, alla voce Video."
 
 #: src/routes/setup.tsx
 msgid "wizard.options.later"
@@ -6799,6 +6994,30 @@ msgstr "La tua versione di Yuo e quelle più recenti"
 msgid "settings.video-history.done"
 msgstr "La cronologia dei video guardati è stata eliminata."
 
+#: src/video/YouTubeVideo.tsx
+msgid "youtube.note.network"
+msgstr "Non è stato possibile raggiungere YouTube, quindi questa lezione è stata scritta senza video."
+
+#: src/video/YouTubeSettings.tsx
+msgid "youtube.key.label"
+msgstr "Chiave YouTube"
+
+#: src/video/YouTubeVideo.tsx
+msgid "youtube.note.bad-key"
+msgstr "YouTube ha rifiutato la chiave impostata nelle Impostazioni, quindi questa lezione è stata scritta senza video."
+
+#: src/video/YouTubeVideo.tsx
+msgid "youtube.note.blocked"
+msgstr "YouTube ha rifiutato la richiesta di questo server per i sottotitoli dei video, quindi questa lezione è stata scritta senza video."
+
+#: src/video/YouTubeVideo.tsx
+msgid "youtube.terms"
+msgstr "Termini di servizio di YouTube"
+
+#: src/routes/SettingRow.tsx
+msgid "settings.key.youtube-languages"
+msgstr "Lingue dei video di YouTube"
+
 #: src/routes/root.tsx
 msgid "app.name"
 msgstr "Yuo"
@@ -6859,6 +7078,10 @@ msgstr "Yuo non ha ancora controllato se c'è una versione più recente."
 #: src/onboarding/desktop.tsx
 msgid "desktop.stopped.title"
 msgstr "Yuo si è chiuso"
+
+#: src/video/YouTubeVideo.tsx
+msgid "youtube.writing"
+msgstr "Yuo sta cercando un altro video e riscrivendo la lezione per quel video; questa versione resta finché non è pronta."
 
 #: src/routes/index.tsx
 #: src/routes/paths.tsx
@@ -6952,6 +7175,10 @@ msgstr "Yuo scrive lezioni, domande di ripasso e video un po' in anticipo rispet
 #: src/onboarding/profile.tsx
 msgid "profile.content-lang.description"
 msgstr "Yuo scrive le tue lezioni, le domande di esercizio e i video in questa lingua. Un nuovo percorso la usa; un percorso che hai già mantiene la sua."
+
+#: src/onboarding/videos.tsx
+msgid "wizard.videos.generated.description"
+msgstr "Yuo scrive, narra e crea un nuovo breve video per ogni lezione. Ogni video costa circa dieci volte la sua lezione."
 
 #: src/components/ErrorNotice.tsx
 msgid "error.network"

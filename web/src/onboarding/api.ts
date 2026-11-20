@@ -111,6 +111,27 @@ export function useRemoveOpenRouterKey() {
   });
 }
 
+/** A YouTube Data API key for the searches of lessons built on a video; checked by the server before it is kept. */
+export function useSetYouTubeKey() {
+  const changed = useAccessChanged();
+  return useMutation({
+    mutationFn: async (key: string) => {
+      await unwrap(api.PUT("/api/setup/access/youtube", { body: { key } }) as Promise<{ data?: undefined; error?: unknown; response: Response }>);
+    },
+    onSuccess: changed,
+  });
+}
+
+export function useRemoveYouTubeKey() {
+  const changed = useAccessChanged();
+  return useMutation({
+    mutationFn: async () => {
+      await unwrap(api.DELETE("/api/setup/access/youtube") as Promise<{ data?: undefined; error?: unknown; response: Response }>);
+    },
+    onSuccess: changed,
+  });
+}
+
 export function useSetLocalServer() {
   const changed = useAccessChanged();
   return useMutation({

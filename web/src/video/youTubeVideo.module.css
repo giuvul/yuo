@@ -1,0 +1,101 @@
+@layer components {
+  .section {
+    display: grid;
+    gap: var(--yuo-space-2);
+  }
+
+  .note {
+    display: grid;
+    gap: var(--yuo-space-1);
+  }
+
+  .frame {
+    aspect-ratio: 16 / 9;
+    inline-size: 100%;
+    border-radius: var(--yuo-radius-2);
+    overflow: hidden;
+    background: var(--yuo-color-media-bg);
+
+    & iframe {
+      display: block;
+      inline-size: 100%;
+      block-size: 100%;
+      border: 0;
+    }
+  }
+
+  /* the player before play: no request to YouTube until the learner presses it */
+  .facade {
+    aspect-ratio: 16 / 9;
+    inline-size: 100%;
+    display: grid;
+    place-content: center;
+    justify-items: center;
+    gap: var(--yuo-space-2);
+    padding: var(--yuo-space-4);
+    border: 0;
+    border-radius: var(--yuo-radius-2);
+    background: var(--yuo-color-media-bg);
+    color: var(--yuo-color-media-fg);
+    font: inherit;
+    text-align: center;
+    cursor: pointer;
+
+    &:hover .play {
+      background: var(--yuo-color-accent-hover);
+    }
+
+    &:focus-visible {
+      outline: 3px solid var(--yuo-color-focus);
+      outline-offset: 2px;
+    }
+  }
+
+  .play {
+    display: grid;
+    place-items: center;
+    inline-size: 3.5rem;
+    block-size: 3.5rem;
+    border-radius: var(--yuo-radius-full);
+    background: var(--yuo-color-accent);
+    color: var(--yuo-color-accent-fg);
+    font-size: var(--yuo-text-xl);
+  }
+
+  .facadeTitle {
+    font-size: var(--yuo-text-lg);
+    font-weight: 700;
+    max-inline-size: 40ch;
+  }
+
+  .facadeMeta,
+  .facadeHint {
+    font-size: var(--yuo-text-sm);
+  }
+
+  .facadeHint {
+    opacity: 0.8;
+  }
+
+  /* under the playing video: the lesson's part and where the video is in it */
+  .stretch {
+    display: grid;
+    gap: var(--yuo-space-1);
+
+    & p {
+      margin: 0;
+    }
+  }
+
+  .stretchSpan {
+    font-weight: 700;
+  }
+
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--yuo-space-3);
+    margin: 0;
+    font-size: var(--yuo-text-sm);
+  }
+}

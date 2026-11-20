@@ -101,6 +101,7 @@ class LocalWhisper:
         progress: Callable[[float], None],
         fast: bool = False,
         duration_ms: int | None = None,
+        on_language: Callable[[str], None] | None = None,
     ) -> list[Segment]:
         why = self.available()
         if why:
@@ -150,6 +151,16 @@ class LocalWhisper:
                 if "segment" in msg:
                     start, end, text = msg["segment"]
                     pending.append(Segment(int(start), int(end), str(text)))
+                elif "language" in msg:
+                    if on_language is not None and msg["language"]:
+                        try:
+                            on_language(str(msg["language"]))
+                        except BaseException:  # the caller does not want the rest (a language it cannot use)
+                            proc.kill()
+                            proc.wait()
+                            saved.close()
+                            checkpoint.unlink(missing_ok=True)
+                            raise
                 elif "done" in msg:  # the window is complete: keep it, so a stop does not lose it
                     for seg in pending:
                         saved.write(json.dumps({"segment": [seg.start_ms, seg.end_ms, seg.text]}) + "\n")

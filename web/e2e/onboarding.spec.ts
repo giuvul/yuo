@@ -27,6 +27,26 @@ async function fits(page: Page, what: string): Promise<void> {
 
 const step = (page: Page, name: string) => page.getByRole("heading", { level: 2, name });
 
+/** The videos step: YouTube is offered first, with what the learner takes on; chosen and saved. Then put back
+ * to videos made by Yuo, as the other files expect. */
+async function throughVideos(page: Page, onStep?: (what: string) => Promise<void>): Promise<void> {
+  await expect(step(page, "Videos")).toBeVisible();
+  const youtube = page.getByRole("radio", { name: /Videos from YouTube/ });
+  await youtube.locator("xpath=ancestor::label").click(); // first on a new install; chosen again here
+  await expect(youtube).toBeChecked();
+  await expect(page.getByText(/You use this at your own risk/)).toBeVisible();
+  await onStep?.("videos");
+  await page.getByRole("button", { name: "Save and continue" }).click();
+}
+
+async function videosMadeByYuo(page: Page): Promise<void> {
+  const res = await page.request.put("/api/settings/video.source", {
+    data: { value: "generated", level: "learner" },
+    headers: CSRF,
+  });
+  expect(res.ok(), await res.text()).toBe(true);
+}
+
 async function throughKey(page: Page, onEachStep?: (what: string) => Promise<void>): Promise<void> {
   await page.goto("/setup");
   await expect(page.getByRole("heading", { level: 1, name: "Set up Yuo" })).toBeVisible();
@@ -83,6 +103,10 @@ test("the full wizard on the open-models option, to the first path", async ({ pa
   await page.getByRole("button", { name: "Session length and interests (optional)" }).click();
   await page.getByRole("textbox", { name: /Your interests/ }).fill("cycling and cooking");
   await page.getByRole("button", { name: "Save and continue" }).click();
+  await throughVideos(page);
+  const source = (await (await page.request.get("/api/settings")).json()) as { key: string; value: unknown }[];
+  expect(source.find((x) => x.key === "video.source")?.value).toBe("youtube");
+  await videosMadeByYuo(page);
 
   await expect(step(page, "Your first path")).toBeVisible();
   await expect(page.getByText(/Estimated cost for 20 lessons/)).toBeVisible();
@@ -112,6 +136,8 @@ test("the wizard fits a phone screen, and Home offers to finish setting up", asy
   await throughKey(page, (what) => fits(page, what));
   await fits(page, "about you");
   await page.getByRole("button", { name: "Save and continue" }).click();
+  await throughVideos(page, (what) => fits(page, what));
+  await videosMadeByYuo(page);
   await expect(step(page, "Your first path")).toBeVisible();
   await fits(page, "your first path");
 
@@ -162,6 +188,9 @@ test("the wizard with your own API key from a model vendor, to the first path", 
   await page.getByRole("button", { name: "Next" }).click();
 
   await expect(step(page, "About you")).toBeVisible();
+  await page.getByRole("button", { name: "Save and continue" }).click();
+  await expect(step(page, "Videos")).toBeVisible(); // chosen before: kept as it is
+  await expect(page.getByRole("radio", { name: /Videos made by Yuo|Videos from YouTube/ }).first()).toBeVisible();
   await page.getByRole("button", { name: "Save and continue" }).click();
   await expect(step(page, "Your first path")).toBeVisible();
   await expect(page.getByText(/Estimated cost for 20 lessons/)).toBeVisible();

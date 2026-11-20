@@ -1,6 +1,7 @@
 """The level check before a path is planned, the urgent job lane, and paths without a subject (0.7.4)."""
 
 import json
+import sqlite3
 import threading
 from collections.abc import Iterator
 from pathlib import Path
@@ -44,7 +45,7 @@ def _tree_prompt(llm: fakes.FakeLLM) -> str:
 
 
 def test_the_tree_waits_for_the_level_check_and_starts_at_the_learners_level(
-    rt: Runtime, llm: fakes.FakeLLM
+    rt: Runtime, llm: fakes.FakeLLM, db_path: Path
 ) -> None:
     path_id = create(rt, level_check=True)
     view = rt.service.level_check(path_id)
@@ -53,8 +54,14 @@ def test_the_tree_waits_for_the_level_check_and_starts_at_the_learners_level(
     assert lessons_of(rt, path_id) == []  # no tree, no lessons before the answers
     assert rt.service.path_view(path_id)["level_check"] == "ready"
 
+    # the options are shuffled: the key is wherever the right option landed
+    ext = (
+        sqlite3.connect(db_path).execute("SELECT extensions FROM path WHERE id = ?", (path_id,)).fetchone()[0]
+    )
+    keys = [q["answer"] for q in json.loads(ext)["yuo"]["level_check"]["questions"]]
+    assert len(set(keys)) > 1  # not always the first
     # right on levels 1 to 3 (questions 1-5), wrong or "don't know" above
-    out = rt.service.answer_level_check(path_id, [0, 0, 0, 0, 0, 1, None, None])
+    out = rt.service.answer_level_check(path_id, [*keys[:5], (keys[5] + 1) % 3, None, None])
     assert out["status"] == "done" and out["result"]["level"] == 3
     assert out["result"]["difficulty"] == "intermediate"
     drain(rt)
@@ -104,7 +111,9 @@ def test_level_check_over_http(rt: Runtime) -> None:
     view = http.get(f"/api/paths/{path_id}/level-check").json()
     assert view["status"] == "ready" and view["result"] is None
     assert "answer" not in json.dumps(view["questions"])
-    done = http.post(f"/api/paths/{path_id}/level-check", json={"answers": [0] * 8})
+    picks = [next(i for i, o in enumerate(q["options"]) if o.startswith("right")) for q in view["questions"]]
+    assert len(set(picks)) > 1  # shuffled: the right option is not always first
+    done = http.post(f"/api/paths/{path_id}/level-check", json={"answers": picks})
     assert done.status_code == 200 and done.json()["result"]["right"] == 8
     assert http.post(f"/api/paths/{path_id}/level-check", json={"skip": True}).status_code == 422
 

@@ -360,6 +360,8 @@ SEEDED_LATER: dict[str, dict[str, int]] = {
         "course_links": 5,
         "material_vision": 6,
         "studies_arrange": 7,
+        "video_pick": 8,
+        "video_query": 9,
     },
     "entity_kind_ref": {
         "material": 5,

@@ -295,6 +295,14 @@ describe("new path", () => {
     await user.click(screen.getByRole("checkbox", { name: "Use it in practice" }));
     await user.click(screen.getByRole("radio", { name: /Deep/ }));
     expect(screen.queryByRole("radio", { name: "Introductory" })).toBeNull(); // the level check sets it
+    // this path's videos: the general choice (YouTube while none was made), with what YouTube means; changed here
+    expect(screen.getByRole("radio", { name: /Videos from YouTube/ })).toBeChecked();
+    expect(screen.getByText(/You use this at your own risk/)).toBeInTheDocument();
+    await user.click(screen.getByRole("radio", { name: /No videos/ }));
+    expect(screen.queryByText(/You use this at your own risk/)).toBeNull();
+    // the estimate follows the cards
+    await waitFor(() => expect(calls.some((c) => c.path === "/api/estimate?lessons=20&videos=reading")).toBe(true));
+    expect(await screen.findByText("Reading lessons, no videos.")).toBeInTheDocument();
     await user.click(screen.getByRole("button", { name: "More options" })); // custom instructions are tucked away
     await user.type(screen.getByRole("textbox", { name: /Custom instructions/ }), "Use R");
     expect(screen.getByText(/5 of 1000 characters/)).toBeInTheDocument();
@@ -312,6 +320,7 @@ describe("new path", () => {
       custom_instructions: "Use R",
       level_check: true,
       preview: true,
+      videos: "reading",
     });
   });
 

@@ -2,8 +2,9 @@
 
 Reads its arguments as JSON on stdin: audio, model, model_dir, lang, prompt, threads, decoder (the path of the
 audio decoder Yuo uses), duration (seconds), start (seconds already done, to resume) and window (seconds).
-Writes one JSON object per line to stdout: {"duration": s} first, then {"segment": [start_ms, end_ms, text]} for
-each stretch of speech and, after each window, {"done": ms}: everything before it is written out.
+Writes one JSON object per line to stdout: {"duration": s} first, {"language": code} once the first window is heard
+(the language given, or the one detected), then {"segment": [start_ms, end_ms, text]} for each stretch of speech and,
+after each window, {"done": ms}: everything before it is written out.
 Only the standard library, numpy and faster_whisper, so it runs in the environment Yuo installs on demand.
 
 The audio is decoded with ffmpeg (16 kHz mono samples) one window at a time, not with faster-whisper's own
@@ -37,6 +38,7 @@ def main() -> None:
     window = float(args.get("window") or 300)
     pos = float(args.get("start") or 0)
     print(json.dumps({"duration": duration}), flush=True)
+    told = False
     while duration <= 0 or pos < duration - 0.5:
         raw = subprocess.run(
             [args["decoder"], "-nostdin", "-loglevel", "error", "-ss", f"{pos:.3f}", "-t", f"{window:.3f}",
@@ -50,7 +52,7 @@ def main() -> None:
         if got < 0.5:
             break
         last = (duration > 0 and pos + got >= duration - 0.5) or got < window - 0.5
-        segments, _ = model.transcribe(
+        segments, info = model.transcribe(
             audio,
             language=args.get("lang") or None,
             initial_prompt=args.get("prompt") or None,
@@ -58,6 +60,9 @@ def main() -> None:
             beam_size=1,
             condition_on_previous_text=False,
         )
+        if not told:
+            print(json.dumps({"language": args.get("lang") or info.language}), flush=True)
+            told = True
         nxt = pos + got
         for s in segments:
             if not last and s.end > got - EDGE_S and s.start > 1.0:

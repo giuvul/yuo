@@ -454,6 +454,43 @@ define(
         impact=("learning", "cost", "time"),
     )
 )
+YOUTUBE_DISCLAIMER = (
+    "Yuo reads the captions of public YouTube videos to write the lesson and shows the video in YouTube's own "
+    "player. YouTube's terms do not allow reading its pages by automated means: you turn this on at your own "
+    "risk and are responsible for your use of it."
+)
+define(
+    SettingDef(
+        "video.source",
+        "CFG-87",
+        ("installation", "learner", "path"),
+        "generated",
+        Literal["generated", "youtube"],
+        explanation="Where a lesson's video comes from. 'Made by Yuo' writes and renders a new video. 'From "
+        "YouTube' finds an existing video for the lesson, picks the part that teaches it, and writes the lesson "
+        "from what the video says: it costs about 10 to 25% more than a reading lesson, where a video made by Yuo costs "
+        "about ten times the lesson, and it needs no video renderer. " + YOUTUBE_DISCLAIMER,
+        example="From YouTube: a lesson on SQL joins comes with minutes 2:10 to 9:45 of a joins tutorial, and the "
+        "reading follows what the video explains.",
+        suggestion="from YouTube when you want videos but keep usage low; made by Yuo for topics YouTube covers "
+        "poorly",
+        impact=("cost", "learning", "privacy"),
+    )
+)
+define(
+    SettingDef(
+        "video.youtube_languages",
+        "CFG-88",
+        ("installation", "learner", "path"),
+        "also_english",
+        Literal["mine", "also_english"],
+        explanation="Which YouTube videos a lesson may use: only videos in the path's language, or also videos "
+        "in English. The lesson text is always in the path's language.",
+        example="Also English: an Italian path can use an English video on Spark; the reading stays in Italian.",
+        suggestion="also English, because most technical videos are in English",
+        impact=("learning",),
+    )
+)
 define(
     SettingDef(
         "video.length",

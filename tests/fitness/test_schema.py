@@ -69,7 +69,7 @@ def test_an_install_on_0002_upgrades_in_place(tmp_path: Path) -> None:
     )
     c.commit()
     c.close()
-    assert migrate(db, "0.7.5") == [3, 4, 5, 6, 7]
+    assert migrate(db, "0.7.5") == [3, 4, 5, 6, 7, 8, 9]
     c = sqlite3.connect(db)
     assert c.execute("SELECT value FROM setting_value WHERE key = 'probe'").fetchone() == ("1",)
     assert c.execute("SELECT count(*) FROM objective_review_state").fetchone() == (0,)

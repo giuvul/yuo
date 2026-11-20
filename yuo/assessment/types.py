@@ -16,6 +16,7 @@ from typing import Any, ClassVar, Literal
 
 from pydantic import BaseModel, Field, create_model
 
+from yuo.core.choices import LENGTH_RULE, longest_is_right
 from yuo.core.enums import GradingMethod
 
 # --- shared pieces -------------------------------------------------------------------------------
@@ -134,7 +135,7 @@ class SingleChoice(ExerciseType):
     Answer = str
     instructions = (
         "A single-choice question: four options a, b, c, d; exactly one is right; the wrong ones are "
-        "plausible mistakes a learner makes."
+        "plausible mistakes a learner makes. " + LENGTH_RULE
     )
 
     def own_rules(self, d: McqDraft) -> list[str]:
@@ -146,6 +147,10 @@ class SingleChoice(ExerciseType):
             problems.append("two options have the same text")
         if d.answer not in ids:
             problems.append(f"the answer {d.answer!r} is not one of the options")
+        elif longest_is_right(
+            [o.text for o in d.options if o.id == d.answer], [o.text for o in d.options if o.id != d.answer]
+        ):
+            problems.append("the right option is clearly the longest: make the options similar in length")
         return problems
 
     def view(self, p: dict[str, Any], seed: str) -> dict[str, Any]:
@@ -181,7 +186,7 @@ class MultipleChoice(ExerciseType):
     Answer = list[str]
     instructions = (
         "A multiple-choice question where the learner selects all right options: four to six options "
-        "a, b, c, ...; at least two right and at least one wrong."
+        "a, b, c, ...; at least two right and at least one wrong. " + LENGTH_RULE
     )
 
     def own_rules(self, d: MultiDraft) -> list[str]:
@@ -191,6 +196,13 @@ class MultipleChoice(ExerciseType):
             problems.append("use four to six options with ids a, b, c, ... in order")
         if len(set(d.answers)) < 2 or set(d.answers) >= set(ids) or not set(d.answers) <= set(ids):
             problems.append("at least two options must be right and at least one wrong, all from the options")
+        elif longest_is_right(
+            [o.text for o in d.options if o.id in d.answers],
+            [o.text for o in d.options if o.id not in d.answers],
+        ):
+            problems.append(
+                "the right options are clearly longer than the wrong ones: make them similar in length"
+            )
         return problems
 
     def view(self, p: dict[str, Any], seed: str) -> dict[str, Any]:

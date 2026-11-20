@@ -18,11 +18,10 @@ from typing import Any, Literal
 from pydantic import BaseModel, Field
 
 from yuo.assessment.types import Choice, McqDraft, OptionWhy, Support, norm
+from yuo.core.choices import longest_is_right
 
 Kind = Literal["recall", "apply", "scenario", "compare", "debug"]
 MAX_OBJECTIVES = 3
-LENGTH_RATIO = 1.2  # the right option may be at most this much longer than the longest wrong one...
-LENGTH_SLACK = 8  # ...unless the difference is only a few characters
 REPAIR_SHARE = 1 / 3  # more than this share of bad questions sends the whole bank back for repair
 
 
@@ -108,8 +107,7 @@ def question_rules(q: ReviewQuestion, own: set[str], partners: set[str], avoid: 
     if not set(codes) & own:
         problems.append("a question must test at least one objective of this lesson's skill")
     right = next(o.text for o in q.options if o.id == q.answer)
-    longest_wrong = max(len(o.text) for o in q.options if o.id != q.answer)
-    if len(right) > LENGTH_RATIO * longest_wrong and len(right) - longest_wrong > LENGTH_SLACK:
+    if longest_is_right([right], [o.text for o in q.options if o.id != q.answer]):
         problems.append("the right option is clearly the longest: make the options similar in length")
     key = norm(right)
     if len(q.hints) != 3:

@@ -33,6 +33,7 @@ from yuo.app.stages import LEVEL_CHECK, REVIEW, TREE_MAX_TOKENS, lesson_spec, tr
 from yuo.app.study import Study
 from yuo.app.tutor import Tutor
 from yuo.app.video import Video
+from yuo.app.video_links import VideoLinks
 from yuo.assessment import types as xt
 from yuo.content.lesson_body import LessonDraft, plain_text, to_body
 from yuo.content.review import gate_verdict
@@ -117,9 +118,10 @@ class Service(Part):
         self.jobs = JobStatus(self.ctx, lessons=self, videos=self.videos)
         self.dashboard = Home(self.ctx, learners=self, reviews=self.reviews)
         self.pausing = Pausing(self.ctx)
+        self.video_links = VideoLinks(self.ctx, models=self)
         self._parts: tuple[Part, ...] = (
             self.study, self.reviews, self.tutor, self.videos, self.sharing, self.next_steps, self.wizard, self.jobs,
-            self.preview, self.materials, self.dashboard, self.pausing,
+            self.preview, self.materials, self.dashboard, self.pausing, self.video_links,
         )  # fmt: skip
         self.erasure = Erasure(writer, readers, blobs, self.scheduler, self.ensure_learner)
 
@@ -254,16 +256,22 @@ class Service(Part):
 
     # --- estimate --------------------------------------------------------------------------------
 
-    def estimate(self, lessons: int = 20, *, include_path: bool = True) -> est.Estimate:  # the bound models
+    def estimate(
+        self, lessons: int = 20, *, include_path: bool = True, videos: str | None = None
+    ) -> est.Estimate:  # the bound models
+        """`videos`: youtube, generated or reading, as on the New path form; None: the learner's settings."""
         bindings = self.bindings()
         if "generator" not in bindings:
             raise Conflict("no model is chosen yet: choose how Yuo reaches an AI first")
         with self.readers.connection() as c:
+            if videos is None:
+                videos = (
+                    "reading"
+                    if settings.effective(c, "video.format", {})[0] == "reading"
+                    else str(settings.effective(c, "video.source", {})[0])
+                )
             video = None
-            if (
-                settings.effective(c, "video.format", {})[0] != "reading"
-                and self.videos.video_unavailable() is None
-            ):
+            if videos == "generated" and self.videos.video_unavailable() is None:
                 video = str(settings.effective(c, "video.length", {})[0])
             return est.estimate(
                 c,
@@ -272,6 +280,7 @@ class Service(Part):
                 lessons=lessons,
                 include_path=include_path,
                 video=video,
+                youtube=videos == "youtube",
             )
 
     # --- paths -----------------------------------------------------------------------------------
@@ -316,6 +325,11 @@ class Service(Part):
             save_path_state(c, path_id, "plan", {"depth": depth_of(form.depth), "goal_types": reasons})
             if form.custom_instructions:
                 settings.put(c, "custom_instructions", form.custom_instructions, "path", path_id)
+            if form.videos == "reading":  # this path's videos, chosen on the New path form
+                settings.put(c, "video.format", "reading", "path", path_id)
+            elif form.videos is not None:
+                settings.put(c, "video.format", "when_possible", "path", path_id)
+                settings.put(c, "video.source", form.videos, "path", path_id)
             if form.preview:  # the plan is shown to the learner before it is built (yuo/app/plan_preview.py)
                 save_path_state(c, path_id, "preview", {"status": "drafting", "rounds": []})
             if form.level_check:  # the tree waits for the learner's answers (or a skip)
@@ -444,7 +458,7 @@ class Service(Part):
             },
             data_class=dclass,
         )
-        questions = [q.model_dump() for q in out.value.questions]
+        questions = lc.stored(out.value, f"{job.target_id}:{job.id}")  # options shuffled
 
         def unit(c: sqlite3.Connection) -> None:
             c.execute(
@@ -680,6 +694,8 @@ class Service(Part):
         self.writer.run(
             lambda c: c.execute("UPDATE lesson SET state = 'generating' WHERE id = ?", (lesson_id,))
         )
+        if "material" not in ctx["inputs"] and (video := self.video_links.prepare(job, ctx)) is not None:
+            ctx["inputs"]["video"] = video  # written from a YouTube video's transcript (yuo.app.video_links)
         spec = lesson_spec(ctx["inputs"]["length"])
         # a later attempt writes a fresh draft rather than the stored one that failed (the job retries it)
         nonce = f"attempt-{job.attempt}" if job.attempt > 1 else None
@@ -705,7 +721,8 @@ class Service(Part):
                     "body": body,
                     "objectives": ctx["inputs"]["objectives"],
                 }
-                | ({"material": ctx["inputs"]["material"]} if "material" in ctx["inputs"] else {}),
+                | ({"material": ctx["inputs"]["material"]} if "material" in ctx["inputs"] else {})
+                | ({"video": ctx["inputs"]["video"]} if "video" in ctx["inputs"] else {}),
                 data_class=dclass,
                 upstream=[body_out.output_hash],
                 fix_round=fix_round,
@@ -812,6 +829,8 @@ class Service(Part):
                     "UPDATE lesson SET extensions = json_set(extensions, '$.yuo.sources', json(?)) WHERE id = ?",
                     (sources, lesson_id),
                 )
+            if "video" in ctx["inputs"]:  # the YouTube video it was written from
+                self.video_links.attach(c, version_id, ctx["inputs"]["video"])
 
         self.writer.run(unit)
         self.study.make_practice(job, ctx["lesson"], version_id, body)
@@ -1047,7 +1066,12 @@ class Service(Part):
         # accepted without passing its review: what the reviewer found, shown with the lesson
         out["review_notes"] = notes["issues"] if notes and notes["version_id"] == r["version_id"] else None
         out["video"] = self.videos.video_of(lesson_id)
-        out["video_unavailable"] = self.videos.video_unavailable()
+        with self.readers.connection() as c:
+            out["youtube"] = self.video_links.link_of(c, lesson_id)
+            youtube_only = settings.effective(c, "video.source", {"path": r["path_id"]})[0] == "youtube"
+        # a lesson with a YouTube video, or a path that only uses them, needs no video renderer
+        on_youtube = youtube_only or (out["youtube"] is not None and out["youtube"]["video_id"] is not None)
+        out["video_unavailable"] = None if on_youtube else self.videos.video_unavailable()
         return out
 
     def hint(self, item_version_id: str, level: int) -> dict[str, Any]:

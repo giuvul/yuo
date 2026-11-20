@@ -258,7 +258,7 @@ def next_grow(text: str) -> dict[str, Any]:
 
 
 def level_check() -> dict[str, Any]:
-    """Eight questions over levels 1 to 5; the right option is always the first."""
+    """Eight questions over levels 1 to 5; the right option is written first (Yuo shuffles them)."""
     levels = [1, 1, 2, 2, 3, 4, 4, 5]
     return {
         "questions": [
@@ -482,6 +482,8 @@ def stage_of(request: Request) -> str:
         ("The learner checked this plan and asked for changes", "course_revise"),
         ("Plan a course of a learner's studies", "course_outline"),
         ("Find where the courses depend on each other", "course_links"),
+        ("Choose the videos that best teach this lesson", "video_pick"),
+        ("Write the YouTube searches that find a good video", "video_query"),
         ("Plan a learning path", "tree"),
         ("Write one reading lesson", "lesson"),
         ("independent reviewer", "review"),
@@ -536,6 +538,16 @@ class FakeLLM:
         match stage:
             case "tree":
                 return tree()
+            case "video_query":
+                return {"queries": [{"text": "sql left join explained", "lang": "en"},
+                                    {"text": "sql joins tutorial", "lang": "en"}]}  # fmt: skip
+            case "video_pick":
+                return {
+                    "videos": [
+                        {"n": 2, "start": "1:00", "end": "9:30", "coverage": "full"},
+                        {"n": 1, "start": "0:00", "end": "11:00", "coverage": "partial"},
+                    ]
+                }
             case "level_check":
                 return level_check()
             case "material_digest":

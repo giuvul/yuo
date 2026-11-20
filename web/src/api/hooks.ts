@@ -1,4 +1,4 @@
-import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { keepPreviousData, useInfiniteQuery, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   api,
   unwrap,
@@ -15,7 +15,7 @@ import {
 
 export const keys = {
   setup: ["setup"] as const,
-  estimate: (lessons: number) => ["estimate", lessons] as const,
+  estimate: (lessons: number, videos?: EstimateVideos) => ["estimate", lessons, videos ?? null] as const,
   paths: ["paths"] as const,
   home: ["home"] as const,
   path: (id: string) => ["paths", id] as const,
@@ -47,10 +47,14 @@ export function useSetup() {
   });
 }
 
-export function useEstimate(lessons: number) {
+/** The kinds of videos an estimate can count; none given: the learner's settings. */
+export type EstimateVideos = "youtube" | "generated" | "reading";
+
+export function useEstimate(lessons: number, videos?: EstimateVideos) {
   return useQuery({
-    queryKey: keys.estimate(lessons),
-    queryFn: () => unwrap(api.GET("/api/estimate", { params: { query: { lessons } } })),
+    queryKey: keys.estimate(lessons, videos),
+    queryFn: () => unwrap(api.GET("/api/estimate", { params: { query: { lessons, videos } } })),
+    placeholderData: keepPreviousData, // switching the kind of videos keeps the old figures until the new ones
   });
 }
 
@@ -299,6 +303,20 @@ export function useVideoAgain(lessonId: string) {
   });
 }
 
+/** Turn down a lesson's YouTube video (or look again when none was found): the lesson is written again for
+ * the next video found, and shows that it is being written meanwhile. */
+export function useAnotherVideo(lessonId: string) {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: () =>
+      unwrap(api.POST("/api/lessons/{lesson_id}/youtube/another", { params: { path: { lesson_id: lessonId } } })),
+    onSettled: () => {
+      void qc.invalidateQueries({ queryKey: keys.lesson(lessonId) });
+      void qc.invalidateQueries({ queryKey: keys.jobs });
+    },
+  });
+}
+
 /** Video states that change on their own; the lesson polls while its video is in one (stream fallback). */
 const VIDEO_MAKING = new Set(["queued", "generating", "in_review"]);
 const VIDEO_POLL_MS = 5_000;
@@ -307,7 +325,12 @@ export function useLesson(lessonId: string) {
   return useQuery({
     queryKey: keys.lesson(lessonId),
     queryFn: () => unwrap(api.GET("/api/lessons/{lesson_id}", { params: { path: { lesson_id: lessonId } } })),
-    refetchInterval: (q) => (VIDEO_MAKING.has(q.state.data?.video?.state ?? "") ? VIDEO_POLL_MS : false),
+    refetchInterval: (q) => {
+      const d = q.state.data;
+      // a video being made, or a lesson written again for another YouTube video
+      const rewriting = !!d?.youtube && !!d.version_id && VIDEO_MAKING.has(d.state);
+      return VIDEO_MAKING.has(d?.video?.state ?? "") || rewriting ? VIDEO_POLL_MS : false;
+    },
   });
 }
 
@@ -496,6 +519,7 @@ export function usePutSetting() {
       noContent(api.PUT("/api/settings/{key}", { params: { path: { key } }, body: { value, level: "learner" } })),
     onSuccess: () => {
       void qc.invalidateQueries({ queryKey: keys.settings });
+      void qc.invalidateQueries({ queryKey: ["estimate"] }); // the kind of videos changes what a path costs
       // gamification, review caps and pass marks change what other screens show
       void qc.invalidateQueries({ queryKey: ["paths"] });
     },

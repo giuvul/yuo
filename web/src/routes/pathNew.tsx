@@ -10,6 +10,7 @@ import { GOAL_TYPE } from "../components/labels";
 import { ArrowRightIcon, BookIcon, CheckIcon, CoinsIcon, SparkleIcon, SproutIcon } from "../components/icons";
 import { Button, ChoiceCards, ChoiceCardsMulti, Field, MoreOptions, Notice, ui, Waiting } from "../components/ui";
 import { DepthField, type Depth } from "../components/DepthField";
+import { useVideoChoice, VideoChoiceCards, type VideoChoice } from "../onboarding/videos";
 import { rootRoute } from "./root";
 import { useTutorRefs } from "../tutor/context";
 import { AiReadyCards } from "../onboarding/AiReady";
@@ -30,7 +31,7 @@ export const pathNewRoute = createRoute({
 const ESTIMATE_LESSONS = 20;
 const CUSTOM_INSTRUCTIONS_MAX = 1000;
 
-function Estimate({ estimate }: { estimate: EstimateOut }) {
+function Estimate({ estimate, videos }: { estimate: EstimateOut; videos: VideoChoice | null }) {
   const { i18n } = useLingui();
   const usd = (v: number) => i18n.number(v, { style: "currency", currency: "USD", maximumFractionDigits: 2 });
   const low = usd(estimate.low_usd);
@@ -52,6 +53,19 @@ function Estimate({ estimate }: { estimate: EstimateOut }) {
             />
           </strong>
         </p>
+        {videos === "youtube" ? (
+          <p className={ui.muted}>
+            <Trans id="path.new.estimate.with-youtube">With videos from YouTube.</Trans>
+          </p>
+        ) : videos === "generated" ? (
+          <p className={ui.muted}>
+            <Trans id="path.new.estimate.with-made">With videos made by Yuo.</Trans>
+          </p>
+        ) : videos === "reading" ? (
+          <p className={ui.muted}>
+            <Trans id="path.new.estimate.reading">Reading lessons, no videos.</Trans>
+          </p>
+        ) : null}
         {showBilled ? (
           <p className={styles.estimateAmount}>
             <Trans id="path.new.estimate.billed">
@@ -125,10 +139,13 @@ export function NewPathForm({
   onCreated,
   secondary,
   prefill,
+  askVideos = true,
 }: {
   onCreated: (pathId: string) => void;
   secondary?: ReactNode;
   prefill?: SetupAnswersPath | null;
+  /** false in setup, whose step before chose videos for every path */
+  askVideos?: boolean;
 }) {
   const { t } = useLingui();
   const [start, setStart] = useState<Start>("goal");
@@ -161,7 +178,7 @@ export function NewPathForm({
         compact
       />
       {start === "goal" ? (
-        <GoalPathForm onCreated={onCreated} secondary={secondary} prefill={prefill} />
+        <GoalPathForm onCreated={onCreated} secondary={secondary} prefill={prefill} askVideos={askVideos} />
       ) : (
         <MaterialStart onCreated={onCreated} secondary={secondary} />
       )}
@@ -173,14 +190,16 @@ function GoalPathForm({
   onCreated,
   secondary,
   prefill,
+  askVideos,
 }: {
   onCreated: (pathId: string) => void;
   secondary?: ReactNode;
+  askVideos: boolean;
   /** The wizard: the first path an AI assistant collected before Yuo started (SETUP.md). */
   prefill?: SetupAnswersPath | null;
 }) {
   const { t, i18n } = useLingui();
-  const estimate = useEstimate(ESTIMATE_LESSONS);
+
   const create = useCreatePath();
   const qc = useQueryClient();
   // asked before anything is written: a missing program or sign-in is a step here, not a failed path
@@ -194,6 +213,11 @@ function GoalPathForm({
   const [goalTypes, setGoalTypes] = useState<GoalType[]>([prefill?.goal_type ?? "understanding"]);
   const [depth, setDepth] = useState<Depth>("standard");
   const [instructions, setInstructions] = useState(prefill?.custom_instructions ?? "");
+  // this path's videos, always sent as shown: they start on the general setting in effect
+  const videoChoice = useVideoChoice();
+  const [videos, setVideos] = useState<VideoChoice | null>(null);
+  const shownVideos = askVideos && !videoChoice.isPending ? (videos ?? videoChoice.current) : null;
+  const estimate = useEstimate(ESTIMATE_LESSONS, shownVideos ?? undefined);
 
   const goalChoices = (Object.keys(GOAL_TYPE) as GoalType[]).map((value) => ({
     value,
@@ -221,6 +245,7 @@ function GoalPathForm({
             custom_instructions: instructions.trim(),
             level_check: true,
             preview: true,
+            videos: shownVideos,
           },
           {
             onSuccess: (r) => onCreated(r.path_id),
@@ -263,6 +288,16 @@ function GoalPathForm({
         required
       />
       <DepthField value={depth} onChange={setDepth} />
+      {!askVideos || videoChoice.isPending ? null : (
+        <VideoChoiceCards
+          label={t({ id: "path.new.field.videos", message: "Videos with this path's lessons" })}
+          value={videos ?? videoChoice.current}
+          onChange={setVideos}
+          canMake={videoChoice.canMake}
+          unavailable={videoChoice.unavailable}
+          desktop={videoChoice.desktop}
+        />
+      )}
       <MoreOptions
         title={t({ id: "path.new.more-options", message: "More options" })}
         defaultExpanded={Boolean(prefill?.custom_instructions)}
@@ -281,7 +316,7 @@ function GoalPathForm({
         />
       </MoreOptions>
 
-      {estimate.data ? <Estimate estimate={estimate.data} /> : null}
+      {estimate.data ? <Estimate estimate={estimate.data} videos={shownVideos} /> : null}
       {estimate.isPending ? (
         <div className={ui.panel}>
           <Waiting>

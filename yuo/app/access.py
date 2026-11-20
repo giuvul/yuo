@@ -21,6 +21,7 @@ from yuo.core.errors import InvalidInput, NotFound
 from yuo.core.hashing import bytes_hash
 from yuo.core.ids import new_id
 from yuo.core.llm import LLMPort
+from yuo.core.online_video import OnlineVideoError
 from yuo.db.connection import ReadPool, Writer
 from yuo.generation.lanes import LanedPort, Slots
 from yuo.setup import settings
@@ -42,6 +43,7 @@ class Access:
         list_models: Callable[[str], list[str]],
         vendor: Callable[[Provider, str], LLMPort] | None = None,
         vendor_models: Callable[[Provider, str], list[str]] | None = None,
+        youtube_check: Callable[[str], None] | None = None,
     ) -> None:
         self.writer = writer
         self.readers = readers
@@ -54,6 +56,7 @@ class Access:
         self.vendors_enabled = vendor is not None and vendor_models is not None
         self._vendor = vendor or _no_vendor
         self._vendor_models = vendor_models or _no_vendor
+        self._youtube_check = youtube_check
         # is a subscription CLI on this machine? (set by main; the adapters are registered either way)
         self.cli_found: Callable[[str], bool] = lambda name: True
 
@@ -78,6 +81,7 @@ class Access:
             ),
             "consent": {k: bool(v) for k, v in consents.items()},
             "vendors": sorted(p.id for p in PROVIDERS.values() if p.adapter in self.ports),
+            "youtube": bool(self.secrets.get("youtube")),
         }
 
     def _connect(self, name: str, port: LLMPort) -> None:
@@ -126,6 +130,28 @@ class Access:
         if not (key := self.secrets.get(f"vendor:{p.id}")):
             return []
         return self._vendor_models(p, key)
+
+    # --- a YouTube Data API key (searches for lessons built on a video) ---------------------------
+
+    def set_youtube_key(self, key: str) -> None:
+        """Checks the key with one cheap request (one unit of its daily quota) and keeps it. Without a key,
+        searches go through yt-dlp."""
+        key = key.strip()
+        if not key.startswith("AIza") or len(key) > 100 or any(ch.isspace() for ch in key):
+            raise InvalidInput("that does not look like a Google API key (it starts with AIza)")
+        if self._youtube_check is not None:
+            try:
+                self._youtube_check(key)
+            except OnlineVideoError as e:
+                raise InvalidInput(
+                    "YouTube refused this key: check that the YouTube Data API v3 is enabled for it"
+                    if e.kind == "bad_key"
+                    else f"YouTube could not be reached to check the key ({e.kind})"
+                ) from e
+        self.secrets.set("youtube", key)
+
+    def remove_youtube_key(self) -> None:
+        self.secrets.delete("youtube")
 
     # --- a model server on this machine ----------------------------------------------------------
 

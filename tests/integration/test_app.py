@@ -14,7 +14,7 @@ def test_health_reports_the_migrated_schema(tmp_path: Path, monkeypatch: pytest.
     monkeypatch.setenv("YUO_DATA_DIR", str(tmp_path))
     with TestClient(main.build(), base_url=LOCAL) as client:
         body = client.get("/api/health").json()
-    assert body["status"] == "ok" and body["schema_version"] == 7
+    assert body["status"] == "ok" and body["schema_version"] == 9
     assert (tmp_path / "yuo.db").exists()
 
 

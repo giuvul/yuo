@@ -17,6 +17,7 @@ import styles from "./lessonVideo.module.css";
 import { readJson, writeJson } from "../storage";
 import { HIDDEN_KEY, NotesBubble } from "./NotesBubble";
 import { VideoUnavailableText } from "./unavailable";
+import { YouTubeVideo } from "./YouTubeVideo";
 
 const VideoPlayer = lazy(() => import("./VideoPlayer"));
 
@@ -160,6 +161,22 @@ function FailedVideo({ lessonId }: { lessonId: string }) {
 }
 
 export function LessonVideo({ lesson }: { lesson: LessonOut }) {
+  const youtube = lesson.youtube ?? null;
+  if (youtube?.video_id) return <YouTubeVideo lesson={lesson} youtube={youtube} />;
+  if (youtube) {
+    // a path that uses YouTube videos found none for this lesson: why, and any video Yuo made instead
+    return (
+      <>
+        <YouTubeVideo lesson={lesson} youtube={youtube} />
+        <MadeVideo lesson={lesson} />
+      </>
+    );
+  }
+  return <MadeVideo lesson={lesson} />;
+}
+
+/** The video Yuo made for the lesson, in each of its states. */
+function MadeVideo({ lesson }: { lesson: LessonOut }) {
   const video = lesson.video ?? null;
   const reason = lesson.video_unavailable ?? null;
   const desktop = useSetup().data?.desktop ?? false;

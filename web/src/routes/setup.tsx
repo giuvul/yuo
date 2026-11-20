@@ -1,6 +1,6 @@
 // /setup: on a server the sign-in setup (code, passkey, recovery codes) comes first; then the environment
 // wizard: your computer -> recommendation with the cost of a typical path for every option
-// -> AI access and applying the models -> about you -> the first path. Resumes from the
+// -> AI access and applying the models -> about you -> videos (YouTube, made by Yuo or none) -> the first path. Resumes from the
 // onboarding milestones (GET /api/onboarding).
 import { Trans, useLingui } from "@lingui/react/macro";
 import { createRoute, useNavigate } from "@tanstack/react-router";
@@ -30,6 +30,7 @@ import {
   useSetupAnswers,
 } from "../onboarding/api";
 import { ProbeSummary } from "../onboarding/ProbeSummary";
+import { VideoChoiceForm } from "../onboarding/videos";
 import { isDefaultProfile } from "../i18n";
 import { ProfileForm } from "../onboarding/profile";
 import {
@@ -65,7 +66,7 @@ function SetupRoute() {
 /** What the learner picks on the recommendation step: a preset, or their own key from a model vendor. */
 export type Choice = Preset | typeof VENDOR_OPTION;
 
-const STEPS = ["computer", "recommendation", "access", "about", "path"] as const;
+const STEPS = ["computer", "recommendation", "access", "about", "videos", "path"] as const;
 type StepId = (typeof STEPS)[number];
 
 /** Where a returning learner picks up: the first milestone not reached yet. */
@@ -74,7 +75,7 @@ function resumeStep(o: OnboardingOut): StepId {
   if (!o.models_chosen) return "recommendation";
   if (!o.profile_done) return "about";
   if (o.done) return "recommendation"; // set up already: here to change the models
-  return "path";
+  return "videos";
 }
 
 function EnvironmentWizard() {
@@ -113,6 +114,7 @@ function Wizard({ initial, onboarding }: { initial: StepId; onboarding: Onboardi
     recommendation: t({ id: "wizard.step.recommendation", message: "Recommendation" }),
     access: t({ id: "wizard.step.access", message: "AI access" }),
     about: t({ id: "wizard.step.about", message: "About you" }),
+    videos: t({ id: "wizard.step.videos", message: "Videos" }),
     path: t({ id: "wizard.step.path", message: "Your first path" }),
   };
 
@@ -156,6 +158,7 @@ function Wizard({ initial, onboarding }: { initial: StepId; onboarding: Onboardi
       ) : null}
       {step === "access" ? <AccessStep choice={choice} back={back} next={next} /> : null}
       {step === "about" ? <AboutStep back={back} next={next} /> : null}
+      {step === "videos" ? <VideosStep back={back} next={next} /> : null}
       {step === "path" ? <PathStep back={back} hasPath={onboarding.has_path} /> : null}
       </div>
     </div>
@@ -595,7 +598,32 @@ function AboutStep({ back, next }: { back: (() => void) | null; next: () => void
   );
 }
 
-// --- f. the first path ------------------------------------------------------------------------------------
+// --- f. videos -------------------------------------------------------------------------------------------
+
+function VideosStep({ back, next }: { back: (() => void) | null; next: () => void }) {
+  return (
+    <div className={ui.stack}>
+      <p className={ui.muted}>
+        <Trans id="wizard.videos.intro">
+          Lessons are written to read. They can also come with a video: an existing one from YouTube, or one Yuo makes.
+        </Trans>
+      </p>
+      <VideoChoiceForm
+        onSaved={next}
+        footer={(save, pending) => (
+          <StepNav back={back}>
+            <Button onPress={save} isDisabled={pending}>
+              <Trans id="wizard.videos.save">Save and continue</Trans>
+              <ArrowRightIcon size="1.1em" />
+            </Button>
+          </StepNav>
+        )}
+      />
+    </div>
+  );
+}
+
+// --- g. the first path ------------------------------------------------------------------------------------
 
 function PathStep({ back, hasPath }: { back: (() => void) | null; hasPath: boolean }) {
   const navigate = useNavigate();
@@ -622,6 +650,7 @@ function PathStep({ back, hasPath }: { back: (() => void) | null; hasPath: boole
         <NewPathForm
           key={prefill ? "answers" : "plain"}
           prefill={prefill}
+          askVideos={false}
           onCreated={(pathId) => done(() => void navigate({ to: "/paths/$pathId", params: { pathId } }))}
           secondary={
             <>

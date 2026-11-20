@@ -13,7 +13,7 @@ from typing import Any, Literal
 from yuo.core import clock
 from yuo.core.errors import NotFound
 
-PathState = Literal["level_check", "next", "preview", "arrange", "plan"]
+PathState = Literal["level_check", "next", "preview", "arrange", "plan", "video_avoid"]
 
 
 def find_path(c: sqlite3.Connection, path_id: str) -> sqlite3.Row | None:

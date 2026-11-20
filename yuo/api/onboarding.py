@@ -97,6 +97,7 @@ class AccessOut(BaseModel):
     vendors: list[str] = Field(
         description="Vendors with a direct key connected (the keys are never returned)"
     )
+    youtube: bool = Field(False, description="A YouTube Data API key is set (never returned)")
 
 
 ProviderId = Literal[
@@ -385,6 +386,15 @@ def _access_routes(svc: Any) -> APIRouter:
     @r.delete("/api/setup/access/openrouter", status_code=204)
     def delete_openrouter() -> None:
         _access(svc).remove_openrouter_key()
+
+    @r.put("/api/setup/access/youtube", status_code=204)
+    def put_youtube(body: KeyIn) -> None:
+        """A YouTube Data API key for searches (checked with one request); without one, searches use yt-dlp."""
+        _access(svc).set_youtube_key(body.key)
+
+    @r.delete("/api/setup/access/youtube", status_code=204)
+    def delete_youtube() -> None:
+        _access(svc).remove_youtube_key()
 
     @r.put("/api/setup/access/local", response_model=LocalOut)
     def put_local(body: LocalIn) -> dict[str, Any]:

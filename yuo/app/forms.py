@@ -18,3 +18,4 @@ class PathForm:
     custom_instructions: str = ""
     level_check: bool = False
     preview: bool = False
+    videos: str | None = None  # youtube, generated or reading; None: the general setting

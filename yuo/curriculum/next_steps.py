@@ -20,6 +20,7 @@ from typing import Any, Literal
 
 from pydantic import BaseModel, Field
 
+from yuo.core.choices import longest_is_right, shuffled
 from yuo.curriculum.tree import TreeDraft, tree_rules
 
 Kind = Literal["deeper", "wider", "apply", "fix"]
@@ -85,6 +86,12 @@ def check_rules(draft: NextCheckDraft) -> list[str]:
             problems.append(f"quiz question {n}: give 3 or 4 options")
         elif not 0 <= item.answer < len(item.options):
             problems.append(f"quiz question {n}: answer must be the index of one of its options")
+        elif longest_is_right(
+            [item.options[item.answer]], [o for i, o in enumerate(item.options) if i != item.answer]
+        ):
+            problems.append(
+                f"quiz question {n}: the right option is clearly the longest; make the options similar in length"
+            )
         if len({o.strip().lower() for o in item.options}) != len(item.options):
             problems.append(f"quiz question {n}: options must differ")
         if not item.prompt.strip():
@@ -147,6 +154,15 @@ def grow_rules(existing: dict[str, set[str]]) -> Any:
         return problems
 
     return rules
+
+
+def stored_quiz(draft: NextCheckDraft, seed: str) -> list[dict[str, Any]]:
+    """The quiz as kept in path state, each question's options shuffled (models put the right one first)."""
+    out = []
+    for n, q in enumerate(draft.quiz):
+        options, answer = shuffled(q.options, q.answer, f"{seed}:{n}")
+        out.append(q.model_dump() | {"options": options, "answer": answer})
+    return out
 
 
 def public_quiz(quiz: list[dict[str, Any]]) -> list[dict[str, Any]]:

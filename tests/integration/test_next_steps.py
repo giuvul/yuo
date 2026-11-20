@@ -65,8 +65,11 @@ def test_the_checkpoint_grows_the_path_only_after_the_learner_confirms(
     check = _prompt(llm, "next_check")
     assert "Lessons studied: 1" in check and "<learner_input>" in check
 
+    # shuffled options: right on the first question, wrong on the second, "don't know" on the third
+    right = [next(i for i, o in enumerate(q["options"]) if o.startswith("right")) for q in view["quiz"]]
+    wrong = next(i for i, o in enumerate(view["quiz"][1]["options"]) if o.startswith("wrong"))
     rt.service.answer_next(
-        path_id, [0, 1, None], [{"option": 1, "text": ""}, {"option": None, "text": "jazz"}]
+        path_id, [right[0], wrong, None], [{"option": 1, "text": ""}, {"option": None, "text": "jazz"}]
     )
     drain(rt)
     view = rt.service.next_view(path_id)

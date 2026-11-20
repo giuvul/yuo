@@ -34,6 +34,9 @@ flowchart LR
   worker: one database writer, one event stream).
 - **Learning data stays on the host.** The only outbound traffic that carries it goes to the model provider
   the learner chose. With a model on the same machine, nothing leaves.
+  One opt-in exception: with lesson videos from YouTube (setting `video.source`), the searches send each
+  lesson's topic to YouTube (recorded in `egress_record`), its captions are read, and a video loads from
+  YouTube in the learner's browser when they press play.
 - **Two ways to run it:**
   - **Server version** (`packaging/container`): a Docker image with a second container that renders videos
     with no network. Optional Caddy for HTTPS, or Tailscale, or the learner's own proxy.
@@ -123,6 +126,7 @@ adapters in `yuo/adapters`:
 | `tts/` | Kokoro, a local voice: narration never leaves the machine |
 | `renderer/` | Remotion in a network-isolated sandbox: `bwrap` or `unshare` on Linux, or the render container (a spool folder shared with a container that has no network) |
 | `tools/` | ffmpeg and espeak-ng, run as separate programs |
+| `youtube.py` | Lessons built on a YouTube video: search (the YouTube Data API with the learner's key, else yt-dlp), captions (youtube-transcript-api; `YUO_YOUTUBE_PROXY` routes them through a proxy) a video's sound when YouTube refuses the captions (yt-dlp; Yuo transcribes it on the machine and deletes it) and whether a video is still there (oEmbed). The picture is never downloaded |
 | `export/` | standard-format exports: CSV, Anki, Moodle XML, readings, videos with subtitles, BibTeX, CSL JSON |
 | `exposure/` | how other devices reach a server: Tailscale Serve, Caddy with a public name, or the learner's own proxy, plus a reachability check |
 | `secrets.py` | API keys in the OS keychain on desktops, or an AES-GCM encrypted file keyed from a secret in the container |

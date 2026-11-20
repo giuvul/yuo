@@ -77,7 +77,9 @@ class Transcriber(Protocol):
         progress: Callable[[float], None],
         fast: bool = False,
         duration_ms: int | None = None,
+        on_language: Callable[[str], None] | None = None,
     ) -> list[Segment]:
-        """`fast`: a smaller model, quicker and less accurate (the learner's choice). Raises
+        """`fast`: a smaller model, quicker and less accurate (the learner's choice). `on_language` hears the
+        spoken language (given, or detected when `lang` is None) once the first minutes are transcribed. Raises
         TranscriptionInterrupted when stopped from outside; the next call goes on from where it was."""
         ...

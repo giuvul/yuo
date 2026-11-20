@@ -48,6 +48,7 @@ class AppContext:
     plan_meter: Any = None  # the subscription CLIs' last plan readings
     cli: Any = None  # adapters.cli_access.CliAccess: are the subscription CLIs installed and signed in
     transcriber: Any = None  # core.documents.Transcriber: speech to text for recorded lectures
+    online_videos: Any = None  # core.online_video.OnlineVideos: YouTube, for lessons built on a video
     answers_file: Path | None = None  # setup-answers.json in the data folder (yuo.app.setup_answers)
 
 
@@ -94,6 +95,7 @@ class Part:
     plan_meter: Shared[Any] = Shared()
     cli: Shared[Any] = Shared()
     answers_file: Shared[Path | None] = Shared()
+    online_videos: Shared[Any] = Shared()
 
     def __init__(self, ctx: AppContext) -> None:
         self.ctx = ctx

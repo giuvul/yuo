@@ -33,6 +33,7 @@ import { rootRoute } from "./root";
 import styles from "./settings.module.css";
 import { useTutorRefs } from "../tutor/context";
 import { VideoUnavailableText } from "../video/unavailable";
+import { YouTubeSettings } from "../video/YouTubeSettings";
 import { LABELS, SettingRow } from "./SettingRow";
 
 export const settingsRoute = createRoute({
@@ -65,7 +66,7 @@ const GROUPS: Group[] = [
     id: "videos",
     title: msg({ id: "settings.group.videos", message: "Videos" }),
     description: msg({ id: "settings.group.videos.description3", message: "Whether lessons come as videos, their length, colours and captions" }),
-    keys: ["video.format", "video.length", "video.theme", "video.captions", "video.notes_bubble"],
+    keys: ["video.format", "video.source", "video.youtube_languages", "video.length", "video.theme", "video.captions", "video.notes_bubble"],
   },
   {
     id: "practice",
@@ -155,12 +156,13 @@ function LearningGroups({ settings }: { settings: SettingOut[] }) {
         if (rows.length === 0) return null;
         return (
           <Collapsible key={g.id} id={g.id} title={i18n._(g.title)} description={i18n._(g.description)}>
-            {g.id === "videos" ? <VideoNotice /> : null}
+            {g.id === "videos" && settings.find((s) => s.key === "video.source")?.value !== "youtube" ? <VideoNotice /> : null}
             <ul className={styles.list}>
               {rows.map((s) => (
                 <SettingRow key={`${s.key}:${JSON.stringify(s.value)}`} setting={s} />
               ))}
             </ul>
+            {g.id === "videos" ? <YouTubeSettings settings={settings} /> : null}
             {g.id === "videos" ? <EraseVideoHistory /> : null}
           </Collapsible>
         );

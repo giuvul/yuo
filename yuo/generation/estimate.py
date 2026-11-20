@@ -51,6 +51,19 @@ VIDEO_HIGH: dict[str, float] = {
 }  # the high end: every repair round used
 # token profiles are for short videos (the measured length); longer ones write and read proportionally more
 VIDEO_SCALE = {"short": 1.0, "medium": 2.4, "long": 3.8}
+# A lesson on a YouTube video (yuo/app/video_links.py), as tokens: the searches are written from the lesson;
+# the ranking reads three transcripts cut to
+# 9,000 characters each (about 2,300 tokens) plus the lesson, and answers a short JSON; the writer and the
+# reviewer each read the chosen stretch (at most 20,000 characters; 8 to 15 minutes of speech is about 2,000
+# to 3,500 tokens). (p10, median, p90) per lesson [ASSUMPTION until the ledger has samples].
+YOUTUBE_TOKENS: dict[str, tuple[tuple[int, int], tuple[int, int], tuple[int, int]]] = {
+    "video_query": ((500, 40), (650, 70), (900, 120)),  # the searches, written from the lesson
+    "video_pick": ((5_000, 100), (7_700, 150), (16_000, 400)),  # the high end: a second round of three
+    "lesson_transcript": ((2_000, 0), (3_500, 0), (5_000, 0)),
+    "review_transcript": ((2_000, 0), (3_500, 0), (5_000, 0)),
+}
+# a subscription's notional price per token, from the binding's lesson profile, counts output as this many inputs
+OUTPUT_WEIGHT = 5
 # A failed review triggers one more lesson_body + review (2 of 6 lessons in a live run). The high end of
 # the range includes one such round per lesson; the low end assumes none.
 FIX_ROUND_UNITS: dict[str, int] = {"lesson_body": 1, "review": 1}
@@ -66,6 +79,10 @@ UNIT_ROLE: dict[str, Role] = {
     "review_bank": "generator",
     "video_scene": "generator",
     "video_review": "generator",  # the author model is its own critic
+    "video_pick": "utility",
+    "video_query": "utility",
+    "lesson_transcript": "generator",
+    "review_transcript": "reviewer",
 }
 
 
@@ -228,7 +245,8 @@ def estimate(
     *,
     lessons: int,
     include_path: bool = True,
-    video: str | None = None,  # None: no video, else the video length
+    video: str | None = None,  # None: no video made by Yuo, else the video length
+    youtube: bool = False,  # lessons built on YouTube videos
 ) -> Estimate:
     est = Estimate(lessons=lessons)
     plan: dict[str, float] = {u: n * lessons for u, n in LESSON_UNITS.items()}
@@ -265,4 +283,38 @@ def estimate(
         est.low_usd += low
         est.high_usd += high
         est.lines.append(Line(unit, count, b.adapter, b.model, low, high, True, p.source))
+    if youtube:
+        _youtube(c, est, bindings, prices, lessons)
     return est
+
+
+def _youtube(
+    c: sqlite3.Connection, est: Estimate, bindings: dict[Role, Binding], prices: PriceSource, lessons: int
+) -> None:
+    """The YouTube part of a lesson: tokens are known (YOUTUBE_TOKENS); a subscription's notional price per token
+    comes from the same binding's lesson profile."""
+    for unit, (p10, med, p90) in YOUTUBE_TOKENS.items():
+        b = (
+            bindings.get(UNIT_ROLE[unit]) or bindings["generator"]
+        )  # the utility role falls back to the writer
+        if b.adapter == "local":
+            est.lines.append(Line(unit, lessons, b.adapter, b.model, 0.0, 0.0, False, "local"))
+            continue
+        price = prices.per_token(b.adapter, b.model)
+        if price is None:
+            base = profile(c, b.adapter, b.model, "lesson_body")
+            if base is None or not base.notional_median:
+                est.missing.append(f"{unit} ({b.model}): no cost profile")
+                continue
+            rate = base.notional_median / (base.median_in + OUTPUT_WEIGHT * base.median_out)
+            notional = lessons * rate * (med[0] + OUTPUT_WEIGHT * med[1])
+            est.notional_usd += notional
+            est.notional_by_cli[b.adapter] = est.notional_by_cli.get(b.adapter, 0.0) + notional
+            est.lines.append(Line(unit, lessons, b.adapter, b.model, notional, notional, False, "assumed"))
+            continue
+        pin, pout = price
+        low = lessons * (p10[0] * pin + p10[1] * pout)
+        high = lessons * (p90[0] * pin + p90[1] * pout)
+        est.low_usd += low
+        est.high_usd += high
+        est.lines.append(Line(unit, lessons, b.adapter, b.model, low, high, True, "assumed"))

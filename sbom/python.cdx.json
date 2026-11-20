@@ -2447,7 +2447,36 @@
       "version": "2.0.13"
     },
     {
-      "bom-ref": "docopt-23@0.6.2",
+      "bom-ref": "defusedxml-23@0.7.1",
+      "externalReferences": [
+        {
+          "hashes": [
+            {
+              "alg": "SHA-256",
+              "content": "1bb3032db185915b62d7c6209c5a8792be6a32ab2fedacc84e01b52c51aa3e69"
+            }
+          ],
+          "type": "distribution",
+          "url": "https://files.pythonhosted.org/packages/0f/d5/c66da9b79e5bdb124974bfe172b4daf3c984ebd9c2a06e2b8a4dc7331c72/defusedxml-0.7.1.tar.gz"
+        },
+        {
+          "hashes": [
+            {
+              "alg": "SHA-256",
+              "content": "a352e7e428770286cc899e2542b6cdaedb2b4953ff269a210103ec58f6198a61"
+            }
+          ],
+          "type": "distribution",
+          "url": "https://files.pythonhosted.org/packages/07/6c/aa3f2f849e01cb6a001cd8554a88d4c77c5c1a31c95bdf1cf9301e6d9ef4/defusedxml-0.7.1-py2.py3-none-any.whl"
+        }
+      ],
+      "name": "defusedxml",
+      "purl": "pkg:pypi/defusedxml@0.7.1",
+      "type": "library",
+      "version": "0.7.1"
+    },
+    {
+      "bom-ref": "docopt-24@0.6.2",
       "externalReferences": [
         {
           "hashes": [
@@ -2466,7 +2495,7 @@
       "version": "0.6.2"
     },
     {
-      "bom-ref": "docstring-parser-24@0.18.0",
+      "bom-ref": "docstring-parser-25@0.18.0",
       "externalReferences": [
         {
           "hashes": [
@@ -2495,7 +2524,7 @@
       "version": "0.18.0"
     },
     {
-      "bom-ref": "en-core-web-sm-25@3.8.0",
+      "bom-ref": "en-core-web-sm-26@3.8.0",
       "externalReferences": [
         {
           "hashes": [
@@ -2514,7 +2543,7 @@
       "version": "3.8.0"
     },
     {
-      "bom-ref": "fastapi-26@0.153.0",
+      "bom-ref": "fastapi-27@0.153.0",
       "externalReferences": [
         {
           "hashes": [
@@ -2543,7 +2572,7 @@
       "version": "0.153.0"
     },
     {
-      "bom-ref": "flatbuffers-27@25.12.19",
+      "bom-ref": "flatbuffers-28@25.12.19",
       "externalReferences": [
         {
           "hashes": [
@@ -2562,7 +2591,7 @@
       "version": "25.12.19"
     },
     {
-      "bom-ref": "frozendict-28@2.4.7",
+      "bom-ref": "frozendict-29@2.4.7",
       "externalReferences": [
         {
           "hashes": [
@@ -2591,7 +2620,7 @@
       "version": "2.4.7"
     },
     {
-      "bom-ref": "fsrs-29@6.3.2",
+      "bom-ref": "fsrs-30@6.3.2",
       "externalReferences": [
         {
           "hashes": [
@@ -2620,7 +2649,7 @@
       "version": "6.3.2"
     },
     {
-      "bom-ref": "genanki-30@0.13.1",
+      "bom-ref": "genanki-31@0.13.1",
       "externalReferences": [
         {
           "hashes": [
@@ -2649,7 +2678,7 @@
       "version": "0.13.1"
     },
     {
-      "bom-ref": "h11-31@0.16.0",
+      "bom-ref": "h11-32@0.16.0",
       "externalReferences": [
         {
           "hashes": [
@@ -2678,7 +2707,7 @@
       "version": "0.16.0"
     },
     {
-      "bom-ref": "httpcore-32@1.0.9",
+      "bom-ref": "httpcore-33@1.0.9",
       "externalReferences": [
         {
           "hashes": [
@@ -2707,7 +2736,7 @@
       "version": "1.0.9"
     },
     {
-      "bom-ref": "httpcore2-33@2.15.1",
+      "bom-ref": "httpcore2-34@2.15.1",
       "externalReferences": [
         {
           "hashes": [
@@ -2742,7 +2771,7 @@
       "version": "2.15.1"
     },
     {
-      "bom-ref": "httpx-34@0.28.1",
+      "bom-ref": "httpx-35@0.28.1",
       "externalReferences": [
         {
           "hashes": [
@@ -2771,7 +2800,7 @@
       "version": "0.28.1"
     },
     {
-      "bom-ref": "httpx2-35@2.15.1",
+      "bom-ref": "httpx2-36@2.15.1",
       "externalReferences": [
         {
           "hashes": [
@@ -2800,7 +2829,7 @@
       "version": "2.15.1"
     },
     {
-      "bom-ref": "httpx2-jsfetch-36@1.0",
+      "bom-ref": "httpx2-jsfetch-37@1.0",
       "externalReferences": [
         {
           "hashes": [
@@ -2835,7 +2864,7 @@
       "version": "1.0"
     },
     {
-      "bom-ref": "idna-37@3.20",
+      "bom-ref": "idna-38@3.20",
       "externalReferences": [
         {
           "hashes": [
@@ -2864,7 +2893,7 @@
       "version": "3.20"
     },
     {
-      "bom-ref": "jaraco-classes-38@3.4.0",
+      "bom-ref": "jaraco-classes-39@3.4.0",
       "externalReferences": [
         {
           "hashes": [
@@ -2893,7 +2922,7 @@
       "version": "3.4.0"
     },
     {
-      "bom-ref": "jaraco-context-39@6.1.2",
+      "bom-ref": "jaraco-context-40@6.1.2",
       "externalReferences": [
         {
           "hashes": [
@@ -2922,7 +2951,7 @@
       "version": "6.1.2"
     },
     {
-      "bom-ref": "jaraco-functools-40@4.6.0",
+      "bom-ref": "jaraco-functools-41@4.6.0",
       "externalReferences": [
         {
           "hashes": [
@@ -2951,7 +2980,7 @@
       "version": "4.6.0"
     },
     {
-      "bom-ref": "jeepney-41@0.9.0",
+      "bom-ref": "jeepney-42@0.9.0",
       "externalReferences": [
         {
           "hashes": [
@@ -2986,7 +3015,7 @@
       "version": "0.9.0"
     },
     {
-      "bom-ref": "jinja2-42@3.1.6",
+      "bom-ref": "jinja2-43@3.1.6",
       "externalReferences": [
         {
           "hashes": [
@@ -3015,7 +3044,7 @@
       "version": "3.1.6"
     },
     {
-      "bom-ref": "jiter-43@0.17.0",
+      "bom-ref": "jiter-44@0.17.0",
       "externalReferences": [
         {
           "hashes": [
@@ -3314,7 +3343,7 @@
       "version": "0.17.0"
     },
     {
-      "bom-ref": "keyring-44@25.7.0",
+      "bom-ref": "keyring-45@25.7.0",
       "externalReferences": [
         {
           "hashes": [
@@ -3343,7 +3372,7 @@
       "version": "25.7.0"
     },
     {
-      "bom-ref": "markdown-it-py-45@4.2.0",
+      "bom-ref": "markdown-it-py-46@4.2.0",
       "externalReferences": [
         {
           "hashes": [
@@ -3372,7 +3401,7 @@
       "version": "4.2.0"
     },
     {
-      "bom-ref": "markupsafe-46@3.0.4",
+      "bom-ref": "markupsafe-47@3.0.4",
       "externalReferences": [
         {
           "hashes": [
@@ -3741,7 +3770,7 @@
       "version": "3.0.4"
     },
     {
-      "bom-ref": "mdurl-47@0.1.2",
+      "bom-ref": "mdurl-48@0.1.2",
       "externalReferences": [
         {
           "hashes": [
@@ -3770,7 +3799,7 @@
       "version": "0.1.2"
     },
     {
-      "bom-ref": "misaki-48@0.9.4",
+      "bom-ref": "misaki-49@0.9.4",
       "externalReferences": [
         {
           "hashes": [
@@ -3799,7 +3828,7 @@
       "version": "0.9.4"
     },
     {
-      "bom-ref": "more-itertools-49@11.2.1",
+      "bom-ref": "more-itertools-50@11.2.1",
       "externalReferences": [
         {
           "hashes": [
@@ -3828,7 +3857,7 @@
       "version": "11.2.1"
     },
     {
-      "bom-ref": "murmurhash-50@1.0.15",
+      "bom-ref": "murmurhash-51@1.0.15",
       "externalReferences": [
         {
           "hashes": [
@@ -4007,7 +4036,7 @@
       "version": "1.0.15"
     },
     {
-      "bom-ref": "num2words-51@0.5.14",
+      "bom-ref": "num2words-52@0.5.14",
       "externalReferences": [
         {
           "hashes": [
@@ -4036,7 +4065,7 @@
       "version": "0.5.14"
     },
     {
-      "bom-ref": "numpy-52@2.5.4",
+      "bom-ref": "numpy-53@2.5.4",
       "externalReferences": [
         {
           "hashes": [
@@ -4265,7 +4294,7 @@
       "version": "2.5.4"
     },
     {
-      "bom-ref": "onnxruntime-53@1.31.0",
+      "bom-ref": "onnxruntime-54@1.31.0",
       "externalReferences": [
         {
           "hashes": [
@@ -4344,7 +4373,7 @@
       "version": "1.31.0"
     },
     {
-      "bom-ref": "openai-54@3.35.1",
+      "bom-ref": "openai-55@3.35.1",
       "externalReferences": [
         {
           "hashes": [
@@ -4373,7 +4402,7 @@
       "version": "3.35.1"
     },
     {
-      "bom-ref": "opentelemetry-api-55@1.45.1",
+      "bom-ref": "opentelemetry-api-56@1.45.1",
       "externalReferences": [
         {
           "hashes": [
@@ -4402,7 +4431,7 @@
       "version": "1.45.1"
     },
     {
-      "bom-ref": "packaging-56@26.3",
+      "bom-ref": "packaging-57@26.3",
       "externalReferences": [
         {
           "hashes": [
@@ -4431,7 +4460,7 @@
       "version": "26.3"
     },
     {
-      "bom-ref": "preshed-57@3.0.13",
+      "bom-ref": "preshed-58@3.0.13",
       "externalReferences": [
         {
           "hashes": [
@@ -4610,7 +4639,7 @@
       "version": "3.0.13"
     },
     {
-      "bom-ref": "protobuf-58@7.36.2",
+      "bom-ref": "protobuf-59@7.36.2",
       "externalReferences": [
         {
           "hashes": [
@@ -4699,7 +4728,7 @@
       "version": "7.36.2"
     },
     {
-      "bom-ref": "pyasn1-59@0.6.4",
+      "bom-ref": "pyasn1-60@0.6.4",
       "externalReferences": [
         {
           "hashes": [
@@ -4728,7 +4757,7 @@
       "version": "0.6.4"
     },
     {
-      "bom-ref": "pyasn1-modules-60@0.4.2",
+      "bom-ref": "pyasn1-modules-61@0.4.2",
       "externalReferences": [
         {
           "hashes": [
@@ -4757,7 +4786,7 @@
       "version": "0.4.2"
     },
     {
-      "bom-ref": "pycparser-61@3.11",
+      "bom-ref": "pycparser-62@3.11",
       "externalReferences": [
         {
           "hashes": [
@@ -4792,7 +4821,7 @@
       "version": "3.11"
     },
     {
-      "bom-ref": "pydantic-62@2.14.1",
+      "bom-ref": "pydantic-63@2.14.1",
       "externalReferences": [
         {
           "hashes": [
@@ -4821,7 +4850,7 @@
       "version": "2.14.1"
     },
     {
-      "bom-ref": "pydantic-core-63@2.50.1",
+      "bom-ref": "pydantic-core-64@2.50.1",
       "externalReferences": [
         {
           "hashes": [
@@ -5150,7 +5179,7 @@
       "version": "2.50.1"
     },
     {
-      "bom-ref": "pygments-64@2.21.0",
+      "bom-ref": "pygments-65@2.21.0",
       "externalReferences": [
         {
           "hashes": [
@@ -5179,7 +5208,7 @@
       "version": "2.21.0"
     },
     {
-      "bom-ref": "pyopenssl-65@26.4.0",
+      "bom-ref": "pyopenssl-66@26.4.0",
       "externalReferences": [
         {
           "hashes": [
@@ -5208,7 +5237,7 @@
       "version": "26.4.0"
     },
     {
-      "bom-ref": "pypdfium2-66@5.15.2",
+      "bom-ref": "pypdfium2-67@5.15.2",
       "externalReferences": [
         {
           "hashes": [
@@ -5447,7 +5476,7 @@
       "version": "5.15.2"
     },
     {
-      "bom-ref": "pywin32-ctypes-67@0.2.3",
+      "bom-ref": "pywin32-ctypes-68@0.2.3",
       "externalReferences": [
         {
           "hashes": [
@@ -5482,7 +5511,7 @@
       "version": "0.2.3"
     },
     {
-      "bom-ref": "pyyaml-68@6.0.3",
+      "bom-ref": "pyyaml-69@6.0.3",
       "externalReferences": [
         {
           "hashes": [
@@ -5681,7 +5710,7 @@
       "version": "6.0.3"
     },
     {
-      "bom-ref": "regex-69@2026.9.29",
+      "bom-ref": "regex-70@2026.9.29",
       "externalReferences": [
         {
           "hashes": [
@@ -6020,7 +6049,7 @@
       "version": "2026.9.29"
     },
     {
-      "bom-ref": "requests-70@2.34.2",
+      "bom-ref": "requests-71@2.34.2",
       "externalReferences": [
         {
           "hashes": [
@@ -6049,7 +6078,7 @@
       "version": "2.34.2"
     },
     {
-      "bom-ref": "rfc8785-71@0.1.4",
+      "bom-ref": "rfc8785-72@0.1.4",
       "externalReferences": [
         {
           "hashes": [
@@ -6078,7 +6107,7 @@
       "version": "0.1.4"
     },
     {
-      "bom-ref": "rich-72@15.0.0",
+      "bom-ref": "rich-73@15.0.0",
       "externalReferences": [
         {
           "hashes": [
@@ -6107,7 +6136,7 @@
       "version": "15.0.0"
     },
     {
-      "bom-ref": "secretstorage-73@3.5.0",
+      "bom-ref": "secretstorage-74@3.5.0",
       "externalReferences": [
         {
           "hashes": [
@@ -6142,7 +6171,7 @@
       "version": "3.5.0"
     },
     {
-      "bom-ref": "setuptools-74@84.2.1",
+      "bom-ref": "setuptools-75@84.2.1",
       "externalReferences": [
         {
           "hashes": [
@@ -6171,7 +6200,7 @@
       "version": "84.2.1"
     },
     {
-      "bom-ref": "shellingham-75@1.5.4",
+      "bom-ref": "shellingham-76@1.5.4",
       "externalReferences": [
         {
           "hashes": [
@@ -6200,7 +6229,7 @@
       "version": "1.5.4"
     },
     {
-      "bom-ref": "smart-open-76@8.0.4",
+      "bom-ref": "smart-open-77@8.0.4",
       "externalReferences": [
         {
           "hashes": [
@@ -6229,7 +6258,7 @@
       "version": "8.0.4"
     },
     {
-      "bom-ref": "sniffio-77@1.3.1",
+      "bom-ref": "sniffio-78@1.3.1",
       "externalReferences": [
         {
           "hashes": [
@@ -6258,7 +6287,7 @@
       "version": "1.3.1"
     },
     {
-      "bom-ref": "spacy-78@3.8.16",
+      "bom-ref": "spacy-79@3.8.16",
       "externalReferences": [
         {
           "hashes": [
@@ -6357,7 +6386,7 @@
       "version": "3.8.16"
     },
     {
-      "bom-ref": "spacy-legacy-79@3.0.12",
+      "bom-ref": "spacy-legacy-80@3.0.12",
       "externalReferences": [
         {
           "hashes": [
@@ -6386,7 +6415,7 @@
       "version": "3.0.12"
     },
     {
-      "bom-ref": "spacy-loggers-80@1.0.5",
+      "bom-ref": "spacy-loggers-81@1.0.5",
       "externalReferences": [
         {
           "hashes": [
@@ -6415,7 +6444,7 @@
       "version": "1.0.5"
     },
     {
-      "bom-ref": "srsly-81@2.5.4",
+      "bom-ref": "srsly-82@2.5.4",
       "externalReferences": [
         {
           "hashes": [
@@ -6594,7 +6623,7 @@
       "version": "2.5.4"
     },
     {
-      "bom-ref": "starlette-82@1.9.0",
+      "bom-ref": "starlette-83@1.9.0",
       "externalReferences": [
         {
           "hashes": [
@@ -6623,7 +6652,7 @@
       "version": "1.9.0"
     },
     {
-      "bom-ref": "structlog-83@26.1.0",
+      "bom-ref": "structlog-84@26.1.0",
       "externalReferences": [
         {
           "hashes": [
@@ -6652,7 +6681,7 @@
       "version": "26.1.0"
     },
     {
-      "bom-ref": "thinc-84@8.3.13",
+      "bom-ref": "thinc-85@8.3.13",
       "externalReferences": [
         {
           "hashes": [
@@ -6751,7 +6780,7 @@
       "version": "8.3.13"
     },
     {
-      "bom-ref": "tqdm-85@4.70.1",
+      "bom-ref": "tqdm-86@4.70.1",
       "externalReferences": [
         {
           "hashes": [
@@ -6780,7 +6809,7 @@
       "version": "4.70.1"
     },
     {
-      "bom-ref": "truststore-86@0.10.5",
+      "bom-ref": "truststore-87@0.10.5",
       "externalReferences": [
         {
           "hashes": [
@@ -6815,7 +6844,7 @@
       "version": "0.10.5"
     },
     {
-      "bom-ref": "typer-87@0.27.3",
+      "bom-ref": "typer-88@0.27.3",
       "externalReferences": [
         {
           "hashes": [
@@ -6844,7 +6873,7 @@
       "version": "0.27.3"
     },
     {
-      "bom-ref": "typing-extensions-88@4.16.0",
+      "bom-ref": "typing-extensions-89@4.16.0",
       "externalReferences": [
         {
           "hashes": [
@@ -6873,7 +6902,7 @@
       "version": "4.16.0"
     },
     {
-      "bom-ref": "typing-inspection-89@0.4.4",
+      "bom-ref": "typing-inspection-90@0.4.4",
       "externalReferences": [
         {
           "hashes": [
@@ -6902,7 +6931,7 @@
       "version": "0.4.4"
     },
     {
-      "bom-ref": "tzdata-90@2026.6",
+      "bom-ref": "tzdata-91@2026.6",
       "externalReferences": [
         {
           "hashes": [
@@ -6931,7 +6960,7 @@
       "version": "2026.6"
     },
     {
-      "bom-ref": "urllib3-91@2.8.0",
+      "bom-ref": "urllib3-92@2.8.0",
       "externalReferences": [
         {
           "hashes": [
@@ -6960,7 +6989,7 @@
       "version": "2.8.0"
     },
     {
-      "bom-ref": "uvicorn-92@0.54.0",
+      "bom-ref": "uvicorn-93@0.54.0",
       "externalReferences": [
         {
           "hashes": [
@@ -6989,7 +7018,7 @@
       "version": "0.54.0"
     },
     {
-      "bom-ref": "wasabi-93@1.1.3",
+      "bom-ref": "wasabi-94@1.1.3",
       "externalReferences": [
         {
           "hashes": [
@@ -7018,7 +7047,7 @@
       "version": "1.1.3"
     },
     {
-      "bom-ref": "weasel-94@1.0.0",
+      "bom-ref": "weasel-95@1.0.0",
       "externalReferences": [
         {
           "hashes": [
@@ -7047,7 +7076,7 @@
       "version": "1.0.0"
     },
     {
-      "bom-ref": "webauthn-95@3.0.1",
+      "bom-ref": "webauthn-96@3.0.1",
       "externalReferences": [
         {
           "hashes": [
@@ -7076,7 +7105,7 @@
       "version": "3.0.1"
     },
     {
-      "bom-ref": "wrapt-96@2.5.1",
+      "bom-ref": "wrapt-97@2.5.1",
       "externalReferences": [
         {
           "hashes": [
@@ -7323,6 +7352,64 @@
       "purl": "pkg:pypi/wrapt@2.5.1",
       "type": "library",
       "version": "2.5.1"
+    },
+    {
+      "bom-ref": "youtube-transcript-api-98@1.2.5",
+      "externalReferences": [
+        {
+          "hashes": [
+            {
+              "alg": "SHA-256",
+              "content": "5e750bd1bac188c1b4afeaf20464ba4dd7a5fb05617f48463f9faa5bace683cc"
+            }
+          ],
+          "type": "distribution",
+          "url": "https://files.pythonhosted.org/packages/01/4d/e5ab63c432a4a818ec5ca9eb18584472653bbdd845cc46bf9d227bad6c4d/youtube_transcript_api-1.2.5.tar.gz"
+        },
+        {
+          "hashes": [
+            {
+              "alg": "SHA-256",
+              "content": "e79323bcb2daebed25773fef51a8dd10fee2ff39fb5993dccbe060470d6721ea"
+            }
+          ],
+          "type": "distribution",
+          "url": "https://files.pythonhosted.org/packages/cb/ee/6463d3dafe3bf671af6b8c149cd746d4a48f43eb23de4b906f8e010b796f/youtube_transcript_api-1.2.5-py3-none-any.whl"
+        }
+      ],
+      "name": "youtube-transcript-api",
+      "purl": "pkg:pypi/youtube-transcript-api@1.2.5",
+      "type": "library",
+      "version": "1.2.5"
+    },
+    {
+      "bom-ref": "yt-dlp-99@2026.10.26",
+      "externalReferences": [
+        {
+          "hashes": [
+            {
+              "alg": "SHA-256",
+              "content": "abe5c6b94c3b2f0560500add1c42e0a97641752743a5b65588ac2007a6e23eb6"
+            }
+          ],
+          "type": "distribution",
+          "url": "https://files.pythonhosted.org/packages/83/31/4be3987022a6244550ab6a3afe45ad10ac10b5e5ab8874bd8eecc7f8b937/yt_dlp-2026.10.26.tar.gz"
+        },
+        {
+          "hashes": [
+            {
+              "alg": "SHA-256",
+              "content": "a05c5b5d8562f7e8a62f5334348b406af4930d56d3a65f8021d14af0e22339ae"
+            }
+          ],
+          "type": "distribution",
+          "url": "https://files.pythonhosted.org/packages/7f/3d/16ea7d5638cf585991f2c5705e8083688dde633d32d0871f2404e0f4d827/yt_dlp-2026.10.26-py3-none-any.whl"
+        }
+      ],
+      "name": "yt-dlp",
+      "purl": "pkg:pypi/yt-dlp@2026.10.26",
+      "type": "library",
+      "version": "2026.10.26"
     }
   ],
   "dependencies": [
@@ -7338,20 +7425,20 @@
     {
       "dependsOn": [
         "anyio-6@4.15.1",
-        "docstring-parser-24@0.18.0",
-        "httpx2-35@2.15.1",
-        "jiter-43@0.17.0",
-        "opentelemetry-api-55@1.45.1",
-        "pydantic-62@2.14.1",
-        "sniffio-77@1.3.1",
-        "typing-extensions-88@4.16.0"
+        "docstring-parser-25@0.18.0",
+        "httpx2-36@2.15.1",
+        "jiter-44@0.17.0",
+        "opentelemetry-api-56@1.45.1",
+        "pydantic-63@2.14.1",
+        "sniffio-78@1.3.1",
+        "typing-extensions-89@4.16.0"
       ],
       "ref": "anthropic-5@1.15.0"
     },
     {
       "dependsOn": [
-        "idna-37@3.20",
-        "typing-extensions-88@4.16.0"
+        "idna-38@3.20",
+        "typing-extensions-89@4.16.0"
       ],
       "ref": "anyio-6@4.15.1"
     },
@@ -7369,7 +7456,7 @@
     },
     {
       "dependsOn": [
-        "numpy-52@2.5.4"
+        "numpy-53@2.5.4"
       ],
       "ref": "blis-9@1.3.3"
     },
@@ -7387,7 +7474,7 @@
     },
     {
       "dependsOn": [
-        "pycparser-61@3.11"
+        "pycparser-62@3.11"
       ],
       "ref": "cffi-14@2.1.1"
     },
@@ -7419,287 +7506,290 @@
       "ref": "cymem-22@2.0.13"
     },
     {
-      "ref": "docopt-23@0.6.2"
+      "ref": "defusedxml-23@0.7.1"
     },
     {
-      "ref": "docstring-parser-24@0.18.0"
+      "ref": "docopt-24@0.6.2"
     },
     {
-      "ref": "en-core-web-sm-25@3.8.0"
+      "ref": "docstring-parser-25@0.18.0"
+    },
+    {
+      "ref": "en-core-web-sm-26@3.8.0"
     },
     {
       "dependsOn": [
         "annotated-doc-3@0.0.5",
-        "opentelemetry-api-55@1.45.1",
-        "pydantic-62@2.14.1",
-        "starlette-82@1.9.0",
-        "typing-extensions-88@4.16.0",
-        "typing-inspection-89@0.4.4"
+        "opentelemetry-api-56@1.45.1",
+        "pydantic-63@2.14.1",
+        "starlette-83@1.9.0",
+        "typing-extensions-89@4.16.0",
+        "typing-inspection-90@0.4.4"
       ],
-      "ref": "fastapi-26@0.153.0"
+      "ref": "fastapi-27@0.153.0"
     },
     {
-      "ref": "flatbuffers-27@25.12.19"
+      "ref": "flatbuffers-28@25.12.19"
     },
     {
-      "ref": "frozendict-28@2.4.7"
+      "ref": "frozendict-29@2.4.7"
     },
     {
       "dependsOn": [
-        "typing-extensions-88@4.16.0"
+        "typing-extensions-89@4.16.0"
       ],
-      "ref": "fsrs-29@6.3.2"
+      "ref": "fsrs-30@6.3.2"
     },
     {
       "dependsOn": [
         "cached-property-10@2.0.1",
         "chevron-16@0.14.0",
-        "frozendict-28@2.4.7",
-        "pyyaml-68@6.0.3"
+        "frozendict-29@2.4.7",
+        "pyyaml-69@6.0.3"
       ],
-      "ref": "genanki-30@0.13.1"
+      "ref": "genanki-31@0.13.1"
     },
     {
-      "ref": "h11-31@0.16.0"
+      "ref": "h11-32@0.16.0"
     },
     {
       "dependsOn": [
         "certifi-13@2026.10.19",
-        "h11-31@0.16.0"
+        "h11-32@0.16.0"
       ],
-      "ref": "httpcore-32@1.0.9"
+      "ref": "httpcore-33@1.0.9"
     },
     {
       "dependsOn": [
-        "h11-31@0.16.0",
-        "truststore-86@0.10.5"
+        "h11-32@0.16.0",
+        "truststore-87@0.10.5"
       ],
-      "ref": "httpcore2-33@2.15.1"
+      "ref": "httpcore2-34@2.15.1"
     },
     {
       "dependsOn": [
         "anyio-6@4.15.1",
         "certifi-13@2026.10.19",
-        "httpcore-32@1.0.9",
-        "idna-37@3.20"
+        "httpcore-33@1.0.9",
+        "idna-38@3.20"
       ],
-      "ref": "httpx-34@0.28.1"
+      "ref": "httpx-35@0.28.1"
     },
     {
       "dependsOn": [
         "anyio-6@4.15.1",
-        "httpcore2-33@2.15.1",
-        "httpx2-jsfetch-36@1.0",
-        "idna-37@3.20",
-        "truststore-86@0.10.5"
+        "httpcore2-34@2.15.1",
+        "httpx2-jsfetch-37@1.0",
+        "idna-38@3.20",
+        "truststore-87@0.10.5"
       ],
-      "ref": "httpx2-35@2.15.1"
+      "ref": "httpx2-36@2.15.1"
     },
     {
-      "ref": "httpx2-jsfetch-36@1.0"
+      "ref": "httpx2-jsfetch-37@1.0"
     },
     {
-      "ref": "idna-37@3.20"
+      "ref": "idna-38@3.20"
     },
     {
       "dependsOn": [
-        "more-itertools-49@11.2.1"
+        "more-itertools-50@11.2.1"
       ],
-      "ref": "jaraco-classes-38@3.4.0"
+      "ref": "jaraco-classes-39@3.4.0"
     },
     {
-      "ref": "jaraco-context-39@6.1.2"
+      "ref": "jaraco-context-40@6.1.2"
     },
     {
       "dependsOn": [
-        "more-itertools-49@11.2.1"
+        "more-itertools-50@11.2.1"
       ],
-      "ref": "jaraco-functools-40@4.6.0"
+      "ref": "jaraco-functools-41@4.6.0"
     },
     {
-      "ref": "jeepney-41@0.9.0"
+      "ref": "jeepney-42@0.9.0"
     },
     {
       "dependsOn": [
-        "markupsafe-46@3.0.4"
+        "markupsafe-47@3.0.4"
       ],
-      "ref": "jinja2-42@3.1.6"
+      "ref": "jinja2-43@3.1.6"
     },
     {
-      "ref": "jiter-43@0.17.0"
+      "ref": "jiter-44@0.17.0"
     },
     {
       "dependsOn": [
-        "jaraco-classes-38@3.4.0",
-        "jaraco-context-39@6.1.2",
-        "jaraco-functools-40@4.6.0",
-        "jeepney-41@0.9.0",
-        "pywin32-ctypes-67@0.2.3",
-        "secretstorage-73@3.5.0"
+        "jaraco-classes-39@3.4.0",
+        "jaraco-context-40@6.1.2",
+        "jaraco-functools-41@4.6.0",
+        "jeepney-42@0.9.0",
+        "pywin32-ctypes-68@0.2.3",
+        "secretstorage-74@3.5.0"
       ],
-      "ref": "keyring-44@25.7.0"
+      "ref": "keyring-45@25.7.0"
     },
     {
       "dependsOn": [
-        "mdurl-47@0.1.2"
+        "mdurl-48@0.1.2"
       ],
-      "ref": "markdown-it-py-45@4.2.0"
+      "ref": "markdown-it-py-46@4.2.0"
     },
     {
-      "ref": "markupsafe-46@3.0.4"
+      "ref": "markupsafe-47@3.0.4"
     },
     {
-      "ref": "mdurl-47@0.1.2"
+      "ref": "mdurl-48@0.1.2"
     },
     {
       "dependsOn": [
         "addict-2@2.4.0",
-        "regex-69@2026.9.29"
+        "regex-70@2026.9.29"
       ],
-      "ref": "misaki-48@0.9.4"
+      "ref": "misaki-49@0.9.4"
     },
     {
-      "ref": "more-itertools-49@11.2.1"
+      "ref": "more-itertools-50@11.2.1"
     },
     {
-      "ref": "murmurhash-50@1.0.15"
+      "ref": "murmurhash-51@1.0.15"
     },
     {
       "dependsOn": [
-        "docopt-23@0.6.2"
+        "docopt-24@0.6.2"
       ],
-      "ref": "num2words-51@0.5.14"
+      "ref": "num2words-52@0.5.14"
     },
     {
-      "ref": "numpy-52@2.5.4"
+      "ref": "numpy-53@2.5.4"
     },
     {
       "dependsOn": [
-        "flatbuffers-27@25.12.19",
-        "numpy-52@2.5.4",
-        "packaging-56@26.3",
-        "protobuf-58@7.36.2"
+        "flatbuffers-28@25.12.19",
+        "numpy-53@2.5.4",
+        "packaging-57@26.3",
+        "protobuf-59@7.36.2"
       ],
-      "ref": "onnxruntime-53@1.31.0"
+      "ref": "onnxruntime-54@1.31.0"
     },
     {
       "dependsOn": [
         "anyio-6@4.15.1",
-        "httpx2-35@2.15.1",
-        "jiter-43@0.17.0",
-        "pydantic-62@2.14.1",
-        "sniffio-77@1.3.1",
-        "typing-extensions-88@4.16.0"
+        "httpx2-36@2.15.1",
+        "jiter-44@0.17.0",
+        "pydantic-63@2.14.1",
+        "sniffio-78@1.3.1",
+        "typing-extensions-89@4.16.0"
       ],
-      "ref": "openai-54@3.35.1"
+      "ref": "openai-55@3.35.1"
     },
     {
       "dependsOn": [
-        "typing-extensions-88@4.16.0"
+        "typing-extensions-89@4.16.0"
       ],
-      "ref": "opentelemetry-api-55@1.45.1"
+      "ref": "opentelemetry-api-56@1.45.1"
     },
     {
-      "ref": "packaging-56@26.3"
+      "ref": "packaging-57@26.3"
     },
     {
       "dependsOn": [
         "cymem-22@2.0.13",
-        "murmurhash-50@1.0.15"
+        "murmurhash-51@1.0.15"
       ],
-      "ref": "preshed-57@3.0.13"
+      "ref": "preshed-58@3.0.13"
     },
     {
-      "ref": "protobuf-58@7.36.2"
+      "ref": "protobuf-59@7.36.2"
     },
     {
-      "ref": "pyasn1-59@0.6.4"
+      "ref": "pyasn1-60@0.6.4"
     },
     {
       "dependsOn": [
-        "pyasn1-59@0.6.4"
+        "pyasn1-60@0.6.4"
       ],
-      "ref": "pyasn1-modules-60@0.4.2"
+      "ref": "pyasn1-modules-61@0.4.2"
     },
     {
-      "ref": "pycparser-61@3.11"
+      "ref": "pycparser-62@3.11"
     },
     {
       "dependsOn": [
         "annotated-types-4@0.8.0",
-        "pydantic-core-63@2.50.1",
-        "typing-extensions-88@4.16.0",
-        "typing-inspection-89@0.4.4"
+        "pydantic-core-64@2.50.1",
+        "typing-extensions-89@4.16.0",
+        "typing-inspection-90@0.4.4"
       ],
-      "ref": "pydantic-62@2.14.1"
+      "ref": "pydantic-63@2.14.1"
     },
     {
       "dependsOn": [
-        "typing-extensions-88@4.16.0"
+        "typing-extensions-89@4.16.0"
       ],
-      "ref": "pydantic-core-63@2.50.1"
+      "ref": "pydantic-core-64@2.50.1"
     },
     {
-      "ref": "pygments-64@2.21.0"
+      "ref": "pygments-65@2.21.0"
     },
     {
       "dependsOn": [
         "cryptography-21@50.0.2"
       ],
-      "ref": "pyopenssl-65@26.4.0"
+      "ref": "pyopenssl-66@26.4.0"
     },
     {
-      "ref": "pypdfium2-66@5.15.2"
+      "ref": "pypdfium2-67@5.15.2"
     },
     {
-      "ref": "pywin32-ctypes-67@0.2.3"
+      "ref": "pywin32-ctypes-68@0.2.3"
     },
     {
-      "ref": "pyyaml-68@6.0.3"
+      "ref": "pyyaml-69@6.0.3"
     },
     {
-      "ref": "regex-69@2026.9.29"
+      "ref": "regex-70@2026.9.29"
     },
     {
       "dependsOn": [
         "certifi-13@2026.10.19",
         "charset-normalizer-15@3.5.2",
-        "idna-37@3.20",
-        "urllib3-91@2.8.0"
+        "idna-38@3.20",
+        "urllib3-92@2.8.0"
       ],
-      "ref": "requests-70@2.34.2"
+      "ref": "requests-71@2.34.2"
     },
     {
-      "ref": "rfc8785-71@0.1.4"
+      "ref": "rfc8785-72@0.1.4"
     },
     {
       "dependsOn": [
-        "markdown-it-py-45@4.2.0",
-        "pygments-64@2.21.0"
+        "markdown-it-py-46@4.2.0",
+        "pygments-65@2.21.0"
       ],
-      "ref": "rich-72@15.0.0"
+      "ref": "rich-73@15.0.0"
     },
     {
       "dependsOn": [
         "cryptography-21@50.0.2",
-        "jeepney-41@0.9.0"
+        "jeepney-42@0.9.0"
       ],
-      "ref": "secretstorage-73@3.5.0"
+      "ref": "secretstorage-74@3.5.0"
     },
     {
-      "ref": "setuptools-74@84.2.1"
+      "ref": "setuptools-75@84.2.1"
     },
     {
-      "ref": "shellingham-75@1.5.4"
+      "ref": "shellingham-76@1.5.4"
     },
     {
       "dependsOn": [
-        "wrapt-96@2.5.1"
+        "wrapt-97@2.5.1"
       ],
-      "ref": "smart-open-76@8.0.4"
+      "ref": "smart-open-77@8.0.4"
     },
     {
-      "ref": "sniffio-77@1.3.1"
+      "ref": "sniffio-78@1.3.1"
     },
     {
       "dependsOn": [
@@ -7707,45 +7797,45 @@
         "click-17@8.5.0",
         "confection-20@1.3.3",
         "cymem-22@2.0.13",
-        "jinja2-42@3.1.6",
-        "murmurhash-50@1.0.15",
-        "numpy-52@2.5.4",
-        "packaging-56@26.3",
-        "preshed-57@3.0.13",
-        "pydantic-62@2.14.1",
-        "requests-70@2.34.2",
-        "setuptools-74@84.2.1",
-        "spacy-legacy-79@3.0.12",
-        "spacy-loggers-80@1.0.5",
-        "srsly-81@2.5.4",
-        "thinc-84@8.3.13",
-        "tqdm-85@4.70.1",
-        "typer-87@0.27.3",
-        "wasabi-93@1.1.3",
-        "weasel-94@1.0.0"
+        "jinja2-43@3.1.6",
+        "murmurhash-51@1.0.15",
+        "numpy-53@2.5.4",
+        "packaging-57@26.3",
+        "preshed-58@3.0.13",
+        "pydantic-63@2.14.1",
+        "requests-71@2.34.2",
+        "setuptools-75@84.2.1",
+        "spacy-legacy-80@3.0.12",
+        "spacy-loggers-81@1.0.5",
+        "srsly-82@2.5.4",
+        "thinc-85@8.3.13",
+        "tqdm-86@4.70.1",
+        "typer-88@0.27.3",
+        "wasabi-94@1.1.3",
+        "weasel-95@1.0.0"
       ],
-      "ref": "spacy-78@3.8.16"
+      "ref": "spacy-79@3.8.16"
     },
     {
-      "ref": "spacy-legacy-79@3.0.12"
+      "ref": "spacy-legacy-80@3.0.12"
     },
     {
-      "ref": "spacy-loggers-80@1.0.5"
+      "ref": "spacy-loggers-81@1.0.5"
     },
     {
       "dependsOn": [
         "catalogue-11@2.0.10"
       ],
-      "ref": "srsly-81@2.5.4"
+      "ref": "srsly-82@2.5.4"
     },
     {
       "dependsOn": [
         "anyio-6@4.15.1"
       ],
-      "ref": "starlette-82@1.9.0"
+      "ref": "starlette-83@1.9.0"
     },
     {
-      "ref": "structlog-83@26.1.0"
+      "ref": "structlog-84@26.1.0"
     },
     {
       "dependsOn": [
@@ -7753,89 +7843,99 @@
         "catalogue-11@2.0.10",
         "confection-20@1.3.3",
         "cymem-22@2.0.13",
-        "murmurhash-50@1.0.15",
-        "numpy-52@2.5.4",
-        "packaging-56@26.3",
-        "preshed-57@3.0.13",
-        "pydantic-62@2.14.1",
-        "setuptools-74@84.2.1",
-        "srsly-81@2.5.4",
-        "wasabi-93@1.1.3"
+        "murmurhash-51@1.0.15",
+        "numpy-53@2.5.4",
+        "packaging-57@26.3",
+        "preshed-58@3.0.13",
+        "pydantic-63@2.14.1",
+        "setuptools-75@84.2.1",
+        "srsly-82@2.5.4",
+        "wasabi-94@1.1.3"
       ],
-      "ref": "thinc-84@8.3.13"
+      "ref": "thinc-85@8.3.13"
     },
     {
       "dependsOn": [
         "colorama-19@0.4.6"
       ],
-      "ref": "tqdm-85@4.70.1"
+      "ref": "tqdm-86@4.70.1"
     },
     {
-      "ref": "truststore-86@0.10.5"
+      "ref": "truststore-87@0.10.5"
     },
     {
       "dependsOn": [
         "annotated-doc-3@0.0.5",
         "colorama-19@0.4.6",
-        "rich-72@15.0.0",
-        "shellingham-75@1.5.4"
+        "rich-73@15.0.0",
+        "shellingham-76@1.5.4"
       ],
-      "ref": "typer-87@0.27.3"
+      "ref": "typer-88@0.27.3"
     },
     {
-      "ref": "typing-extensions-88@4.16.0"
+      "ref": "typing-extensions-89@4.16.0"
     },
     {
       "dependsOn": [
-        "typing-extensions-88@4.16.0"
+        "typing-extensions-89@4.16.0"
       ],
-      "ref": "typing-inspection-89@0.4.4"
+      "ref": "typing-inspection-90@0.4.4"
     },
     {
-      "ref": "tzdata-90@2026.6"
+      "ref": "tzdata-91@2026.6"
     },
     {
-      "ref": "urllib3-91@2.8.0"
+      "ref": "urllib3-92@2.8.0"
     },
     {
       "dependsOn": [
         "click-17@8.5.0",
-        "h11-31@0.16.0"
+        "h11-32@0.16.0"
       ],
-      "ref": "uvicorn-92@0.54.0"
+      "ref": "uvicorn-93@0.54.0"
     },
     {
       "dependsOn": [
         "colorama-19@0.4.6"
       ],
-      "ref": "wasabi-93@1.1.3"
+      "ref": "wasabi-94@1.1.3"
     },
     {
       "dependsOn": [
         "cloudpathlib-18@0.26.0",
         "confection-20@1.3.3",
-        "httpx-34@0.28.1",
-        "packaging-56@26.3",
-        "pydantic-62@2.14.1",
-        "smart-open-76@8.0.4",
-        "srsly-81@2.5.4",
-        "typer-87@0.27.3",
-        "wasabi-93@1.1.3"
+        "httpx-35@0.28.1",
+        "packaging-57@26.3",
+        "pydantic-63@2.14.1",
+        "smart-open-77@8.0.4",
+        "srsly-82@2.5.4",
+        "typer-88@0.27.3",
+        "wasabi-94@1.1.3"
       ],
-      "ref": "weasel-94@1.0.0"
+      "ref": "weasel-95@1.0.0"
     },
     {
       "dependsOn": [
         "cbor2-12@6.1.5",
         "cryptography-21@50.0.2",
-        "pyasn1-59@0.6.4",
-        "pyasn1-modules-60@0.4.2",
-        "pyopenssl-65@26.4.0"
+        "pyasn1-60@0.6.4",
+        "pyasn1-modules-61@0.4.2",
+        "pyopenssl-66@26.4.0"
       ],
-      "ref": "webauthn-95@3.0.1"
+      "ref": "webauthn-96@3.0.1"
     },
     {
-      "ref": "wrapt-96@2.5.1"
+      "ref": "wrapt-97@2.5.1"
+    },
+    {
+      "dependsOn": [
+        "defusedxml-23@0.7.1",
+        "requests-71@2.34.2"
+      ],
+      "ref": "youtube-transcript-api-98@1.2.5"
+    },
+    {
+      "ref": "yt-dlp-99@2026.10.26"
     },
     {
       "dependsOn": [
@@ -7843,32 +7943,34 @@
         "anyio-6@4.15.1",
         "argon2-cffi-7@25.1.0",
         "cryptography-21@50.0.2",
-        "en-core-web-sm-25@3.8.0",
-        "fastapi-26@0.153.0",
-        "fsrs-29@6.3.2",
-        "genanki-30@0.13.1",
-        "httpx-34@0.28.1",
-        "keyring-44@25.7.0",
-        "misaki-48@0.9.4",
-        "num2words-51@0.5.14",
-        "numpy-52@2.5.4",
-        "onnxruntime-53@1.31.0",
-        "openai-54@3.35.1",
-        "pydantic-62@2.14.1",
-        "pypdfium2-66@5.15.2",
-        "rfc8785-71@0.1.4",
-        "spacy-78@3.8.16",
-        "structlog-83@26.1.0",
-        "tzdata-90@2026.6",
-        "uvicorn-92@0.54.0",
-        "webauthn-95@3.0.1"
+        "en-core-web-sm-26@3.8.0",
+        "fastapi-27@0.153.0",
+        "fsrs-30@6.3.2",
+        "genanki-31@0.13.1",
+        "httpx-35@0.28.1",
+        "keyring-45@25.7.0",
+        "misaki-49@0.9.4",
+        "num2words-52@0.5.14",
+        "numpy-53@2.5.4",
+        "onnxruntime-54@1.31.0",
+        "openai-55@3.35.1",
+        "pydantic-63@2.14.1",
+        "pypdfium2-67@5.15.2",
+        "rfc8785-72@0.1.4",
+        "spacy-79@3.8.16",
+        "structlog-84@26.1.0",
+        "tzdata-91@2026.6",
+        "uvicorn-93@0.54.0",
+        "webauthn-96@3.0.1",
+        "youtube-transcript-api-98@1.2.5",
+        "yt-dlp-99@2026.10.26"
       ],
-      "ref": "yuo-1@1.2.0"
+      "ref": "yuo-1@1.3.0"
     }
   ],
   "metadata": {
     "component": {
-      "bom-ref": "yuo-1@1.2.0",
+      "bom-ref": "yuo-1@1.3.0",
       "name": "yuo",
       "properties": [
         {
@@ -7877,7 +7979,7 @@
         }
       ],
       "type": "library",
-      "version": "1.2.0"
+      "version": "1.3.0"
     }
   },
   "specVersion": "1.5",

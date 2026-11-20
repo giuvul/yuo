@@ -214,6 +214,8 @@ class Stage(StrEnum):
     COURSE_LINKS = "course_links"  # prerequisites and related skills across courses (0005)
     MATERIAL_VISION = "material_vision"  # pages with formulas or figures, read from their images (0006)
     STUDIES_ARRANGE = "studies_arrange"  # a path's name and courses, proposed from the learner's files (0007)
+    VIDEO_PICK = "video_pick"  # the YouTube video a lesson is built on, among the search's candidates (0008)
+    VIDEO_QUERY = "video_query"  # the YouTube searches for a lesson's video (0009)
 
 
 class Check(StrEnum):

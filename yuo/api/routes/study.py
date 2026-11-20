@@ -31,6 +31,12 @@ def router(svc: Any) -> APIRouter:
         """Make a lesson's video again after it failed."""
         return {"job_id": svc.retry_video(lesson_id)}
 
+    @r.post("/api/lessons/{lesson_id}/youtube/another", status_code=202, response_model=S.JobStarted)
+    def post_another_video(lesson_id: str) -> dict[str, str]:
+        """Turn down the lesson's YouTube video (or look again when none was found): the next one found, and
+        the lesson written again for it."""
+        return {"job_id": svc.another(lesson_id)}
+
     @r.get("/api/lessons/{lesson_id}", response_model=S.LessonOut)
     def get_lesson(lesson_id: str) -> dict[str, Any]:
         result: dict[str, Any] = svc.lesson_view(lesson_id)

@@ -119,6 +119,9 @@ class Video(Part):
         fmt = settings.effective(c, "video.format", {"path": path_id})[0]
         if fmt == "reading" or self.video_unavailable() is not None:
             return None
+        source = settings.effective(c, "video.source", {"path": path_id})[0]
+        if source == "youtube":
+            return None  # the lesson's video is a YouTube one (yuo.app.video_links)
         row = c.execute(
             "SELECT id, state FROM rendition WHERE lesson_id = ? AND kind = 'video'", (lesson_id,)
         ).fetchone()

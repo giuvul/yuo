@@ -3,6 +3,7 @@ nothing, makes no stills of substance, and (optionally) writes a real, playable 
 
 import subprocess
 from pathlib import Path
+from typing import Any
 
 from yuo.core.audio import write_wav
 from yuo.core.media import Narration, Stills
@@ -89,3 +90,86 @@ class FakeFFmpeg:
 
     def with_subtitles(self, video: Path, vtt: Path, out: Path, lang: str = "eng") -> None:
         out.write_bytes(video.read_bytes())
+
+
+class FakeYouTube:
+    """YouTube for lessons built on a video: four candidates, each with a transcript; `refuse` makes the
+    captions fail with that kind (blocked, no_transcript); `audio` writes a small file standing for the sound,
+    unless `refuse_audio` names a kind."""
+
+    def __init__(self) -> None:
+        from yuo.core.online_video import Candidate
+
+        self.searches: list[str] = []
+        self.transcripts: list[str] = []
+        self.refuse: str | None = None
+        self.refuse_audio: str | None = None
+        self.sounds: list[str] = []
+        self.gone: set[str] = set()
+        self.found = [
+            Candidate(f"vid{n}aaaaaa", f"Video {n} on joins", f"Channel {n}", f"UC{n}", 12 * 60_000, 1000 * n)
+            for n in range(1, 5)
+        ]
+
+    def search(self, query: str, lang: str, limit: int) -> list[Any]:
+        self.searches.append(query)
+        return self.found[:limit]
+
+    def transcript(self, video_id: str, langs: list[str]) -> Any:
+        from yuo.core.online_video import Line, OnlineVideoError, Transcript
+
+        self.transcripts.append(video_id)
+        if self.refuse:
+            raise OnlineVideoError(self.refuse)
+        lines = [
+            Line(
+                s * 1000,
+                (s + 10) * 1000,
+                f"in {video_id} a left join keeps every row of the left table, part {s}",
+            )
+            for s in range(0, 720, 10)
+        ]
+        return Transcript(langs[-1], True, lines)
+
+    def audio(self, video_id: str, folder: Path) -> Path:
+        from yuo.core.online_video import OnlineVideoError
+
+        self.sounds.append(video_id)
+        if self.refuse_audio:
+            raise OnlineVideoError(self.refuse_audio)
+        folder.mkdir(parents=True, exist_ok=True)
+        out = folder / f"{video_id}.webm"
+        out.write_text(video_id)
+        return out
+
+    def available(self, video_id: str) -> tuple[str, str] | None:
+        return None if video_id in self.gone else (f"Renamed {video_id}", "New channel")
+
+
+class FakeTranscriber:
+    """Speech recognition: each sound file "says" a left-join sentence every 10 seconds for 12 minutes, in
+    `language` (or the one per video in `languages`)."""
+
+    def __init__(self, language: str = "en") -> None:
+        self.language = language
+        self.languages: dict[str, str] = {}
+        self.heard: list[str] = []
+        self.calls: list[dict[str, Any]] = []
+
+    def available(self) -> str | None:
+        return None
+
+    def transcribe(self, audio: Path, **kw: Any) -> list[Any]:
+        from yuo.core.documents import Segment
+
+        video_id = audio.read_text()
+        self.heard.append(video_id)
+        self.calls.append(kw)
+        if kw.get("on_language"):
+            kw["on_language"](self.languages.get(video_id, self.language))
+        return [
+            Segment(
+                s * 1000, (s + 10) * 1000, f" heard in {video_id}: a left join keeps every left row, part {s}"
+            )
+            for s in range(0, 720, 10)
+        ]

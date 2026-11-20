@@ -27,6 +27,9 @@ class PathIn(BaseModel):
         False  # a short check of what the learner knows before the path is planned (the app asks)
     )
     preview: bool = False  # the learner sees the plan and can change it before it is built (the app asks)
+    # this path's videos: from YouTube, made by Yuo, or none (reading lessons only); saved as the path's own
+    # video.source and video.format. None: the path follows the general setting
+    videos: Literal["youtube", "generated", "reading"] | None = None
 
 
 class PreviewFeedbackIn(BaseModel):

@@ -112,6 +112,9 @@ function wizardRoutes(rec: () => RecommendationOut, state: State, extra: Paramet
       });
     },
     "GET /api/setup/consent/claude": () => json({ cli: "claude", version: 2, text: "English original" }),
+    "GET /api/settings": () => json([]),
+    "PUT /api/settings/video.source": () => new Response(null, { status: 204 }),
+    "PUT /api/settings/video.format": () => new Response(null, { status: 204 }),
     ...extra,
   });
 }
@@ -145,10 +148,10 @@ describe("environment wizard", () => {
 
     await waitFor(() => expect(router.state.location.pathname).toBe("/setup"));
     expect(await screen.findByRole("heading", { level: 2, name: "Your computer" })).toBeInTheDocument();
-    expect(screen.getByText("Step 1 of 5")).toBeInTheDocument();
+    expect(screen.getByText("Step 1 of 6")).toBeInTheDocument();
     expect(screen.getByText(/Nothing leaves this computer/)).toBeInTheDocument();
     const steps = screen.getByRole("navigation", { name: "Setup steps" });
-    expect(within(steps).getAllByRole("listitem")).toHaveLength(5);
+    expect(within(steps).getAllByRole("listitem")).toHaveLength(6);
     expect(within(steps).getByText("Your computer").closest("li")).toHaveAttribute("aria-current", "step");
 
     expect(await screen.findByText("Windows 11")).toBeInTheDocument();
@@ -195,7 +198,7 @@ describe("environment wizard", () => {
     ).toBeInTheDocument();
     await u.click(screen.getByRole("button", { name: "Next" }));
     expect(await screen.findByRole("heading", { level: 2, name: "About you" })).toBeInTheDocument();
-    expect(screen.getByText("Step 4 of 5")).toBeInTheDocument();
+    expect(screen.getByText("Step 4 of 6")).toBeInTheDocument();
   });
 
   it("lets a learner pick a subscription whose program is missing, then holds the step until it is ready", async () => {
@@ -462,7 +465,15 @@ describe("environment wizard", () => {
     await u.click(screen.getByRole("button", { name: "Session length and interests (optional)" }));
     await u.type(screen.getByRole("textbox", { name: /Your interests/ }), "cycling");
     await u.click(screen.getByRole("button", { name: "Save and continue" }));
+
+    // videos: YouTube first and chosen, with what the learner takes on; a renderer here offers Yuo's own too
+    expect(await screen.findByRole("heading", { level: 2, name: "Videos" })).toBeInTheDocument();
+    expect(await screen.findByRole("radio", { name: /Videos from YouTube/ })).toBeChecked();
+    expect(screen.getByRole("radio", { name: /Videos made by Yuo/ })).toBeInTheDocument();
+    expect(screen.getByText(/You use this at your own risk/)).toBeInTheDocument();
+    await u.click(screen.getByRole("button", { name: "Save and continue" }));
     expect(await screen.findByRole("heading", { level: 2, name: "Your first path" })).toBeInTheDocument();
+    expect(calls.find((c) => c.path === "/api/settings/video.source")?.body).toEqual({ value: "youtube", level: "learner" });
     expect(calls.filter((c) => c.method === "PATCH").at(-1)?.body).toEqual({
       display_name: "Ada",
       content_lang: "en",
@@ -495,9 +506,15 @@ describe("environment wizard", () => {
       "GET /api/setup": () => json(configuredSetup),
       "GET /api/estimate": () => json({ low_usd: 0.5, high_usd: 2, notional_usd: 2, missing: [], lines: [] }),
     });
+    const u = user();
     renderApp("/setup");
+    expect(await screen.findByRole("heading", { level: 2, name: "Videos" })).toBeInTheDocument();
+    expect(screen.getByText("Step 5 of 6")).toBeInTheDocument();
+    await u.click(await screen.findByRole("radio", { name: /No videos/ }));
+    expect(screen.queryByText(/You use this at your own risk/)).toBeNull();
+    await u.click(screen.getByRole("button", { name: "Save and continue" }));
     expect(await screen.findByRole("heading", { level: 2, name: "Your first path" })).toBeInTheDocument();
-    expect(screen.getByText("Step 5 of 5")).toBeInTheDocument();
+    expect(screen.getByText("Step 6 of 6")).toBeInTheDocument();
     expect(await screen.findByText(/Estimated cost for 20 lessons/)).toBeInTheDocument();
     expect(screen.queryByText(/hosted version/)).not.toBeInTheDocument();
     expect(screen.queryByRole("button", { name: "Finish without a new path" })).not.toBeInTheDocument();
@@ -553,6 +570,7 @@ describe("answers an AI assistant collected (SETUP.md)", () => {
       "GET /api/setup/answers": () => json(answers),
     });
     renderApp("/setup");
+    await user().click(await screen.findByRole("button", { name: "Save and continue" }));
     expect(await screen.findByRole("heading", { level: 2, name: "Your first path" })).toBeInTheDocument();
     expect(await screen.findByRole("textbox", { name: /Title/ })).toHaveValue("Statistics for A/B tests");
     expect(screen.getByRole("textbox", { name: /Your goal/ })).toHaveValue("Read and design A/B tests at work");
