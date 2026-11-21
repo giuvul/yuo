@@ -130,6 +130,10 @@ an update of the image. To sign in by hand instead: `docker compose exec yuo cla
   on "Start Docker Desktop when you sign in" (Settings > General); on Linux enable the service once with
   `sudo systemctl enable docker`. A copy stopped with `docker compose stop` stays stopped until
   `docker compose up -d`.
+- Updates: Yuo looks for a new release after every start and once a day (Settings > Updates, where it can be
+  turned off). To update, set `YUO_IMAGE` in `.env` to the new version, then `docker compose pull &&
+  docker compose up -d`; the data stays in its volume and the new version migrates it after a backup. The pull
+  downloads only the layers that changed, usually Yuo's own code and web app, a few MB.
 - Lost every way in: `docker compose exec yuo yuo setup-code` prints a new setup code.
 - Backups: one a day, the newest seven, in the data volume (`yuo_data` by default; `/data/backups`); one now with
   `docker compose exec yuo yuo backup`. Copy them off the machine with

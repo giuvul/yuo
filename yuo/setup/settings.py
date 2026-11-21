@@ -662,7 +662,7 @@ define(
         ("installation",),
         True,
         bool,
-        explanation="Look once a day for a new Yuo release. The check downloads a small file listing the latest "
+        explanation="Look for a new Yuo release when Yuo starts and once a day while it runs. The check downloads a small file listing the latest "
         "version; nothing about you or your learning is sent. Installing is always your choice.",
         example="Off: you learn about new versions from the project page only.",
         suggestion="on, so you get fixes",

@@ -1,5 +1,9 @@
 """Updates (CFG B11): know about a new release, fetch it, and hand it to the desktop launcher.
 
+The app looks for a new release a few seconds after every start (an install that is off most of the time,
+like a computer turned off at night, still hears of one) and then once a day while it runs; "updates.check"
+turns this off. A failed look (offline) is tried again an hour later.
+
 The app only downloads and checks; installing happens outside the running process. On the desktop the
 launcher installs the staged release beside the current one and starts it; the new version migrates the
 database after a checked backup, and if it does not come up the launcher restores that backup and
@@ -24,6 +28,8 @@ from yuo.core.errors import InvalidInput
 log = structlog.get_logger(__name__)
 
 CHECK_EVERY_S = 24 * 3600
+FIRST_CHECK_S = 10.0  # after a start: let the server come up first
+POLL_S = 3600.0  # how often the background check wakes: a retry after a failure, the daily look otherwise
 EXIT_FOR_UPDATE = 75  # the launcher's signal: install what is staged, then start again
 _VERSION = re.compile(r"^(\d+)\.(\d+)\.(\d+)$")
 _SHA = re.compile(r"^[0-9a-f]{64}$")
@@ -51,6 +57,8 @@ class Updates:
         enabled: Callable[[], bool],
         desktop: bool,
         exit_process: Callable[[int], None],
+        first_check_s: float = FIRST_CHECK_S,
+        poll_s: float = POLL_S,
     ) -> None:
         self.dir = root / "updates"
         self.cache = root / "cache" / "update-check.json"
@@ -62,6 +70,40 @@ class Updates:
         self.desktop = desktop
         self._exit = exit_process
         self._lock = threading.Lock()
+        self.first_check_s = first_check_s
+        self.poll_s = poll_s
+        self._stop = threading.Event()
+        self._thread: threading.Thread | None = None
+
+    def start(self) -> None:
+        """Look now (forced: this start's look is never skipped for a fresh cache), then once a day."""
+        if not self.feed_url or self._thread is not None:
+            return
+        self._stop.clear()
+        self._thread = threading.Thread(target=self._run, name="update-check", daemon=True)
+        self._thread.start()
+
+    def stop(self) -> None:
+        self._stop.set()
+        if self._thread is not None:
+            self._thread.join(timeout=5)
+            self._thread = None
+
+    def _run(self) -> None:
+        looked = False  # this start's look is done
+        wait = self.first_check_s
+        while not self._stop.wait(wait):
+            wait = self.poll_s
+            if not self._enabled():
+                continue  # turned on later: the look happens within the hour
+            try:
+                latest = self.check(force=not looked)
+            except Exception as e:  # offline, a bad feed: try again later, never stop the app
+                log.warning("update.check_failed", error=str(e)[:200])
+                continue
+            looked = True
+            if latest and newer(latest["version"], self.current):
+                log.info("update.available", current=self.current, latest=latest["version"])
 
     def _cached(self) -> dict[str, Any] | None:
         try:

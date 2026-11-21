@@ -233,6 +233,47 @@ def test_an_update_is_fetched_checked_and_handed_to_the_launcher(
     assert c.post("/api/desktop/quit").status_code == 202 and state["desktop"].quits == 1
 
 
+def test_every_start_looks_for_a_new_release_even_with_a_fresh_answer_from_yesterday(tmp_path: Path) -> None:
+    """A computer that is off at night may never run for a whole day: the look happens after each start."""
+    import time
+
+    fetched: list[str] = []
+    on = [True]
+
+    def fetch(url: str) -> dict[str, Any]:
+        fetched.append(url)
+        if len(fetched) == 1:
+            raise OSError("offline")  # the first look fails: tried again at the next wake
+        return {"version": "1.1.0", "desktop": None}
+
+    cache = tmp_path / "cache" / "update-check.json"
+    cache.parent.mkdir(parents=True)
+    cache.write_text(json.dumps({"version": "1.0.0", "checked_at": time.time()}), encoding="utf-8")
+
+    def updates(feed: str | None) -> Updates:
+        return Updates(tmp_path, "1.0.0", feed, fetch=fetch, download=lambda *a: tmp_path, enabled=lambda: on[0],
+                       desktop=False, exit_process=lambda code: None, first_check_s=0, poll_s=0.01)  # fmt: skip
+
+    u = updates("https://releases.example/feed.json")
+    u.start()
+    deadline = time.time() + 5
+    while len(fetched) < 2 and time.time() < deadline:
+        time.sleep(0.01)
+    time.sleep(0.1)  # more wakes: the answer is fresh now, nothing more is fetched
+    u.stop()
+    assert len(fetched) == 2 and u.status()["latest"] == "1.1.0" and u.status()["available"] is True
+
+    fetched.clear()
+    on[0] = False  # "updates.check" off: no look at all
+    u = updates("https://releases.example/feed.json")
+    u.start()
+    time.sleep(0.1)
+    u.stop()
+    no_feed = updates(None)  # a build without a feed never starts the look
+    no_feed.start()
+    assert fetched == [] and no_feed._thread is None
+
+
 def test_a_signed_out_tab_gets_a_signed_in_one_opened(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:

@@ -4,6 +4,18 @@ All notable changes are listed here. The format follows Keep a Changelog; versio
 
 ## [Unreleased]
 
+## [1.3.1] - 2026-11-21
+
+- Server installs (Docker) now hear about new versions: the image names the release feed, so Settings >
+  Updates shows a new version and how to install it. Before, only the desktop app could.
+- Yuo looks for a new version a few seconds after every start, then once a day while it runs (it only looked
+  when you pressed "Check now" before). A computer that is off at night still hears of updates; a failed look
+  (offline) is tried again an hour later. Settings > Updates turns it off.
+- Updating a server downloads much less: the image keeps the system packages, Python, its libraries, the
+  voice model and the video renderer in layers of their own that only change when they do, so an update
+  pulls Yuo's own code and web app, a few MB, instead of the whole image. This starts with the update after
+  1.3.1, whose image is the first built this way.
+
 ## [1.3.0] - 2026-11-20
 
 - Lesson videos can come from YouTube (Settings > Videos > Where videos come from). Yuo searches YouTube for

@@ -1,6 +1,8 @@
 # Release pipeline, on a version tag (vX.Y.Z, matching the version in pyproject.toml):
 #   1. checks, the third-party licence file, the desktop zip and latest.json;
 #   2. the server image for amd64 and arm64, built on native runners and pushed to ghcr.io by digest;
+#      it names the update feed, and its build cache lives in the registry (tags buildcache-<arch>), so
+#      layers whose inputs did not change keep their digest and an update pulls only what changed;
 #   3. one multi-architecture tag (ghcr.io/giuvul/yuo:X.Y.Z), with a build provenance attestation;
 #   4. the GitHub release, last, so latest.json never names an image that does not exist yet.
 # Attestations are signed with Sigstore; check one with `gh attestation verify <file> --repo giuvul/yuo`.
@@ -83,8 +85,10 @@ jobs:
       matrix:
         include:
           - platform: linux/amd64
+            arch: amd64
             runner: ubuntu-24.04
           - platform: linux/arm64
+            arch: arm64
             runner: ubuntu-24.04-arm
     runs-on: ${{ matrix.runner }}
     permissions:
@@ -115,6 +119,10 @@ jobs:
             org.opencontainers.image.version=${{ needs.build.outputs.version }}
             org.opencontainers.image.licenses=Apache-2.0
           outputs: type=image,name=${{ env.IMAGE }},push-by-digest=true,name-canonical=true,push=true
+          build-args: |
+            YUO_UPDATE_FEED=https://github.com/${{ github.repository }}/releases/latest/download/latest.json
+          cache-from: type=registry,ref=${{ env.IMAGE }}:buildcache-${{ matrix.arch }}
+          cache-to: type=registry,ref=${{ env.IMAGE }}:buildcache-${{ matrix.arch }},mode=max,image-manifest=true,oci-mediatypes=true
           provenance: false
       - name: Keep the digest
         run: |

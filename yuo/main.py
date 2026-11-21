@@ -467,6 +467,9 @@ def build() -> FastAPI:
         runtime.worker.start()
         runtime.tutor.start()
         upkeep.start()
+        updates = runtime.service.updates
+        if updates is not None:
+            updates.start()  # a look for a new release after every start, then daily
         if desktop is not None:
             desktop.started()
         try:
@@ -474,6 +477,8 @@ def build() -> FastAPI:
         finally:
             if desktop is not None:
                 desktop.stopped()
+            if updates is not None:
+                updates.stop()
             upkeep.stop()
             runtime.close()
             lock.release()

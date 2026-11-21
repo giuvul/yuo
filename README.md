@@ -92,8 +92,8 @@ OpenRouter, an AI company's API) receives what each request needs, under that pr
 model on your own machine, nothing leaves at all. Video narration is made by a voice that runs on your
 machine too.
 
-Yuo also downloads a few things that carry none of your data: its own updates (a daily check of the release
-file, which you can turn off in Settings), public model prices from OpenRouter, and the programs and voice
+Yuo also downloads a few things that carry none of your data: its own updates (a check of the release file
+at every start and once a day, which you can turn off in Settings), public model prices from OpenRouter, and the programs and voice
 model it needs. The first recorded lecture you add downloads the speech recognition (faster-whisper and its
 model, about 1 GB); your recordings are transcribed on your machine. On a server, the HTTPS certificate or
 Tailscale you set up connects your devices to it, not to anyone else. Sharing a path or exporting it happens only when you do it.

@@ -236,7 +236,7 @@ def expose(how: str, ip: str | None, domain: str | None, origin: str | None, out
 
 
 def fetch_models(directory: str | None) -> int:
-    from yuo.adapters.tts.kokoro import fetch_models as fetch
+    from yuo.adapters.tts.kokoro_models import fetch_models as fetch
 
     target = Path(directory or os.environ.get("YUO_KOKORO_DIR") or m.data_dir() / "models" / "kokoro")
     got = fetch(target)
