@@ -3,9 +3,8 @@
 import type { MessageDescriptor } from "@lingui/core";
 import { msg } from "@lingui/core/macro";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { useQuery } from "@tanstack/react-query";
 import { Link, useRouterState } from "@tanstack/react-router";
-import { useEffect, useId, useState, type ReactNode } from "react";
+import { useId, useState, type ReactNode } from "react";
 import { ApiError } from "../api/client";
 import { useSetup } from "../api/hooks";
 import { Collapsible, useOpenHashTarget } from "../components/Collapsible";
@@ -17,7 +16,6 @@ import { PlanMeters } from "./PlanMeter";
 import { VendorKeys } from "./vendor";
 import { OpenRouterModels } from "./vendorModels";
 import {
-  serverVersion,
   useAccess,
   useAiReady,
   useCheckForUpdate,
@@ -30,6 +28,7 @@ import {
   useUpdateStatus,
 } from "./api";
 import { StopYuo } from "./desktop";
+import { ContainerUpdateSteps, useReloadAfterRestart } from "./updates";
 import { ProfileForm, ThemePicker } from "./profile";
 import styles from "./onboarding.module.css";
 
@@ -441,9 +440,7 @@ function LocalModels({ models }: { models: string[] }) {
 
 // --- updates ---------------------------------------------------------------------------------------------
 
-/** Indirection so tests can watch the reload after a restart. */
-export const page = { reload: () => window.location.reload() };
-const HEALTH_POLL_MS = 2_000;
+export { page } from "./updates";
 
 export function UpdatesSection() {
   const { i18n } = useLingui();
@@ -451,21 +448,7 @@ export function UpdatesSection() {
   const check = useCheckForUpdate();
   const download = useDownloadUpdate();
   const restart = useRestartForUpdate();
-  const [restarting, setRestarting] = useState(false);
-  const current = status.data?.current ?? null;
-  const health = useQuery({
-    queryKey: ["health", "after-restart"],
-    queryFn: serverVersion,
-    enabled: restarting,
-    refetchInterval: HEALTH_POLL_MS,
-    staleTime: 0,
-    gcTime: 0,
-  });
-  const answered = health.data ?? null;
-
-  useEffect(() => {
-    if (restarting && answered !== null && answered !== current) page.reload();
-  }, [restarting, answered, current]);
+  const { restarting, begin: setRestarting } = useReloadAfterRestart(status.data?.current ?? null);
 
   const title = <Trans id="update.title">Updates</Trans>;
   const updatesDescription = <Trans id="update.description">Your version of Yuo and newer ones</Trans>;
@@ -543,15 +526,13 @@ export function UpdatesSection() {
             </p>
           )}
 
-          {s.available && !s.can_install ? (
+          {s.available && s.container ? <ContainerUpdateSteps status={s} /> : null}
+          {s.available && !s.can_install && !s.container ? (
             <p>
-              <Trans id="update.container.how">
-                To update, in the folder packaging/container set YUO_IMAGE in .env to the new version, then run
-                docker compose pull and docker compose up -d.
-              </Trans>
+              <Trans id="update.server.how">To update, install the new version the way you installed this one.</Trans>
             </p>
           ) : null}
-          {!s.can_install ? (
+          {s.container ? (
             <p className={ui.muted}>
               <Trans id="update.container.restart">
                 Yuo runs in Docker here and starts by itself whenever Docker runs. On a computer, turn on “Start
@@ -581,7 +562,7 @@ export function UpdatesSection() {
               </Button>
             ) : null}
             {s.available && s.can_install && staged ? (
-              <Button isDisabled={busy} onPress={() => restart.mutate(undefined, { onSuccess: () => setRestarting(true) })}>
+              <Button isDisabled={busy} onPress={() => restart.mutate(undefined, { onSuccess: () => setRestarting() })}>
                 <Trans id="update.restart">Restart to install</Trans>
               </Button>
             ) : null}

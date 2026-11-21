@@ -5744,10 +5744,14 @@ export interface components {
             available: boolean;
             /** Can Install */
             can_install: boolean;
+            /** Container */
+            container: boolean;
             /** Current */
             current: string;
             /** Feed */
             feed: boolean;
+            /** Image */
+            image: string | null;
             /** Latest */
             latest: string | null;
             /** Notes Url */

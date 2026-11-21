@@ -1,6 +1,6 @@
 [project]
 name = "yuo"
-version = "1.3.1"
+version = "1.3.2"
 description = "Self-hosted learning paths: generated lessons, practice, tests and a tutor."
 readme = "README.md"
 license = "Apache-2.0"

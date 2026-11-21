@@ -24,8 +24,9 @@ import {
   Waiting,
   ui,
 } from "../components/ui";
-import type { CliOut } from "../api/client";
+import type { CliOut, UpdateOut } from "../api/client";
 import { CliAccessView } from "../onboarding/CliAccess";
+import { ContainerUpdateSteps } from "../onboarding/updates";
 import { LARGE_TREE, SMALL_TREE } from "../path/fixtures";
 import { LazyPathGraph } from "../path/LazyPathGraph";
 import { NodeSample } from "../path/TreeNode";
@@ -142,6 +143,19 @@ const CLI_CODEX: CliOut = {
   install_command: "irm https://chatgpt.com/codex/install.ps1 | iex",
   login_command: "codex login",
   docs_url: "https://developers.openai.com/codex/cli",
+};
+
+const DOCKER_UPDATE: UpdateOut = {
+  current: "1.3.1",
+  feed: true,
+  latest: "1.3.2",
+  published_at: "2026-11-22T10:00:00Z",
+  notes_url: null,
+  available: true,
+  staged: null,
+  can_install: false,
+  container: true,
+  image: "ghcr.io/giuvul/yuo:1.3.2",
 };
 
 const CLI_SAMPLES: [string, CliOut][] = [
@@ -607,6 +621,14 @@ function DesignPage() {
             <CliAccessView cli={sample} {...CLI_NOOP} />
           </div>
         ))}
+      </div>
+
+      <h2>Update on Docker</h2>
+      <p className={ui.muted}>
+        Settings &gt; Updates on a Docker install when a newer release is out: the steps and the prompt for an agent.
+      </p>
+      <div className={ui.card} id="docker-update-sample">
+        <ContainerUpdateSteps status={DOCKER_UPDATE} />
       </div>
 
       <h2>Surfaces</h2>

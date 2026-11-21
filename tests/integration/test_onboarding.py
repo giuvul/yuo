@@ -252,7 +252,8 @@ def test_every_start_looks_for_a_new_release_even_with_a_fresh_answer_from_yeste
 
     def updates(feed: str | None) -> Updates:
         return Updates(tmp_path, "1.0.0", feed, fetch=fetch, download=lambda *a: tmp_path, enabled=lambda: on[0],
-                       desktop=False, exit_process=lambda code: None, first_check_s=0, poll_s=0.01)  # fmt: skip
+                       desktop=False, exit_process=lambda code: None, container=True,
+                       image_repo="ghcr.example/yuo", first_check_s=0, poll_s=0.01)  # fmt: skip
 
     u = updates("https://releases.example/feed.json")
     u.start()
@@ -262,6 +263,8 @@ def test_every_start_looks_for_a_new_release_even_with_a_fresh_answer_from_yeste
     time.sleep(0.1)  # more wakes: the answer is fresh now, nothing more is fetched
     u.stop()
     assert len(fetched) == 2 and u.status()["latest"] == "1.1.0" and u.status()["available"] is True
+    # a container cannot pull its own image: the status names the exact image for the steps on the host
+    assert u.status()["container"] is True and u.status()["image"] == "ghcr.example/yuo:1.1.0"
 
     fetched.clear()
     on[0] = False  # "updates.check" off: no look at all

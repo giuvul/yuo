@@ -74,7 +74,7 @@ export const appRoutes: Record<string, Handler> = {
   "GET /api/setup/plan-meter": () => json({ claude: null, codex: null }),
   "GET /api/setup/ai-ready": () => json({ ready: true, clis: [] }),
   "GET /api/update": () =>
-    json({ current: "1.0.0", feed: false, latest: null, published_at: null, notes_url: null, available: false, staged: null, can_install: false }),
+    json({ current: "1.0.0", feed: false, latest: null, published_at: null, notes_url: null, available: false, staged: null, can_install: false, container: false, image: null }),
 };
 
 /** A subscription program's status as GET /api/setup/cli/{cli} gives it (Claude Code on Linux, not installed). */

@@ -838,6 +838,10 @@ msgstr "Advanced"
 msgid "settings.impact.label"
 msgstr "Affects"
 
+#: src/onboarding/updates.tsx
+msgid "update.docker.step.check"
+msgstr "After a minute, reload this page: the Updates section in Settings says you have version {latest}."
+
 #: src/routes/SettingRow.tsx
 msgid "settings.solution.attempt"
 msgstr "After an attempt"
@@ -1908,6 +1912,10 @@ msgstr "Download"
 msgid "update.download"
 msgstr "Download"
 
+#: src/onboarding/updates.tsx
+msgid "update.docker.step.pull"
+msgstr "Download the new version and restart Yuo with it:"
+
 #: src/onboarding/access.tsx
 msgid "access.local.step.install"
 msgstr "Download the Ollama app and install it like any other app:"
@@ -1932,6 +1940,7 @@ msgid "share.download.running"
 msgstr "Downloading…"
 
 #: src/onboarding/SettingsSections.tsx
+#: src/onboarding/updates.tsx
 msgid "update.downloading"
 msgstr "Downloading…"
 
@@ -2473,6 +2482,10 @@ msgstr "How deep"
 msgid "settings.group.reviews.description"
 msgstr "How much and how often you go back over past lessons"
 
+#: src/onboarding/updates.tsx
+msgid "update.banner.how"
+msgstr "How to update"
+
 #: src/items/ItemInput.tsx
 msgid "item.flashcard.rate"
 msgstr "How well did you know it?"
@@ -2509,12 +2522,12 @@ msgstr "I can't say whether that's right until you submit your answer. Want a hi
 msgid "tutor.review.coach"
 msgstr "I can't say whether that's right: finding it yourself is what makes the review work. Give it a try, or ask me for a hint or a guiding question."
 
-#: src/routes/nextSteps.tsx
-msgid "next.quiz.dont-know"
-msgstr "I don’t know yet"
-
 #: src/routes/levelCheck.tsx
 msgid "level-check.dont-know"
+msgstr "I don’t know yet"
+
+#: src/routes/nextSteps.tsx
+msgid "next.quiz.dont-know"
 msgstr "I don’t know yet"
 
 #: src/tutor/Nudges.tsx
@@ -2545,6 +2558,10 @@ msgstr "Idea"
 msgid "desktop.signed-out.fallback"
 msgstr "If nothing opens, start Yuo again from its launcher (the Yuo-Windows / Yuo-macOS / Yuo-Linux file, or the Yuo menu entry)."
 
+#: src/onboarding/updates.tsx
+msgid "update.docker.careful"
+msgstr "If something goes wrong, never delete Yuo's data volume (yuo_data): it holds everything you learned. The output of docker compose logs --tail 100 yuo says what happened."
+
 #: src/onboarding/CliAccess.tsx
 msgid "cli.login.device.hint"
 msgstr "If the page refuses the code, device sign-in may be switched off for your account. Turn it on in your account's security settings, then start the sign-in again."
@@ -2552,6 +2569,10 @@ msgstr "If the page refuses the code, device sign-in may be switched off for you
 #: src/auth/RecoveryCodes.tsx
 msgid "auth.codes.intro"
 msgstr "If you lose your passkey and password, each of these codes signs you in once. They are shown only now: keep them somewhere safe, like a password manager or on paper."
+
+#: src/onboarding/updates.tsx
+msgid "update.agent.intro"
+msgstr "If you use an agent that can run commands on that computer (Claude Code, Codex or similar), copy this and paste it to the agent:"
 
 #: src/routes/paths.tsx
 #: src/routes/paths.tsx
@@ -2573,6 +2594,14 @@ msgstr "Import as a new path"
 #: src/routes/importPage.tsx
 msgid "import.importing"
 msgstr "Importing…"
+
+#: src/onboarding/updates.tsx
+msgid "update.docker.step.image-version"
+msgstr "In .env, change the version at the end of the YUO_IMAGE line (after the colon) to {latest}:"
+
+#: src/onboarding/updates.tsx
+msgid "update.docker.step.image"
+msgstr "In .env, change the YUO_IMAGE line to:"
 
 #: src/sharing/ExportDialog.tsx
 msgid "share.preview.counts"
@@ -2625,6 +2654,10 @@ msgstr "Install {name} in Settings to continue"
 #: src/routes/setup.tsx
 msgid "wizard.access.wait.install"
 msgstr "Install {programName} to go on."
+
+#: src/onboarding/updates.tsx
+msgid "update.banner.install"
+msgstr "Install and restart"
 
 #: src/onboarding/CliAccess.tsx
 msgid "cli.state.installing"
@@ -2882,6 +2915,10 @@ msgstr "Lessons, questions and videos"
 #: src/components/PauseControls.tsx
 msgid "pause.state.all"
 msgstr "Lessons, review questions and videos wait."
+
+#: src/onboarding/updates.tsx
+msgid "update.agent.title"
+msgstr "Let an AI agent do it"
 
 #: src/tutor/texts.ts
 msgid "tutor.blocked"
@@ -3488,6 +3525,10 @@ msgstr "Not now"
 msgid "next.close"
 msgstr "Not now"
 
+#: src/onboarding/updates.tsx
+msgid "update.banner.later"
+msgstr "Not now"
+
 #: src/material/Studies.tsx
 msgid "studies.update.dismiss"
 msgstr "Not now"
@@ -3700,6 +3741,10 @@ msgstr "Open"
 #: src/routes/importPage.tsx
 msgid "import.intro"
 msgstr "Open a path package (.yuo.zip) that someone shared with you or that you exported. You see what it holds before anything is imported."
+
+#: src/onboarding/updates.tsx
+msgid "update.docker.step.folder"
+msgstr "Open a terminal on that computer and go to the folder you set Yuo up in: the one with compose.yaml and .env (in Yuo's release files it is packaging/container)."
 
 #: src/video/YouTubeVideo.tsx
 msgid "youtube.open"
@@ -3989,6 +4034,21 @@ msgstr "Please give at most {max} links."
 #: src/onboarding/vendorModels.tsx
 msgid "wizard.access.warnings"
 msgstr "Please note"
+
+#: src/onboarding/updates.tsx
+msgid "update.agent.prompt"
+msgstr ""
+"Please update my self-hosted Yuo, which runs with Docker Compose, to version {latest}.\n"
+"\n"
+"1. Find the folder where Yuo was set up: it has compose.yaml and a .env file with a YUO_IMAGE line (in Yuo's release files it is packaging/container). If you cannot find it, ask me.\n"
+"2. Show me the current YUO_IMAGE line, then change only that line to: {imageLine}\n"
+"3. In that folder run: docker compose pull\n"
+"   then: docker compose up -d\n"
+"4. Wait up to 3 minutes until docker compose ps shows the yuo service as healthy, then run: docker compose exec yuo yuo --version\n"
+"   It should print {latest}.\n"
+"5. Tell me what you changed and what came out.\n"
+"\n"
+"Rules: never run docker compose down -v, docker volume rm or any prune command, and never delete or edit anything in Yuo's data volume: it holds all my learning data, and Yuo backs it up by itself before it moves to a new version. If a step fails, stop, show me the last 100 lines of docker compose logs yuo, and ask me before trying anything else."
 
 #: src/routes/settings.tsx
 msgid "settings.group.motivation.description"
@@ -5910,8 +5970,8 @@ msgid "access.local.no-server"
 msgstr "To run the model on this computer, Yuo uses the free Ollama app. It is not running yet."
 
 #: src/onboarding/SettingsSections.tsx
-msgid "update.container.how"
-msgstr "To update, in the folder packaging/container set YUO_IMAGE in .env to the new version, then run docker compose pull and docker compose up -d."
+msgid "update.server.how"
+msgstr "To update, install the new version the way you installed this one."
 
 #: src/routes/index.tsx
 msgid "home.today"
@@ -5949,12 +6009,12 @@ msgstr "Try again"
 msgid "preview.retry"
 msgstr "Try again"
 
-#: src/routes/nextSteps.tsx
-msgid "next.retry"
-msgstr "Try again"
-
 #: src/routes/levelCheck.tsx
 msgid "level-check.retry"
+msgstr "Try again"
+
+#: src/routes/nextSteps.tsx
+msgid "next.retry"
 msgstr "Try again"
 
 #: src/routes/jobs.tsx
@@ -6415,12 +6475,12 @@ msgstr "What is new (opens in a new tab)"
 msgid "review.report.reason"
 msgstr "What is wrong with it? (optional)"
 
-#: src/routes/nextSteps.tsx
-msgid "next.title"
-msgstr "What next?"
-
 #: src/routes/pathView.tsx
 msgid "path.next.link"
+msgstr "What next?"
+
+#: src/routes/nextSteps.tsx
+msgid "next.title"
 msgstr "What next?"
 
 #: src/path/NextOffer.tsx
@@ -7022,6 +7082,14 @@ msgstr "YouTube video languages"
 msgid "app.name"
 msgstr "Yuo"
 
+#: src/onboarding/updates.tsx
+msgid "update.banner.desktop"
+msgstr "Yuo {latest} is out. Installing it takes a minute."
+
+#: src/onboarding/updates.tsx
+msgid "update.banner.server"
+msgstr "Yuo {latest} is out. Updating takes a minute on the computer where Yuo runs."
+
 #: src/routes/nextSteps.tsx
 msgid "next.intro"
 msgstr "Yuo asks you a few questions about where you want to go and gives you a short quiz on what comes next. Then it suggests two or three directions. Nothing changes in your path until you choose one."
@@ -7096,6 +7164,10 @@ msgstr "Yuo is reading your material and planning each course. This page updates
 msgid "error.restarting"
 msgstr "Yuo is restarting or cannot be reached right now. Try again in a moment."
 
+#: src/onboarding/updates.tsx
+msgid "update.banner.restarting"
+msgstr "Yuo is restarting with version {latest}… This page reloads by itself when it is ready."
+
 #: src/onboarding/SettingsSections.tsx
 msgid "update.restarting"
 msgstr "Yuo is restarting… This page reloads by itself when the new version is ready."
@@ -7143,6 +7215,10 @@ msgstr "Yuo plans lessons and reviews to fit this time, from 5 to 120 minutes."
 #: src/onboarding/SettingsSections.tsx
 msgid "update.container.restart"
 msgstr "Yuo runs in Docker here and starts by itself whenever Docker runs. On a computer, turn on “Start Docker Desktop when you sign in” in Docker Desktop's settings, so Yuo is there after a restart."
+
+#: src/onboarding/updates.tsx
+msgid "update.docker.intro"
+msgstr "Yuo runs in Docker here, and a program cannot replace the container it runs in, so the update is two commands on the computer or server where Yuo runs. It takes a minute or two. Your data stays where it is, and Yuo backs it up before it moves to the new version."
 
 #: src/onboarding/PlanMeter.tsx
 msgid "plan-meter.none.claude"

@@ -120,6 +120,23 @@
     user-select: all;
   }
 
+  /* long text: the box takes the full width and the button goes under it */
+  .commandBlock {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: start;
+
+    & > pre {
+      justify-self: stretch;
+    }
+  }
+
+  .commandWrap {
+    max-block-size: 16rem;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+
   .copied {
     grid-column: 1 / -1;
     color: var(--yuo-color-muted);

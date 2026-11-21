@@ -7,8 +7,9 @@ turns this off. A failed look (offline) is tried again an hour later.
 The app only downloads and checks; installing happens outside the running process. On the desktop the
 launcher installs the staged release beside the current one and starts it; the new version migrates the
 database after a checked backup, and if it does not come up the launcher restores that backup and
-runs the previous version again (packaging/desktop/launcher.py). Servers update by pulling the new image;
-the app tells them which version is out.
+runs the previous version again (packaging/desktop/launcher.py). A container cannot replace its own image:
+the app tells which version is out and the image to pull (`YUO_IMAGE_REPO`, set in release images), and the
+person (or their agent) runs the pull on the host.
 
 No feed configured (`YUO_UPDATE_FEED`, set in release builds) means no checks at all.
 """
@@ -57,6 +58,8 @@ class Updates:
         enabled: Callable[[], bool],
         desktop: bool,
         exit_process: Callable[[int], None],
+        container: bool = False,
+        image_repo: str | None = None,
         first_check_s: float = FIRST_CHECK_S,
         poll_s: float = POLL_S,
     ) -> None:
@@ -70,6 +73,8 @@ class Updates:
         self.desktop = desktop
         self._exit = exit_process
         self._lock = threading.Lock()
+        self.container = container
+        self.image_repo = image_repo
         self.first_check_s = first_check_s
         self.poll_s = poll_s
         self._stop = threading.Event()
@@ -157,6 +162,10 @@ class Updates:
             "available": available,
             "staged": staged["version"] if staged else None,
             "can_install": self.desktop,  # servers update their container image instead
+            "container": self.container,
+            "image": f"{self.image_repo}:{latest['version']}"
+            if self.image_repo and available and latest
+            else None,
         }
 
     def stage(self) -> dict[str, Any]:

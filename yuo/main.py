@@ -299,6 +299,8 @@ def wire_setup(service: Service, root: Path, secrets: SecretStore) -> None:
         enabled=enabled,
         desktop=desktop_mode(),
         exit_process=request_exit,
+        container=Path("/.dockerenv").exists(),
+        image_repo=os.environ.get("YUO_IMAGE_REPO") or None,
     )
 
 

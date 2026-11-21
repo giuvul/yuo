@@ -16,6 +16,7 @@ import { Ambient } from "../components/Grove";
 import { Logo } from "../components/Logo";
 import { ui } from "../components/ui";
 import { useOutbox } from "../outbox/context";
+import { ReleaseNotice } from "../onboarding/updates";
 import { InstallButton, ShortcutGuide, UpdateNotice } from "../pwa/PwaControls";
 import { install, runningInstalled, useInstallPrompt } from "../pwa/pwa";
 import { GearIcon, MoreIcon, PathIcon, RepeatIcon, SignOutIcon } from "../components/icons";
@@ -163,6 +164,7 @@ function RootLayout() {
         )}
       </header>
       <UpdateNotice />
+      {shell ? <ReleaseNotice /> : null}
       <main className={styles.main}>
         {desktopSignedOut ? (
           <DesktopSignedOut failed={launchFailed} />

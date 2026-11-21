@@ -438,11 +438,12 @@ export function useUpdateMe() {
 
 // --- updates ------------------------------------------------------------------------------------
 
-export function useUpdateStatus() {
+export function useUpdateStatus({ refetchInterval }: { refetchInterval?: number } = {}) {
   return useQuery({
     queryKey: m7Keys.update,
     queryFn: () => unwrap(api.GET("/api/update")),
     retry: false,
+    refetchInterval,
   });
 }
 

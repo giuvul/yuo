@@ -436,8 +436,9 @@ function Manual({ c, h, kind, quiet }: { c: CliOut; h: CliHandlers; kind: "insta
   );
 }
 
-/** A command to copy: the clipboard when the browser allows it, else the text is selected to copy by hand. */
-function Command({ text, label }: { text: string; label?: string }) {
+/** A command to copy: the clipboard when the browser allows it, else the text is selected to copy by hand.
+ * `wrap`: long text (a prompt) wraps instead of scrolling sideways. */
+export function Command({ text, label, wrap }: { text: string; label?: string; wrap?: boolean }) {
   const ref = useRef<HTMLElement>(null);
   const [copied, setCopied] = useState<"yes" | "failed" | null>(null);
   const copy = async () => {
@@ -450,8 +451,8 @@ function Command({ text, label }: { text: string; label?: string }) {
     }
   };
   return (
-    <div className={styles.command}>
-      <pre className={styles.commandText} aria-label={label}>
+    <div className={`${styles.command} ${wrap ? styles.commandBlock : ""}`}>
+      <pre className={`${styles.commandText} ${wrap ? styles.commandWrap : ""}`} aria-label={label}>
         <code ref={ref}>{text}</code>
       </pre>
       <Button variant="secondary" small onPress={() => void copy()}>

@@ -284,6 +284,8 @@ class UpdateOut(BaseModel):
     available: bool
     staged: str | None  # downloaded and checked, installed on restart
     can_install: bool  # desktop; servers pull the new image
+    container: bool  # runs in Docker: updated with docker compose on the host
+    image: str | None  # the image to pull for the newer version (release images name their repository)
 
 
 class LinkOut(BaseModel):

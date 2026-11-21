@@ -4,6 +4,18 @@ All notable changes are listed here. The format follows Keep a Changelog; versio
 
 ## [Unreleased]
 
+## [1.3.2] - 2026-11-21
+
+- A new version shows a line under the header, on every page, for everyone signed in. On the desktop app,
+  "Install and restart" downloads it, restarts Yuo and reloads the page. On a Docker install, "How to update"
+  opens the steps; "Not now" hides the line until the next version.
+- Settings > Updates on a Docker install explains the update step by step: where to run it, the exact
+  YUO_IMAGE line to set (with a Copy button), the command to run, and how to see it worked. A container cannot
+  replace itself, so the commands run on the computer where Yuo runs.
+- The same steps come as a prompt to copy and paste to an AI agent that can run commands on that computer
+  (Claude Code, Codex or similar), with rules that keep your learning data safe: it never deletes the data
+  volume, and it stops and asks if a step fails.
+
 ## [1.3.1] - 2026-11-21
 
 - Server installs (Docker) now hear about new versions: the image names the release feed, so Settings >

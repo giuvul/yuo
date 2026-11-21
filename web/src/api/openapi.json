@@ -9324,6 +9324,10 @@
             "title": "Can Install",
             "type": "boolean"
           },
+          "container": {
+            "title": "Container",
+            "type": "boolean"
+          },
           "current": {
             "title": "Current",
             "type": "string"
@@ -9331,6 +9335,17 @@
           "feed": {
             "title": "Feed",
             "type": "boolean"
+          },
+          "image": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Image"
           },
           "latest": {
             "anyOf": [
@@ -9385,7 +9400,9 @@
           "notes_url",
           "available",
           "staged",
-          "can_install"
+          "can_install",
+          "container",
+          "image"
         ],
         "title": "UpdateOut",
         "type": "object"

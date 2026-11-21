@@ -84,14 +84,16 @@ COPY --from=app /opt/app/site/ /opt/yuo/.venv/lib/python3.14/site-packages/
 COPY --from=app /opt/app/bin/yuo /opt/yuo/.venv/bin/yuo
 COPY --from=web /src/web/dist /opt/yuo/web
 COPY LICENSE NOTICE THIRD_PARTY_LICENSES /opt/yuo/
-# release builds name their update feed (release.yml); a build without one never looks for updates
+# release builds name their update feed and their image (release.yml): a build without a feed never looks for
+# updates, and the image name lets Settings > Updates give the exact YUO_IMAGE line to set
 ARG YUO_UPDATE_FEED=
+ARG YUO_IMAGE_REPO=
 ENV PATH=/opt/yuo/.venv/bin:$PATH \
     PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 HOME=/tmp \
     YUO_DATA_DIR=/data YUO_CLI_HOME=/data/home YUO_HOST=0.0.0.0 YUO_PORT=18765 \
     YUO_WEB_DIR=/opt/yuo/web YUO_RENDERER_DIR=/opt/yuo/renderer YUO_KOKORO_DIR=/opt/yuo/models \
     YUO_CHROME=/opt/yuo/renderer/chrome-headless-shell YUO_SECRETS_KEY_FILE=/run/secrets/yuo_key \
-    YUO_UPDATE_FEED=${YUO_UPDATE_FEED}
+    YUO_UPDATE_FEED=${YUO_UPDATE_FEED} YUO_IMAGE_REPO=${YUO_IMAGE_REPO}
 USER yuo
 VOLUME /data
 EXPOSE 18765

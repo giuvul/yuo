@@ -26,6 +26,8 @@ const status = (patch: Partial<UpdateOut>): UpdateOut => ({
   available: false,
   staged: null,
   can_install: true,
+  container: false,
+  image: null,
   ...patch,
 });
 
@@ -45,14 +47,20 @@ describe("updates in Settings", () => {
     expect(s.queryByRole("button", { name: "Check now" })).not.toBeInTheDocument();
   });
 
-  it("checks now, tells a server to pull the new image", async () => {
-    let st = status({ can_install: false });
+  it("checks now, then gives a Docker install the steps and a prompt for an agent", async () => {
+    let st = status({ can_install: false, container: true });
     const { calls } = mockApi({
       ...appRoutes,
       "GET /api/settings": () => json([]),
       "GET /api/update": () => json(st),
       "POST /api/update/check": () => {
-        st = { ...st, latest: "1.1.0", available: true, notes_url: "https://releases.example/1.1.0" };
+        st = {
+          ...st,
+          latest: "1.1.0",
+          available: true,
+          notes_url: "https://releases.example/1.1.0",
+          image: "ghcr.io/giuvul/yuo:1.1.0",
+        };
         return json(st);
       },
     });
@@ -62,7 +70,17 @@ describe("updates in Settings", () => {
     expect(s.getByText("Yuo has not checked for a newer version yet.")).toBeInTheDocument();
     await u.click(s.getByRole("button", { name: "Check now" }));
     expect(await s.findByText("Version 1.1.0 is available.")).toBeInTheDocument();
-    expect(s.getByText(/set YUO_IMAGE in .env to the new version/)).toBeInTheDocument();
+    expect(s.getByText(/a program cannot replace the container it runs in/)).toBeInTheDocument();
+    expect(s.getByText("YUO_IMAGE=ghcr.io/giuvul/yuo:1.1.0")).toBeInTheDocument();
+    expect(s.getByText("docker compose pull && docker compose up -d")).toBeInTheDocument();
+    const prompt = s.getByText(/Please update my self-hosted Yuo/);
+    expect(prompt.textContent).toContain("change only that line to: YUO_IMAGE=ghcr.io/giuvul/yuo:1.1.0");
+    expect(prompt.textContent).toContain("never run docker compose down -v");
+    const writeText = vi.fn(() => Promise.resolve());
+    vi.stubGlobal("navigator", { ...navigator, clipboard: { writeText } });
+    const copies = s.getAllByRole("button", { name: "Copy" });
+    await u.click(copies[copies.length - 1]!);
+    expect(writeText).toHaveBeenCalledWith(expect.stringContaining("to version 1.1.0"));
     expect(s.getByText(/starts by itself whenever Docker runs/)).toBeInTheDocument();
     expect(s.getByRole("link", { name: /What is new/ })).toHaveAttribute("target", "_blank");
     expect(s.queryByRole("button", { name: "Download" })).not.toBeInTheDocument();
@@ -97,6 +115,58 @@ describe("updates in Settings", () => {
     expect(await screen.findByText(/Yuo is restarting/)).toBeInTheDocument();
     await waitFor(() => expect(reload).toHaveBeenCalled());
     expect(calls.some((c) => c.path === "/api/health")).toBe(true);
+  });
+});
+
+describe("the banner when a new version is out", () => {
+  it("on a server: links to the steps, and Not now hides it until the next version", async () => {
+    localStorage.clear();
+    mockApi({
+      ...appRoutes,
+      "GET /api/update": () =>
+        json(status({ latest: "1.1.0", available: true, can_install: false, container: true })),
+    });
+    const u = userEvent.setup();
+    renderApp("/");
+    expect(await screen.findByText(/Yuo 1.1.0 is out. Updating takes a minute/)).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "How to update" })).toHaveAttribute("href", "/settings#updates");
+    await u.click(screen.getByRole("button", { name: "Not now" }));
+    expect(screen.queryByText(/Yuo 1.1.0 is out/)).not.toBeInTheDocument();
+    expect(localStorage.getItem("yuo.release.dismissed")).toBe("1.1.0");
+  });
+
+  it("on the desktop: downloads, restarts and reloads from the banner", async () => {
+    localStorage.clear();
+    let st = status({ latest: "1.1.0", available: true });
+    let health = "1.0.0";
+    const reload = vi.spyOn(page, "reload").mockImplementation(() => {});
+    const { calls } = mockApi({
+      ...appRoutes,
+      "GET /api/update": () => json(st),
+      "POST /api/update/download": () => {
+        st = { ...st, staged: "1.1.0" };
+        return json(st);
+      },
+      "POST /api/update/restart": () => {
+        health = "1.1.0";
+        return json(null, 202);
+      },
+      "GET /api/health": () => json({ status: "ok", version: health }),
+    });
+    const u = userEvent.setup();
+    renderApp("/");
+    await u.click(await screen.findByRole("button", { name: "Install and restart" }));
+    expect(await screen.findByText(/Yuo is restarting with version 1.1.0/)).toBeInTheDocument();
+    await waitFor(() => expect(reload).toHaveBeenCalled());
+    const order = calls.filter((c) => c.method === "POST").map((c) => c.path);
+    expect(order).toEqual(["/api/update/download", "/api/update/restart"]);
+  });
+
+  it("says nothing when this is the newest version", async () => {
+    mockApi({ ...appRoutes, "GET /api/update": () => json(status({ latest: "1.0.0" })) });
+    renderApp("/");
+    expect(await screen.findByRole("link", { name: /Settings/ })).toBeInTheDocument();
+    expect(screen.queryByText(/is out/)).not.toBeInTheDocument();
   });
 });
 
